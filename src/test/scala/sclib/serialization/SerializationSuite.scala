@@ -1,9 +1,11 @@
-package sclib
+package sclib.serialization
 
 import org.scalatest.{FunSuite, Matchers}
+import sclib.State
+import sclib.ops.either._
+import sclib.serialization.simple._
 
 class SerializationSuite extends FunSuite with Matchers {
-  import sclib.serialization._
 
   //
   // serialize
@@ -11,6 +13,10 @@ class SerializationSuite extends FunSuite with Matchers {
 
   test("serialize string") {
     Serialize("44:one string") should be("13:44:one string")
+  }
+
+  test("serialize char"){
+    Serialize('x') should be("1:x")
   }
 
   test("serialize int") {
@@ -21,8 +27,22 @@ class SerializationSuite extends FunSuite with Matchers {
     Serialize(true) should be("4:true")
   }
 
+  test("serialize list of int"){
+    Serialize(List(1, 5, 2)) should be ("9:1:11:51:2")
+  }
+
   test("serialize vector of int") {
     Serialize(Vector(1, 5, 2)) should be("9:1:11:51:2")
+  }
+
+  test("serialize option"){
+    Serialize(Option.empty[Int]) should be("1:N")
+    Serialize(Option("N")) should be("3:1:N")
+  }
+
+  test("serialize either"){
+    Serialize("left".left[Int]) should be("7:L4:left")
+    Serialize("right".right[Int]) should be("8:R5:right")
   }
 
   //
@@ -33,6 +53,10 @@ class SerializationSuite extends FunSuite with Matchers {
     Deserialize[String]("4:abcd") should be("abcd")
   }
 
+  test("deserialize char"){
+    Deserialize[Char]("1:x") should be('x')
+  }
+
   test("deserialize int") {
     Deserialize[Int]("6:123456") should be(123456)
   }
@@ -41,9 +65,24 @@ class SerializationSuite extends FunSuite with Matchers {
     Deserialize[Boolean]("5:false") should be(false)
   }
 
+  test("deserialize list of int"){
+    Deserialize[List[Int]]("9:1:11:51:2") should be(List(1, 5, 2))
+  }
+
   test("deserialize vector of int") {
     Deserialize[Vector[Int]]("9:1:11:51:2") should be(Vector(1, 5, 2))
   }
+
+  test("deserialize option"){
+    Deserialize[Option[String]]("1:N") should be(None)
+    Deserialize[Option[String]]("3:1:N") should be(Some("N"))
+  }
+
+  test("deserialize either"){
+    Deserialize[Either[String, Int]]("7:L4:left") should be("left".left[Int])
+    Deserialize[Either[Int, String]]("8:R5:right") should be("right".right[Int])
+  }
+
 
 
   //
