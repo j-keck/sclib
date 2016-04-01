@@ -37,6 +37,20 @@ for {
 } yield a + b
 ```
 
+### List
+
+```tut:silent:reset
+import sclib.ops.list._
+```
+
+  - unfoldLeft / unfoldRight
+    
+```tut
+ListOps.unfoldRight(0){ i =>
+  if(i > 10) None else Some((i, i + 1))
+}
+```
+
 
 ## (very) simple serialize / deserialize
 
