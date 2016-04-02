@@ -51,6 +51,30 @@ ListOps.unfoldRight(0){ i =>
 }
 ```
 
+## "design pattern's"
+
+```tut:silent:reset
+import sclib.dp._
+```
+
+### AppF
+
+simple *AppF*unction - expect's a function with receives a config and returns a Either
+
+
+```tut
+import sclib.ops.either._
+
+val action = for {
+  a <- AppF{i: Int => i.right[String]}
+  b <- AppF{i: Int => if(i < 5) (i * 10).right else "BOOM".left}
+  c <- AppF.lift(33.right[String])
+} yield (a, b, c)
+
+action.runEitherT.runReader(2)
+
+action.runEitherT.runReader(8)
+```
 
 ## (very) simple serialize / deserialize
 
