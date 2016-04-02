@@ -85,7 +85,7 @@ implicit val cSer = new Serialize[C]{
 }
 
 implicit val cDes = new Deserialize[C]{
-  override def apply: sclib.State[String, C] = for {
+  override def apply: sclib.ct.State[String, C] = for {
     a <- Deserialize[String]
     b <- Deserialize[List[Int]]
     c <- Deserialize[Either[Int, String]]

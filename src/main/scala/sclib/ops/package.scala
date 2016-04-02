@@ -1,6 +1,6 @@
 package sclib
 
 /**
-  * Extensions
+  * stdlib extensions
   */
 package object ops

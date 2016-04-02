@@ -1,6 +1,6 @@
 package sclib.serialization.simple
 
-import sclib.State
+import sclib.ct.State
 import sclib.ops.either._
 
 trait deserialize {
@@ -55,10 +55,10 @@ trait deserialize {
   //
 
   implicit def optionDes[A: Deserialize] = new Deserialize[Option[A]] {
-    override def apply: State[String, Option[A]] = next.map(_ match {
+    override def apply: State[String, Option[A]] = next.map {
       case "N" => None
       case s => Some(Deserialize[A](s))
-    })
+    }
   }
 
   implicit def eitherDes[A: Deserialize, B: Deserialize] = new Deserialize[Either[A, B]] {
