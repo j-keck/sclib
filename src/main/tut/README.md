@@ -4,6 +4,7 @@
   - utilities
   - zero runtime dependencies
   - jvm and scala.js bits
+  - [scaladoc](http://j-keck.github.io/sclib/latest/api/)
 
 ## quick start 
 
@@ -35,6 +36,8 @@ so you can add the following snippet to your `build.sbt` file.
 ### stdlib extensions
 
 #### Either
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.either$)
+
 ```tut:silent:reset
 import sclib.ops.either._
 ```
@@ -62,6 +65,8 @@ for {
 ```
 
 #### List
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.list$)
+
 ```tut:silent:reset
 import sclib.ops.list._
 ```
@@ -74,6 +79,8 @@ ListOps.unfoldRight(0){ i =>
 ```
 
 #### Try
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.try$)
+
 ```tut:silent:reset
 import sclib.ops.`try`._
 ```
@@ -100,6 +107,8 @@ TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
 ```
 
 ### java8 interoperability
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.java8$)
+
 ```tut:silent:reset
 import sclib.ops.java8._
 ```
@@ -127,6 +136,8 @@ java.util.Arrays.asList(1, 2, 3, 4).stream().filter((_:Int) < 3).toArray
 
 
 ### "pattern's"
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.patterns.package)
+
 ```tut:silent:reset
 import sclib.patterns._
 ```
@@ -150,6 +161,7 @@ action.runEitherT.runReader(8)
 ```
 
 ### (very) simple serialize / deserialize
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.serialization.simple.package)
 
 values are converted to strings and prefixed with their length.
 so the int value 31593 becomes "5:31593". to deserialize this value,

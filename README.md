@@ -4,6 +4,7 @@
   - utilities
   - zero runtime dependencies
   - jvm and scala.js bits
+  - [scaladoc](http://j-keck.github.io/sclib/latest/api/)
 
 ## quick start 
 
@@ -35,6 +36,8 @@ so you can add the following snippet to your `build.sbt` file.
 ### stdlib extensions
 
 #### Either
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.either$)
+
 ```scala
 import sclib.ops.either._
 ```
@@ -70,6 +73,8 @@ res5: scala.util.Either[Nothing,Int] = Right(5)
 ```
 
 #### List
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.list$)
+
 ```scala
 import sclib.ops.list._
 ```
@@ -83,6 +88,8 @@ res0: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 
 #### Try
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.try$)
+
 ```scala
 import sclib.ops.`try`._
 ```
@@ -115,6 +122,8 @@ res4: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
 ```
 
 ### java8 interoperability
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.java8$)
+
 ```scala
 import sclib.ops.java8._
 ```
@@ -146,6 +155,8 @@ res3: Array[Object] = Array(1, 2)
 
 
 ### "pattern's"
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.patterns.package)
+
 ```scala
 import sclib.patterns._
 ```
@@ -173,6 +184,7 @@ res1: Either[String,(Int, Int, Int)] = Left(BOOM)
 ```
 
 ### (very) simple serialize / deserialize
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.serialization.simple.package)
 
 values are converted to strings and prefixed with their length.
 so the int value 31593 becomes "5:31593". to deserialize this value,

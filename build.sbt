@@ -16,7 +16,7 @@ lazy val commonSettings = Seq(
   scalacOptions := Seq(
     "-feature",
     "-language:higherKinds",
-    "-Xfatal-warnings",
+//    "-Xfatal-warnings",
     "-deprecation",
     "-unchecked"
   ),
@@ -57,3 +57,9 @@ lazy val sclibJVM = sclib.jvm
 lazy val sclibJS = sclib.js
 
 enablePlugins(ScalaJSPlugin)
+
+enablePlugins(SiteScaladocPlugin)
+
+ghpages.settings
+
+git.remoteRepo := "git@github.com:j-keck/sclib.git"
