@@ -67,7 +67,33 @@ ListOps.unfoldRight(0){ i =>
 }
 ```
 
-## java8 extensions
+### Try
+```tut:silent:reset
+import sclib.ops.`try`._
+```
+
+  - shorthand constructor for `scala.util.Success`
+```tut
+3.success
+```
+  
+  - shorthand constructor for `Failure` from a `Throwable`
+```tut
+new IllegalArgumentException("BOOM").failure[Int]
+```
+
+  - shorthand constructor for `Failure` from a `String`
+```tut
+"BOOM".failure
+```
+
+  - sequence on `Try` to reducing many `Try`s into a single `Try`
+```tut
+TryOps.sequence(3.success :: 44.success :: Nil)
+TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
+```
+
+## java8
 ```tut:silent:reset
 import sclib.ops.java8._
 ```

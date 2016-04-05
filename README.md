@@ -76,7 +76,39 @@ scala> ListOps.unfoldRight(0){ i =>
 res0: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 
-## java8 extensions
+### Try
+```scala
+import sclib.ops.`try`._
+```
+
+  - shorthand constructor for `scala.util.Success`
+```scala
+scala> 3.success
+res0: scala.util.Try[Int] = Success(3)
+```
+  
+  - shorthand constructor for `Failure` from a `Throwable`
+```scala
+scala> new IllegalArgumentException("BOOM").failure[Int]
+res1: scala.util.Try[Int] = Failure(java.lang.IllegalArgumentException: BOOM)
+```
+
+  - shorthand constructor for `Failure` from a `String`
+```scala
+scala> "BOOM".failure
+res2: scala.util.Try[Nothing] = Failure(java.lang.Exception: BOOM)
+```
+
+  - sequence on `Try` to reducing many `Try`s into a single `Try`
+```scala
+scala> TryOps.sequence(3.success :: 44.success :: Nil)
+res3: scala.util.Try[List[Int]] = Success(List(3, 44))
+
+scala> TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
+res4: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
+```
+
+## java8
 ```scala
 import sclib.ops.java8._
 ```
