@@ -1,0 +1,351 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>ct - sclib.ct</title>
+          <meta name="description" content="ct - sclib.ct" />
+          <meta name="keywords" content="ct sclib.ct" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'sclib.ct.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="sclib">sclib</a></p>
+        <h1>ct</h1><span class="permalink">
+      <a href="../../index.html#sclib.ct.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ct</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><h4> functor, monad, monad-transformer</h4><ul><li>for zero runtime dependencies of this library, some concepts are reimplemented here</li><li>very basic / minimal <code>Functor</code> and <code>Monad</code> implementations</li></ul><p><i>check the member documentation for examples</i>
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="sclib.ct"><span>ct</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show All</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="sclib.ct.EitherT" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="EitherT[F[_],A,B]extendsProductwithSerializable"></a>
+      <a id="EitherT[F[_],A,B]:EitherT[F,A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="EitherT.html"><span class="name">EitherT</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>, <span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="runEitherT">runEitherT: <span class="extype" name="sclib.ct.EitherT.F">F</span>[<span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.ct.EitherT.A">A</span>, <span class="extype" name="sclib.ct.EitherT.B">B</span>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@EitherT[F[_],A,B]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>Either</code> monad transformer
+</p><div class="fullcomment"><div class="comment cmt"><p>minimalistic <code>Either</code> monad transformer
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ct._
+scala&gt; scala&gt; <span class="kw">import</span> sclib.ops.either._
+scala&gt; scala&gt; <span class="kw">val</span> et = EitherT[Function0, <span class="std">Int</span>, <span class="std">Int</span>]{() <span class="kw">=&gt;</span> <span class="num">10.</span>right}
+scala&gt; et: sclib.ct.EitherT[Function0,<span class="std">Int</span>,<span class="std">Int</span>] = EitherT(&lt;function0&gt;)
+scala&gt; scala&gt; et.map(_ * <span class="num">10</span>).map(_ * <span class="num">10</span>).runEitherT.apply()
+scala&gt; res0: Either[<span class="std">Int</span>,<span class="std">Int</span>] = Right(<span class="num">1000</span>)</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.ct.Functor" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Functor[F[_]]extendsAnyRef"></a>
+      <a id="Functor[F[_]]:Functor[F]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Functor.html"><span class="name">Functor</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@Functor[F[_]]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>Functor</code>
+</p>
+    </li><li name="sclib.ct.Monad" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Monad[F[_]]extendsFunctor[F]"></a>
+      <a id="Monad[F[_]]:Monad[F]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Monad.html"><span class="name">Monad</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="result"> extends <a href="Functor.html" class="extype" name="sclib.ct.Functor">Functor</a>[<span class="extype" name="sclib.ct.Monad.F">F</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@Monad[F[_]]extendsFunctor[F]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>Monad</code>
+</p>
+    </li><li name="sclib.ct.Reader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Reader[C,A]extendsProductwithSerializable"></a>
+      <a id="Reader[C,A]:Reader[C,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Reader.html"><span class="name">Reader</span></a><span class="tparams">[<span name="C">C</span>, <span name="A">A</span>]</span><span class="params">(<span name="runReader">runReader: (<span class="extype" name="sclib.ct.Reader.C">C</span>) ⇒ <span class="extype" name="sclib.ct.Reader.A">A</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@Reader[C,A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>Reader</code> monad
+</p><div class="fullcomment"><div class="comment cmt"><p>minimalistic <code>Reader</code> monad
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ct._
+scala&gt; <span class="kw">for</span> {
+     |   a <span class="kw">&lt;-</span> Reader[<span class="std">Int</span>, <span class="std">Int</span>]{_ + <span class="num">5</span>}
+     |   b <span class="kw">&lt;-</span> Reader[<span class="std">Int</span>, <span class="std">Int</span>]{_ + <span class="num">10</span>}
+     | } <span class="kw">yield</span> (a, b)
+res0: sclib.ct.Reader[<span class="std">Int</span>,(<span class="std">Int</span>, <span class="std">Int</span>)] = Reader(&lt;function1&gt;)
+scala&gt; res0.runReader(<span class="num">1</span>)
+res1: (<span class="std">Int</span>, <span class="std">Int</span>) = (<span class="num">6</span>,<span class="num">11</span>)</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.ct.State" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="State[S,A]extendsProductwithSerializable"></a>
+      <a id="State[S,A]:State[S,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="State.html"><span class="name">State</span></a><span class="tparams">[<span name="S">S</span>, <span name="A">A</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="sclib.ct.State.S">S</span>) ⇒ (<span class="extype" name="sclib.ct.State.A">A</span>, <span class="extype" name="sclib.ct.State.S">S</span>)</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@State[S,A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>State</code> monad
+</p><div class="fullcomment"><div class="comment cmt"><p>minimalistic <code>State</code> monad
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ct._
+scala&gt; <span class="kw">for</span> {
+     |   a <span class="kw">&lt;-</span> State[<span class="std">Int</span>, <span class="std">Int</span>](i <span class="kw">=&gt;</span> (i, i + <span class="num">1</span>))
+     |   b <span class="kw">&lt;-</span> State[<span class="std">Int</span>, <span class="std">Int</span>](i <span class="kw">=&gt;</span> (i, i + <span class="num">1</span>))
+     | } <span class="kw">yield</span> a -&gt; b
+res0: sclib.ct.State[<span class="std">Int</span>,(<span class="std">Int</span>, <span class="std">Int</span>)] = State(&lt;function1&gt;)
+scala&gt; res0.run(<span class="num">0</span>)
+res1: ((<span class="std">Int</span>, <span class="std">Int</span>), <span class="std">Int</span>) = ((<span class="num">0</span>,<span class="num">1</span>),<span class="num">2</span>)</pre></li></ol>
+            </div></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="sclib.ct#eitherInstance" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="eitherInstance[A]:sclib.ct.Functor[[B]scala.util.Either[A,B]]withsclib.ct.Monad[[B]scala.util.Either[A,B]]"></a>
+      <a id="eitherInstance[A]:Functor[[B]Either[A,B]]withMonad[[B]Either[A,B]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eitherInstance</span><span class="tparams">[<span name="A">A</span>]</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.ct.Functor">Functor</a>[[B]<span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.ct.eitherInstance.A">A</span>, <span class="extype" name="sclib.ct.&lt;refinement&gt;.L.B">B</span>]] with <a href="Monad.html" class="extype" name="sclib.ct.Monad">Monad</a>[[B]<span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.ct.eitherInstance.A">A</span>, <span class="extype" name="sclib.ct.&lt;refinement&gt;.L.B">B</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@eitherInstance[A]:sclib.ct.Functor[[B]scala.util.Either[A,B]]withsclib.ct.Monad[[B]scala.util.Either[A,B]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Either</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.ct#function0Instances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="function0Instances:sclib.ct.Functor[Function0]withsclib.ct.Monad[Function0]"></a>
+      <a id="function0Instances:Functor[Function0]withMonad[Function0]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">function0Instances</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.ct.Functor">Functor</a>[<span class="extype" name="scala.Function0">Function0</span>] with <a href="Monad.html" class="extype" name="sclib.ct.Monad">Monad</a>[<span class="extype" name="scala.Function0">Function0</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@function0Instances:sclib.ct.Functor[Function0]withsclib.ct.Monad[Function0]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Function0</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.ct#listInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="listInstances:sclib.ct.Functor[List]withsclib.ct.Monad[List]"></a>
+      <a id="listInstances:Functor[List]withMonad[List]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">listInstances</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.ct.Functor">Functor</a>[<span class="extype" name="scala.List">List</span>] with <a href="Monad.html" class="extype" name="sclib.ct.Monad">Monad</a>[<span class="extype" name="scala.List">List</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@listInstances:sclib.ct.Functor[List]withsclib.ct.Monad[List]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>List</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.ct#optionInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="optionInstances:sclib.ct.Functor[Option]withsclib.ct.Monad[Option]"></a>
+      <a id="optionInstances:Functor[Option]withMonad[Option]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">optionInstances</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.ct.Functor">Functor</a>[<span class="extype" name="scala.Option">Option</span>] with <a href="Monad.html" class="extype" name="sclib.ct.Monad">Monad</a>[<span class="extype" name="scala.Option">Option</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@optionInstances:sclib.ct.Functor[Option]withsclib.ct.Monad[Option]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Option</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.ct#readerInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="readerInstances[C]:sclib.ct.Functor[[A]sclib.ct.Reader[C,A]]withsclib.ct.Monad[[A]sclib.ct.Reader[C,A]]"></a>
+      <a id="readerInstances[C]:Functor[[A]Reader[C,A]]withMonad[[A]Reader[C,A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">readerInstances</span><span class="tparams">[<span name="C">C</span>]</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.ct.Functor">Functor</a>[[A]<a href="Reader.html" class="extype" name="sclib.ct.Reader">Reader</a>[<span class="extype" name="sclib.ct.readerInstances.C">C</span>, <span class="extype" name="sclib.ct.&lt;refinement&gt;.L.A">A</span>]] with <a href="Monad.html" class="extype" name="sclib.ct.Monad">Monad</a>[[A]<a href="Reader.html" class="extype" name="sclib.ct.Reader">Reader</a>[<span class="extype" name="sclib.ct.readerInstances.C">C</span>, <span class="extype" name="sclib.ct.&lt;refinement&gt;.L.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@readerInstances[C]:sclib.ct.Functor[[A]sclib.ct.Reader[C,A]]withsclib.ct.Monad[[A]sclib.ct.Reader[C,A]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Reader</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.ct#stateInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="stateInstances[S]:sclib.ct.Functor[[A]sclib.ct.State[S,A]]withsclib.ct.Monad[[A]sclib.ct.State[S,A]]"></a>
+      <a id="stateInstances[S]:Functor[[A]State[S,A]]withMonad[[A]State[S,A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stateInstances</span><span class="tparams">[<span name="S">S</span>]</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.ct.Functor">Functor</a>[[A]<a href="State.html" class="extype" name="sclib.ct.State">State</a>[<span class="extype" name="sclib.ct.stateInstances.S">S</span>, <span class="extype" name="sclib.ct.&lt;refinement&gt;.L.A">A</span>]] with <a href="Monad.html" class="extype" name="sclib.ct.Monad">Monad</a>[[A]<a href="State.html" class="extype" name="sclib.ct.State">State</a>[<span class="extype" name="sclib.ct.stateInstances.S">S</span>, <span class="extype" name="sclib.ct.&lt;refinement&gt;.L.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ct.package@stateInstances[S]:sclib.ct.Functor[[A]sclib.ct.State[S,A]]withsclib.ct.Monad[[A]sclib.ct.State[S,A]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>State</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

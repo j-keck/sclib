@@ -1,0 +1,682 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>simple - sclib.serialization.simple</title>
+          <meta name="description" content="simple - sclib.serialization.simple" />
+          <meta name="keywords" content="simple sclib.serialization.simple" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../index.html';
+            var hash = 'sclib.serialization.simple.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../../lib/package_big.png" />
+        <p id="owner"><a href="../../package.html" class="extype" name="sclib">sclib</a>.<a href="../package.html" class="extype" name="sclib.serialization">serialization</a></p>
+        <h1>simple</h1><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">simple</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>simple serialization / deserialization</p><p>example:</p><pre>scala&gt; <span class="kw">import</span> sclib.serialization._
+scala&gt; <span class="kw">val</span> s = Serialize(<span class="num">1</span> to <span class="num">20</span> toList)
+s: <span class="std">String</span> = <span class="num">71</span>:<span class="num">1</span>:<span class="num">11</span>:<span class="num">21</span>:<span class="num">31</span>:<span class="num">41</span>:<span class="num">51</span>:<span class="num">61</span>:<span class="num">71</span>:<span class="num">81</span>:<span class="num">92</span>:<span class="num">102</span>:<span class="num">112</span>:<span class="num">122</span>:<span class="num">132</span>:<span class="num">142</span>:<span class="num">152</span>:<span class="num">162</span>:<span class="num">172</span>:<span class="num">182</span>:<span class="num">192</span>:<span class="num">20</span>
+scala&gt; Deserialize[<span class="std">List</span>[<span class="std">Int</span>]](s)
+res0: <span class="std">List</span>[<span class="std">Int</span>] = <span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>, <span class="num">7</span>, <span class="num">8</span>, <span class="num">9</span>, <span class="num">10</span>, <span class="num">11</span>, <span class="num">12</span>, <span class="num">13</span>, <span class="num">14</span>, <span class="num">15</span>, <span class="num">16</span>, <span class="num">17</span>, <span class="num">18</span>, <span class="num">19</span>, <span class="num">20</span>)</pre></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a>, <a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="sclib.serialization.simple"><span>simple</span></li><li class="in" name="sclib.serialization.simple.deserialize"><span>deserialize</span></li><li class="in" name="sclib.serialization.simple.serialize"><span>serialize</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show All</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="sclib.serialization.simple.deserialize.Deserialize" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="Deserialize[A]extendsAnyRef"></a>
+      <a id="Deserialize[A]:Deserialize[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="deserialize$Deserialize.html"><span class="name">Deserialize</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.deserialize@Deserialize[A]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize.Serialize" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="Serialize[A]extendsAnyRef"></a>
+      <a id="Serialize[A]:Serialize[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="serialize$Serialize.html"><span class="name">Serialize</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.serialize@Serialize[A]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="deserializeextendsAnyRef"></a>
+      <a id="deserialize:deserialize"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="deserialize.html"><span class="name">deserialize</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@deserializeextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="sclib.serialization.simple.serialize" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="serializeextendsAnyRef"></a>
+      <a id="serialize:serialize"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="serialize.html"><span class="name">serialize</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@serializeextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="sclib.serialization.simple.deserialize.Deserialize" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Deserialize"></a>
+      <a id="Deserialize:Deserialize"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="deserialize$Deserialize$.html"><span class="name">Deserialize</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.deserialize@Deserialize" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize.Serialize" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Serialize"></a>
+      <a id="Serialize:Serialize"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="serialize$Serialize$.html"><span class="name">Serialize</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.serialize@Serialize" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#booleanDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="booleanDes:deserialize.this.Deserialize[Boolean]"></a>
+      <a id="booleanDes:Deserialize[Boolean]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">booleanDes</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@booleanDes:deserialize.this.Deserialize[Boolean]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#booleanSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="booleanSer:serialize.this.Serialize[Boolean]"></a>
+      <a id="booleanSer:Serialize[Boolean]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">booleanSer</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@booleanSer:serialize.this.Serialize[Boolean]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#charDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="charDes:deserialize.this.Deserialize[Char]"></a>
+      <a id="charDes:Deserialize[Char]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">charDes</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Char">Char</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@charDes:deserialize.this.Deserialize[Char]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#charSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="charSer:serialize.this.Serialize[Char]"></a>
+      <a id="charSer:Serialize[Char]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">charSer</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Char">Char</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@charSer:serialize.this.Serialize[Char]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#doubleDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="doubleDes:deserialize.this.Deserialize[Double]"></a>
+      <a id="doubleDes:Deserialize[Double]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doubleDes</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Double">Double</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@doubleDes:deserialize.this.Deserialize[Double]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#doubleSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="doubleSer:serialize.this.Serialize[Double]"></a>
+      <a id="doubleSer:Serialize[Double]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doubleSer</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Double">Double</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@doubleSer:serialize.this.Serialize[Double]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#eitherDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eitherDes[A,B](implicitevidence$4:deserialize.this.Deserialize[A],implicitevidence$5:deserialize.this.Deserialize[B]):deserialize.this.Deserialize[Either[A,B]]"></a>
+      <a id="eitherDes[A,B](Deserialize[A],Deserialize[B]):Deserialize[Either[A,B]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eitherDes</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="sclib.serialization.simple.deserialize.eitherDes.A">A</span>]</span>, <span name="arg1">arg1: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="sclib.serialization.simple.deserialize.eitherDes.B">B</span>]</span>)</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.serialization.simple.deserialize.eitherDes.A">A</span>, <span class="extype" name="sclib.serialization.simple.deserialize.eitherDes.B">B</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@eitherDes[A,B](implicitevidence$4:deserialize.this.Deserialize[A],implicitevidence$5:deserialize.this.Deserialize[B]):deserialize.this.Deserialize[Either[A,B]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#eitherSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eitherSer[A,B](implicitevidence$3:serialize.this.Serialize[A],implicitevidence$4:serialize.this.Serialize[B]):serialize.this.Serialize[Either[A,B]]"></a>
+      <a id="eitherSer[A,B](Serialize[A],Serialize[B]):Serialize[Either[A,B]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eitherSer</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="sclib.serialization.simple.serialize.eitherSer.A">A</span>]</span>, <span name="arg1">arg1: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="sclib.serialization.simple.serialize.eitherSer.B">B</span>]</span>)</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.serialization.simple.serialize.eitherSer.A">A</span>, <span class="extype" name="sclib.serialization.simple.serialize.eitherSer.B">B</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@eitherSer[A,B](implicitevidence$3:serialize.this.Serialize[A],implicitevidence$4:serialize.this.Serialize[B]):serialize.this.Serialize[Either[A,B]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#intDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="intDes:deserialize.this.Deserialize[Int]"></a>
+      <a id="intDes:Deserialize[Int]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">intDes</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@intDes:deserialize.this.Deserialize[Int]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#intSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="intSer:serialize.this.Serialize[Int]"></a>
+      <a id="intSer:Serialize[Int]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">intSer</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@intSer:serialize.this.Serialize[Int]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#listDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="listDes[A](implicitevidence$8:deserialize.this.Deserialize[A]):deserialize.this.Deserialize[List[A]]"></a>
+      <a id="listDes[A](Deserialize[A]):Deserialize[List[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">listDes</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="sclib.serialization.simple.deserialize.listDes.A">A</span>]</span>)</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="sclib.serialization.simple.deserialize.listDes.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@listDes[A](implicitevidence$8:deserialize.this.Deserialize[A]):deserialize.this.Deserialize[List[A]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#listSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="listSer[A](implicitevidence$7:serialize.this.Serialize[A]):serialize.this.Serialize[List[A]]"></a>
+      <a id="listSer[A](Serialize[A]):Serialize[List[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">listSer</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="sclib.serialization.simple.serialize.listSer.A">A</span>]</span>)</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="sclib.serialization.simple.serialize.listSer.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@listSer[A](implicitevidence$7:serialize.this.Serialize[A]):serialize.this.Serialize[List[A]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#longDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="longDes:deserialize.this.Deserialize[Long]"></a>
+      <a id="longDes:Deserialize[Long]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">longDes</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Long">Long</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@longDes:deserialize.this.Deserialize[Long]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#longSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="longSer:serialize.this.Serialize[Long]"></a>
+      <a id="longSer:Serialize[Long]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">longSer</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Long">Long</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@longSer:serialize.this.Serialize[Long]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#mapDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mapDes[A,B](implicitevidence$11:deserialize.this.Deserialize[A],implicitevidence$12:deserialize.this.Deserialize[B]):deserialize.this.Deserialize[Map[A,B]]"></a>
+      <a id="mapDes[A,B](Deserialize[A],Deserialize[B]):Deserialize[Map[A,B]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mapDes</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="sclib.serialization.simple.deserialize.mapDes.A">A</span>]</span>, <span name="arg1">arg1: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="sclib.serialization.simple.deserialize.mapDes.B">B</span>]</span>)</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="sclib.serialization.simple.deserialize.mapDes.A">A</span>, <span class="extype" name="sclib.serialization.simple.deserialize.mapDes.B">B</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@mapDes[A,B](implicitevidence$11:deserialize.this.Deserialize[A],implicitevidence$12:deserialize.this.Deserialize[B]):deserialize.this.Deserialize[Map[A,B]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#mapSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mapSer[A,B](implicitevidence$10:serialize.this.Serialize[A],implicitevidence$11:serialize.this.Serialize[B]):serialize.this.Serialize[Map[A,B]]"></a>
+      <a id="mapSer[A,B](Serialize[A],Serialize[B]):Serialize[Map[A,B]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mapSer</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="sclib.serialization.simple.serialize.mapSer.A">A</span>]</span>, <span name="arg1">arg1: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="sclib.serialization.simple.serialize.mapSer.B">B</span>]</span>)</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="sclib.serialization.simple.serialize.mapSer.A">A</span>, <span class="extype" name="sclib.serialization.simple.serialize.mapSer.B">B</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@mapSer[A,B](implicitevidence$10:serialize.this.Serialize[A],implicitevidence$11:serialize.this.Serialize[B]):serialize.this.Serialize[Map[A,B]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#optionDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="optionDes[A](implicitevidence$3:deserialize.this.Deserialize[A]):deserialize.this.Deserialize[Option[A]]"></a>
+      <a id="optionDes[A](Deserialize[A]):Deserialize[Option[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">optionDes</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="sclib.serialization.simple.deserialize.optionDes.A">A</span>]</span>)</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Option">Option</span>[<span class="extype" name="sclib.serialization.simple.deserialize.optionDes.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@optionDes[A](implicitevidence$3:deserialize.this.Deserialize[A]):deserialize.this.Deserialize[Option[A]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#optionSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="optionSer[A](implicitevidence$2:serialize.this.Serialize[A]):serialize.this.Serialize[Option[A]]"></a>
+      <a id="optionSer[A](Serialize[A]):Serialize[Option[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">optionSer</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="sclib.serialization.simple.serialize.optionSer.A">A</span>]</span>)</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Option">Option</span>[<span class="extype" name="sclib.serialization.simple.serialize.optionSer.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@optionSer[A](implicitevidence$2:serialize.this.Serialize[A]):serialize.this.Serialize[Option[A]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#setDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="setDes[A](implicitevidence$10:deserialize.this.Deserialize[A]):deserialize.this.Deserialize[Set[A]]"></a>
+      <a id="setDes[A](Deserialize[A]):Deserialize[Set[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setDes</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="sclib.serialization.simple.deserialize.setDes.A">A</span>]</span>)</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="sclib.serialization.simple.deserialize.setDes.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@setDes[A](implicitevidence$10:deserialize.this.Deserialize[A]):deserialize.this.Deserialize[Set[A]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#setSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="setSer[A](implicitevidence$9:serialize.this.Serialize[A]):serialize.this.Serialize[Set[A]]"></a>
+      <a id="setSer[A](Serialize[A]):Serialize[Set[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setSer</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="sclib.serialization.simple.serialize.setSer.A">A</span>]</span>)</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="sclib.serialization.simple.serialize.setSer.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@setSer[A](implicitevidence$9:serialize.this.Serialize[A]):serialize.this.Serialize[Set[A]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#stringDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="stringDes:deserialize.this.Deserialize[String]"></a>
+      <a id="stringDes:Deserialize[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stringDes</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@stringDes:deserialize.this.Deserialize[String]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#stringSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="stringSer:serialize.this.Serialize[String]"></a>
+      <a id="stringSer:Serialize[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stringSer</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@stringSer:serialize.this.Serialize[String]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#tupleDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="tupleDes[A,B](implicitevidence$6:deserialize.this.Deserialize[A],implicitevidence$7:deserialize.this.Deserialize[B]):deserialize.this.Deserialize[(A,B)]"></a>
+      <a id="tupleDes[A,B](Deserialize[A],Deserialize[B]):Deserialize[(A,B)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tupleDes</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="sclib.serialization.simple.deserialize.tupleDes.A">A</span>]</span>, <span name="arg1">arg1: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="sclib.serialization.simple.deserialize.tupleDes.B">B</span>]</span>)</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[(<span class="extype" name="sclib.serialization.simple.deserialize.tupleDes.A">A</span>, <span class="extype" name="sclib.serialization.simple.deserialize.tupleDes.B">B</span>)]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@tupleDes[A,B](implicitevidence$6:deserialize.this.Deserialize[A],implicitevidence$7:deserialize.this.Deserialize[B]):deserialize.this.Deserialize[(A,B)]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#tupleSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="tupleSer[A,B](implicitevidence$5:serialize.this.Serialize[A],implicitevidence$6:serialize.this.Serialize[B]):serialize.this.Serialize[(A,B)]"></a>
+      <a id="tupleSer[A,B](Serialize[A],Serialize[B]):Serialize[(A,B)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tupleSer</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="sclib.serialization.simple.serialize.tupleSer.A">A</span>]</span>, <span name="arg1">arg1: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="sclib.serialization.simple.serialize.tupleSer.B">B</span>]</span>)</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[(<span class="extype" name="sclib.serialization.simple.serialize.tupleSer.A">A</span>, <span class="extype" name="sclib.serialization.simple.serialize.tupleSer.B">B</span>)]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@tupleSer[A,B](implicitevidence$5:serialize.this.Serialize[A],implicitevidence$6:serialize.this.Serialize[B]):serialize.this.Serialize[(A,B)]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.deserialize#vectorDes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="vectorDes[A](implicitevidence$9:deserialize.this.Deserialize[A]):deserialize.this.Deserialize[Vector[A]]"></a>
+      <a id="vectorDes[A](Deserialize[A]):Deserialize[Vector[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">vectorDes</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="sclib.serialization.simple.deserialize.vectorDes.A">A</span>]</span>)</span><span class="result">: <a href="deserialize$Deserialize.html" class="extype" name="sclib.serialization.simple.deserialize.Deserialize">Deserialize</a>[<span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="sclib.serialization.simple.deserialize.vectorDes.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@vectorDes[A](implicitevidence$9:deserialize.this.Deserialize[A]):deserialize.this.Deserialize[Vector[A]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></dd></dl></div>
+    </li><li name="sclib.serialization.simple.serialize#vectorSer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="vectorSer[A](implicitevidence$8:serialize.this.Serialize[A]):serialize.this.Serialize[Vector[A]]"></a>
+      <a id="vectorSer[A](Serialize[A]):Serialize[Vector[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">vectorSer</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="sclib.serialization.simple.serialize.vectorSer.A">A</span>]</span>)</span><span class="result">: <a href="serialize$Serialize.html" class="extype" name="sclib.serialization.simple.serialize.Serialize">Serialize</a>[<span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="sclib.serialization.simple.serialize.vectorSer.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.serialization.simple.package@vectorSer[A](implicitevidence$8:serialize.this.Serialize[A]):serialize.this.Serialize[Vector[A]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="sclib.serialization.simple.deserialize">
+              <h3>Inherited from <a href="deserialize.html" class="extype" name="sclib.serialization.simple.deserialize">deserialize</a></h3>
+            </div><div class="parent" name="sclib.serialization.simple.serialize">
+              <h3>Inherited from <a href="serialize.html" class="extype" name="sclib.serialization.simple.serialize">serialize</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
