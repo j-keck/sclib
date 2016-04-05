@@ -1,6 +1,21 @@
 # sclib - simple scala utility library
 
-## zero dependencies
+## 
+
+i publish the library to bintray for scala 2.10 and 2.11
+
+- for the jvm:
+
+        resolvers += Resolver.bintrayRepo("j-keck", "maven")
+        libraryDependencies += "net.jkeck" %% "sclib" % "0.1"
+
+- for scala.js
+
+        resolvers += Resolver.bintrayRepo("j-keck", "maven")
+        libraryDependencies += "net.jkeck" %%% "sclib" % "0.1"
+
+
+## zero runtime dependencies
 
 TODO
 
@@ -16,6 +31,7 @@ import sclib.ops.either._
   - shorthand Left / Right constructor:
   
 ```tut
+"a string".left
 "a string".left[Int] 
 4.right[String]
 ```
@@ -87,7 +103,7 @@ we give the deserializer the expected type, and it parse / converts the given st
 import sclib.serialization.simple._
 ```
 
-  - for stdlib
+####for stdlib
   
 ```tut
 val s = Serialize("a simple string")
@@ -97,9 +113,11 @@ val t = Serialize("a tuple with a string and a list" -> List(4, 23, 1))
 Deserialize[(String, List[Int])](t)
 ```
 
-  - for own types
+####for own types
   
-```tut
+  - define your type and the typeclass for serialization / deserialization
+  
+```tut:silent
 case class C(a: String, b: List[Int], c: Either[Int, String])
 
 implicit val cSer = new Serialize[C]{
@@ -115,7 +133,10 @@ implicit val cDes = new Deserialize[C]{
     c <- Deserialize[Either[Int, String]]
   } yield C(a, b, c)
 }
+```
 
+  - use it
+```tut
 val s = Serialize(C("the string", List(4, 2, 1), Right("i'm right")))
 Deserialize[C](s)
 ```

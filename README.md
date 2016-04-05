@@ -1,6 +1,21 @@
 # sclib - simple scala utility library
 
-## zero dependencies
+## 
+
+i publish the library to bintray for scala 2.10 and 2.11
+
+- for the jvm:
+
+        resolvers += Resolver.bintrayRepo("j-keck", "maven")
+        libraryDependencies += "net.jkeck" %% "sclib" % "0.1"
+
+- for scala.js
+
+        resolvers += Resolver.bintrayRepo("j-keck", "maven")
+        libraryDependencies += "net.jkeck" %%% "sclib" % "0.1"
+
+
+## zero runtime dependencies
 
 TODO
 
@@ -16,21 +31,24 @@ import sclib.ops.either._
   - shorthand Left / Right constructor:
   
 ```scala
+scala> "a string".left
+res0: Either[String,Nothing] = Left(a string)
+
 scala> "a string".left[Int] 
-res0: Either[String,Int] = Left(a string)
+res1: Either[String,Int] = Left(a string)
 
 scala> 4.right[String]
-res1: Either[String,Int] = Right(4)
+res2: Either[String,Int] = Right(4)
 ```
 
   - sequence on either
   
 ```scala
 scala> EitherOps.sequence(List(3.right, 4.right))
-res2: Either[Nothing,List[Int]] = Right(List(3, 4))
+res3: Either[Nothing,List[Int]] = Right(List(3, 4))
 
 scala> EitherOps.sequence(List(3.right, 4.right, "BOOM".left))
-res3: Either[String,List[Int]] = Left(BOOM)
+res4: Either[String,List[Int]] = Left(BOOM)
 ```
    
   - right biased either
@@ -40,7 +58,7 @@ scala> for {
      |   a <- Right(1)
      |   b <- Right(4)
      | } yield a + b
-res4: scala.util.Either[Nothing,Int] = Right(5)
+res5: scala.util.Either[Nothing,Int] = Right(5)
 ```
 
 ### List
@@ -98,7 +116,7 @@ we give the deserializer the expected type, and it parse / converts the given st
 import sclib.serialization.simple._
 ```
 
-  - for stdlib
+####for stdlib
   
 ```scala
 scala> val s = Serialize("a simple string")
@@ -114,31 +132,33 @@ scala> Deserialize[(String, List[Int])](t)
 res1: (String, List[Int]) = (a tuple with a string and a list,List(4, 23, 1))
 ```
 
-  - for own types
+####for own types
+  
+  - define your type and the typeclass for serialization / deserialization
   
 ```scala
-scala> case class C(a: String, b: List[Int], c: Either[Int, String])
-defined class C
+case class C(a: String, b: List[Int], c: Either[Int, String])
 
-scala> implicit val cSer = new Serialize[C]{
-     |   override def apply(c: C): String = c match {
-     |     case C(a, b, c) => Serialize(a) + Serialize(b) + Serialize(c)
-     |   }
-     | }
-cSer: sclib.serialization.simple.Serialize[C] = $anon$1@5236e87f
+implicit val cSer = new Serialize[C]{
+  override def apply(c: C): String = c match {
+    case C(a, b, c) => Serialize(a) + Serialize(b) + Serialize(c)
+  }
+}
 
-scala> implicit val cDes = new Deserialize[C]{
-     |   override def apply: sclib.ct.State[String, C] = for {
-     |     a <- Deserialize[String]
-     |     b <- Deserialize[List[Int]]
-     |     c <- Deserialize[Either[Int, String]]
-     |   } yield C(a, b, c)
-     | }
-cDes: sclib.serialization.simple.Deserialize[C] = $anon$1@1b7474b2
+implicit val cDes = new Deserialize[C]{
+  override def apply: sclib.ct.State[String, C] = for {
+    a <- Deserialize[String]
+    b <- Deserialize[List[Int]]
+    c <- Deserialize[Either[Int, String]]
+  } yield C(a, b, c)
+}
+```
 
+  - use it
+```scala
 scala> val s = Serialize(C("the string", List(4, 2, 1), Right("i'm right")))
 s: String = 10:the string9:1:41:21:112:R9:i'm right
 
 scala> Deserialize[C](s)
-res2: C = C(the string,List(4, 2, 1),Right(i'm right))
+res4: C = C(the string,List(4, 2, 1),Right(i'm right))
 ```
