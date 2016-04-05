@@ -6,7 +6,7 @@ import java.util.function.{Predicate, Function => JFunction}
 import scala.collection.JavaConverters
 
 /**
-  * == java8 extensions
+  * java8 interoperability
   *
   *  - `java.util.stream.Stream` extensions: [[sclib.ops.java8.JStreamOps]]
   *  - create a `java.util.function.Function` from a `scala.Function1`: [[sclib.ops.java8.SFunction2JFunction]]

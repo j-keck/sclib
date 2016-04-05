@@ -1,8 +1,14 @@
 # sclib - simple scala utility library
 
-## 
+  - stdlib extensions
+  - utilities
+  - zero runtime dependencies
+  - jvm and scala.js bits
 
-i publish the library to bintray for scala 2.10 and 2.11
+## quick start 
+
+i publish the library to bintray for scala 2.10 and 2.11.
+so you can add the following snippet to your `build.sbt` file.
 
 - for the jvm:
 
@@ -15,21 +21,25 @@ i publish the library to bintray for scala 2.10 and 2.11
         libraryDependencies += "net.jkeck" %%% "sclib" % "0.1"
 
 
-## zero runtime dependencies
+## content
 
-TODO
+   - [stdlib extensions](#stdlib-extensions)
+     - [Either](#either)
+     - [List](#list)
+     - [Try](#try)
+     - [Java8 interoperability](#java8-interoperability)
+   - [patterns](#patterns)
+   - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
 
 
-## stdlib extensions
+### stdlib extensions
 
-### Either
-
+#### Either
 ```tut:silent:reset
 import sclib.ops.either._
 ```
 
   - shorthand Left / Right constructor:
-  
 ```tut
 "a string".left
 "a string".left[Int] 
@@ -37,7 +47,6 @@ import sclib.ops.either._
 ```
 
   - sequence on either to reducing many `Either`s into a single `Either`
-  
 ```tut
 EitherOps.sequence(List(3.right, 4.right))
 
@@ -45,7 +54,6 @@ EitherOps.sequence(List(3.right, 4.right, "BOOM".left))
 ```
    
   - right biased either
-  
 ```tut
 for {
   a <- Right(1)
@@ -53,26 +61,24 @@ for {
 } yield a + b
 ```
 
-### List
-
+#### List
 ```tut:silent:reset
 import sclib.ops.list._
 ```
 
   - unfoldLeft / unfoldRight
-    
 ```tut
 ListOps.unfoldRight(0){ i =>
   if(i > 10) None else Some((i, i + 1))
 }
 ```
 
-### Try
+#### Try
 ```tut:silent:reset
 import sclib.ops.`try`._
 ```
 
-  - shorthand constructor for `scala.util.Success`
+  - shorthand constructor for `Success`
 ```tut
 3.success
 ```
@@ -93,7 +99,7 @@ TryOps.sequence(3.success :: 44.success :: Nil)
 TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
 ```
 
-## java8
+### java8 interoperability
 ```tut:silent:reset
 import sclib.ops.java8._
 ```
@@ -120,16 +126,14 @@ java.util.Arrays.asList(1, 2, 3, 4).stream().filter((_:Int) < 3).toArray
 ```
 
 
-## "design pattern's"
-
+### "pattern's"
 ```tut:silent:reset
-import sclib.dp._
+import sclib.patterns._
 ```
 
-### AppF
+#### AppF
 
 simple *AppF*unction - expect's a function with receives a config and returns a Either
-
 
 ```tut
 import sclib.ops.either._
@@ -145,7 +149,7 @@ action.runEitherT.runReader(2)
 action.runEitherT.runReader(8)
 ```
 
-## (very) simple serialize / deserialize
+### (very) simple serialize / deserialize
 
 values are converted to strings and prefixed with their length.
 so the int value 31593 becomes "5:31593". to deserialize this value,
@@ -156,7 +160,7 @@ we give the deserializer the expected type, and it parse / converts the given st
 import sclib.serialization.simple._
 ```
 
-####for stdlib
+#####for stdlib
   
 ```tut
 val s = Serialize("a simple string")
@@ -166,7 +170,7 @@ val t = Serialize("a tuple with a string and a list" -> List(4, 23, 1))
 Deserialize[(String, List[Int])](t)
 ```
 
-####for own types
+#####for own types
   
   - define your type and the typeclass for serialization / deserialization
   

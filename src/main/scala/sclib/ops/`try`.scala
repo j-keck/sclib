@@ -5,12 +5,15 @@ import sclib.ops.either._
 import scala.util.{Failure, Success, Try}
 
 /**
-  * == scala.util.Try extensions
+  * `Try` extensions
   *
   * ''check the member documentation for examples''
   */
 object `try` {
 
+  /**
+    * utility's for `Try`
+    */
   object TryOps {
     /**
       * reducing many `Try`s into a single `Try`
@@ -31,6 +34,9 @@ object `try` {
     }
   }
 
+  /**
+    * extensions on `Try` instances
+    */
   implicit class TryOps[A](t: Try[A]) {
 
     /**

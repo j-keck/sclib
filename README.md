@@ -1,8 +1,14 @@
 # sclib - simple scala utility library
 
-## 
+  - stdlib extensions
+  - utilities
+  - zero runtime dependencies
+  - jvm and scala.js bits
 
-i publish the library to bintray for scala 2.10 and 2.11
+## quick start 
+
+i publish the library to bintray for scala 2.10 and 2.11.
+so you can add the following snippet to your `build.sbt` file.
 
 - for the jvm:
 
@@ -15,21 +21,25 @@ i publish the library to bintray for scala 2.10 and 2.11
         libraryDependencies += "net.jkeck" %%% "sclib" % "0.1"
 
 
-## zero runtime dependencies
+## content
 
-TODO
+   - [stdlib extensions](#stdlib-extensions)
+     - [Either](#either)
+     - [List](#list)
+     - [Try](#try)
+     - [Java8 interoperability](#java8-interoperability)
+   - [patterns](#patterns)
+   - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
 
 
-## stdlib extensions
+### stdlib extensions
 
-### Either
-
+#### Either
 ```scala
 import sclib.ops.either._
 ```
 
   - shorthand Left / Right constructor:
-  
 ```scala
 scala> "a string".left
 res0: Either[String,Nothing] = Left(a string)
@@ -41,8 +51,7 @@ scala> 4.right[String]
 res2: Either[String,Int] = Right(4)
 ```
 
-  - sequence on either
-  
+  - sequence on either to reducing many `Either`s into a single `Either`
 ```scala
 scala> EitherOps.sequence(List(3.right, 4.right))
 res3: Either[Nothing,List[Int]] = Right(List(3, 4))
@@ -52,7 +61,6 @@ res4: Either[String,List[Int]] = Left(BOOM)
 ```
    
   - right biased either
-  
 ```scala
 scala> for {
      |   a <- Right(1)
@@ -61,14 +69,12 @@ scala> for {
 res5: scala.util.Either[Nothing,Int] = Right(5)
 ```
 
-### List
-
+#### List
 ```scala
 import sclib.ops.list._
 ```
 
   - unfoldLeft / unfoldRight
-    
 ```scala
 scala> ListOps.unfoldRight(0){ i =>
      |   if(i > 10) None else Some((i, i + 1))
@@ -76,12 +82,12 @@ scala> ListOps.unfoldRight(0){ i =>
 res0: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 
-### Try
+#### Try
 ```scala
 import sclib.ops.`try`._
 ```
 
-  - shorthand constructor for `scala.util.Success`
+  - shorthand constructor for `Success`
 ```scala
 scala> 3.success
 res0: scala.util.Try[Int] = Success(3)
@@ -108,7 +114,7 @@ scala> TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
 res4: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
 ```
 
-## java8
+### java8 interoperability
 ```scala
 import sclib.ops.java8._
 ```
@@ -139,16 +145,14 @@ res3: Array[Object] = Array(1, 2)
 ```
 
 
-## "design pattern's"
-
+### "pattern's"
 ```scala
-import sclib.dp._
+import sclib.patterns._
 ```
 
-### AppF
+#### AppF
 
 simple *AppF*unction - expect's a function with receives a config and returns a Either
-
 
 ```scala
 scala> import sclib.ops.either._
@@ -168,7 +172,7 @@ scala> action.runEitherT.runReader(8)
 res1: Either[String,(Int, Int, Int)] = Left(BOOM)
 ```
 
-## (very) simple serialize / deserialize
+### (very) simple serialize / deserialize
 
 values are converted to strings and prefixed with their length.
 so the int value 31593 becomes "5:31593". to deserialize this value,
@@ -179,7 +183,7 @@ we give the deserializer the expected type, and it parse / converts the given st
 import sclib.serialization.simple._
 ```
 
-####for stdlib
+#####for stdlib
   
 ```scala
 scala> val s = Serialize("a simple string")
@@ -195,7 +199,7 @@ scala> Deserialize[(String, List[Int])](t)
 res1: (String, List[Int]) = (a tuple with a string and a list,List(4, 23, 1))
 ```
 
-####for own types
+#####for own types
   
   - define your type and the typeclass for serialization / deserialization
   

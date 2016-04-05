@@ -1,7 +1,7 @@
 package sclib.ops
 
 /**
-  * == scala.Either extensions
+  * `Either` extensions
   *
   * ''check the member documentation for examples''
   */

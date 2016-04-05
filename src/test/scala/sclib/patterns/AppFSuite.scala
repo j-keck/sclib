@@ -1,4 +1,4 @@
-package sclib.dp
+package sclib.patterns
 
 import org.scalatest.{FunSuite, Matchers}
 import sclib.ops.either._
