@@ -36,7 +36,7 @@ import sclib.ops.either._
 4.right[String]
 ```
 
-  - sequence on either
+  - sequence on either to reducing many `Either`s into a single `Either`
   
 ```tut
 EitherOps.sequence(List(3.right, 4.right))
