@@ -76,6 +76,37 @@ scala> ListOps.unfoldRight(0){ i =>
 res0: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 
+## java8 extensions
+```scala
+import sclib.ops.java8._
+```
+
+#####java.util.stream.Stream
+
+  - convert to Iterator
+```scala
+scala> java.util.Arrays.asList(1, 2, 3, 4).stream.toIterator
+res0: Iterator[Int] = non-empty iterator
+```
+  - convert to List
+```scala
+scala> java.util.Arrays.asList(1, 2, 3, 4).stream.toList
+res1: List[Int] = List(1, 2, 3, 4)
+```
+
+#####create a 'java.util.function.Function' from a 'scala.Function1'
+```scala
+scala> java.util.Arrays.asList(1, 2, 3, 4).stream().map((_: Int) * 10).toArray
+res2: Array[Object] = Array(10, 20, 30, 40)
+```
+
+#####create a 'java.util.function.Predicate' from a 'scala.Function1'
+```scala
+scala> java.util.Arrays.asList(1, 2, 3, 4).stream().filter((_:Int) < 3).toArray
+res3: Array[Object] = Array(1, 2)
+```
+
+
 ## "design pattern's"
 
 ```scala

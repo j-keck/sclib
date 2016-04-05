@@ -67,6 +67,33 @@ ListOps.unfoldRight(0){ i =>
 }
 ```
 
+## java8 extensions
+```tut:silent:reset
+import sclib.ops.java8._
+```
+
+#####java.util.stream.Stream
+
+  - convert to Iterator
+```tut
+java.util.Arrays.asList(1, 2, 3, 4).stream.toIterator
+```
+  - convert to List
+```tut
+java.util.Arrays.asList(1, 2, 3, 4).stream.toList
+```
+
+#####create a 'java.util.function.Function' from a 'scala.Function1'
+```tut
+java.util.Arrays.asList(1, 2, 3, 4).stream().map((_: Int) * 10).toArray
+```
+
+#####create a 'java.util.function.Predicate' from a 'scala.Function1'
+```tut
+java.util.Arrays.asList(1, 2, 3, 4).stream().filter((_:Int) < 3).toArray
+```
+
+
 ## "design pattern's"
 
 ```tut:silent:reset
