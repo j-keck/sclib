@@ -67,6 +67,20 @@ ListOps.unfoldRight(0){ i =>
 }
 ```
 
+
+## repl
+
+```tut:silent:reset
+import sclib.repl._
+```
+
+  - desugar
+```tut
+desugar{
+  List.range(0, 10).foldLeft("")(_ + _)
+}
+```
+
 ## "design pattern's"
 
 ```tut:silent:reset

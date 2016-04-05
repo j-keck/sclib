@@ -76,6 +76,21 @@ scala> ListOps.unfoldRight(0){ i =>
 res0: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 
+
+## repl
+
+```scala
+import sclib.repl._
+```
+
+  - desugar
+```scala
+scala> desugar{
+     |   List.range(0, 10).foldLeft("")(_ + _)
+     | }
+immutable.this.List.range[Int](0, 10)(math.this.Numeric.IntIsIntegral).foldLeft[String]("")(((x$1: String, x$2: Int) => x$1.+(x$2)))
+```
+
 ## "design pattern's"
 
 ```scala

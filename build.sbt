@@ -24,9 +24,11 @@ lazy val commonSettings = Seq(
   scalacOptions in console in Compile -= "-Xfatal-warnings",
   scalacOptions in console in Test    -= "-Xfatal-warnings",
 
+  initialCommands in console := """import sclib.repl._""",
 
   libraryDependencies ++= Seq(
-    "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+    "org.scala-lang"   % "scala-reflect" % scalaVersion.value,
+    "org.scalatest"   %% "scalatest"     % "2.2.6" % "test"
   )
 )
 
