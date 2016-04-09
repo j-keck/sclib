@@ -141,16 +141,30 @@ scala> java.util.Arrays.asList(1, 2, 3, 4).stream.toList
 res1: List[Int] = List(1, 2, 3, 4)
 ```
 
-#####create a 'java.util.function.Function' from a 'scala.Function1'
+#####convert a `scala.Function1` to a `java.util.function.Function`
 ```scala
 scala> java.util.Arrays.asList(1, 2, 3, 4).stream().map((_: Int) * 10).toArray
 res2: Array[Object] = Array(10, 20, 30, 40)
 ```
 
-#####create a 'java.util.function.Predicate' from a 'scala.Function1'
+#####convert a `scala.Function1` to a `java.util.function.Predicate`
 ```scala
 scala> java.util.Arrays.asList(1, 2, 3, 4).stream().filter((_:Int) < 3).toArray
 res3: Array[Object] = Array(1, 2)
+```
+
+#####convert a `scala.Function1` to a `java.util.function.Consumer`
+```scala
+scala> java.util.Arrays.asList(1, 2,3).stream.forEach(println(_: Int))
+1
+2
+3
+```
+
+#####convert a `scala.Function2` to a `java.util.function.BinaryOperator`
+```scala
+scala> java.util.Arrays.asList(1, 2,3).stream.reduce(0, (_: Int) + (_: Int))
+res5: Int = 6
 ```
 
 

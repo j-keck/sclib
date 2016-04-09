@@ -124,14 +124,24 @@ java.util.Arrays.asList(1, 2, 3, 4).stream.toIterator
 java.util.Arrays.asList(1, 2, 3, 4).stream.toList
 ```
 
-#####create a 'java.util.function.Function' from a 'scala.Function1'
+#####convert a `scala.Function1` to a `java.util.function.Function`
 ```tut
 java.util.Arrays.asList(1, 2, 3, 4).stream().map((_: Int) * 10).toArray
 ```
 
-#####create a 'java.util.function.Predicate' from a 'scala.Function1'
+#####convert a `scala.Function1` to a `java.util.function.Predicate`
 ```tut
 java.util.Arrays.asList(1, 2, 3, 4).stream().filter((_:Int) < 3).toArray
+```
+
+#####convert a `scala.Function1` to a `java.util.function.Consumer`
+```tut
+java.util.Arrays.asList(1, 2,3).stream.forEach(println(_: Int))
+```
+
+#####convert a `scala.Function2` to a `java.util.function.BinaryOperator`
+```tut
+java.util.Arrays.asList(1, 2,3).stream.reduce(0, (_: Int) + (_: Int))
 ```
 
 
