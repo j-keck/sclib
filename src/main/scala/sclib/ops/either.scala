@@ -41,9 +41,6 @@ object either {
     /** @see [[scala.util.Either.RightProjection#flatMap]] */
     def flatMap[C](f: B => Either[A, C]) = e.right.flatMap(f)
 
-    /** @see [[scala.util.Either.RightProjection#get]] */
-    def get: B = e.right.get
-
     /** @see [[scala.util.Either.RightProjection#getOrElse]] */
     def getOrElse[BB >: B](or: => BB): BB = e.right.getOrElse(or)
 
