@@ -115,33 +115,33 @@ import sclib.ops.java8._
 
 #####java.util.stream.Stream
 
-  - convert to Iterator
+  - convert to 'scala.collection.Iterator'
 ```tut
-java.util.Arrays.asList(1, 2, 3, 4).stream.toIterator
+java.util.stream.Stream.of(1, 2, 3, 4).toIterator
 ```
-  - convert to List
+  - convert to 'scala.collection.immutable.List'
 ```tut
-java.util.Arrays.asList(1, 2, 3, 4).stream.toList
+java.util.stream.Stream.of(1, 2, 3, 4).toList
 ```
 
 #####convert a `scala.Function1` to a `java.util.function.Function`
 ```tut
-java.util.Arrays.asList(1, 2, 3, 4).stream().map((_: Int) * 10).toArray
+java.util.stream.Stream.of(1, 2, 3,4).map((_: Int) * 10).toArray
 ```
 
 #####convert a `scala.Function1` to a `java.util.function.Predicate`
 ```tut
-java.util.Arrays.asList(1, 2, 3, 4).stream().filter((_:Int) < 3).toArray
+java.util.stream.Stream.of(1, 2, 3, 4).filter((_: Int) < 3).toArray
 ```
 
 #####convert a `scala.Function1` to a `java.util.function.Consumer`
 ```tut
-java.util.Arrays.asList(1, 2,3).stream.forEach(println(_: Int))
+java.util.stream.Stream.of(1, 2, 3, 4).forEach(println(_: Int))
 ```
 
 #####convert a `scala.Function2` to a `java.util.function.BinaryOperator`
 ```tut
-java.util.Arrays.asList(1, 2,3).stream.reduce(0, (_: Int) + (_: Int))
+java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
 ```
 
 
