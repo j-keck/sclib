@@ -35,16 +35,16 @@ object either {
     * extensions on `Either` instances
     */
   implicit class EitherOps[A, B](e: Either[A, B]) {
-    /** @see [[scala.util.Either.RightProjection#map]] */
+    /** apply the given function if it's a `Right` */
     def map[C](f: B => C): Either[A, C] = e.right.map(f)
 
-    /** @see [[scala.util.Either.RightProjection#flatMap]] */
+    /** apply the given function if it's a `Right` */
     def flatMap[C](f: B => Either[A, C]) = e.right.flatMap(f)
 
-    /** @see [[scala.util.Either.RightProjection#getOrElse]] */
+    /** get the current value if it's a `Right` otherwise return the given argument */
     def getOrElse[BB >: B](or: => BB): BB = e.right.getOrElse(or)
 
-    /** @see [[scala.util.Either.RightProjection#toOption]] */
+    /** get the current value as a `Some` if it's a `Right` otherwise return `None` */
     def toOption: Option[B] = e.right.toOption
   }
 

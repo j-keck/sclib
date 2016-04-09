@@ -1,7 +1,7 @@
 package sclib
 
 /**
-  * == functor, monad, monad-transformer
+  * functor, monad, monad-transformer
   *
   *   - for zero runtime dependencies of this library, some concepts are reimplemented here
   *   - very basic / minimal `Functor` and `Monad` implementations
