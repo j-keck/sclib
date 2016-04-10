@@ -29,7 +29,7 @@ so you can add the following snippet to your `build.sbt` file.
      - [List](#list)
      - [Try](#try)
      - [Java8 interoperability](#java8-interoperability)
-   - [io](io)
+   - [io](#io)
    - [patterns](#patterns)
    - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
 
@@ -171,7 +171,7 @@ res5: Int = 6
 
 
 ### io
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io$)
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.package)
 ```scala
 import sclib.io._
 ```
@@ -207,7 +207,7 @@ def info(p: String) = for {
 ```scala
 scala> info("/tmp/dummy")
 res2: scala.util.Try[String] =
-Success(name: /tmp/dummy, size: 38, mtime: 1460290900000, content: first line
+Success(name: /tmp/dummy, size: 38, mtime: 1460291843000, content: first line
 2. line
 third line
 4. line)

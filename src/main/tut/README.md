@@ -29,7 +29,7 @@ so you can add the following snippet to your `build.sbt` file.
      - [List](#list)
      - [Try](#try)
      - [Java8 interoperability](#java8-interoperability)
-   - [io](io)
+   - [io](#io)
    - [patterns](#patterns)
    - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
 
@@ -147,7 +147,7 @@ java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
 
 
 ### io
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io$)
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.package)
 ```tut:silent:reset
 import sclib.io._
 ```
