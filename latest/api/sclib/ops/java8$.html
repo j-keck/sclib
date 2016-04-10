@@ -49,7 +49,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>java8 interoperability</p><ul><li><code>java.util.stream.Stream</code> extensions: <a href="java8$$JStreamOps.html" class="extype" name="sclib.ops.java8.JStreamOps">sclib.ops.java8.JStreamOps</a></li><li>create a <code>java.util.function.Function</code> from a <code>scala.Function1</code>: <a href="#SFunction2JFunction[A,B](f:A=&gt;B):java.util.function.Function[A,B]" class="extmbr" name="sclib.ops.java8#SFunction2JFunction">sclib.ops.java8.SFunction2JFunction</a></li><li>create a <code>java.util.function.Predicate</code> from a <code>scala.Function1</code>: <a href="#SFunction2Predicate[A](f:A=&gt;Boolean):java.util.function.Predicate[A]" class="extmbr" name="sclib.ops.java8#SFunction2Predicate">sclib.ops.java8.SFunction2Predicate</a></li></ul><p> <i>check the member documentation for examples</i>
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>java8 interoperability</p><p><i>check the member documentation for examples</i>
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -167,6 +167,67 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="sclib.ops.java8#SFunction2BinaryOperation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SFunction2BinaryOperation[A](f:(A,A)=&gt;A):java.util.function.BinaryOperator[A]"></a>
+      <a id="SFunction2BinaryOperation[A]((A,A)⇒A):BinaryOperator[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SFunction2BinaryOperation</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.ops.java8.SFunction2BinaryOperation.A">A</span>, <span class="extype" name="sclib.ops.java8.SFunction2BinaryOperation.A">A</span>) ⇒ <span class="extype" name="sclib.ops.java8.SFunction2BinaryOperation.A">A</span></span>)</span><span class="result">: <span class="extype" name="java.util.function.BinaryOperator">BinaryOperator</span>[<span class="extype" name="sclib.ops.java8.SFunction2BinaryOperation.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ops.java8$@SFunction2BinaryOperation[A](f:(A,A)=&gt;A):java.util.function.BinaryOperator[A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">convert a <code>scala.Function2</code> to a <code>java.util.function.BinaryOperator</code>
+</p><div class="fullcomment"><div class="comment cmt"><p>convert a <code>scala.Function2</code> to a <code>java.util.function.BinaryOperator</code>
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p>
+<b>without</b> the import:</p><pre>scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).reduce(<span class="num">0</span>, (_: <span class="std">Int</span>) + (_: <span class="std">Int</span>))
+&lt;console<span class="kw">&gt;:</span><span class="num">12</span>: error: overloaded method value reduce <span class="kw">with</span> alternatives:
+  [U](x$1: U, x$2: java.util.function.BiFunction[U, _ <span class="kw">&gt;:</span> <span class="std">Int</span>, U], x$3: java.util.function.BinaryOperator[U])U &lt;and&gt;
+  (x$1: java.util.function.BinaryOperator[<span class="std">Int</span>])java.util.Optional[<span class="std">Int</span>] &lt;and&gt;
+  (x$1: <span class="std">Int</span>,x$2: java.util.function.BinaryOperator[<span class="std">Int</span>])<span class="std">Int</span>
+ cannot be applied to (<span class="std">Int</span>, (<span class="std">Int</span>, <span class="std">Int</span>) <span class="kw">=&gt;</span> <span class="std">Int</span>)
+       java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).reduce(<span class="num">0</span>, (_: <span class="std">Int</span>) + (_: <span class="std">Int</span>))</pre><p><b>with</b> the import:</p><pre>scala&gt; <span class="kw">import</span> sclib.ops.java8._
+scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).reduce(<span class="num">0</span>, (_: <span class="std">Int</span>) + (_: <span class="std">Int</span>))
+res1: <span class="std">Int</span> = <span class="num">10</span></pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.ops.java8#SFunction2Consumer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SFunction2Consumer[A](f:A=&gt;Unit):java.util.function.Consumer[A]"></a>
+      <a id="SFunction2Consumer[A]((A)⇒Unit):Consumer[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SFunction2Consumer</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.ops.java8.SFunction2Consumer.A">A</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="java.util.function.Consumer">Consumer</span>[<span class="extype" name="sclib.ops.java8.SFunction2Consumer.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ops.java8$@SFunction2Consumer[A](f:A=&gt;Unit):java.util.function.Consumer[A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">convert a <code>scala.Function1</code> to a <code>java.util.function.Consumer</code>
+</p><div class="fullcomment"><div class="comment cmt"><p>convert a <code>scala.Function1</code> to a <code>java.util.function.Consumer</code>
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p>
+<b>without</b> the import:</p><pre>scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).forEach(println(_: <span class="std">Int</span>))
+&lt;console<span class="kw">&gt;:</span><span class="num">12</span>: error: <span class="kw">type</span> mismatch;
+ found   : <span class="std">Int</span> <span class="kw">=&gt;</span> <span class="std">Unit</span>
+ required: java.util.function.Consumer[_ <span class="kw">&gt;:</span> <span class="std">Int</span>]
+       java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).forEach(println(_: <span class="std">Int</span>))</pre><p><b>with</b> the import:</p><pre>scala&gt; <span class="kw">import</span> sclib.ops.java8._
+scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).forEach(println(_: <span class="std">Int</span>))
+<span class="num">1</span>
+<span class="num">2</span>
+<span class="num">3</span>
+<span class="num">4</span></pre></li></ol>
+            </div></dl></div>
     </li><li name="sclib.ops.java8#SFunction2JFunction" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="SFunction2JFunction[A,B](f:A=&gt;B):java.util.function.Function[A,B]"></a>
       <a id="SFunction2JFunction[A,B]((A)⇒B):Function[A,B]"></a>
@@ -187,12 +248,12 @@
 </p><div class="fullcomment"><div class="comment cmt"><p>convert a <code>scala.Function1</code> to a <code>java.util.function.Function</code>
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p>
-<b>without</b> the import:</p><pre>scala&gt; java.util.Arrays.asList(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).stream().map((_: <span class="std">Int</span>) * <span class="num">10</span>).toArray
+<b>without</b> the import:</p><pre>scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>,<span class="num">4</span>).map((_: <span class="std">Int</span>) * <span class="num">10</span>).toArray
 &lt;console<span class="kw">&gt;:</span><span class="num">12</span>: error: <span class="kw">type</span> mismatch;
 found   : <span class="std">Int</span> <span class="kw">=&gt;</span> <span class="std">Int</span>
 required: java.util.function.<span class="std">Function</span>[_ <span class="kw">&gt;:</span> <span class="std">Int</span>, _]
-java.util.Arrays.asList(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).stream().map((_: <span class="std">Int</span>) * <span class="num">10</span>).toArray</pre><p><b>with</b> the import:</p><pre>scala&gt; <span class="kw">import</span> sclib.ops.java8._
-scala&gt; java.util.Arrays.asList(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).stream().map((_: <span class="std">Int</span>) * <span class="num">10</span>).toArray
+       java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>,<span class="num">4</span>).map((_: <span class="std">Int</span>) * <span class="num">10</span>).toArray</pre><p><b>with</b> the import:</p><pre>scala&gt; <span class="kw">import</span> sclib.ops.java8._
+scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>,<span class="num">4</span>).map((_: <span class="std">Int</span>) * <span class="num">10</span>).toArray
 res1: <span class="std">Array</span>[<span class="std">Object</span>] = <span class="std">Array</span>(<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>)</pre></li></ol>
             </div></dl></div>
     </li><li name="sclib.ops.java8#SFunction2Predicate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -215,12 +276,12 @@ res1: <span class="std">Array</span>[<span class="std">Object</span>] = <span cl
 </p><div class="fullcomment"><div class="comment cmt"><p>convert a <code>scala.Function1</code> to a <code>java.util.function.Predicate</code>
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p>
-<b>without</b> the import:</p><pre>scala&gt; java.util.Arrays.asList(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).stream().filter((_:<span class="std">Int</span>) &lt; <span class="num">3</span>).toArray
+<b>without</b> the import:</p><pre>scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).filter((_: <span class="std">Int</span>) &lt; <span class="num">3</span>).toArray
 &lt;console<span class="kw">&gt;:</span><span class="num">12</span>: error: <span class="kw">type</span> mismatch;
-found   : <span class="std">Int</span> <span class="kw">=&gt;</span> <span class="std">Boolean</span>
-required: java.util.function.Predicate[_ <span class="kw">&gt;:</span> <span class="std">Int</span>]
-       java.util.Arrays.asList(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).stream().filter((_:<span class="std">Int</span>) &lt; <span class="num">3</span>).toArray</pre><p><b>with</b> the import:</p><pre>scala&gt; <span class="kw">import</span> sclib.ops.java8._
-scala&gt; java.util.Arrays.asList(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).stream().filter((_:<span class="std">Int</span>) &lt; <span class="num">3</span>).toArray
+ found   : <span class="std">Int</span> <span class="kw">=&gt;</span> <span class="std">Boolean</span>
+ required: java.util.function.Predicate[_ <span class="kw">&gt;:</span> <span class="std">Int</span>]
+       java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).filter((_: <span class="std">Int</span>) &lt; <span class="num">3</span>).toArray</pre><p><b>with</b> the import:</p><pre>scala&gt; <span class="kw">import</span> sclib.ops.java8._
+scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).filter((_: <span class="std">Int</span>) &lt; <span class="num">3</span>).toArray
 res1: <span class="std">Array</span>[<span class="std">Object</span>] = <span class="std">Array</span>(<span class="num">1</span>, <span class="num">2</span>)</pre></li></ol>
             </div></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">

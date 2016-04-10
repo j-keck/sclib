@@ -398,11 +398,11 @@
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">create a <code>Iterator</code> from a <code>java.util.stream.Stream</code>
-</p><div class="fullcomment"><div class="comment cmt"><p>create a <code>Iterator</code> from a <code>java.util.stream.Stream</code>
+      <p class="shortcomment cmt">create a <code>scala.collection.Iterator</code> from a <code>java.util.stream.Stream</code>
+</p><div class="fullcomment"><div class="comment cmt"><p>create a <code>scala.collection.Iterator</code> from a <code>java.util.stream.Stream</code>
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.java8._
-scala&gt; java.util.Arrays.asList(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).stream.toIterator
+scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).toIterator
 res0: Iterator[<span class="std">Int</span>] = non-empty iterator</pre></li></ol>
             </div></dl></div>
     </li><li name="sclib.ops.java8.JStreamOps#toList" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -421,11 +421,11 @@ res0: Iterator[<span class="std">Int</span>] = non-empty iterator</pre></li></ol
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">create a <code>collection.immutable.List</code> from a <code>java.util.stream.Stream</code>
-</p><div class="fullcomment"><div class="comment cmt"><p>create a <code>collection.immutable.List</code> from a <code>java.util.stream.Stream</code>
+      <p class="shortcomment cmt">create a <code>scala.collection.immutable.List</code> from a <code>java.util.stream.Stream</code>
+</p><div class="fullcomment"><div class="comment cmt"><p>create a <code>scala.collection.immutable.List</code> from a <code>java.util.stream.Stream</code>
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.java8._
-scala&gt; java.util.Arrays.asList(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).stream.toList
+scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).toList
 res0: <span class="std">List</span>[<span class="std">Int</span>] = <span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>)</pre></li></ol>
             </div></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
