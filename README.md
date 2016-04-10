@@ -29,6 +29,7 @@ so you can add the following snippet to your `build.sbt` file.
      - [List](#list)
      - [Try](#try)
      - [Java8 interoperability](#java8-interoperability)
+   - [io](io)
    - [patterns](#patterns)
    - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
 
@@ -141,19 +142,19 @@ scala> java.util.stream.Stream.of(1, 2, 3, 4).toList
 res1: List[Int] = List(1, 2, 3, 4)
 ```
 
-#####convert a `scala.Function1` to a `java.util.function.Function`
+  - convert a `scala.Function1` to a `java.util.function.Function`
 ```scala
 scala> java.util.stream.Stream.of(1, 2, 3,4).map((_: Int) * 10).toArray
 res2: Array[Object] = Array(10, 20, 30, 40)
 ```
 
-#####convert a `scala.Function1` to a `java.util.function.Predicate`
+  - convert a `scala.Function1` to a `java.util.function.Predicate`
 ```scala
 scala> java.util.stream.Stream.of(1, 2, 3, 4).filter((_: Int) < 3).toArray
 res3: Array[Object] = Array(1, 2)
 ```
 
-#####convert a `scala.Function1` to a `java.util.function.Consumer`
+  - convert a `scala.Function1` to a `java.util.function.Consumer`
 ```scala
 scala> java.util.stream.Stream.of(1, 2, 3, 4).forEach(println(_: Int))
 1
@@ -162,12 +163,77 @@ scala> java.util.stream.Stream.of(1, 2, 3, 4).forEach(println(_: Int))
 4
 ```
 
-#####convert a `scala.Function2` to a `java.util.function.BinaryOperator`
+  - convert a `scala.Function2` to a `java.util.function.BinaryOperator`
 ```scala
 scala> java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
 res5: Int = 6
 ```
 
+
+### io
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io$)
+```scala
+import sclib.io._
+```
+
+- write a file
+```scala
+scala> val content = List("first line", "2. line", "third line", "4. line")
+content: List[String] = List(first line, 2. line, third line, 4. line)
+
+scala> file("/tmp/dummy").flatMap(_.writeLines(content))
+res0: scala.util.Try[sclib.io.FSFile] = Success(FSFile(/tmp/dummy))
+```
+
+- read a file
+```scala
+scala> file("/tmp/dummy").flatMap(_.slurp)
+res1: scala.util.Try[String] =
+Success(first line
+2. line
+third line
+4. line)
+```
+
+- all functions are wrapped in a `Try`, so errors are captured and it's easy to compose.
+```scala
+def info(p: String) = for {
+  fh <- file(p)
+  size <- fh.size
+  mtime <- fh.mtime
+  content <- fh.slurp
+} yield s"name: $p, size: $size, mtime: $mtime, content: $content"
+```
+```scala
+scala> info("/tmp/dummy")
+res2: scala.util.Try[String] =
+Success(name: /tmp/dummy, size: 38, mtime: 1460289358000, content: first line
+2. line
+third line
+4. line)
+
+scala> info("/not/existing/file")
+res3: scala.util.Try[String] = Failure(java.nio.file.NoSuchFileException: /not/existing/file)
+```
+
+- type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for basic types. 
+```scala
+scala> for {
+     |   fh <- file("/tmp/example")
+     |   _ <- fh.writeLines("1. apple")                        // string
+     |   _ <- fh.appendLines(List("2. banana", "3. cherry"))   // list of string
+     |   _ <- fh.append(4)                                     // int
+     |   _ <- fh.append('.')                                   // char
+     |   _ <- fh.append(Vector(' ', 'd', 'o', 'g'))            // vector of char
+     |   content <- fh.slurp
+     |   _ <- fh.delete
+     | } yield content
+res4: scala.util.Try[String] =
+Success(1. apple
+2. banana
+3. cherry
+4. dog)
+```
 
 ### "pattern's"
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.patterns.package)
@@ -228,7 +294,7 @@ res1: (String, List[Int]) = (a tuple with a string and a list,List(4, 23, 1))
 
 #####for own types
   
-  - define your type and the typeclass for serialization / deserialization
+  - define your types and the typeclass instances for serialization / deserialization
   
 ```scala
 case class C(a: String, b: List[Int], c: Either[Int, String])

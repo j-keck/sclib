@@ -29,6 +29,7 @@ so you can add the following snippet to your `build.sbt` file.
      - [List](#list)
      - [Try](#try)
      - [Java8 interoperability](#java8-interoperability)
+   - [io](io)
    - [patterns](#patterns)
    - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
 
@@ -124,26 +125,71 @@ java.util.stream.Stream.of(1, 2, 3, 4).toIterator
 java.util.stream.Stream.of(1, 2, 3, 4).toList
 ```
 
-#####convert a `scala.Function1` to a `java.util.function.Function`
+  - convert a `scala.Function1` to a `java.util.function.Function`
 ```tut
 java.util.stream.Stream.of(1, 2, 3,4).map((_: Int) * 10).toArray
 ```
 
-#####convert a `scala.Function1` to a `java.util.function.Predicate`
+  - convert a `scala.Function1` to a `java.util.function.Predicate`
 ```tut
 java.util.stream.Stream.of(1, 2, 3, 4).filter((_: Int) < 3).toArray
 ```
 
-#####convert a `scala.Function1` to a `java.util.function.Consumer`
+  - convert a `scala.Function1` to a `java.util.function.Consumer`
 ```tut
 java.util.stream.Stream.of(1, 2, 3, 4).forEach(println(_: Int))
 ```
 
-#####convert a `scala.Function2` to a `java.util.function.BinaryOperator`
+  - convert a `scala.Function2` to a `java.util.function.BinaryOperator`
 ```tut
 java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
 ```
 
+
+### io
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io$)
+```tut:silent:reset
+import sclib.io._
+```
+
+- write a file
+```tut
+val content = List("first line", "2. line", "third line", "4. line")
+file("/tmp/dummy").flatMap(_.writeLines(content))
+```
+
+- read a file
+```tut
+file("/tmp/dummy").flatMap(_.slurp)
+```
+
+- all functions are wrapped in a `Try`, so errors are captured and it's easy to compose.
+```tut:silent
+def info(p: String) = for {
+  fh <- file(p)
+  size <- fh.size
+  mtime <- fh.mtime
+  content <- fh.slurp
+} yield s"name: $p, size: $size, mtime: $mtime, content: $content"
+```
+```tut
+info("/tmp/dummy")
+info("/not/existing/file")
+```
+
+- type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for basic types. 
+```tut
+for {
+  fh <- file("/tmp/example")
+  _ <- fh.writeLines("1. apple")                        // string
+  _ <- fh.appendLines(List("2. banana", "3. cherry"))   // list of string
+  _ <- fh.append(4)                                     // int
+  _ <- fh.append('.')                                   // char
+  _ <- fh.append(Vector(' ', 'd', 'o', 'g'))            // vector of char
+  content <- fh.slurp
+  _ <- fh.delete
+} yield content
+```
 
 ### "pattern's"
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.patterns.package)
@@ -194,7 +240,7 @@ Deserialize[(String, List[Int])](t)
 
 #####for own types
   
-  - define your type and the typeclass for serialization / deserialization
+  - define your types and the typeclass instances for serialization / deserialization
   
 ```tut:silent
 case class C(a: String, b: List[Int], c: Either[Int, String])

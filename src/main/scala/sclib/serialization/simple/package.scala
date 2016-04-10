@@ -1,5 +1,7 @@
 package sclib.serialization
 
+import sclib.io.Writable
+
 /**
   * simple serialization / deserialization
   *
@@ -12,4 +14,9 @@ package sclib.serialization
   * res0: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
   * }}}
   */
-package object simple extends serialize with deserialize
+package object simple extends serialize with deserialize{
+
+  implicit def serializeWritable[A: Serialize] = new Writable[A] {
+    override def apply(a: A): Iterator[String] = Iterator.single(Serialize(a))
+  }
+}
