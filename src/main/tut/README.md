@@ -14,12 +14,12 @@ so you can add the following snippet to your `build.sbt` file.
 - for the jvm:
 
         resolvers += Resolver.bintrayRepo("j-keck", "maven")
-        libraryDependencies += "net.jkeck" %% "sclib" % "0.2"
+        libraryDependencies += "net.jkeck" %% "sclib" % "0.3"
 
 - for scala.js
 
         resolvers += Resolver.bintrayRepo("j-keck", "maven")
-        libraryDependencies += "net.jkeck" %%% "sclib" % "0.2"
+        libraryDependencies += "net.jkeck" %%% "sclib" % "0.3"
 
 
 ## content
@@ -218,6 +218,9 @@ action.runEitherT.runReader(8)
 
 ### (very) simple serialize / deserialize
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.serialization.simple.package)
+
+i use this for little scala.js apps for the client / server communication
+to keep the resulting '.js' files small.
 
 values are converted to strings and prefixed with their length.
 so the int value 31593 becomes "5:31593". to deserialize this value,

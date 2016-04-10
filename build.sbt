@@ -2,7 +2,7 @@ lazy val buildSettings = Seq(
   name := "sclib",
   organization := "net.jkeck",
 
-  version := "0.2",
+  version := "0.3",
   scalaVersion := "2.11.8",
   crossScalaVersions := Seq("2.10.6", scalaVersion.value)
 )
