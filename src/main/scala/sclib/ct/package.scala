@@ -1,10 +1,12 @@
 package sclib
 
+import scala.util.{Success, Try}
+
 /**
   * functor, monad, monad-transformer
   *
-  *   - for zero runtime dependencies of this library, some concepts are reimplemented here
-  *   - very basic / minimal `Functor` and `Monad` implementations
+  * - for zero runtime dependencies of this library, some concepts are reimplemented here
+  * - very basic / minimal `Functor` and `Monad` implementations
   *
   * ''check the member documentation for examples''
   */
@@ -30,6 +32,25 @@ package object ct {
     override def pure[A](a: A): List[A] = List(a)
   }
 
+  /** `Vector`s `Functor` and `Monad` instances */
+  implicit def vectorInstances = new Functor[Vector] with Monad[Vector]{
+    override def map[A, B](fa: Vector[A])(f: (A) => B): Vector[B] = fa.map(f)
+
+    override def flatMap[A, B](fa: Vector[A])(f: (A) => Vector[B]): Vector[B] = fa.flatMap(f)
+
+    override def pure[A](a: A): Vector[A] = Vector(a)
+  }
+
+  
+  /** `Set`s `Functor` and `Monad` instances */
+  implicit def setInstances = new Functor[Set] with Monad[Set]{
+    override def map[A, B](fa: Set[A])(f: (A) => B): Set[B] = fa.map(f)
+
+    override def flatMap[A, B](fa: Set[A])(f: (A) => Set[B]): Set[B] = fa.flatMap(f)
+
+    override def pure[A](a: A): Set[A] = Set(a)
+  }
+
 
   /** `Function0`s `Functor` and `Monad` instances */
   implicit def function0Instances = new Functor[Function0] with Monad[Function0] {
@@ -41,6 +62,16 @@ package object ct {
   }
 
 
+  /** `Function1`s `Functor` and `Monad` instances */
+  implicit def function1Instances[A] = new Functor[({type L[B] = Function1[A, B]})#L] with Monad[({type L[B] = Function1[A, B]})#L] {
+    override def map[B, C](fa: (A) => B)(f: (B) => C): (A) => C = a => f(fa(a))
+
+    override def flatMap[B, C](fa: (A) => B)(f: (B) => (A) => C): (A) => C = a => f(fa(a))(a)
+
+    override def pure[B](b: B): (A) => B = _ => b
+  }
+
+
   /** `Either`s `Functor` and `Monad` instances */
   implicit def eitherInstance[A] = new Functor[({type L[B] = Either[A, B]})#L] with Monad[({type L[B] = Either[A, B]})#L] {
     override def map[B, C](fa: Either[A, B])(f: (B) => C): Either[A, C] = fa.right.map(f)
@@ -48,6 +79,17 @@ package object ct {
     override def flatMap[B, C](fa: Either[A, B])(f: (B) => Either[A, C]): Either[A, C] = fa.right.flatMap(f)
 
     override def pure[B](b: B): Either[A, B] = Right(b)
+  }
+
+
+  /** `Try`s `Functor` and `Monad` instances */
+  implicit def tryInstance = new Functor[Try] with Monad[Try] {
+    override def map[A, B](fa: Try[A])(f: (A) => B): Try[B] = fa.map(f)
+
+    override def flatMap[A, B](fa: Try[A])(f: (A) => Try[B]): Try[B] = fa.flatMap(f)
+
+    /** lift the given value in the `Monad` */
+    override def pure[A](a: A): Try[A] = Success(a)
   }
 
 
