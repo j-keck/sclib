@@ -70,7 +70,7 @@ scala> for {
      |   a <- Right(1)
      |   b <- Right(4)
      | } yield a + b
-res5: scala.util.Either[Nothing,Int] = Right(5)
+res5: Either[Nothing,Int] = Right(5)
 ```
 
 #### List
@@ -207,7 +207,7 @@ def info(p: String) = for {
 ```scala
 scala> info("/tmp/dummy")
 res2: scala.util.Try[String] =
-Success(name: /tmp/dummy, size: 38, mtime: 1460291843000, content: first line
+Success(name: /tmp/dummy, size: 38, mtime: 1460904865000, content: first line
 2. line
 third line
 4. line)
@@ -286,13 +286,13 @@ scala> val s = Serialize("a simple string")
 s: String = 15:a simple string
 
 scala> Deserialize[String](s)
-res0: String = a simple string
+res0: Either[String,String] = Right(a simple string)
 
 scala> val t = Serialize("a tuple with a string and a list" -> List(4, 23, 1))
 t: String = 32:a tuple with a string and a list10:1:42:231:1
 
 scala> Deserialize[(String, List[Int])](t)
-res1: (String, List[Int]) = (a tuple with a string and a list,List(4, 23, 1))
+res1: Either[String,(String, List[Int])] = Right((a tuple with a string and a list,List(4, 23, 1)))
 ```
 
 #####for own types
@@ -309,7 +309,7 @@ implicit val cSer = new Serialize[C]{
 }
 
 implicit val cDes = new Deserialize[C]{
-  override def apply: sclib.ct.State[String, C] = for {
+  override def apply: DeserializeState[C] = for {
     a <- Deserialize[String]
     b <- Deserialize[List[Int]]
     c <- Deserialize[Either[Int, String]]
@@ -319,9 +319,9 @@ implicit val cDes = new Deserialize[C]{
 
   - use it
 ```scala
-scala> val s = Serialize(C("the string", List(4, 2, 1), Right("i'm right")))
-s: String = 10:the string9:1:41:21:112:R9:i'm right
+scala> val s = Serialize(C("the string", List(4, 2, 1), Right("i'm ok")))
+s: String = 10:the string9:1:41:21:19:R6:i'm ok
 
 scala> Deserialize[C](s)
-res4: C = C(the string,List(4, 2, 1),Right(i'm right))
+res4: Either[String,C] = Right(C(the string,List(4, 2, 1),Right(i'm ok)))
 ```

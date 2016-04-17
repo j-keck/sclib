@@ -15,7 +15,7 @@ class SerializationSuite extends FunSuite with Matchers {
     Serialize("44:one string") should be("13:44:one string")
   }
 
-  test("serialize char"){
+  test("serialize char") {
     Serialize('x') should be("1:x")
   }
 
@@ -27,20 +27,20 @@ class SerializationSuite extends FunSuite with Matchers {
     Serialize(true) should be("4:true")
   }
 
-  test("serialize list of int"){
-    Serialize(List(1, 5, 2)) should be ("9:1:11:51:2")
+  test("serialize list of int") {
+    Serialize(List(1, 5, 2)) should be("9:1:11:51:2")
   }
 
   test("serialize vector of int") {
     Serialize(Vector(1, 5, 2)) should be("9:1:11:51:2")
   }
 
-  test("serialize option"){
+  test("serialize option") {
     Serialize(Option.empty[Int]) should be("1:N")
     Serialize(Option("N")) should be("3:1:N")
   }
 
-  test("serialize either"){
+  test("serialize either") {
     Serialize("left".left[Int]) should be("7:L4:left")
     Serialize("right".right[Int]) should be("8:R5:right")
   }
@@ -49,40 +49,56 @@ class SerializationSuite extends FunSuite with Matchers {
   // deserialize
   //
 
-  test("deserialize string") {
-    Deserialize[String]("4:abcd") should be("abcd")
+  test("deserialize invalid input") {
+    Deserialize[String]("BOOM") should be(
+      "unable to deserialize invalid string - expected: '<LENGTH>:<CONTENT>...', actual: 'BOOM'".left)
+    Deserialize[String]("") should be(
+      "unable to deserialize empty string - expected: '<LENGTH>:<CONTENT>...'".left)
   }
 
-  test("deserialize char"){
-    Deserialize[Char]("1:x") should be('x')
+  test("deserialize string") {
+    Deserialize[String]("4:abcd") should be("abcd".right)
+  }
+
+  test("deserialize char") {
+    Deserialize[Char]("1:x") should be('x'.right)
+    Deserialize[Char]("2:xx") should be("'xx' contains more than a char".left)
+    Deserialize[Char]("0:") should be(
+      "empty string doesn't contain any char".left)
   }
 
   test("deserialize int") {
-    Deserialize[Int]("6:123456") should be(123456)
+    Deserialize[Int]("6:123456") should be(123456.right)
   }
 
   test("deserialize boolean") {
-    Deserialize[Boolean]("5:false") should be(false)
+    Deserialize[Boolean]("5:false") should be(false.right)
   }
 
-  test("deserialize list of int"){
-    Deserialize[List[Int]]("9:1:11:51:2") should be(List(1, 5, 2))
+  test("deserialize list of int") {
+    Deserialize[List[Int]]("9:1:11:51:2") should be(List(1, 5, 2).right)
   }
 
   test("deserialize vector of int") {
-    Deserialize[Vector[Int]]("9:1:11:51:2") should be(Vector(1, 5, 2))
+    Deserialize[Vector[Int]]("9:1:11:51:2") should be(Vector(1, 5, 2).right)
   }
 
-  test("deserialize option"){
-    Deserialize[Option[String]]("1:N") should be(None)
-    Deserialize[Option[String]]("3:1:N") should be(Some("N"))
+  test("deserialize option") {
+    Deserialize[Option[String]]("1:N") should be(None.right)
+    Deserialize[Option[String]]("3:1:N") should be(Some("N").right)
   }
 
-  test("deserialize either"){
-    Deserialize[Either[String, Int]]("7:L4:left") should be("left".left[Int])
-    Deserialize[Either[Int, String]]("8:R5:right") should be("right".right[Int])
-  }
+  test("deserialize either") {
+    // 'xxx.right' are not usable here, because we are already on a 'Either', which has a '.right'
+    // function to get the 'RightProjection'
+    Deserialize[Either[String, Int]]("7:L4:left") should be(
+      Right("left".left[Int]))
+    Deserialize[Either[Int, String]]("8:R5:right") should be(
+      Right("right".right[Int]))
 
+    Deserialize[Either[Int, Int]]("4:X1:1") should be(
+      "unable to deserialize Either: expected 'L' or 'R' prefix, found: 'X' - in: 'X1:1'".left)
+  }
 
 
   //
@@ -104,7 +120,7 @@ class SerializationSuite extends FunSuite with Matchers {
   }
 
   implicit val cDes = new Deserialize[C] {
-    override def apply: State[String, C] = for {
+    override def apply: DeserializeState[C] = for {
       a <- Deserialize[Int]
       b <- Deserialize[String]
       c <- Deserialize[List[Long]]
@@ -113,11 +129,13 @@ class SerializationSuite extends FunSuite with Matchers {
     } yield C(a, b, c, d, e)
   }
 
+
   test("serialize case class") {
     Serialize(cs) should be(csStr)
   }
 
   test("deserialize case class") {
-    Deserialize[List[C]](csStr) should be(cs)
+    Deserialize[List[C]](csStr) should be(cs.right)
   }
+
 }

@@ -255,7 +255,7 @@ implicit val cSer = new Serialize[C]{
 }
 
 implicit val cDes = new Deserialize[C]{
-  override def apply: sclib.ct.State[String, C] = for {
+  override def apply: DeserializeState[C] = for {
     a <- Deserialize[String]
     b <- Deserialize[List[Int]]
     c <- Deserialize[Either[Int, String]]
@@ -265,6 +265,6 @@ implicit val cDes = new Deserialize[C]{
 
   - use it
 ```tut
-val s = Serialize(C("the string", List(4, 2, 1), Right("i'm right")))
+val s = Serialize(C("the string", List(4, 2, 1), Right("i'm ok")))
 Deserialize[C](s)
 ```
