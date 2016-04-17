@@ -5,15 +5,19 @@ import sclib.ops.either._
 /**
   * minimalistic `Either` monad transformer
   *
-  * @example {{{
+  * @example
+  * {{{
   * scala> import sclib.ct._
-  * scala> scala> import sclib.ops.either._
+  * scala> import sclib.ops.either._
   *
-  * scala> scala> val et = EitherT[Function0, Int, Int]{() => 10.right}
-  * scala> et: sclib.ct.EitherT[Function0,Int,Int] = EitherT(<function0>)
+  * scala> val et = EitherT[({type L[A] = Function1[Int, A]})#L, String, Int]{i => if(i < 10) i.right else "BOOM".left}
+  * et: sclib.ct.EitherT[[A]Int => A,String,Int] = EitherT(<function1>)
   *
-  * scala> scala> et.map(_ * 10).map(_ * 10).runEitherT.apply()
-  * scala> res0: Either[Int,Int] = Right(1000)
+  * scala> et.runEitherT(5)
+  * res0: Either[String,Int] = Right(5)
+  *
+  * scala> et.runEitherT(50)
+  * res1: Either[String,Int] = Left(BOOM)
   * }}}
   *
   */
@@ -24,9 +28,10 @@ case class EitherT[F[_], A, B](runEitherT: F[Either[A, B]]) {
   }
 
   def flatMap[AA >: A, D](f: B => EitherT[F, AA, D])(implicit F: Monad[F]): EitherT[F, AA, D] = EitherT {
-    F.flatMap(runEitherT) {
-      case Left(v) => F.pure(v.left[D])
-      case Right(r) => f(r).runEitherT
-    }
+    F.flatMap(runEitherT)(_.fold(l => F.pure(l.left[D]), r => f(r).runEitherT))
+  }
+
+  def flatMapF[C](f: B => F[Either[A, C]])(implicit F: Monad[F]): EitherT[F, A, C] = EitherT {
+    F.flatMap(runEitherT)(_.fold(a => F.pure(a.left), f))
   }
 }
