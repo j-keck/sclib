@@ -57,22 +57,6 @@ case class FSDir(path: Path) extends FSEntry {
     })
   }
 
-  /**
-    * create the directories
-    *
-    * @param attrs [[http://docs.oracle.com/javase/8/docs/api/java/nio/file/attribute/PosixFileAttributes.html]]
-    */
-  def mkDirs(attrs: Seq[FileAttribute[_]] = Seq()): Try[FSDir] = Try {
-    Files.createDirectories(path, attrs: _*)
-    this
-  }
-
-
-  /**
-    * @see [[FSDir.mkDirs(attrs*]]
-    */
-  def mkDirs: Try[FSDir] = mkDirs()
-
 
 
   /**
@@ -87,6 +71,8 @@ case class FSDir(path: Path) extends FSEntry {
 
 
   /**
+    * shortcut to use without parenthesize
+    *
     * @see [[FSDir.ls(depth:Int*]]
     */
   def ls: Try[Iterator[FSEntry]] = ls()
@@ -108,6 +94,15 @@ case class FSDir(path: Path) extends FSEntry {
   def lsS(depth: Int = 1): Iterator[Try[FSEntry]] = {
     FSIteratorS(this, depth)
   }
+
+
+  /**
+    * shortcut to use without parenthesize
+    *
+    * @see [[FSDir.lsS(depth:Int*]]
+    */
+  def lsS: Iterator[Try[FSEntry]] = lsS()
+
 
   /**
     * ''save'' function of [[FSDir.lsR]] - wraps every file operation in a `Try`.

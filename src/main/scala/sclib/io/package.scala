@@ -14,14 +14,14 @@ import scala.util.Try
   * scala> import sclib.io._
   * scala> for {
   *      |   fh <- file("/tmp/example")
-  *      |   _ <- fh.writeLines("1. apple")
-  *      |   _ <- fh.appendLines(List("2. banana", "3. cherry"))
-  *      |   _ <- fh.append(4)
-  *      |   _ <- fh.append('.')
-  *      |   _ <- fh.append(" dog")
+  *      |   _ <- fh.writeLines("1. apple")                        // string
+  *      |   _ <- fh.appendLines(List("2. banana", "3. cherry"))   // list of string
+  *      |   _ <- fh.append(4)                                     // int
+  *      |   _ <- fh.append('.')                                   // char
+  *      |   _ <- fh.append(Vector(' ', 'd', 'o', 'g'))            // vector of char
   *      |   content <- fh.slurp
   *      |   _ <- fh.delete
-  *      | } yield content
+  *      |
   * res0: scala.util.Try[String] =
   * Success(1. apple
   * 2. banana

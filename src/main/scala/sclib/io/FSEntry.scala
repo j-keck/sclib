@@ -1,6 +1,8 @@
 package sclib.io
 
 import java.nio.file._
+import java.nio.file.attribute.FileAttribute
+
 import scala.collection.JavaConversions._
 import scala.util.Try
 
@@ -29,6 +31,32 @@ trait FSEntry {
     * absolute, normalized path
     */
   lazy val absNormalizedPath = path.toAbsolutePath.normalize
+
+
+  val name: Try[String] = Try(path.getFileName.toString)
+
+  /**
+    * create the directories
+    *
+    * - when called on a `FSDir`, the directroy's path (inclusive parents) are created
+    * - when called on a `FSFile` the parent hierarchy are created
+    *
+    * @param attrs [[http://docs.oracle.com/javase/8/docs/api/java/nio/file/attribute/PosixFileAttributes.html]]
+    */
+  def mkDirs(attrs: Seq[FileAttribute[_]] = Seq()): Try[FSEntry] = Try {
+    val p = this match {
+      case _: FSDir => path
+      case _: FSFile => path.getParent
+    }
+    Files.createDirectories(p, attrs: _*)
+    this
+  }
+
+
+  /**
+    * @see [[FSDir.mkDirs(attrs*]]
+    */
+  def mkDirs: Try[FSEntry] = mkDirs()
 
 
   /**

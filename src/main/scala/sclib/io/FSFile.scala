@@ -23,22 +23,19 @@ import scala.util.Try
   * scala> import sclib.io._
   * scala> for {
   *      |   fh <- file("/tmp/example")
-  *      |   _ <- fh.appendLines("a string")
-  *      |   _ <- fh.appendLines(123)
-  *      |   _ <- fh.appendLines(1.23)
-  *      |   _ <- fh.appendLines(List(1, 2, 3))
-  *      |   _ <- fh.append(List(1, 2, 3))
+  *      |   _ <- fh.writeLines("1. apple")                        // string
+  *      |   _ <- fh.appendLines(List("2. banana", "3. cherry"))   // list of string
+  *      |   _ <- fh.append(4)                                     // int
+  *      |   _ <- fh.append('.')                                   // char
+  *      |   _ <- fh.append(Vector(' ', 'd', 'o', 'g'))            // vector of char
   *      |   content <- fh.slurp
   *      |   _ <- fh.delete
-  *      | } yield content
+  *      |
   * res0: scala.util.Try[String] =
-  * Success(a string
-  * 123
-  * 1.23
-  * 1
-  * 2
-  * 3
-  * 123)
+  * Success(1. apple
+  * 2. banana
+  * 3. cherry
+  * 4. dog)
   * }}}
   *
   * ''check the member documentation for examples''
