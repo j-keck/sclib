@@ -36,16 +36,25 @@ object either {
     */
   implicit class EitherOps[A, B](e: Either[A, B]) {
     /** apply the given function if it's a `Right` */
-    def map[C](f: B => C): Either[A, C] = e.right.map(f)
+    def map[BB](f: B => BB): Either[A, BB] = e.right.map(f)
 
     /** apply the given function if it's a `Right` */
-    def flatMap[C](f: B => Either[A, C]) = e.right.flatMap(f)
+    def flatMap[BB](f: B => Either[A, BB]): Either[A, BB] = e.right.flatMap(f)
 
     /** get the current value if it's a `Right` otherwise return the given argument */
     def getOrElse[BB >: B](or: => BB): BB = e.right.getOrElse(or)
 
     /** get the current value as a `Some` if it's a `Right` otherwise return `None` */
     def toOption: Option[B] = e.right.toOption
+
+    /** map both */
+    def bimap[AA, BB](fl: A => AA, fr: B => BB) = e.fold(fl, fr)
+
+    /** map over left */
+    def leftMap[AA](f: A => AA): Either[AA, B] = e.left.map(f)
+
+    /** flatMap over left */
+    def leftFlatMap[AA](f: A => Either[AA, B]): Either[AA, B] = e.left.flatMap(f)
   }
 
   /**
