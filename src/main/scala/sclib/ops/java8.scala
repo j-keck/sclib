@@ -5,12 +5,13 @@ import java.util.stream.{Stream => JStream}
 
 import scala.collection.JavaConverters
 
+object java8 extends java8
 /**
   * java8 interoperability
   *
   * ''check the member documentation for examples''
   */
-object java8 {
+trait java8 {
 
   import scala.language.implicitConversions
 

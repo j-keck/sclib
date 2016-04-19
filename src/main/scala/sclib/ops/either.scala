@@ -1,11 +1,12 @@
 package sclib.ops
 
+object either extends either
 /**
   * `Either` extensions
   *
   * ''check the member documentation for examples''
   */
-object either {
+trait either {
 
   /**
     * utility's for `Either`

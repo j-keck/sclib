@@ -5,7 +5,7 @@ import sclib.io.Writable
 /**
   * simple serialization / deserialization
   *
-  * example:
+  * @example
   * {{{
   * scala> import sclib.serialization.simple._
   * scala> val s = Serialize(List.range(1, 20))

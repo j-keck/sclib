@@ -4,12 +4,13 @@ import sclib.ops.either._
 
 import scala.util.{Failure, Success, Try}
 
+object `try`  extends `try`
 /**
   * `Try` extensions
   *
   * ''check the member documentation for examples''
   */
-object `try` {
+trait `try` {
 
   /**
     * utility's for `Try`
@@ -20,10 +21,10 @@ object `try` {
       *
       * @example {{{
       * scala> import sclib.ops.`try`._
-      * scala> TryOps.sequence(3.success :: 44.success :: Nil)
+      * scala> TryExtensions.sequence(3.success :: 44.success :: Nil)
       * res0: scala.util.Try[List[Int]] = Success(List(3, 44))
       *
-      * scala> TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
+      * scala> TryExtensions.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
       * res1: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
       * }}}
       */

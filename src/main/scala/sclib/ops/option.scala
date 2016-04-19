@@ -1,11 +1,13 @@
 package sclib.ops
 
+object option extends option
+
 /**
   * `Option` extensions
   *
   * ''check the member documentation for examples''
   */
-object option {
+trait option {
 
   /**
     * shorthand constructor for `None`

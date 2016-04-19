@@ -1,11 +1,12 @@
 package sclib.ops
 
+object list extends list
 /**
   * `List` extensions
   *
   * ''check the member documentation for examples''
   */
-object list {
+trait list {
 
   /**
     * utility's for `List`

@@ -1,9 +1,7 @@
 package sclib.serialization.simple
 
 import sclib.ct.StateT
-import sclib.ops.either._
-import sclib.ops.option._
-import sclib.ops.string._
+import sclib.ops.all._
 
 trait deserialize {
 

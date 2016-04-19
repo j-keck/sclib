@@ -26,9 +26,11 @@ so you can add the following snippet to your `build.sbt` file.
 
    - [stdlib extensions](#stdlib-extensions)
      - [Either](#either)
-     - [List](#list)
-     - [Try](#try)
      - [Java8 interoperability](#java8-interoperability)
+     - [List](#list)
+     - [Option](#option)
+     - [String](#string)
+     - [Try](#try)
    - [io](#io)
    - [patterns](#patterns)
    - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
@@ -36,8 +38,10 @@ so you can add the following snippet to your `build.sbt` file.
 
 ### stdlib extensions
 
+to import all in one use `import sclib.ops.all._`
+
 #### Either
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.either$)
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.either)
 
 ```scala
 import sclib.ops.either._
@@ -73,8 +77,50 @@ scala> for {
 res5: Either[Nothing,Int] = Right(5)
 ```
 
+
+#### java8 interoperability
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.java8)
+
+```scala
+import sclib.ops.java8._
+```
+
+  - convert a `java.util.stream.Stream` to 'scala.collection.Iterator'
+```scala
+scala> java.util.stream.Stream.of(1, 2, 3, 4).toIterator
+res0: Iterator[Int] = non-empty iterator
+```
+  - convert a `java.util.stream.Stream` to 'scala.collection.immutable.List'
+```scala
+scala> java.util.stream.Stream.of(1, 2, 3, 4).toList
+res1: List[Int] = List(1, 2, 3, 4)
+```
+  - convert a `scala.Function1` to a `java.util.function.Function`
+```scala
+scala> java.util.stream.Stream.of(1, 2, 3,4).map((_: Int) * 10).toArray
+res2: Array[Object] = Array(10, 20, 30, 40)
+```
+  - convert a `scala.Function1` to a `java.util.function.Predicate`
+```scala
+scala> java.util.stream.Stream.of(1, 2, 3, 4).filter((_: Int) < 3).toArray
+res3: Array[Object] = Array(1, 2)
+```
+  - convert a `scala.Function1` to a `java.util.function.Consumer`
+```scala
+scala> java.util.stream.Stream.of(1, 2, 3, 4).forEach(println(_: Int))
+1
+2
+3
+4
+```
+  - convert a `scala.Function2` to a `java.util.function.BinaryOperator`
+```scala
+scala> java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
+res5: Int = 6
+```
+
 #### List
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.list$)
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.list)
 
 ```scala
 import sclib.ops.list._
@@ -88,8 +134,78 @@ scala> ListOps.unfoldRight(0){ i =>
 res0: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 
+#### Option
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.option)
+
+```scala
+import sclib.ops.option._
+```
+
+  - shorthand constructor for `Some` (with type `Option[A]`)
+```scala
+scala> 123.some
+res0: Option[Int] = Some(123)
+```
+
+  - shorthand constructor for `None` (with type `Option[A]`)
+  
+```scala
+scala> none
+res1: Option[Nothing] = None
+```
+
+#### String
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.string)
+
+```scala
+import sclib.ops.string._
+```
+
+  - save / easy to compose toInt[T|E], toLong[T|E], toDouble[T|E], toChar[T|E] and toBoolean[T|E]
+```scala
+scala> "123".toIntT
+res0: scala.util.Try[Int] = Success(123)
+
+scala> "one".toIntT
+res1: scala.util.Try[Int] = Failure(java.lang.NumberFormatException: For input string: "one")
+
+scala> "123".toIntE
+res2: Either[String,Int] = Right(123)
+
+scala> "one".toIntE
+res3: Either[String,Int] = Left('one' is not a Int)
+
+scala> import sclib.ops.either._
+import sclib.ops.either._
+
+scala> for{
+     |  a <- "123".toIntE
+     |  b <- "44".toIntE
+     | } yield a + b
+res4: Either[String,Int] = Right(167)
+
+scala> for{
+     |  a <- "one".toIntE
+     |  b <- "44".toIntE
+     | } yield a + b
+res5: Either[String,Int] = Left('one' is not a Int)
+```
+
+  - toDate[T|E]
+```scala
+implicit val sdf = new java.text.SimpleDateFormat("DD.MM.yyyy HH:mm:ss")
+```
+
+```scala
+scala> "01.02.2020 16:30:10".toDateE
+res6: Either[String,java.util.Date] = Right(Wed Jan 01 16:30:10 CET 2020)
+
+scala> "Feb 01 16:30:10 2020".toDateE("MMM DD HH:mm:ss yyyy")
+res7: Either[String,java.util.Date] = Right(Wed Jan 01 16:30:10 CET 2020)
+```
+
 #### Try
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.try$)
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.try)
 
 ```scala
 import sclib.ops.`try`._
@@ -122,52 +238,7 @@ scala> TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
 res4: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
 ```
 
-### java8 interoperability
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.java8$)
 
-```scala
-import sclib.ops.java8._
-```
-
-#####java.util.stream.Stream
-
-  - convert to 'scala.collection.Iterator'
-```scala
-scala> java.util.stream.Stream.of(1, 2, 3, 4).toIterator
-res0: Iterator[Int] = non-empty iterator
-```
-  - convert to 'scala.collection.immutable.List'
-```scala
-scala> java.util.stream.Stream.of(1, 2, 3, 4).toList
-res1: List[Int] = List(1, 2, 3, 4)
-```
-
-  - convert a `scala.Function1` to a `java.util.function.Function`
-```scala
-scala> java.util.stream.Stream.of(1, 2, 3,4).map((_: Int) * 10).toArray
-res2: Array[Object] = Array(10, 20, 30, 40)
-```
-
-  - convert a `scala.Function1` to a `java.util.function.Predicate`
-```scala
-scala> java.util.stream.Stream.of(1, 2, 3, 4).filter((_: Int) < 3).toArray
-res3: Array[Object] = Array(1, 2)
-```
-
-  - convert a `scala.Function1` to a `java.util.function.Consumer`
-```scala
-scala> java.util.stream.Stream.of(1, 2, 3, 4).forEach(println(_: Int))
-1
-2
-3
-4
-```
-
-  - convert a `scala.Function2` to a `java.util.function.BinaryOperator`
-```scala
-scala> java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
-res5: Int = 6
-```
 
 
 ### io
@@ -207,7 +278,7 @@ def info(p: String) = for {
 ```scala
 scala> info("/tmp/dummy")
 res2: scala.util.Try[String] =
-Success(name: /tmp/dummy, size: 38, mtime: 1460904865000, content: first line
+Success(name: /tmp/dummy, size: 38, mtime: 1461053226000, content: first line
 2. line
 third line
 4. line)
