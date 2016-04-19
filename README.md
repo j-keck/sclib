@@ -134,6 +134,15 @@ scala> ListOps.unfoldRight(0){ i =>
 res0: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 
+  - partition a list into sub-lists - start by the given predicate
+```scala
+scala> val l = List("-- heading1", "a", "b", "-- heading2", "c", "d")
+l: List[String] = List(-- heading1, a, b, -- heading2, c, d)
+
+scala> l.partitionsBy(_.startsWith("--"))
+res1: List[List[String]] = List(List(-- heading1, a, b), List(-- heading2, c, d))
+```
+
 #### Option
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.option)
 
@@ -278,7 +287,7 @@ def info(p: String) = for {
 ```scala
 scala> info("/tmp/dummy")
 res2: scala.util.Try[String] =
-Success(name: /tmp/dummy, size: 38, mtime: 1461053226000, content: first line
+Success(name: /tmp/dummy, size: 38, mtime: 1461069702000, content: first line
 2. line
 third line
 4. line)

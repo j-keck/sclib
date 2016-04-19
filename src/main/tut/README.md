@@ -116,6 +116,12 @@ ListOps.unfoldRight(0){ i =>
 }
 ```
 
+  - partition a list into sub-lists - start by the given predicate
+```tut
+val l = List("-- heading1", "a", "b", "-- heading2", "c", "d")
+l.partitionsBy(_.startsWith("--"))
+```
+
 #### Option
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.option)
 
@@ -141,7 +147,7 @@ none
 import sclib.ops.string._
 ```
 
-  - save / easy to compose toInt, toLong, toDouble, toChar and toBoolean
+  - save / easy to compose toInt[T|E], toLong[T|E], toDouble[T|E], toChar[T|E] and toBoolean[T|E]
 ```tut
 "123".toIntT
 "one".toIntT
@@ -161,7 +167,7 @@ for{
 } yield a + b
 ```
 
-  - toDate
+  - toDate[T|E]
 ```tut:silent
 implicit val sdf = new java.text.SimpleDateFormat("DD.MM.yyyy HH:mm:ss")
 ```
