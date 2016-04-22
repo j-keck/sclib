@@ -1,6 +1,7 @@
 package sclib.ops
 
 object list extends list
+
 /**
   * `List` extensions
   *
@@ -18,15 +19,13 @@ trait list {
       *
       * @example {{{
       * scala> import sclib.ops.list._
-      * scala> ListOps.unfoldRight(0){ i =>
-      *      |   if(i > 10) None else Some(i, i + 1)
-      *      | }
+      * scala> ListOps.unfoldRight(0){ i => if(i > 10) None else Some(i, i + 1)}
       * res0: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
       * }}}
       */
     def unfoldRight[A, B](b: B)(f: B => Option[(A, B)]): List[A] = f(b) match {
       case Some((a, b)) => a :: unfoldRight(b)(f)
-      case None => Nil
+      case None         => Nil
     }
 
     /**
@@ -34,21 +33,18 @@ trait list {
       *
       * @example {{{
       * scala> import sclib.ops.list._
-      * scala> ListOps.unfoldLeft(0){ i =>
-      * |   if(i > 10) None else Some(i+1, i)
-      * | }
+      * scala> ListOps.unfoldLeft(0){ i => if(i > 10) None else Some(i + 1, i)}
       * res0: List[Int] = List(10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
       * }}}
       */
     def unfoldLeft[A, B](b: B)(f: B => Option[(B, A)]): List[A] = {
       def go(b: B)(l: List[A]): List[A] = f(b) match {
         case Some((b, a)) => go(b)(a :: l)
-        case None => l
+        case None         => l
       }
       go(b)(Nil)
     }
   }
-
 
   /**
     * extensions on `List` instances
@@ -56,7 +52,7 @@ trait list {
   implicit class ListOps[A](l: List[A]) {
 
     /**
-      * partition a list into sub-lists - start by the given predicate
+      * partition a list into sub-lists - separated at the given predicate
       *
       * @example
       * {{{
@@ -77,5 +73,4 @@ trait list {
       else Nil
     }
   }
-
 }
