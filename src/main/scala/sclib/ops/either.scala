@@ -1,6 +1,13 @@
 package sclib.ops
 
+import scala.util.{Either, Try}
+import sclib.ops.`try`._
+
+import scala.collection.{SeqLike, TraversableLike}
+import scala.collection.generic.CanBuildFrom
+
 object either extends either
+
 /**
   * `Either` extensions
   *
@@ -12,6 +19,7 @@ trait either {
     * utility's for `Either`
     */
   object EitherOps {
+
     /**
       * reducing many `Either`s into a single `Either`
       *
@@ -23,12 +31,29 @@ trait either {
       *
       * scala> EitherOps.sequence(List(3.right, 4.right, "BOOM".left))
       * res1: Either[String,List[Int]] = Left(BOOM)
+      *
+      * scala> EitherOps.sequence(Vector(2.right, 5.right))
+      * res2: scala.util.Either[Nothing,scala.collection.immutable.Vector[Int]] = Right(Vector(2, 5))
       * }}}
       */
-    def sequence[A, B](xs: List[Either[A, B]]): Either[A, List[B]] = xs match {
-      case Nil => Right(Nil)
-      case (Left(x) :: _) => Left(x)
-      case (Right(x) :: ys) => sequence(ys).map(x :: _)
+    def sequence[A, B, CC[X] <: Traversable[X]](value: CC[Either[A, B]])(
+        implicit cbf: CanBuildFrom[Nothing, B, CC[B]]): Either[A, CC[B]] = {
+
+      val b = {
+        val builder = collection.breakOut[CC[Either[A, B]], B, CC[B]]
+        builder(value)
+      }
+      b.sizeHint(value)
+
+      def go(xs: Traversable[Either[A, B]]): Either[A, CC[B]] = xs.headOption match {
+        case Some(Left(x)) => x.left
+        case Some(Right(x)) =>
+          b += x
+          go(xs.tail)
+        case None => b.result.right
+      }
+
+      go(value)
     }
   }
 
@@ -36,6 +61,7 @@ trait either {
     * extensions on `Either` instances
     */
   implicit class EitherOps[A, B](e: Either[A, B]) {
+
     /** apply the given function if it's a `Right` */
     def map[BB](f: B => BB): Either[A, BB] = e.right.map(f)
 
@@ -47,6 +73,11 @@ trait either {
 
     /** get the current value as a `Some` if it's a `Right` otherwise return `None` */
     def toOption: Option[B] = e.right.toOption
+
+    /** get the current value as a `Success` if it's a `Right` otherwise return `Failure`
+      * with the Left site
+      */
+    def toTry: Try[B] = e.fold(_.toString.failure, _.success)
 
     /** map both */
     def bimap[AA, BB](fl: A => AA, fr: B => BB) = e.fold(fl, fr)
@@ -67,7 +98,7 @@ trait either {
     * res0: Either[String,Nothing] = Left(BOOM)
     * }}}
     */
-  implicit class Any2Left[A](a: A){
+  implicit class Any2Left[A](a: A) {
     def left[B]: Either[A, B] = Left[A, B](a)
   }
 
@@ -80,8 +111,7 @@ trait either {
     * res0: Either[Nothing,Int] = Right(1)
     * }}}
     */
-  implicit class Any2Right[B](b: B){
+  implicit class Any2Right[B](b: B) {
     def right[A]: Either[A, B] = Right[A, B](b)
   }
-
 }
