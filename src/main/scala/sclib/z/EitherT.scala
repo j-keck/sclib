@@ -1,4 +1,4 @@
-package sclib.ct
+package sclib.z
 
 import sclib.ops.either._
 
@@ -7,11 +7,11 @@ import sclib.ops.either._
   *
   * @example
   * {{{
-  * scala> import sclib.ct._
+  * scala> import sclib.z._
   * scala> import sclib.ops.either._
   *
   * scala> val et = EitherT[({type L[A] = Function1[Int, A]})#L, String, Int]{i => if(i < 10) i.right else "BOOM".left}
-  * et: sclib.ct.EitherT[[A]Int => A,String,Int] = EitherT(<function1>)
+  * et: sclib.z.EitherT[[A]Int => A,String,Int] = EitherT(<function1>)
   *
   * scala> et.runEitherT(5)
   * res0: Either[String,Int] = Right(5)

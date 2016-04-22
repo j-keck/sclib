@@ -1,19 +1,19 @@
-package sclib.ct
+package sclib.z
 
 /**
   * minimalistic `Reader` monad
   *
   * @example {{{
-  * scala> import sclib.ct._
+  * scala> import sclib.z._
   *
-  * scala> for {
+  * scala> val action = for {
   *      |   a <- Reader[Int, Int]{_ + 5}
   *      |   b <- Reader[Int, Int]{_ + 10}
   *      | } yield (a, b)
-  * res0: sclib.ct.Reader[Int,(Int, Int)] = Reader(<function1>)
+  * action: sclib.z.Reader[Int,(Int, Int)] = Reader(<function1>)
   *
-  * scala> res0.runReader(1)
-  * res1: (Int, Int) = (6,11)
+  * scala> action.runReader(1)
+  * res0: (Int, Int) = (6,11)
   * }}}
   *
   */

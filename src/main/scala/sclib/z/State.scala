@@ -1,18 +1,18 @@
-package sclib.ct
+package sclib.z
 
 /**
   * minimalistic `State` monad
   *
   * @example {{{
-  * scala> import sclib.ct._
+  * scala> import sclib.z._
   *
-  * scala> for {
+  * scala> val action = for {
   *      |   a <- State[Int, Int](i => (i, i + 1))
   *      |   b <- State[Int, Int](i => (i, i + 1))
   *      | } yield a -> b
-  * res0: sclib.ct.State[Int,(Int, Int)] = State(<function1>)
+  * action: sclib.z.State[Int,(Int, Int)] = State(<function1>)
   *
-  * scala> res0.run(0)
+  * scala> action.run(0)
   * res1: ((Int, Int), Int) = ((0,1),2)
   * }}}
   */

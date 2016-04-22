@@ -10,7 +10,7 @@ import scala.util.{Success, Try}
   *
   * ''check the member documentation for examples''
   */
-package object ct {
+package object z {
 
 
   /** `Option`s `Functor` and `Monad` instances */
@@ -51,6 +51,14 @@ package object ct {
     override def pure[A](a: A): Set[A] = Set(a)
   }
 
+  /** `Iterator`s `Functor` and `Monad` instances */
+  implicit def iteratorInstances = new Functor[Iterator] with Monad[Iterator]{
+    override def map[A, B](fa: Iterator[A])(f: (A) => B): Iterator[B] = fa.map(f)
+
+    override def flatMap[A, B](fa: Iterator[A])(f: (A) => Iterator[B]): Iterator[B] = fa.flatMap(f)
+
+    override def pure[A](a: A): Iterator[A] = Iterator.single(a)
+  }
 
   /** `Function0`s `Functor` and `Monad` instances */
   implicit def function0Instances = new Functor[Function0] with Monad[Function0] {

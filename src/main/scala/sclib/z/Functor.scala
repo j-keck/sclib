@@ -1,4 +1,4 @@
-package sclib.ct
+package sclib.z
 
 /**
   * minimalistic `Functor`

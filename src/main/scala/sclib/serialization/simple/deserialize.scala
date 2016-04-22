@@ -1,6 +1,6 @@
 package sclib.serialization.simple
 
-import sclib.ct.StateT
+import sclib.z.StateT
 import sclib.ops.all._
 
 trait deserialize {

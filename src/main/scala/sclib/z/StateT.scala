@@ -1,25 +1,24 @@
-package sclib.ct
+package sclib.z
 
 /**
   * minimalistic `State` monad transformer
   *
   * @example
   * {{{
-  *  scala> import sclib.ct._
+  *  scala> import sclib.z._
   *  scala> import sclib.ops.`try`._
   *  scala> import scala.util.Try
   *
-  *  scala> val f = StateT{i: Int => if(i < 10) (i, i + 1).success else "BOOM".failure}
-  *  scala> for {
-  *       |   a <- f
-  *       |   b <- f
+  *  scala> val pf = StateT{i: Int => if(i < 10) (i, i + 1).success else "BOOM".failure}
+  *  scala> val action = for {
+  *       |   a <- pf
+  *       |   b <- pf
   *       | } yield a -> b
   *
-  *
-  *  scala> res0.run(0)
+  *  scala> action.run(0)
   *  res1: scala.util.Try[((Int, Int), Int)] = Success(((0,1),2))
   *
-  *  scala> res0.run(10)
+  *  scala> action.run(10)
   *  res2: scala.util.Try[((Int, Int), Int)] = Failure(java.lang.Exception: BOOM)
   * }}}
   */

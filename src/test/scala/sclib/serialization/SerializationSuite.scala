@@ -1,7 +1,6 @@
 package sclib.serialization
 
 import org.scalatest.{FunSuite, Matchers}
-import sclib.ct.State
 import sclib.ops.either._
 import sclib.serialization.simple._
 

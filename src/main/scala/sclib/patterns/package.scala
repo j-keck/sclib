@@ -1,6 +1,6 @@
 package sclib
 
-import sclib.ct.{EitherT, Reader}
+import sclib.z.{EitherT, Reader}
 
 /**
   * pattern's
@@ -21,7 +21,7 @@ package object patterns {
     *      |   b <- AppF{i: Int => if(i < 5) (i * 10).right else "BOOM".left}
     *      |   c <- AppF.lift(33.right[String])
     *      | } yield (a, b, c)
-    * action: sclib.ct.EitherT[[B]sclib.ct.Reader[Int,B],String,(Int, Int, Int)] = EitherT(Reader(<function1>))
+    * action: sclib.z.EitherT[[B]sclib.z.Reader[Int,B],String,(Int, Int, Int)] = EitherT(Reader(<function1>))
     *
     * scala> action.runEitherT.runReader(2)
     * res0: Either[String,(Int, Int, Int)] = Right((2,20,33))
