@@ -1,12 +1,11 @@
-package sclib.io
+package sclib.io.fs
 
 import java.nio.file.{Files, Path}
 
-import sclib.io.FSEntry.FSEntryImpl
-import sclib.ops.all._
-import sclib.z._
-
 import scala.util.Try
+
+import sclib.io.fs.FSEntry.FSEntryImpl
+import sclib.ops.all._
 
 /**
   * a ''save'' file-system iterator.
@@ -42,9 +41,9 @@ case class FSIterator(start: FSDir, maxDepth: Int = Integer.MAX_VALUE) extends I
     val curOrErr: Try[FSEntryImpl] = todo.head
     todo = todo.tail
 
-    // if the current entry is a directory, add it to the todos
-    curOrErr.foreach{ cur =>
-      if(cur.isDirectory){
+    // if the current entry is a directory, push the content at the top (deep first)
+    curOrErr.foreach { cur =>
+      if (cur.isDirectory && cur.depth(start) < maxDepth) {
         todo = ls(cur.path) ++ todo
       }
     }
@@ -53,11 +52,10 @@ case class FSIterator(start: FSDir, maxDepth: Int = Integer.MAX_VALUE) extends I
   }
 
   private def ls(path: Path): List[Try[FSEntryImpl]] =
-    Try(Files.list(path).toList).fold(_.failure[FSEntryImpl] :: Nil) ( _.map{ p =>
+    Try(Files.list(path).toList).fold(_.failure[FSEntryImpl] :: Nil)(_.map { p =>
       Try {
         if (Files.isDirectory(p)) new FSDir(p): FSEntryImpl
         else new FSFile(p): FSEntry.FSEntryImpl
       }
     })
-
 }

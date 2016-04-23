@@ -1,4 +1,3 @@
-import DocExamples._
 
 lazy val buildSettings = Seq(
   name := "sclib",
@@ -18,6 +17,7 @@ lazy val commonSettings = Seq(
   scalacOptions := Seq(
     "-feature",
     "-language:higherKinds",
+    "-language:existentials",
     "-Xfatal-warnings",
     "-deprecation",
     "-unchecked"

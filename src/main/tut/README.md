@@ -8,8 +8,8 @@
 
 ## quick start 
 
-i publish the library to bintray for scala 2.10 and 2.11.
-so you can add the following snippet to your `build.sbt` file.
+the library are published to bintray for scala 2.10 and 2.11.
+add the following snippet to your `build.sbt` file:
 
 - for the jvm:
 
@@ -138,6 +138,7 @@ import sclib.ops.option._
   
 ```tut
 none
+none[String]
 ```
 
 #### String
@@ -210,49 +211,42 @@ TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
 
 
 ### io
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.package)
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.fs.package)
 ```tut:silent:reset
-import sclib.io._
+import sclib.io.fs._
 ```
 
-- write a file
+- all functions which can throw a exception are wrapped in a `Try`.
 ```tut
-val content = List("first line", "2. line", "third line", "4. line")
-file("/tmp/dummy").flatMap(_.writeLines(content))
-```
-
-- read a file
-```tut
-file("/tmp/dummy").flatMap(_.slurp)
-```
-
-- all functions are wrapped in a `Try`, so errors are captured and it's easy to compose.
-```tut:silent
-def info(p: String) = for {
-  fh <- file(p)
-  size <- fh.size
-  mtime <- fh.mtime
-  content <- fh.slurp
-} yield s"name: $p, size: $size, mtime: $mtime, content: $content"
-```
-```tut
-info("/tmp/dummy")
-info("/not/existing/file")
+for {
+  wd <- dir("sclib-example")
+  wd <- wd.createTemp                          // create a temp work-dir (path is something like: '/tmp/sclib-example6964564891871111476')
+  fh <- file(wd, "a-file")                     // create a file under the work-dir
+  _ <- fh.append("first line in the file\n")   // write a line
+  _ <- fh.append("second line")
+  fs <- fh.size                                // file-size  (fh.size returns Try[Long])
+  lc <- fh.lines.map(_.length)                 // line-count (fh.lines returns Try[Iterator[String]])
+  wc <- fh.slurp.map(_.size)                   // word-count (fh.slurp returns Try[String])
+  _ <- wd.deleteR                              // delete the work-dir recursive
+} yield s"file size: ${fs}, line count: ${lc}, word count: ${wc}"
 ```
 
 - type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for basic types. 
 ```tut
 for {
-  fh <- file("/tmp/example")
+  wd <- dir("sclib-example")
+  wd <- wd.createTemp                                   // create a temp work-dir (path is something like: '/tmp/sclib-example6964564891871111476')
+  fh <- file(wd, "a-file")                              // create a file under the work-dir
   _ <- fh.writeLines("1. apple")                        // string
   _ <- fh.appendLines(List("2. banana", "3. cherry"))   // list of string
   _ <- fh.append(4)                                     // int
   _ <- fh.append('.')                                   // char
   _ <- fh.append(Vector(' ', 'd', 'o', 'g'))            // vector of char
-  content <- fh.slurp
-  _ <- fh.delete
+  content <- fh.slurp                                   // read the whole file 
+  _ <- wd.deleteR                                       // delete the work-dir recursive
 } yield content
 ```
+  
 
 ### "pattern's"
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.patterns.package)

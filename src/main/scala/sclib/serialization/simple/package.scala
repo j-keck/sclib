@@ -1,6 +1,6 @@
 package sclib.serialization
 
-import sclib.io.Writable
+import sclib.io.fs.Writable
 
 /**
   * simple serialization / deserialization

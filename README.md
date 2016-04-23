@@ -50,22 +50,22 @@ import sclib.ops.either._
   - shorthand Left / Right constructor:
 ```scala
 scala> "a string".left
-res0: Either[String,Nothing] = Left(a string)
+res0: scala.util.Either[String,Nothing] = Left(a string)
 
 scala> "a string".left[Int] 
-res1: Either[String,Int] = Left(a string)
+res1: scala.util.Either[String,Int] = Left(a string)
 
 scala> 4.right[String]
-res2: Either[String,Int] = Right(4)
+res2: scala.util.Either[String,Int] = Right(4)
 ```
 
   - sequence on either to reducing many `Either`s into a single `Either`
 ```scala
 scala> EitherOps.sequence(List(3.right, 4.right))
-res3: Either[Nothing,List[Int]] = Right(List(3, 4))
+res3: scala.util.Either[Nothing,List[Int]] = Right(List(3, 4))
 
 scala> EitherOps.sequence(List(3.right, 4.right, "BOOM".left))
-res4: Either[String,List[Int]] = Left(BOOM)
+res4: scala.util.Either[String,List[Int]] = Left(BOOM)
 ```
    
   - right biased either
@@ -74,7 +74,7 @@ scala> for {
      |   a <- Right(1)
      |   b <- Right(4)
      | } yield a + b
-res5: Either[Nothing,Int] = Right(5)
+res5: scala.util.Either[Nothing,Int] = Right(5)
 ```
 
 
@@ -161,6 +161,9 @@ res0: Option[Int] = Some(123)
 ```scala
 scala> none
 res1: Option[Nothing] = None
+
+scala> none[String]
+res2: Option[String] = None
 ```
 
 #### String
@@ -191,13 +194,13 @@ scala> for{
      |  a <- "123".toIntE
      |  b <- "44".toIntE
      | } yield a + b
-res4: Either[String,Int] = Right(167)
+res4: scala.util.Either[String,Int] = Right(167)
 
 scala> for{
      |  a <- "one".toIntE
      |  b <- "44".toIntE
      | } yield a + b
-res5: Either[String,Int] = Left('one' is not a Int)
+res5: scala.util.Either[String,Int] = Left('one' is not a Int)
 ```
 
   - toDate[T|E]
@@ -251,69 +254,48 @@ res4: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
 
 
 ### io
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.package)
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.fs.package)
 ```scala
-import sclib.io._
+import sclib.io.fs._
 ```
 
-- write a file
+- all functions which can throw a exception are wrapped in a `Try`.
 ```scala
-scala> val content = List("first line", "2. line", "third line", "4. line")
-content: List[String] = List(first line, 2. line, third line, 4. line)
-
-scala> file("/tmp/dummy").flatMap(_.writeLines(content))
-res0: scala.util.Try[sclib.io.FSFile] = Success(FSFile(/tmp/dummy))
-```
-
-- read a file
-```scala
-scala> file("/tmp/dummy").flatMap(_.slurp)
-res1: scala.util.Try[String] =
-Success(first line
-2. line
-third line
-4. line)
-```
-
-- all functions are wrapped in a `Try`, so errors are captured and it's easy to compose.
-```scala
-def info(p: String) = for {
-  fh <- file(p)
-  size <- fh.size
-  mtime <- fh.mtime
-  content <- fh.slurp
-} yield s"name: $p, size: $size, mtime: $mtime, content: $content"
-```
-```scala
-scala> info("/tmp/dummy")
-res2: scala.util.Try[String] =
-Success(name: /tmp/dummy, size: 38, mtime: 1461069702000, content: first line
-2. line
-third line
-4. line)
-
-scala> info("/not/existing/file")
-res3: scala.util.Try[String] = Failure(java.nio.file.NoSuchFileException: /not/existing/file)
+scala> for {
+     |   wd <- dir("sclib-example")
+     |   wd <- wd.createTemp                          // create a temp work-dir (path is something like: '/tmp/sclib-example6964564891871111476')
+     |   fh <- file(wd, "a-file")                     // create a file under the work-dir
+     |   _ <- fh.append("first line in the file\n")   // write a line
+     |   _ <- fh.append("second line")
+     |   fs <- fh.size                                // file-size  (fh.size returns Try[Long])
+     |   lc <- fh.lines.map(_.length)                 // line-count (fh.lines returns Try[Iterator[String]])
+     |   wc <- fh.slurp.map(_.size)                   // word-count (fh.slurp returns Try[String])
+     |   _ <- wd.deleteR                              // delete the work-dir recursive
+     | } yield s"file size: ${fs}, line count: ${lc}, word count: ${wc}"
+res0: scala.util.Try[String] = Success(file size: 34, line count: 2, word count: 34)
 ```
 
 - type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for basic types. 
 ```scala
 scala> for {
-     |   fh <- file("/tmp/example")
+     |   wd <- dir("sclib-example")
+     |   wd <- wd.createTemp                                   // create a temp work-dir (path is something like: '/tmp/sclib-example6964564891871111476')
+     |   fh <- file(wd, "a-file")                              // create a file under the work-dir
      |   _ <- fh.writeLines("1. apple")                        // string
      |   _ <- fh.appendLines(List("2. banana", "3. cherry"))   // list of string
      |   _ <- fh.append(4)                                     // int
      |   _ <- fh.append('.')                                   // char
      |   _ <- fh.append(Vector(' ', 'd', 'o', 'g'))            // vector of char
-     |   content <- fh.slurp
-     |   _ <- fh.delete
+     |   content <- fh.slurp                                   // read the whole file 
+     |   _ <- wd.deleteR                                       // delete the work-dir recursive
      | } yield content
-res4: scala.util.Try[String] =
+res1: scala.util.Try[String] =
 Success(1. apple
 2. banana
 3. cherry
 4. dog)
 ```
+  
 
 ### "pattern's"
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.patterns.package)
@@ -335,7 +317,7 @@ scala> val action = for {
      |   b <- AppF{i: Int => if(i < 5) (i * 10).right else "BOOM".left}
      |   c <- AppF.lift(33.right[String])
      | } yield (a, b, c)
-action: sclib.ct.EitherT[[B]sclib.ct.Reader[Int,B],String,(Int, Int, Int)] = EitherT(Reader(<function1>))
+action: sclib.z.EitherT[[B]sclib.z.Reader[Int,B],String,(Int, Int, Int)] = EitherT(Reader(<function1>))
 
 scala> action.runEitherT.runReader(2)
 res0: Either[String,(Int, Int, Int)] = Right((2,20,33))

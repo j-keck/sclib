@@ -1,4 +1,4 @@
-package sclib.io
+package sclib.io.fs
 
 import org.scalatest.{FunSuite, Matchers}
 
