@@ -8,18 +8,18 @@
 
 ## quick start 
 
-i publish the library to bintray for scala 2.10 and 2.11.
-so you can add the following snippet to your `build.sbt` file.
+the library are published to bintray for scala 2.10 and 2.11.
+add the following snippet to your `build.sbt` file:
 
 - for the jvm:
 
         resolvers += Resolver.bintrayRepo("j-keck", "maven")
-        libraryDependencies += "net.jkeck" %% "sclib" % "0.3"
+        libraryDependencies += "net.jkeck" %% "sclib" % "0.4"
 
 - for scala.js
 
         resolvers += Resolver.bintrayRepo("j-keck", "maven")
-        libraryDependencies += "net.jkeck" %%% "sclib" % "0.3"
+        libraryDependencies += "net.jkeck" %%% "sclib" % "0.4"
 
 
 ## content
