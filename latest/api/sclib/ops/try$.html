@@ -28,10 +28,12 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img alt="Object" src="../../lib/object_big.png" />
+        <a href="try.html" title="See companion trait"><img alt="Object/Trait" src="../../lib/object_to_trait_big.png" /></a>
         <p id="owner"><a href="../package.html" class="extype" name="sclib">sclib</a>.<a href="package.html" class="extype" name="sclib.ops">ops</a></p>
-        <h1>try</h1><h3><span class="morelinks"><div>Related Doc:
-            <a href="package.html" class="extype" name="sclib.ops">package ops</a>
+        <h1><a href="try.html" title="See companion trait">try</a></h1><h3><span class="morelinks"><div>
+            Related Docs:
+            <a href="try.html" title="See companion trait">trait try</a>
+            | <a href="package.html" class="extype" name="sclib.ops">package ops</a>
           </div></span></h3><span class="permalink">
       <a href="../../index.html#sclib.ops.try$" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
@@ -45,14 +47,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">try</span>
+        <span class="name">try</span><span class="result"> extends <a href="try.html" class="extype" name="sclib.ops.try">try</a></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p><code>Try</code> extensions</p><p><i>check the member documentation for examples</i>
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="try.html" class="extype" name="sclib.ops.try">try</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -70,7 +71,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="sclib.ops.try"><span>try</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="sclib.ops.try"><span>try</span></li><li class="in" name="sclib.ops.try"><span>try</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -100,16 +101,16 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="try$$Any2Success.html"><span class="name">Any2Success</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="try$Any2Success.html"><span class="name">Any2Success</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.try$@Any2Success[A]extendsAnyRef" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try@Any2Success[A]extendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">shorthand constructor for <code>scala.util.Success</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>shorthand constructor for <code>scala.util.Success</code>
-</p></div><dl class="attributes block"> <div class="block">Example:
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="try.html" class="extype" name="sclib.ops.try">try</a></dd><div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
 scala&gt; <span class="num">3.</span>success
 res0: scala.util.Try[<span class="std">Int</span>] = Success(<span class="num">3</span>)</pre></li></ol>
@@ -123,16 +124,16 @@ res0: scala.util.Try[<span class="std">Int</span>] = Success(<span class="num">3
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="try$$String2Failure.html"><span class="name">String2Failure</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="try$String2Failure.html"><span class="name">String2Failure</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.try$@String2FailureextendsAnyRef" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try@String2FailureextendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">shorthand constructor for <code>Failure</code> from a <code>String</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>shorthand constructor for <code>Failure</code> from a <code>String</code>
-</p></div><dl class="attributes block"> <div class="block">Example:
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="try.html" class="extype" name="sclib.ops.try">try</a></dd><div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
 scala&gt; <span class="lit">"BOOM"</span>.failure
 res0: scala.util.Try[<span class="std">Nothing</span>] = Failure(java.lang.Exception: BOOM)</pre></li></ol>
@@ -146,21 +147,21 @@ res0: scala.util.Try[<span class="std">Nothing</span>] = Failure(java.lang.Excep
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="try$$Throwable2Failure.html"><span class="name">Throwable2Failure</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="try$Throwable2Failure.html"><span class="name">Throwable2Failure</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.try$@Throwable2FailureextendsAnyRef" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try@Throwable2FailureextendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">shorthand constructor for <code>Failure</code> from a <code>Throwable</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>shorthand constructor for <code>Failure</code> from a <code>Throwable</code>
-</p></div><dl class="attributes block"> <div class="block">Example:
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="try.html" class="extype" name="sclib.ops.try">try</a></dd><div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
 scala&gt; <span class="kw">new</span> IllegalArgumentException(<span class="lit">"BOOM"</span>).failure[<span class="std">Int</span>]
 res0: scala.util.Try[<span class="std">Int</span>] = Failure(java.lang.IllegalArgumentException: BOOM)</pre></li></ol>
             </div></dl></div>
-    </li><li name="sclib.ops.try.TryOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="sclib.ops.try.TryOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="TryOps[A]extendsAnyRef"></a>
       <a id="TryOps[A]:TryOps[A]"></a>
       <h4 class="signature">
@@ -169,15 +170,16 @@ res0: scala.util.Try[<span class="std">Int</span>] = Failure(java.lang.IllegalAr
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="try$$TryOps.html"><span class="name">TryOps</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="try$TryOps.html"><span class="name">TryOps</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.try$@TryOps[A]extendsAnyRef" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try@TryOps[A]extendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">extensions on <code>Try</code> instances
-</p>
+</p><div class="fullcomment"><div class="comment cmt"><p>extensions on <code>Try</code> instances
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="try.html" class="extype" name="sclib.ops.try">try</a></dd></dl></div>
     </li></ol>
             </div>
 
@@ -236,7 +238,7 @@ res0: scala.util.Try[<span class="std">Int</span>] = Failure(java.lang.IllegalAr
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="sclib.ops.try.TryOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="sclib.ops.try.TryOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="TryOps"></a>
       <a id="TryOps:try.TryOps"></a>
       <h4 class="signature">
@@ -245,15 +247,16 @@ res0: scala.util.Try[<span class="std">Int</span>] = Failure(java.lang.IllegalAr
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="try$$TryOps$.html"><span class="name">TryOps</span></a>
+        <a href="try$TryOps$.html"><span class="name">TryOps</span></a>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.try$@TryOps" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try@TryOps" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">utility's for <code>Try</code>
-</p>
+</p><div class="fullcomment"><div class="comment cmt"><p>utility's for <code>Try</code>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="try.html" class="extype" name="sclib.ops.try">try</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -565,7 +568,9 @@ res0: scala.util.Try[<span class="std">Int</span>] = Failure(java.lang.IllegalAr
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="sclib.ops.try">
+              <h3>Inherited from <a href="try.html" class="extype" name="sclib.ops.try">try</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

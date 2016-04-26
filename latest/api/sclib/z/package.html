@@ -1,0 +1,564 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>z - sclib.z</title>
+          <meta name="description" content="z - sclib.z" />
+          <meta name="keywords" content="z sclib.z" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'sclib.z.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="sclib">sclib</a></p>
+        <h1>z</h1><span class="permalink">
+      <a href="../../index.html#sclib.z.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">z</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>functor, monad, monad-transformer</p><p>- for zero runtime dependencies of this library, some concepts are reimplemented here
+- very basic / minimal <code>Functor</code> and <code>Monad</code> implementations</p><p><i>check the member documentation for examples</i>
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="sclib.z"><span>z</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show All</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="sclib.z.EitherT" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="EitherT[F[_],A,B]extendsProductwithSerializable"></a>
+      <a id="EitherT[F[_],A,B]:EitherT[F,A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="EitherT.html"><span class="name">EitherT</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>, <span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="runEitherT">runEitherT: <span class="extype" name="sclib.z.EitherT.F">F</span>[<span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.z.EitherT.A">A</span>, <span class="extype" name="sclib.z.EitherT.B">B</span>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@EitherT[F[_],A,B]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>Either</code> monad transformer
+</p><div class="fullcomment"><div class="comment cmt"><p>minimalistic <code>Either</code> monad transformer
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">import</span> sclib.ops.either._
+scala&gt; <span class="kw">val</span> et = EitherT[({<span class="kw">type</span> L[A] = Function1[<span class="std">Int</span>, A]})#L, <span class="std">String</span>, <span class="std">Int</span>]{i <span class="kw">=&gt;</span> <span class="kw">if</span>(i &lt; <span class="num">10</span>) i.right <span class="kw">else</span> <span class="lit">"BOOM"</span>.left}
+et: sclib.z.EitherT[[A]<span class="std">Int</span> <span class="kw">=&gt;</span> A,<span class="std">String</span>,<span class="std">Int</span>] = EitherT(&lt;function1&gt;)
+scala&gt; et.runEitherT(<span class="num">5</span>)
+res0: Either[<span class="std">String</span>,<span class="std">Int</span>] = Right(<span class="num">5</span>)
+scala&gt; et.runEitherT(<span class="num">50</span>)
+res1: Either[<span class="std">String</span>,<span class="std">Int</span>] = Left(BOOM)</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.z.Functor" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Functor[F[_]]extendsAnyRef"></a>
+      <a id="Functor[F[_]]:Functor[F]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Functor.html"><span class="name">Functor</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@Functor[F[_]]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>Functor</code>
+</p>
+    </li><li name="sclib.z.ListT" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ListT[F[_],A]extendsProductwithSerializable"></a>
+      <a id="ListT[F[_],A]:ListT[F,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ListT.html"><span class="name">ListT</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>, <span name="A">A</span>]</span><span class="params">(<span name="runListT">runListT: <span class="extype" name="sclib.z.ListT.F">F</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="sclib.z.ListT.A">A</span>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@ListT[F[_],A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>List</code> monad transformer
+</p><div class="fullcomment"><div class="comment cmt"><p>minimalistic <code>List</code> monad transformer
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; (<span class="kw">for</span> {
+     |   a <span class="kw">&lt;-</span> ListT(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>).success)
+     |   b <span class="kw">&lt;-</span> ListT(<span class="std">List</span>(<span class="num">3</span>, <span class="num">4</span>).success)
+     | } <span class="kw">yield</span> a + b).runListT
+res0: scala.util.Try[<span class="std">List</span>[<span class="std">Int</span>]] = Success(<span class="std">List</span>(<span class="num">4</span>, <span class="num">5</span>, <span class="num">5</span>, <span class="num">6</span>))
+scala&gt; (<span class="kw">for</span> {
+     |   a <span class="kw">&lt;-</span> ListT(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>).success)
+     |   b <span class="kw">&lt;-</span> ListT(<span class="lit">"BOOM"</span>.failure[<span class="std">List</span>[<span class="std">Int</span>]])
+     | } <span class="kw">yield</span> a + b).runListT
+res1: scala.util.Try[<span class="std">List</span>[<span class="std">Int</span>]] = Failure(java.lang.Exception: BOOM)</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.z.Monad" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Monad[F[_]]extendsFunctor[F]"></a>
+      <a id="Monad[F[_]]:Monad[F]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Monad.html"><span class="name">Monad</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="result"> extends <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="sclib.z.Monad.F">F</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@Monad[F[_]]extendsFunctor[F]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>Monad</code>
+</p>
+    </li><li name="sclib.z.Reader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Reader[C,A]extendsProductwithSerializable"></a>
+      <a id="Reader[C,A]:Reader[C,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Reader.html"><span class="name">Reader</span></a><span class="tparams">[<span name="C">C</span>, <span name="A">A</span>]</span><span class="params">(<span name="runReader">runReader: (<span class="extype" name="sclib.z.Reader.C">C</span>) ⇒ <span class="extype" name="sclib.z.Reader.A">A</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@Reader[C,A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>Reader</code> monad
+</p><div class="fullcomment"><div class="comment cmt"><p>minimalistic <code>Reader</code> monad
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">val</span> action = <span class="kw">for</span> {
+     |   a <span class="kw">&lt;-</span> Reader[<span class="std">Int</span>, <span class="std">Int</span>]{_ + <span class="num">5</span>}
+     |   b <span class="kw">&lt;-</span> Reader[<span class="std">Int</span>, <span class="std">Int</span>]{_ + <span class="num">10</span>}
+     | } <span class="kw">yield</span> (a, b)
+action: sclib.z.Reader[<span class="std">Int</span>,(<span class="std">Int</span>, <span class="std">Int</span>)] = Reader(&lt;function1&gt;)
+scala&gt; action.runReader(<span class="num">1</span>)
+res0: (<span class="std">Int</span>, <span class="std">Int</span>) = (<span class="num">6</span>,<span class="num">11</span>)</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.z.State" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="State[S,A]extendsProductwithSerializable"></a>
+      <a id="State[S,A]:State[S,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="State.html"><span class="name">State</span></a><span class="tparams">[<span name="S">S</span>, <span name="A">A</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="sclib.z.State.S">S</span>) ⇒ (<span class="extype" name="sclib.z.State.A">A</span>, <span class="extype" name="sclib.z.State.S">S</span>)</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@State[S,A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>State</code> monad
+</p><div class="fullcomment"><div class="comment cmt"><p>minimalistic <code>State</code> monad
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">val</span> action = <span class="kw">for</span> {
+     |   a <span class="kw">&lt;-</span> State[<span class="std">Int</span>, <span class="std">Int</span>](i <span class="kw">=&gt;</span> (i, i + <span class="num">1</span>))
+     |   b <span class="kw">&lt;-</span> State[<span class="std">Int</span>, <span class="std">Int</span>](i <span class="kw">=&gt;</span> (i, i + <span class="num">1</span>))
+     | } <span class="kw">yield</span> a -&gt; b
+action: sclib.z.State[<span class="std">Int</span>,(<span class="std">Int</span>, <span class="std">Int</span>)] = State(&lt;function1&gt;)
+scala&gt; action.run(<span class="num">0</span>)
+res1: ((<span class="std">Int</span>, <span class="std">Int</span>), <span class="std">Int</span>) = ((<span class="num">0</span>,<span class="num">1</span>),<span class="num">2</span>)</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.z.StateT" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="StateT[F[_],S,A]extendsProductwithSerializable"></a>
+      <a id="StateT[F[_],S,A]:StateT[F,S,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="StateT.html"><span class="name">StateT</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>, <span name="S">S</span>, <span name="A">A</span>]</span><span class="params">(<span name="runStateT">runStateT: <span class="extype" name="sclib.z.StateT.F">F</span>[(<span class="extype" name="sclib.z.StateT.S">S</span>) ⇒ <span class="extype" name="sclib.z.StateT.F">F</span>[(<span class="extype" name="sclib.z.StateT.A">A</span>, <span class="extype" name="sclib.z.StateT.S">S</span>)]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@StateT[F[_],S,A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>State</code> monad transformer
+</p><div class="fullcomment"><div class="comment cmt"><p>minimalistic <code>State</code> monad transformer
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; <span class="kw">import</span> scala.util.Try
+scala&gt; <span class="kw">val</span> pf = StateT{i: <span class="std">Int</span> <span class="kw">=&gt;</span> <span class="kw">if</span>(i &lt; <span class="num">10</span>) (i, i + <span class="num">1</span>).success <span class="kw">else</span> <span class="lit">"BOOM"</span>.failure}
+scala&gt; <span class="kw">val</span> action = <span class="kw">for</span> {
+     |   a <span class="kw">&lt;-</span> pf
+     |   b <span class="kw">&lt;-</span> pf
+     | } <span class="kw">yield</span> a -&gt; b
+scala&gt; action.run(<span class="num">0</span>)
+res1: scala.util.Try[((<span class="std">Int</span>, <span class="std">Int</span>), <span class="std">Int</span>)] = Success(((<span class="num">0</span>,<span class="num">1</span>),<span class="num">2</span>))
+scala&gt; action.run(<span class="num">10</span>)
+res2: scala.util.Try[((<span class="std">Int</span>, <span class="std">Int</span>), <span class="std">Int</span>)] = Failure(java.lang.Exception: BOOM)</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.z.TryT" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="TryT[F[_],A]extendsProductwithSerializable"></a>
+      <a id="TryT[F[_],A]:TryT[F,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="TryT.html"><span class="name">TryT</span></a><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>, <span name="A">A</span>]</span><span class="params">(<span name="runTryT">runTryT: <span class="extype" name="sclib.z.TryT.F">F</span>[<span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.z.TryT.A">A</span>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@TryT[F[_],A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">minimalistic <code>Try</code> monad transformer
+</p><div class="fullcomment"><div class="comment cmt"><p>minimalistic <code>Try</code> monad transformer
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; <span class="kw">val</span> tt = TryT[({<span class="kw">type</span> L[A] = Function1[<span class="std">Int</span>, A]})#L, <span class="std">Int</span>]{i <span class="kw">=&gt;</span> <span class="kw">if</span>(i &lt; <span class="num">10</span>) i.success <span class="kw">else</span> <span class="lit">"BOOM"</span>.failure}
+scala&gt; tt.map(_ * <span class="num">10</span>).runTryT(<span class="num">5</span>)
+res0: scala.util.Try[<span class="std">Int</span>] = Success(<span class="num">50</span>)
+scala&gt; tt.map(_ * <span class="num">10</span>).runTryT(<span class="num">10</span>)
+res1: scala.util.Try[<span class="std">Int</span>] = Failure(java.lang.Exception: BOOM)</pre></li></ol>
+            </div></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="sclib.z.ListT" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ListT"></a>
+      <a id="ListT:ListT"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ListT$.html"><span class="name">ListT</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@ListT" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="sclib.z.StateT" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StateT"></a>
+      <a id="StateT:StateT"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="StateT$.html"><span class="name">StateT</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@StateT" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="sclib.z#eitherInstance" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="eitherInstance[A]:sclib.z.Functor[[B]scala.util.Either[A,B]]withsclib.z.Monad[[B]scala.util.Either[A,B]]"></a>
+      <a id="eitherInstance[A]:Functor[[B]Either[A,B]]withMonad[[B]Either[A,B]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eitherInstance</span><span class="tparams">[<span name="A">A</span>]</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[[B]<span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.z.eitherInstance.A">A</span>, <span class="extype" name="sclib.z.&lt;refinement&gt;.L.B">B</span>]] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[[B]<span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.z.eitherInstance.A">A</span>, <span class="extype" name="sclib.z.&lt;refinement&gt;.L.B">B</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@eitherInstance[A]:sclib.z.Functor[[B]scala.util.Either[A,B]]withsclib.z.Monad[[B]scala.util.Either[A,B]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Either</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.z#function0Instances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="function0Instances:sclib.z.Functor[Function0]withsclib.z.Monad[Function0]"></a>
+      <a id="function0Instances:Functor[Function0]withMonad[Function0]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">function0Instances</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="scala.Function0">Function0</span>] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="scala.Function0">Function0</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@function0Instances:sclib.z.Functor[Function0]withsclib.z.Monad[Function0]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Function0</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.z#function1Instances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="function1Instances[A]:sclib.z.Functor[[B]A=&gt;B]withsclib.z.Monad[[B]A=&gt;B]"></a>
+      <a id="function1Instances[A]:Functor[[B](A)⇒B]withMonad[[B](A)⇒B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">function1Instances</span><span class="tparams">[<span name="A">A</span>]</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[[B](<span class="extype" name="sclib.z.function1Instances.A">A</span>) ⇒ <span class="extype" name="sclib.z.&lt;refinement&gt;.L.B">B</span>] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[[B](<span class="extype" name="sclib.z.function1Instances.A">A</span>) ⇒ <span class="extype" name="sclib.z.&lt;refinement&gt;.L.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@function1Instances[A]:sclib.z.Functor[[B]A=&gt;B]withsclib.z.Monad[[B]A=&gt;B]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Function1</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.z#iteratorInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="iteratorInstances:sclib.z.Functor[Iterator]withsclib.z.Monad[Iterator]"></a>
+      <a id="iteratorInstances:Functor[Iterator]withMonad[Iterator]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">iteratorInstances</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="scala.Iterator">Iterator</span>] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="scala.Iterator">Iterator</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@iteratorInstances:sclib.z.Functor[Iterator]withsclib.z.Monad[Iterator]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Iterator</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.z#listInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="listInstances:sclib.z.Functor[List]withsclib.z.Monad[List]"></a>
+      <a id="listInstances:Functor[List]withMonad[List]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">listInstances</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="scala.List">List</span>] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="scala.List">List</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@listInstances:sclib.z.Functor[List]withsclib.z.Monad[List]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>List</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.z#optionInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="optionInstances:sclib.z.Functor[Option]withsclib.z.Monad[Option]"></a>
+      <a id="optionInstances:Functor[Option]withMonad[Option]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">optionInstances</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="scala.Option">Option</span>] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="scala.Option">Option</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@optionInstances:sclib.z.Functor[Option]withsclib.z.Monad[Option]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Option</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.z#readerInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="readerInstances[C]:sclib.z.Functor[[A]sclib.z.Reader[C,A]]withsclib.z.Monad[[A]sclib.z.Reader[C,A]]"></a>
+      <a id="readerInstances[C]:Functor[[A]Reader[C,A]]withMonad[[A]Reader[C,A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">readerInstances</span><span class="tparams">[<span name="C">C</span>]</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[[A]<a href="Reader.html" class="extype" name="sclib.z.Reader">Reader</a>[<span class="extype" name="sclib.z.readerInstances.C">C</span>, <span class="extype" name="sclib.z.&lt;refinement&gt;.L.A">A</span>]] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[[A]<a href="Reader.html" class="extype" name="sclib.z.Reader">Reader</a>[<span class="extype" name="sclib.z.readerInstances.C">C</span>, <span class="extype" name="sclib.z.&lt;refinement&gt;.L.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@readerInstances[C]:sclib.z.Functor[[A]sclib.z.Reader[C,A]]withsclib.z.Monad[[A]sclib.z.Reader[C,A]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Reader</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.z#setInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="setInstances:sclib.z.Functor[Set]withsclib.z.Monad[Set]"></a>
+      <a id="setInstances:Functor[Set]withMonad[Set]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setInstances</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="scala.Predef.Set">Set</span>] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="scala.Predef.Set">Set</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@setInstances:sclib.z.Functor[Set]withsclib.z.Monad[Set]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Set</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.z#stateInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="stateInstances[S]:sclib.z.Functor[[A]sclib.z.State[S,A]]withsclib.z.Monad[[A]sclib.z.State[S,A]]"></a>
+      <a id="stateInstances[S]:Functor[[A]State[S,A]]withMonad[[A]State[S,A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stateInstances</span><span class="tparams">[<span name="S">S</span>]</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[[A]<a href="State.html" class="extype" name="sclib.z.State">State</a>[<span class="extype" name="sclib.z.stateInstances.S">S</span>, <span class="extype" name="sclib.z.&lt;refinement&gt;.L.A">A</span>]] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[[A]<a href="State.html" class="extype" name="sclib.z.State">State</a>[<span class="extype" name="sclib.z.stateInstances.S">S</span>, <span class="extype" name="sclib.z.&lt;refinement&gt;.L.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@stateInstances[S]:sclib.z.Functor[[A]sclib.z.State[S,A]]withsclib.z.Monad[[A]sclib.z.State[S,A]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>State</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.z#tryInstance" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="tryInstance:sclib.z.Functor[scala.util.Try]withsclib.z.Monad[scala.util.Try]"></a>
+      <a id="tryInstance:Functor[Try]withMonad[Try]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tryInstance</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="scala.util.Try">Try</span>] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="scala.util.Try">Try</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@tryInstance:sclib.z.Functor[scala.util.Try]withsclib.z.Monad[scala.util.Try]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Try</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li><li name="sclib.z#vectorInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="vectorInstances:sclib.z.Functor[Vector]withsclib.z.Monad[Vector]"></a>
+      <a id="vectorInstances:Functor[Vector]withMonad[Vector]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">vectorInstances</span><span class="result">: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="scala.Vector">Vector</span>] with <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="scala.Vector">Vector</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.package@vectorInstances:sclib.z.Functor[Vector]withsclib.z.Monad[Vector]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>Vector</code>s <code>Functor</code> and <code>Monad</code> instances</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

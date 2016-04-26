@@ -28,10 +28,12 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img alt="Object" src="../../lib/object_big.png" />
+        <a href="java8.html" title="See companion trait"><img alt="Object/Trait" src="../../lib/object_to_trait_big.png" /></a>
         <p id="owner"><a href="../package.html" class="extype" name="sclib">sclib</a>.<a href="package.html" class="extype" name="sclib.ops">ops</a></p>
-        <h1>java8</h1><h3><span class="morelinks"><div>Related Doc:
-            <a href="package.html" class="extype" name="sclib.ops">package ops</a>
+        <h1><a href="java8.html" title="See companion trait">java8</a></h1><h3><span class="morelinks"><div>
+            Related Docs:
+            <a href="java8.html" title="See companion trait">trait java8</a>
+            | <a href="package.html" class="extype" name="sclib.ops">package ops</a>
           </div></span></h3><span class="permalink">
       <a href="../../index.html#sclib.ops.java8$" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
@@ -45,14 +47,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">java8</span>
+        <span class="name">java8</span><span class="result"> extends <a href="java8.html" class="extype" name="sclib.ops.java8">java8</a></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>java8 interoperability</p><p><i>check the member documentation for examples</i>
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="java8.html" class="extype" name="sclib.ops.java8">java8</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -70,7 +71,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="sclib.ops.java8"><span>java8</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="sclib.ops.java8"><span>java8</span></li><li class="in" name="sclib.ops.java8"><span>java8</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -91,7 +92,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="sclib.ops.java8.JStreamOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="sclib.ops.java8.JStreamOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="JStreamOps[A]extendsAnyRef"></a>
       <a id="JStreamOps[A]:JStreamOps[A]"></a>
       <h4 class="signature">
@@ -100,15 +101,16 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="java8$$JStreamOps.html"><span class="name">JStreamOps</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="java8$JStreamOps.html"><span class="name">JStreamOps</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.java8$@JStreamOps[A]extendsAnyRef" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.java8@JStreamOps[A]extendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">extend <code>Stream</code>
-</p>
+</p><div class="fullcomment"><div class="comment cmt"><p>extend <code>Stream</code>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="java8.html" class="extype" name="sclib.ops.java8">java8</a></dd></dl></div>
     </li></ol>
             </div>
 
@@ -185,7 +187,7 @@
     </span>
       <p class="shortcomment cmt">convert a <code>scala.Function2</code> to a <code>java.util.function.BinaryOperator</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>convert a <code>scala.Function2</code> to a <code>java.util.function.BinaryOperator</code>
-</p></div><dl class="attributes block"> <div class="block">Example:
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="java8.html" class="extype" name="sclib.ops.java8">java8</a></dd><div class="block">Example:
                <ol><li class="cmt"><p>
 <b>without</b> the import:</p><pre>scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).reduce(<span class="num">0</span>, (_: <span class="std">Int</span>) + (_: <span class="std">Int</span>))
 &lt;console<span class="kw">&gt;:</span><span class="num">12</span>: error: overloaded method value reduce <span class="kw">with</span> alternatives:
@@ -215,7 +217,7 @@ res1: <span class="std">Int</span> = <span class="num">10</span></pre></li></ol>
     </span>
       <p class="shortcomment cmt">convert a <code>scala.Function1</code> to a <code>java.util.function.Consumer</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>convert a <code>scala.Function1</code> to a <code>java.util.function.Consumer</code>
-</p></div><dl class="attributes block"> <div class="block">Example:
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="java8.html" class="extype" name="sclib.ops.java8">java8</a></dd><div class="block">Example:
                <ol><li class="cmt"><p>
 <b>without</b> the import:</p><pre>scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).forEach(println(_: <span class="std">Int</span>))
 &lt;console<span class="kw">&gt;:</span><span class="num">12</span>: error: <span class="kw">type</span> mismatch;
@@ -246,7 +248,7 @@ scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="nu
     </span>
       <p class="shortcomment cmt">convert a <code>scala.Function1</code> to a <code>java.util.function.Function</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>convert a <code>scala.Function1</code> to a <code>java.util.function.Function</code>
-</p></div><dl class="attributes block"> <div class="block">Example:
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="java8.html" class="extype" name="sclib.ops.java8">java8</a></dd><div class="block">Example:
                <ol><li class="cmt"><p>
 <b>without</b> the import:</p><pre>scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>,<span class="num">4</span>).map((_: <span class="std">Int</span>) * <span class="num">10</span>).toArray
 &lt;console<span class="kw">&gt;:</span><span class="num">12</span>: error: <span class="kw">type</span> mismatch;
@@ -274,7 +276,7 @@ res1: <span class="std">Array</span>[<span class="std">Object</span>] = <span cl
     </span>
       <p class="shortcomment cmt">convert a <code>scala.Function1</code> to a <code>java.util.function.Predicate</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>convert a <code>scala.Function1</code> to a <code>java.util.function.Predicate</code>
-</p></div><dl class="attributes block"> <div class="block">Example:
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="java8.html" class="extype" name="sclib.ops.java8">java8</a></dd><div class="block">Example:
                <ol><li class="cmt"><p>
 <b>without</b> the import:</p><pre>scala&gt; java.util.stream.Stream.of(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>).filter((_: <span class="std">Int</span>) &lt; <span class="num">3</span>).toArray
 &lt;console<span class="kw">&gt;:</span><span class="num">12</span>: error: <span class="kw">type</span> mismatch;
@@ -595,7 +597,9 @@ res1: <span class="std">Array</span>[<span class="std">Object</span>] = <span cl
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="sclib.ops.java8">
+              <h3>Inherited from <a href="java8.html" class="extype" name="sclib.ops.java8">java8</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

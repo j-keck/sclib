@@ -1,0 +1,673 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>ListT - sclib.z.ListT</title>
+          <meta name="description" content="ListT - sclib.z.ListT" />
+          <meta name="keywords" content="ListT sclib.z.ListT" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'sclib.z.ListT';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="type">
+      <div id="definition">
+        <a href="ListT$.html" title="See companion object"><img alt="Class/Object" src="../../lib/class_to_object_big.png" /></a>
+        <p id="owner"><a href="../package.html" class="extype" name="sclib">sclib</a>.<a href="package.html" class="extype" name="sclib.z">z</a></p>
+        <h1><a href="ListT$.html" title="See companion object">ListT</a></h1><h3><span class="morelinks"><div>
+            Related Docs:
+            <a href="ListT$.html" title="See companion object">object ListT</a>
+            | <a href="package.html" class="extype" name="sclib.z">package z</a>
+          </div></span></h3><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ListT</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>, <span name="A">A</span>]</span><span class="params">(<span name="runListT">runListT: <span class="extype" name="sclib.z.ListT.F">F</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="sclib.z.ListT.A">A</span>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>minimalistic <code>List</code> monad transformer
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; (<span class="kw">for</span> {
+     |   a <span class="kw">&lt;-</span> ListT(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>).success)
+     |   b <span class="kw">&lt;-</span> ListT(<span class="std">List</span>(<span class="num">3</span>, <span class="num">4</span>).success)
+     | } <span class="kw">yield</span> a + b).runListT
+res0: scala.util.Try[<span class="std">List</span>[<span class="std">Int</span>]] = Success(<span class="std">List</span>(<span class="num">4</span>, <span class="num">5</span>, <span class="num">5</span>, <span class="num">6</span>))
+scala&gt; (<span class="kw">for</span> {
+     |   a <span class="kw">&lt;-</span> ListT(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>).success)
+     |   b <span class="kw">&lt;-</span> ListT(<span class="lit">"BOOM"</span>.failure[<span class="std">List</span>[<span class="std">Int</span>]])
+     | } <span class="kw">yield</span> a + b).runListT
+res1: scala.util.Try[<span class="std">List</span>[<span class="std">Int</span>]] = Failure(java.lang.Exception: BOOM)</pre></li></ol>
+            </div></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="sclib.z.ListT"><span>ListT</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show All</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="sclib.z.ListT#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(runListT:F[List[A]]):sclib.z.ListT[F,A]"></a>
+      <a id="&lt;init&gt;:ListT[F,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ListT</span><span class="params">(<span name="runListT">runListT: <span class="extype" name="sclib.z.ListT.F">F</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="sclib.z.ListT.A">A</span>]]</span>)</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@&lt;init&gt;(runListT:F[List[A]]):sclib.z.ListT[F,A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@##():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="sclib.z.ListT#++" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="++(other:sclib.z.ListT[F,A])(implicitF:sclib.z.Monad[F]):sclib.z.ListT[F,A]"></a>
+      <a id="++(ListT[F,A])(Monad[F]):ListT[F,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $plus$plus" class="name">++</span><span class="params">(<span name="other">other: <a href="" class="extype" name="sclib.z.ListT">ListT</a>[<span class="extype" name="sclib.z.ListT.F">F</span>, <span class="extype" name="sclib.z.ListT.A">A</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="F">F: <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="sclib.z.ListT.F">F</span>]</span>)</span><span class="result">: <a href="" class="extype" name="sclib.z.ListT">ListT</a>[<span class="extype" name="sclib.z.ListT.F">F</span>, <span class="extype" name="sclib.z.ListT.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@++(other:sclib.z.ListT[F,A])(implicitF:sclib.z.Monad[F]):sclib.z.ListT[F,A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">concat
+</p><div class="fullcomment"><div class="comment cmt"><p>concat
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; ListT(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>).success) ++ ListT(<span class="std">List</span>(<span class="num">3</span>, <span class="num">4</span>).success)
+res0: sclib.z.ListT[scala.util.Try,<span class="std">Int</span>] = ListT(Success(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>)))</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.z.ListT#++" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="++(xs:F[List[A]])(implicitF:sclib.z.Monad[F]):sclib.z.ListT[F,A]"></a>
+      <a id="++(F[List[A]])(Monad[F]):ListT[F,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $plus$plus" class="name">++</span><span class="params">(<span name="xs">xs: <span class="extype" name="sclib.z.ListT.F">F</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="sclib.z.ListT.A">A</span>]]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="F">F: <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="sclib.z.ListT.F">F</span>]</span>)</span><span class="result">: <a href="" class="extype" name="sclib.z.ListT">ListT</a>[<span class="extype" name="sclib.z.ListT.F">F</span>, <span class="extype" name="sclib.z.ListT.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@++(xs:F[List[A]])(implicitF:sclib.z.Monad[F]):sclib.z.ListT[F,A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">concat
+</p><div class="fullcomment"><div class="comment cmt"><p>concat
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; ListT(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>).success) ++ <span class="std">List</span>(<span class="num">3</span>, <span class="num">4</span>).success
+res0: sclib.z.ListT[scala.util.Try,<span class="std">Int</span>] = ListT(Success(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>)))
+scala&gt; ListT(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>).success) ++ <span class="lit">"BOOM"</span>.failure
+res1: sclib.z.ListT[scala.util.Try,<span class="std">Int</span>] = ListT(Failure(java.lang.Exception: BOOM))</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.z.ListT#::" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="::(a:F[A])(implicitF:sclib.z.Monad[F]):sclib.z.ListT[F,A]"></a>
+      <a id="::(F[A])(Monad[F]):ListT[F,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $colon$colon" class="name">::</span><span class="params">(<span name="a">a: <span class="extype" name="sclib.z.ListT.F">F</span>[<span class="extype" name="sclib.z.ListT.A">A</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="F">F: <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="sclib.z.ListT.F">F</span>]</span>)</span><span class="result">: <a href="" class="extype" name="sclib.z.ListT">ListT</a>[<span class="extype" name="sclib.z.ListT.F">F</span>, <span class="extype" name="sclib.z.ListT.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@::(a:F[A])(implicitF:sclib.z.Monad[F]):sclib.z.ListT[F,A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">prepend the given element to the list</p><div class="fullcomment"><div class="comment cmt"><p>prepend the given element to the list</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; <span class="num">1.</span>success :: ListT(<span class="std">List</span>(<span class="num">2</span>, <span class="num">3</span>).success)
+res0: sclib.z.ListT[scala.util.Try,<span class="std">Int</span>] = ListT(Success(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>)))
+scala&gt; <span class="lit">"BOOM"</span>.failure :: ListT(<span class="std">List</span>(<span class="num">2</span>, <span class="num">3</span>).success)
+res1: sclib.z.ListT[scala.util.Try,<span class="std">Int</span>] = ListT(Failure(java.lang.Exception: BOOM))</pre></li></ol>
+            </div></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@clone():Object" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="sclib.z.ListT#flatMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="flatMap[B](f:A=&gt;sclib.z.ListT[F,B])(implicitF:sclib.z.Monad[F]):sclib.z.ListT[F,B]"></a>
+      <a id="flatMap[B]((A)⇒ListT[F,B])(Monad[F]):ListT[F,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">flatMap</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.z.ListT.A">A</span>) ⇒ <a href="" class="extype" name="sclib.z.ListT">ListT</a>[<span class="extype" name="sclib.z.ListT.F">F</span>, <span class="extype" name="sclib.z.ListT.flatMap.B">B</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="F">F: <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="sclib.z.ListT.F">F</span>]</span>)</span><span class="result">: <a href="" class="extype" name="sclib.z.ListT">ListT</a>[<span class="extype" name="sclib.z.ListT.F">F</span>, <span class="extype" name="sclib.z.ListT.flatMap.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@flatMap[B](f:A=&gt;sclib.z.ListT[F,B])(implicitF:sclib.z.Monad[F]):sclib.z.ListT[F,B]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="sclib.z.ListT#flatMapF" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="flatMapF[B](f:A=&gt;F[List[B]])(implicitF:sclib.z.Monad[F]):sclib.z.ListT[F,B]"></a>
+      <a id="flatMapF[B]((A)⇒F[List[B]])(Monad[F]):ListT[F,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">flatMapF</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.z.ListT.A">A</span>) ⇒ <span class="extype" name="sclib.z.ListT.F">F</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="sclib.z.ListT.flatMapF.B">B</span>]]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="F">F: <a href="Monad.html" class="extype" name="sclib.z.Monad">Monad</a>[<span class="extype" name="sclib.z.ListT.F">F</span>]</span>)</span><span class="result">: <a href="" class="extype" name="sclib.z.ListT">ListT</a>[<span class="extype" name="sclib.z.ListT.F">F</span>, <span class="extype" name="sclib.z.ListT.flatMapF.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@flatMapF[B](f:A=&gt;F[List[B]])(implicitF:sclib.z.Monad[F]):sclib.z.ListT[F,B]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="sclib.z.ListT#head" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="head(implicitF:sclib.z.Functor[F]):F[A]"></a>
+      <a id="head(Functor[F]):F[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">head</span><span class="params">(<span class="implicit">implicit </span><span name="F">F: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="sclib.z.ListT.F">F</span>]</span>)</span><span class="result">: <span class="extype" name="sclib.z.ListT.F">F</span>[<span class="extype" name="sclib.z.ListT.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@head(implicitF:sclib.z.Functor[F]):F[A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">head of the list
+</p><div class="fullcomment"><div class="comment cmt"><p>head of the list
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; ListT(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>).success).head
+res0: scala.util.Try[<span class="std">Int</span>] = Success(<span class="num">1</span>)
+scala&gt; ListT(<span class="lit">"BOOM"</span>.failure[<span class="std">List</span>[<span class="std">Int</span>]]).head
+res1: scala.util.Try[<span class="std">Int</span>] = Failure(java.lang.Exception: BOOM)
+scala&gt; ListT(<span class="std">List</span>.empty.success).head
+res2: scala.util.Try[<span class="std">Nothing</span>] = Failure(java.util.NoSuchElementException: head of empty list)</pre></li></ol>
+            </div></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="sclib.z.ListT#map" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="map[B](f:A=&gt;B)(implicitF:sclib.z.Functor[F]):sclib.z.ListT[F,B]"></a>
+      <a id="map[B]((A)⇒B)(Functor[F]):ListT[F,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">map</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.z.ListT.A">A</span>) ⇒ <span class="extype" name="sclib.z.ListT.map.B">B</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="F">F: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="sclib.z.ListT.F">F</span>]</span>)</span><span class="result">: <a href="" class="extype" name="sclib.z.ListT">ListT</a>[<span class="extype" name="sclib.z.ListT.F">F</span>, <span class="extype" name="sclib.z.ListT.map.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@map[B](f:A=&gt;B)(implicitF:sclib.z.Functor[F]):sclib.z.ListT[F,B]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@notify():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="sclib.z.ListT#runListT" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="runListT:F[List[A]]"></a>
+      <a id="runListT:F[List[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">runListT</span><span class="result">: <span class="extype" name="sclib.z.ListT.F">F</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="sclib.z.ListT.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@runListT:F[List[A]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="sclib.z.ListT#tail" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="tail(implicitF:sclib.z.Functor[F]):sclib.z.ListT[F,A]"></a>
+      <a id="tail(Functor[F]):ListT[F,A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tail</span><span class="params">(<span class="implicit">implicit </span><span name="F">F: <a href="Functor.html" class="extype" name="sclib.z.Functor">Functor</a>[<span class="extype" name="sclib.z.ListT.F">F</span>]</span>)</span><span class="result">: <a href="" class="extype" name="sclib.z.ListT">ListT</a>[<span class="extype" name="sclib.z.ListT.F">F</span>, <span class="extype" name="sclib.z.ListT.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@tail(implicitF:sclib.z.Functor[F]):sclib.z.ListT[F,A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">tail of the list
+</p><div class="fullcomment"><div class="comment cmt"><p>tail of the list
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
+scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; ListT(<span class="std">List</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>).success).tail
+res0: sclib.z.ListT[scala.util.Try,<span class="std">Int</span>] = ListT(Success(<span class="std">List</span>(<span class="num">2</span>, <span class="num">3</span>)))
+scala&gt; ListT(<span class="lit">"BOOM"</span>.failure[<span class="std">List</span>[<span class="std">Int</span>]]).tail
+res1: sclib.z.ListT[scala.util.Try,<span class="std">Int</span>] = ListT(Failure(java.lang.Exception: BOOM))
+scala&gt; ListT(<span class="std">List</span>.empty.success).tail
+res2: sclib.z.ListT[scala.util.Try,<span class="std">Nothing</span>] = ListT(Failure(java.lang.UnsupportedOperationException: tail of empty list))</pre></li></ol>
+            </div></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@wait():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.z.ListT@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.Product">
+              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
+            </div><div class="parent" name="scala.Equals">
+              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

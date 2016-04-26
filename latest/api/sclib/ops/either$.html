@@ -28,10 +28,12 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img alt="Object" src="../../lib/object_big.png" />
+        <a href="either.html" title="See companion trait"><img alt="Object/Trait" src="../../lib/object_to_trait_big.png" /></a>
         <p id="owner"><a href="../package.html" class="extype" name="sclib">sclib</a>.<a href="package.html" class="extype" name="sclib.ops">ops</a></p>
-        <h1>either</h1><h3><span class="morelinks"><div>Related Doc:
-            <a href="package.html" class="extype" name="sclib.ops">package ops</a>
+        <h1><a href="either.html" title="See companion trait">either</a></h1><h3><span class="morelinks"><div>
+            Related Docs:
+            <a href="either.html" title="See companion trait">trait either</a>
+            | <a href="package.html" class="extype" name="sclib.ops">package ops</a>
           </div></span></h3><span class="permalink">
       <a href="../../index.html#sclib.ops.either$" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
@@ -45,14 +47,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">either</span>
+        <span class="name">either</span><span class="result"> extends <a href="either.html" class="extype" name="sclib.ops.either">either</a></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p><code>Either</code> extensions</p><p><i>check the member documentation for examples</i>
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="either.html" class="extype" name="sclib.ops.either">either</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -70,7 +71,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="sclib.ops.either"><span>either</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="sclib.ops.either"><span>either</span></li><li class="in" name="sclib.ops.either"><span>either</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -100,16 +101,16 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="either$$Any2Left.html"><span class="name">Any2Left</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="either$Any2Left.html"><span class="name">Any2Left</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@Any2Left[A]extendsAnyRef" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.either@Any2Left[A]extendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">shorthand constructor for <code>Left</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>shorthand constructor for <code>Left</code>
-</p></div><dl class="attributes block"> <div class="block">Example:
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="either.html" class="extype" name="sclib.ops.either">either</a></dd><div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.either._
 scala&gt; <span class="lit">"BOOM"</span>.left
 res0: Either[<span class="std">String</span>,<span class="std">Nothing</span>] = Left(BOOM)</pre></li></ol>
@@ -123,21 +124,21 @@ res0: Either[<span class="std">String</span>,<span class="std">Nothing</span>] =
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="either$$Any2Right.html"><span class="name">Any2Right</span></a><span class="tparams">[<span name="B">B</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="either$Any2Right.html"><span class="name">Any2Right</span></a><span class="tparams">[<span name="B">B</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@Any2Right[B]extendsAnyRef" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.either@Any2Right[B]extendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">shorthand constructor for <code>Right</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>shorthand constructor for <code>Right</code>
-</p></div><dl class="attributes block"> <div class="block">Example:
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="either.html" class="extype" name="sclib.ops.either">either</a></dd><div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.either._
 scala&gt; <span class="num">1.</span>right
 res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Right(<span class="num">1</span>)</pre></li></ol>
             </div></dl></div>
-    </li><li name="sclib.ops.either.EitherOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="sclib.ops.either.EitherOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="EitherOps[A,B]extendsAnyRef"></a>
       <a id="EitherOps[A,B]:EitherOps[A,B]"></a>
       <h4 class="signature">
@@ -146,15 +147,16 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="either$$EitherOps.html"><span class="name">EitherOps</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="either$EitherOps.html"><span class="name">EitherOps</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@EitherOps[A,B]extendsAnyRef" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.either@EitherOps[A,B]extendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">extensions on <code>Either</code> instances
-</p>
+</p><div class="fullcomment"><div class="comment cmt"><p>extensions on <code>Either</code> instances
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="either.html" class="extype" name="sclib.ops.either">either</a></dd></dl></div>
     </li></ol>
             </div>
 
@@ -213,7 +215,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="sclib.ops.either.EitherOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="sclib.ops.either.EitherOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="EitherOps"></a>
       <a id="EitherOps:either.EitherOps"></a>
       <h4 class="signature">
@@ -222,15 +224,16 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="either$$EitherOps$.html"><span class="name">EitherOps</span></a>
+        <a href="either$EitherOps$.html"><span class="name">EitherOps</span></a>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@EitherOps" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.either@EitherOps" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">utility's for <code>Either</code>
-</p>
+</p><div class="fullcomment"><div class="comment cmt"><p>utility's for <code>Either</code>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="either.html" class="extype" name="sclib.ops.either">either</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -542,7 +545,9 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="sclib.ops.either">
+              <h3>Inherited from <a href="either.html" class="extype" name="sclib.ops.either">either</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

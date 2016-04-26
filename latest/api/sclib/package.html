@@ -70,25 +70,7 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="sclib.ct" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="ct"></a>
-      <a id="ct:ct"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">package</span>
-      </span>
-      <span class="symbol">
-        <a href="ct/package.html"><span class="name">ct</span></a>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#sclib.package@ct" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">functor, monad, monad-transformer</p><div class="fullcomment"><div class="comment cmt"><p>functor, monad, monad-transformer</p><ul><li>for zero runtime dependencies of this library, some concepts are reimplemented here</li><li>very basic / minimal <code>Functor</code> and <code>Monad</code> implementations</li></ul><p><i>check the member documentation for examples</i>
-</p></div></div>
-    </li><li name="sclib.io" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+              <ol><li name="sclib.io" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="io"></a>
       <a id="io:io"></a>
       <h4 class="signature">
@@ -104,25 +86,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">io utils</p><div class="fullcomment"><div class="comment cmt"><p>io utils</p><p>all functions are wrapped in a <code>Try</code>, so errors are captured and it's easy to compose.
-</p></div><dl class="attributes block"> <div class="block">Example:
-               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.io._
-scala&gt; <span class="kw">for</span> {
-     |   fh <span class="kw">&lt;-</span> file(<span class="lit">"/tmp/example"</span>)
-     |   _ <span class="kw">&lt;-</span> fh.writeLines(<span class="lit">"1. apple"</span>)
-     |   _ <span class="kw">&lt;-</span> fh.appendLines(<span class="std">List</span>(<span class="lit">"2. banana"</span>, <span class="lit">"3. cherry"</span>))
-     |   _ <span class="kw">&lt;-</span> fh.append(<span class="num">4</span>)
-     |   _ <span class="kw">&lt;-</span> fh.append(<span class="lit">'.'</span>)
-     |   _ <span class="kw">&lt;-</span> fh.append(<span class="lit">" dog"</span>)
-     |   content <span class="kw">&lt;-</span> fh.slurp
-     |   _ <span class="kw">&lt;-</span> fh.delete
-     | } <span class="kw">yield</span> content
-res0: scala.util.Try[<span class="std">String</span>] =
-Success(<span class="num">1.</span> apple
-<span class="num">2.</span> banana
-<span class="num">3.</span> cherry
-<span class="num">4.</span> dog)</pre><p><i>check the member documentation for examples</i></p></li></ol>
-            </div></dl></div>
+      
     </li><li name="sclib.ops" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ops"></a>
       <a id="ops:ops"></a>
@@ -176,6 +140,25 @@ Success(<span class="num">1.</span> apple
       </a>
     </span>
       
+    </li><li name="sclib.z" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="z"></a>
+      <a id="z:z"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="z/package.html"><span class="name">z</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#sclib.package@z" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">functor, monad, monad-transformer</p><div class="fullcomment"><div class="comment cmt"><p>functor, monad, monad-transformer</p><p>- for zero runtime dependencies of this library, some concepts are reimplemented here
+- very basic / minimal <code>Functor</code> and <code>Monad</code> implementations</p><p><i>check the member documentation for examples</i>
+</p></div></div>
     </li></ol>
             </div>
 

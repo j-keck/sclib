@@ -119,7 +119,7 @@ scala&gt; <span class="kw">val</span> action = <span class="kw">for</span> {
      |   b <span class="kw">&lt;-</span> AppF{i: <span class="std">Int</span> <span class="kw">=&gt;</span> <span class="kw">if</span>(i &lt; <span class="num">5</span>) (i * <span class="num">10</span>).right <span class="kw">else</span> <span class="lit">"BOOM"</span>.left}
      |   c <span class="kw">&lt;-</span> AppF.lift(<span class="num">33.</span>right[<span class="std">String</span>])
      | } <span class="kw">yield</span> (a, b, c)
-action: sclib.ct.EitherT[[B]sclib.ct.Reader[<span class="std">Int</span>,B],<span class="std">String</span>,(<span class="std">Int</span>, <span class="std">Int</span>, <span class="std">Int</span>)] = EitherT(Reader(&lt;function1&gt;))
+action: sclib.z.EitherT[[B]sclib.z.Reader[<span class="std">Int</span>,B],<span class="std">String</span>,(<span class="std">Int</span>, <span class="std">Int</span>, <span class="std">Int</span>)] = EitherT(Reader(&lt;function1&gt;))
 scala&gt; action.runEitherT.runReader(<span class="num">2</span>)
 res0: Either[<span class="std">String</span>,(<span class="std">Int</span>, <span class="std">Int</span>, <span class="std">Int</span>)] = Right((<span class="num">2</span>,<span class="num">20</span>,<span class="num">33</span>))
 scala&gt; action.runEitherT.runReader(<span class="num">8</span>)
