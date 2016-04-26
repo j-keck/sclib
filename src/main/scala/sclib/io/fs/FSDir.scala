@@ -130,14 +130,14 @@ case class FSDir protected[fs](path: Path) extends FSEntry[FSDir] { self =>
   /**
     * apply the given function recursive to every `FSEntry` start from this directory
     *
-    * to control the depth, use [[FSDir.foreach(f:sclib\.io\.FSEntry\.FSEntryImpl=>Unit*]]
+    * to control the depth, use [[FSDir.foreach(f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>Unit*]]
     */
   def foreachR(f: FSEntryImpl => Unit): Try[Unit] = foreach(f, Integer.MAX_VALUE)
 
   /**
-    * ''save'' function of [[FSDir.foreach(f:sclib\.io\.FSEntry\.FSEntryImpl=>Unit*]] - wraps every file operation in a `Try`.
+    * ''save'' function of [[FSDir.foreach(f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>Unit*]] - wraps every file operation in a `Try`.
     *
-    * @see [[FSDir.foreach(f:sclib\.io\.FSEntry\.FSEntryImpl=>Unit*]]
+    * @see [[FSDir.foreach(f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>Unit*]]
     */
   def foreachS(f: Try[FSEntryImpl] => Unit, depth: Int = 1): Unit = {
     FSIterator(this, depth).foreach(f)
@@ -163,14 +163,14 @@ case class FSDir protected[fs](path: Path) extends FSEntry[FSDir] { self =>
   /**
     * apply the given function recursive to every `FSEntry` start from this directory
     *
-    * to control the depth, use [[FSDir.map[A](f:sclib\.io\.FSEntry\.FSEntryImpl=>A*]]
+    * to control the depth, use [[FSDir.map[A](f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>A*]]
     */
   def mapR[A](f: FSEntryImpl => A): Try[Iterator[A]] = map(f, Integer.MAX_VALUE)
 
   /**
-    * ''save'' function of [[FSDir.map[A](f:sclib\.io\.FSEntry\.FSEntryImpl=>A*]] - wraps every file operation in a `Try`.
+    * ''save'' function of [[FSDir.map[A](f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>A*]] - wraps every file operation in a `Try`.
     *
-    * @see [[FSDir.map[A](f:sclib\.io\.FSEntry\.FSEntryImpl=>A*]]
+    * @see [[FSDir.map[A](f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>A*]]
     */
   def mapS[A](f: Try[FSEntryImpl] => A, depth: Int = 1): Iterator[A] = {
     FSIterator(this, depth).map(f)

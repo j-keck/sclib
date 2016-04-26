@@ -63,13 +63,13 @@ case class FSFile protected[io] (path: Path) extends FSEntry[FSFile] {
     Files.lines(path, cs).toIterator
   }
 
-  /** @see [[[sclib.io.FSFile.lines(cs:java\.nio\.charset\.Charset)*]]] */
+  /** @see [[[sclib.io.fs.FSFile.lines(cs:java\.nio\.charset\.Charset)*]]] */
   def lines: Try[Iterator[String]] = lines()
 
   /**
     * try to read the whole file at once and return it as a string.
     *
-    * use [[[sclib.io.FSFile.lines(cs:java\.nio\.charset\.Charset)*]]] for a memory constant operation.
+    * use [[[sclib.io.fs.FSFile.lines(cs:java\.nio\.charset\.Charset)*]]] for a memory constant operation.
     *
     * @param cs character set
     * @return whole file content as a string
@@ -78,7 +78,7 @@ case class FSFile protected[io] (path: Path) extends FSEntry[FSFile] {
     Files.readAllLines(path).mkString(System.getProperty("line.separator"))
   }
 
-  /** @see [[[sclib.io.FSFile.slurp(cs:java\.nio\.charset\.Charset)*]]] */
+  /** @see [[[sclib.io.fs.FSFile.slurp(cs:java\.nio\.charset\.Charset)*]]] */
   def slurp: Try[String] = slurp()
 
   /**
