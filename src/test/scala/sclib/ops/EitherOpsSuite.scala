@@ -7,13 +7,13 @@ class EitherOpsSuite extends FunSuite with Matchers {
 
   test("sequence with Right values"){
     val l: List[Either[Nothing, Int]] = List.range(1, 10).map(Right.apply)
-    val e: Either[Nothing, Seq[Int]] = EitherOps.sequence(l)
+    val e: Either[Nothing, Seq[Int]] = l.sequence
     e should be(Right(List.range(1, 10)))
   }
 
   test("sequence with one Left"){
     val l: List[Either[String, Int]] = List.range(1, 10).map(Right.apply).updated(6, Left("BOOM"))
-    val e: Either[String, Seq[Int]] = EitherOps.sequence(l)
+    val e: Either[String, Seq[Int]] = l.sequence
     e should be(Left("BOOM"))
   }
 

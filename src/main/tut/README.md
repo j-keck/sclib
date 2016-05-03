@@ -54,11 +54,11 @@ import sclib.ops.either._
 4.right[String]
 ```
 
-  - sequence on either to reducing many `Either`s into a single `Either`
+  - sequence on `Traversable[Either[A, B]]` to reducing many `Either`s into a single `Either`
 ```tut
-EitherOps.sequence(List(3.right, 4.right))
-
-EitherOps.sequence(List(3.right, 4.right, "BOOM".left))
+List(3.right, 4.right).sequence
+List(3.right, 4.right, "BOOM".left).sequence
+Vector(2.right, 5.right).sequence
 ```
    
   - right biased either
@@ -201,10 +201,11 @@ new IllegalArgumentException("BOOM").failure[Int]
 "BOOM".failure
 ```
 
-  - sequence on `Try` to reducing many `Try`s into a single `Try`
+  - sequence on `Traversable[Try[A]]` to reducing many `Try`s into a single `Try`
 ```tut
-TryOps.sequence(3.success :: 44.success :: Nil)
-TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
+List(3.success, 44.success).sequence
+List(3.success, "BOOM".failure, 44.success).sequence
+Vector(1.success, 2.success).sequence
 ```
 
 

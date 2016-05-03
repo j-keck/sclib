@@ -59,13 +59,16 @@ scala> 4.right[String]
 res2: scala.util.Either[String,Int] = Right(4)
 ```
 
-  - sequence on either to reducing many `Either`s into a single `Either`
+  - sequence on `Traversable[Either[A, B]]` to reducing many `Either`s into a single `Either`
 ```scala
-scala> EitherOps.sequence(List(3.right, 4.right))
+scala> List(3.right, 4.right).sequence
 res3: scala.util.Either[Nothing,List[Int]] = Right(List(3, 4))
 
-scala> EitherOps.sequence(List(3.right, 4.right, "BOOM".left))
+scala> List(3.right, 4.right, "BOOM".left).sequence
 res4: scala.util.Either[String,List[Int]] = Left(BOOM)
+
+scala> Vector(2.right, 5.right).sequence
+res5: scala.util.Either[Nothing,scala.collection.immutable.Vector[Int]] = Right(Vector(2, 5))
 ```
    
   - right biased either
@@ -74,7 +77,7 @@ scala> for {
      |   a <- Right(1)
      |   b <- Right(4)
      | } yield a + b
-res5: scala.util.Either[Nothing,Int] = Right(5)
+res6: scala.util.Either[Nothing,Int] = Right(5)
 ```
 
 
@@ -241,13 +244,16 @@ scala> "BOOM".failure
 res2: scala.util.Try[Nothing] = Failure(java.lang.Exception: BOOM)
 ```
 
-  - sequence on `Try` to reducing many `Try`s into a single `Try`
+  - sequence on `Traversable[Try[A]]` to reducing many `Try`s into a single `Try`
 ```scala
-scala> TryOps.sequence(3.success :: 44.success :: Nil)
+scala> List(3.success, 44.success).sequence
 res3: scala.util.Try[List[Int]] = Success(List(3, 44))
 
-scala> TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
+scala> List(3.success, "BOOM".failure, 44.success).sequence
 res4: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
+
+scala> Vector(1.success, 2.success).sequence
+res5: scala.util.Try[scala.collection.immutable.Vector[Int]] = Success(Vector(1, 2))
 ```
 
 

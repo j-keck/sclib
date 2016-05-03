@@ -15,49 +15,6 @@ object `try` extends `try`
 trait `try` {
 
   /**
-    * utility's for `Try`
-    */
-  object TryOps {
-
-    /**
-      * reducing many `Try`s into a single `Try`
-      *
-      * @example {{{
-      * scala> import sclib.ops.`try`._
-      * scala> TryOps.sequence(3.success :: 44.success :: Nil)
-      * res0: scala.util.Try[List[Int]] = Success(List(3, 44))
-      *
-      * scala> TryOps.sequence(3.success :: 44.success :: "BOOM".failure :: Nil)
-      * res1: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
-      *
-      * scala> TryOps.sequence(Vector(1.success, 2.success))
-      * res2: scala.util.Try[scala.collection.immutable.Vector[Int]] = Success(Vector(1, 2))
-      * }}}
-      */
-    def sequence[A, CC[X] <: Traversable[X]](value: CC[Try[A]])(
-        implicit cbf: CanBuildFrom[Nothing, A, CC[A]]): Try[CC[A]] = {
-
-      val b = {
-        val builder = collection.breakOut[CC[Try[A]], A, CC[A]]
-        builder(value)
-      }
-      b.sizeHint(value)
-
-      def go(xs: Traversable[Try[A]]): Try[CC[A]] = xs.headOption match {
-        case Some(Failure(x)) => x.failure
-        case Some(Success(x)) =>
-          b += x
-          go(xs.tail)
-        case None => b.result.success
-      }
-
-      go(value)
-    }
-
-    def lift[A](f: => A) = f.success
-  }
-
-  /**
     * extensions on `Try` instances
     */
   implicit class TryOps[A](t: Try[A]) {
@@ -176,5 +133,45 @@ trait `try` {
     */
   implicit class String2Failure(s: String) {
     def failure[A]: Try[A] = Failure(new Exception(s))
+  }
+
+
+  /**
+    * reducing many `Try`s into a single `Try`
+    */
+  implicit class TraversableOfTry[A, CC[X] <: Traversable[X]](ts: CC[Try[A]]) {
+    /**
+      * reducing many `Try`s into a single `Try`
+      *
+      * @example {{{
+      * scala> import sclib.ops.`try`._
+      * scala> List(3.success, 44.success).sequence
+      * res0: scala.util.Try[List[Int]] = Success(List(3, 44))
+      *
+      * scala> List(3.success, "BOOM".failure, 44.success).sequence
+      * res1: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
+      *
+      * scala> Vector(1.success, 2.success).sequence
+      * res2: scala.util.Try[scala.collection.immutable.Vector[Int]] = Success(Vector(1, 2))
+      * }}}
+      */
+    def sequence(implicit cbf: CanBuildFrom[Nothing, A, CC[A]]): Try[CC[A]] = {
+
+      val b = {
+        val builder = collection.breakOut[CC[Try[A]], A, CC[A]]
+        builder(ts)
+      }
+      b.sizeHint(ts)
+
+      def go(xs: Traversable[Try[A]]): Try[CC[A]] = xs.headOption match {
+        case Some(Failure(x)) => x.failure
+        case Some(Success(x)) =>
+          b += x
+          go(xs.tail)
+        case None => b.result.success
+      }
+
+      go(ts)
+    }
   }
 }

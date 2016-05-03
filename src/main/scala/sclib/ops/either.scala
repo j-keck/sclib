@@ -16,48 +16,6 @@ object either extends either
 trait either {
 
   /**
-    * utility's for `Either`
-    */
-  object EitherOps {
-
-    /**
-      * reducing many `Either`s into a single `Either`
-      *
-      * @example {{{
-      * scala> import sclib.ops.either._
-      *
-      * scala> EitherOps.sequence(List(3.right, 4.right))
-      * res0: Either[Nothing,List[Int]] = Right(List(3, 4))
-      *
-      * scala> EitherOps.sequence(List(3.right, 4.right, "BOOM".left))
-      * res1: Either[String,List[Int]] = Left(BOOM)
-      *
-      * scala> EitherOps.sequence(Vector(2.right, 5.right))
-      * res2: scala.util.Either[Nothing,scala.collection.immutable.Vector[Int]] = Right(Vector(2, 5))
-      * }}}
-      */
-    def sequence[A, B, CC[X] <: Traversable[X]](value: CC[Either[A, B]])(
-        implicit cbf: CanBuildFrom[Nothing, B, CC[B]]): Either[A, CC[B]] = {
-
-      val b = {
-        val builder = collection.breakOut[CC[Either[A, B]], B, CC[B]]
-        builder(value)
-      }
-      b.sizeHint(value)
-
-      def go(xs: Traversable[Either[A, B]]): Either[A, CC[B]] = xs.headOption match {
-        case Some(Left(x)) => x.left
-        case Some(Right(x)) =>
-          b += x
-          go(xs.tail)
-        case None => b.result.right
-      }
-
-      go(value)
-    }
-  }
-
-  /**
     * extensions on `Either` instances
     */
   implicit class EitherOps[A, B](e: Either[A, B]) {
@@ -138,5 +96,45 @@ trait either {
     */
   implicit class Any2Right[B](b: B) {
     def right[A]: Either[A, B] = Right[A, B](b)
+  }
+
+  /**
+    * reducing many `Either`s into a single `Either`
+    */
+  implicit class TraversableOfEither[A, B, CC[X] <: Traversable[X]](es: CC[Either[A, B]]) {
+
+    /**
+      * reducing many `Either`s into a single `Either`
+      *
+      * @example {{{
+      * scala> import sclib.ops.either._
+      * scala> List(3.right, 4.right).sequence
+      * res0: Either[Nothing,List[Int]] = Right(List(3, 4))
+      *
+      * scala> List(3.right, 4.right, "BOOM".left).sequence
+      * res1: Either[String,List[Int]] = Left(BOOM)
+      *
+      * scala> Vector(2.right, 5.right).sequence
+      * res2: scala.util.Either[Nothing,scala.collection.immutable.Vector[Int]] = Right(Vector(2, 5))
+      * }}}
+      */
+    def sequence(implicit cbf: CanBuildFrom[Nothing, B, CC[B]]): Either[A, CC[B]] = {
+
+      val b = {
+        val builder = collection.breakOut[CC[Either[A, B]], B, CC[B]]
+        builder(es)
+      }
+      b.sizeHint(es)
+
+      def go(xs: Traversable[Either[A, B]]): Either[A, CC[B]] = xs.headOption match {
+        case Some(Left(x)) => x.left
+        case Some(Right(x)) =>
+          b += x
+          go(xs.tail)
+        case None => b.result.right
+      }
+
+      go(es)
+    }
   }
 }

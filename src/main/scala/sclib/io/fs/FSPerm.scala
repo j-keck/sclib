@@ -164,23 +164,20 @@ object FSPerm {
     def lookupAll(act: Seq[PosixFilePermission],
                   whos: Seq[Who],
                   op: Char,
-                  perms: Seq[Perm]): Either[String, Seq[PosixFilePermission]] =
-      EitherOps
-        .sequence(for {
+                  perms: Seq[Perm]): Either[String, Seq[PosixFilePermission]] = (for {
           w <- whos
           p <- perms
-        } yield lookup(act, w, op, p))
-        .map(_.flatten)
+        } yield lookup(act, w, op, p)).sequence.map(_.flatten)
 
     def parse(act: Seq[PosixFilePermission], mode: String): Try[Seq[PosixFilePermission]] = {
       val idx = mode.indexWhere("+-=".contains(_))
       for {
         _ <- if (idx < 0) "operator [+|-|=] not found".left else ().right
         op = mode.charAt(idx)
-        whos  <- EitherOps.sequence(mode.take(idx).map(Who.apply))
-        perms <- EitherOps.sequence(mode.drop(idx + 1).map(Perm.apply))
-        _     <- if (whos.size == 0) "who ([a|u|g|o]+) not found".left else ().right
-        _     <- if (perms.size == 0) "perm ([r|w|x]+) not found".left else ().right
+        whos  <- mode.take(idx).map(Who.apply).sequence
+        perms <- mode.drop(idx + 1).map(Perm.apply).sequence
+        _     <- if (whos.isEmpty) "who ([a|u|g|o]+) not found".left else ().right
+        _     <- if (perms.isEmpty) "perm ([r|w|x]+) not found".left else ().right
         res   <- lookupAll(act, whos, op, perms)
       } yield res
     }.toTry
