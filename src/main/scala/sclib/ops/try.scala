@@ -81,11 +81,62 @@ trait `try` {
       */
     def toEither: Either[Throwable, A] = fold(_.left[A])(_.right)
 
+    /**
+      * zip two Try's
+      *
+      * returns a `Failure` if any of the given `Try`s are a `Failure`
+      *
+      * @example
+      * {{{
+      * scala> import sclib.ops.`try`._
+      * scala> import scala.util.Try
+      * scala> val z = 5.success.zip(11.success)
+      * res0: Try[(Int, Int)] = Success(5, 11)
+      * scala> z.map(Function.tupled(_ + _))
+      * res1: Try[Int] = Success(16)
+      * }}}
+      */
     def zip[B](other: Try[B]): Try[(A, B)] = (t, other) match {
       case (Success(a), Success(b)) => Success(a, b)
       case (Failure(t), _)          => t.failure
       case (_, Failure(t))          => t.failure
     }
+
+    /**
+      * apply the given function if it's a failure
+      *
+      * (read as '''map o'''ther)
+      *
+      * @example
+      * {{{
+      * scala> import sclib.ops.`try`._
+      * scala> import scala.util.Try
+      * scala> Try(1/0)
+      * res0: Try[Int] = Failure(java.lang.ArithmeticException: / by zero)
+      * scala> Try(1/0).mapO(_ => "unable to calculate: 1/0")
+      * res1: Try[Int] = Failure(java.lang.Exception: unable to calculate: 1/0)
+      * }}}
+      */
+    def mapO(f: Throwable => String): Try[A] = t.transform(_.success, f(_).failure)
+
+    /**
+      * apply the given function if it's a failure
+      *
+      * (read as '''flatMap o'''ther)
+      *
+      * @example
+      * {{{
+      * scala> import sclib.ops.`try`._
+      * scala> import scala.util.Try
+      * scala> Try(1/0)
+      * res0: Try[Int] = Failure(java.lang.ArithmeticException: / by zero)
+      * scala> Try(1/0).flatMapO(_ => "unable to calculate: 1/0".failure)
+      * res1: Try[Int] = Failure(java.lang.Exception: unable to calculate: 1/0)
+      * scala> Try(1/0).flatMapO(_ => 0.success)
+      * res2: Try[Int] = Success(0)
+      * }}}
+      */
+    def flatMapO(f: Throwable => Try[A]): Try[A] = t.transform(_.success, f)
   }
 
   /**

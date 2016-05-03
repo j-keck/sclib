@@ -82,11 +82,36 @@ trait either {
     /** map both */
     def bimap[AA, BB](fl: A => AA, fr: B => BB) = e.fold(fl, fr)
 
-    /** map over left */
-    def leftMap[AA](f: A => AA): Either[AA, B] = e.left.map(f)
+    /**
+      * apply the given function if it's a `Left`
+      *
+      * (read as '''map o'''ther)
+      *
+      * @example
+      * {{{
+      * scala> import sclib.ops.either._
+      * scala> 5.right[Int].mapO(_ + 1)
+      * res0: scala.util.Either[Int,Int] = Right(5)
+      *
+      * scala> 5.left.mapO(_ + 1)
+      * res1: scala.util.Either[Int,Nothing] = Left(6)
+      * }}}
+      */
+    def mapO[AA](f: A => AA): Either[AA, B] = e.left.map(f)
 
-    /** flatMap over left */
-    def leftFlatMap[AA](f: A => Either[AA, B]): Either[AA, B] = e.left.flatMap(f)
+    /**
+      * apply the given function if it's a `Left`
+      *
+      * (read as '''flatMap o'''ther)
+      *
+      * @example
+      * {{{
+      * scala> import sclib.ops.either._
+      * scala> 5.left.flatMapO(_.right)
+      * res0: scala.util.Either[Nothing,Int] = Right(5)
+      * }}}
+      */
+    def flatMapO[AA](f: A => Either[AA, B]): Either[AA, B] = e.left.flatMap(f)
   }
 
   /**
