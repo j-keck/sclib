@@ -14,12 +14,12 @@ add the following snippet to your `build.sbt` file:
 - for the jvm:
 
         resolvers += Resolver.bintrayRepo("j-keck", "maven")
-        libraryDependencies += "net.jkeck" %% "sclib" % "0.4"
+        libraryDependencies += "net.jkeck" %% "sclib" % "0.5-SNAPSHOT"
 
 - for scala.js
 
         resolvers += Resolver.bintrayRepo("j-keck", "maven")
-        libraryDependencies += "net.jkeck" %%% "sclib" % "0.4"
+        libraryDependencies += "net.jkeck" %%% "sclib" % "0.5-SNAPSHOT"
 
 
 ## content
@@ -365,8 +365,9 @@ res1: Either[String,(String, List[Int])] = Right((a tuple with a string and a li
 case class C(a: String, b: List[Int], c: Either[Int, String])
 
 implicit val cSer = new Serialize[C]{
-  override def apply(c: C): String = c match {
-    case C(a, b, c) => Serialize(a) + Serialize(b) + Serialize(c)
+  override def apply(cInst: C): String = {
+    import cInst._
+    Serialize(a) + Serialize(b) + Serialize(c)
   }
 }
 
