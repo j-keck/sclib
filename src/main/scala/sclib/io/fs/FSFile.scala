@@ -7,7 +7,7 @@ import java.nio.file.StandardOpenOption._
 import java.nio.file.{Files, OpenOption, Path}
 
 import scala.util.Try
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 import sclib.ops.all._
 
@@ -16,7 +16,10 @@ import sclib.ops.all._
   *
   * the functions `write`, `writeLines`, `append` and `appendLines` expects a type-class instance (from [[Writable]])
   * for their to be written payload in scope. instances for `string`, `char`, `short`, `int`, `long`, `float`,
-  * `double` and some collection types are already defined.
+  * `double` and some collection types are already defined (see [[Writable$]]).
+  *
+  * the `write` and `append` functions don't add a newline at the end / between the sequences.
+  * for functions which add newlines use `writeLines` and `appendLines`.
   *
   * @example
   * {{{
@@ -40,18 +43,9 @@ import sclib.ops.all._
   *
   * ''check the member documentation for examples''
   */
-case class FSFile protected[io] (path: Path) extends FSEntry[FSFile] {
+case class FSFile protected[io](path: Path) extends FSEntry[FSFile] {
 
-  /**
-    * @see [[FSEntry.createTemp]]
-    */
-  override def createTemp: Try[FSFile] = Try {
-    val (prefix, suffix) = name.reverse.split("\\.", 2) match {
-      case Array(s, p) => (p.reverse, "." + s.reverse)
-      case Array(p)    => (p.reverse, "")
-    }
-    FSFile(Option(path.getParent).fold(Files.createTempFile(prefix, suffix))(Files.createTempFile(_, prefix, suffix)))
-  }
+  override protected[fs] def withPath(p: Path): FSFile = new FSFile(p)
 
   /**
     * memory constant operation to process all lines
@@ -75,7 +69,7 @@ case class FSFile protected[io] (path: Path) extends FSEntry[FSFile] {
     * @return whole file content as a string
     */
   def slurp(cs: Charset = UTF_8): Try[String] = Try {
-    Files.readAllLines(path).mkString(System.getProperty("line.separator"))
+    Files.readAllLines(path).asScala.mkString(System.getProperty("line.separator"))
   }
 
   /** @see [[[sclib.io.fs.FSFile.slurp(cs:java\.nio\.charset\.Charset)*]]] */

@@ -5,49 +5,86 @@ import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file.{FileVisitResult, FileVisitor, Files, Path}
 
 import scala.util.Try
-
-import sclib.io.fs.FSEntry.FSEntryImpl
 import sclib.ops.all._
 
 /**
   * Represents a 'Directory'
   *
-  * ==== to walk over a directory tree, there are four functions available: ====
+  * ==== to iterate over a directory tree, there are the following functions available: ====
+  * ''the method signature from `foreach`, `map` and `flatMap` shown here are simplified''
   *
-  *  - iterate over each entry
-  *    {{{ls: Try[Iterator[FSEntryImpl]]}}}
+  *   - [[sclib.io.fs.FSDir.ls:*             ls: Iterator[Try[FSEntryImpl]&#93; ]]
+  *   - [[sclib.io.fs.FSDir.foreach[A](tf*   foreach(f: Try[FSEntryImpl] => Unit): Unit ]]
+  *   - [[sclib.io.fs.FSDir.foreach[A](tf*   foreach(f: FSEntryImpl => Unit): Try[Unit] ]]
+  *   - [[sclib.io.fs.FSDir.map[A](tf*       map[A](f: Try[FSEntryImpl] => A): Iterator[Try[A]&#93; ]]
+  *   - [[sclib.io.fs.FSDir.map[A](tf*       map[A](f: FSEntryImpl => A): Iterator[Try[A]&#93; ]]
+  *   - [[sclib.io.fs.FSDir.flatMap[A](tf*   flatMap[A](f: Try[FSEntryImpl] => Try[A]): Iterator[Try[A]&#93; ]]
+  *   - [[sclib.io.fs.FSDir.flatMap[A](tf*   flatMap[A](f: FSEntryImpl => Try[A]): Iterator[Try[A]&#93; ]]
+  *   - [[sclib.io.fs.FSDir.collect[A](pf*   collect[A](pf: PartialFunction[Try[FSEntryImpl]&#93;, A): Iterator[A] ]]
   *
-  *  - execute a side effect on each entry
-  *    {{{foreach(f: FSEntryImpl => Unit): Try[Unit]}}}
+  * this functions doesn't work recursive by default. for a recursive behaviour, use their counterpart functions
+  * with the 'R' suffix: `lsR`, `foreachR`, `mapR` or `collectR`.
   *
-  *  - apply a function on each entry
-  *    {{{map[A](f: FSEntryImpl => A): Try[Iterator[A]]}}}
-  *
-  *  - apply a partial function on each entry on which the function is defined
-  *    {{{collectS[A](pf: PartialFunction[Try[FSEntryImpl], A]): Iterator[A]}}}
+  * to control the recursive level, you can give the `lsR`, `foreachR`, `mapR` or `collectR` function a 'depth' argument.
   *
   *
-  * this functions doesn't work recursive by default. to use the recursive behaviour,
-  * use their counterpart with the 'R' suffix: `lsR`, `foreachR`, `mapR`, `collectSR`.
+  * ====iterate over a directory tree====
   *
-  * to control the recursive level, you can give the `ls`, `foreach`, `map` or `collectS` function a 'depth' argument.
+  * you can give `foreach`, `map` and `flatMap` a traverse function which receives a `FSEntryImpl` or a `Try[FSEntryImpl]`.
   *
-  * ----
   *
-  * for this functions there exists also a error tolerant counterpart with a 'S' suffix (for '''save'''):
-  * `lsS`, `foreachS` and `mapS`. this ''saver'' functions wraps every file operation in a `Try`.
+  * assume the following directory tree:
+  * <pre>
+  * root@main:/tmp/sclib-example # ls -lR /tmp/sclib-example/
+  * total 1
+  * drwx------  2 j  wheel  5 May  4 10:51 pub
+  * d---------  2 j  wheel  5 May  4 10:51 sec
+  *
+  * /tmp/sclib-example/pub:
+  * total 2
+  * -rw-r--r--  1 j  wheel  0 May  4 10:51 a
+  * -rw-r--r--  1 j  wheel  0 May  4 10:51 b
+  * -rw-r--r--  1 j  wheel  0 May  4 10:51 c
+  *
+  * /tmp/sclib-example/sec:
+  * total 1
+  * ----------  1 j  wheel  0 May  4 10:51 a
+  * </pre>
+  *
+  * '''fail on first error:'''
+  * if you get it a function which receives a `FSEntryImpl` and an exception occurs, the function execution
+  * stops and a `Failure` are returned.
+  * {{{
+  * scala> import sclib.io.fs._
+  * scala> dir("/tmp/sclib-example").get.foreachR(println(_: FSEntryImpl))
+  * FSDir(/tmp/sclib-example/sec)
+  * res0: scala.util.Try[Unit] = Failure(java.nio.file.AccessDeniedException: /tmp/sclib-example/sec)
+  * }}}
+  *
+  *
+  * '''exceptions intercepted:'''
+  * if you get it a function which receives a `Try[FSEntryImpl]` and an exception occurs, the function execution
+  * continues.
+  * {{{
+  * scala> import sclib.io.fs._
+  * scala> import scala.util.Try
+  * scala> dir("/tmp/sclib-example").get.foreachR(println(_: Try[FSEntryImpl]))
+  * Success(FSDir(/tmp/sclib-example/sec))
+  * Failure(java.nio.file.AccessDeniedException: /tmp/sclib-example/sec)
+  * Success(FSDir(/tmp/sclib-example/pub))
+  * Success(FSFile(/tmp/sclib-example/pub/c))
+  * Success(FSFile(/tmp/sclib-example/pub/b))
+  * Success(FSFile(/tmp/sclib-example/pub/a))
+  * }}}
+  *
   *
   * ----
   * ''check the member documentation for examples''
   */
 case class FSDir protected[fs](path: Path) extends FSEntry[FSDir] { self =>
+  import FSDir._
 
-  /**
-    * @see [[FSEntry.createTemp]]
-    */
-  override def createTemp: Try[FSDir] = Try {
-    FSDir(Option(path.getParent).fold(Files.createTempDirectory(name))(Files.createTempDirectory(_, name)))
-  }
+  override protected[fs] def withPath(p: Path): FSDir = new FSDir(p)
 
   /**
     * delete the directory recursive
@@ -74,119 +111,50 @@ case class FSDir protected[fs](path: Path) extends FSEntry[FSDir] { self =>
   }
 
   /**
-    * directory content from this directory
+    * recursive directory content, start from this directory.
     *
-    * @param depth maximum depth level - default: 1 for no recursive behavior
+    * @param depth maximum depth level
     * @return a `Iterator` with the directory entries
     */
-  def ls(depth: Int = 1): Try[Iterator[FSEntryImpl]] = Try(FSIterator(this, depth).map(_.fold(throw _)(identity)))
-
-  /**
-    * shortcut to use without parenthesize
-    *
-    * @see [[FSDir.ls(depth:Int*]]
-    */
-  def ls: Try[Iterator[FSEntryImpl]] = ls()
+  def lsR(depth: Int = Integer.MAX_VALUE): Iterator[Try[FSEntryImpl]] = FSIterator(this, depth)
 
   /**
     * recursive directory content, start from this directory.
     *
-    * to control the depth, use [[FSDir.ls(depth:Int*]].
-    */
-  def lsR: Try[Iterator[FSEntryImpl]] = ls(Integer.MAX_VALUE)
-
-  /**
-    * ''save'' function of [[FSDir.ls(depth:Int*]] - wraps every file operation in a `Try`.
-    *
-    * @see [[FSDir.ls(depth:Int*]]
-    */
-  def lsS(depth: Int = 1): Iterator[Try[FSEntryImpl]] = {
-    FSIterator(this, depth)
-  }
-
-  /**
     * shortcut to use without parenthesize
     *
-    * @see [[FSDir.lsS(depth:Int*]]
+    * to control the depth, use [[FSDir.lsR(depth:Int)*]]
     */
-  def lsS: Iterator[Try[FSEntryImpl]] = lsS()
+  def lsR: Iterator[Try[FSEntryImpl]] = lsR(Integer.MAX_VALUE)
+  def ls: Iterator[Try[FSEntryImpl]]  = lsR(1)
 
   /**
-    * ''save'' function of [[FSDir.lsR]] - wraps every file operation in a `Try`.
-    *
-    * @see [[FSDir.lsR]]
+    * apply the given function recursive to every `FSEntry` start from this directory
     */
-  def lsSR: Iterator[Try[FSEntryImpl]] = lsS(Integer.MAX_VALUE)
-
-  /**
-    * apply the given function to every `FSEntry` in this directory
-    *
-    * @param depth maximum depth level - default: 1 for no recursive behavior
-    */
-  def foreach(f: FSEntryImpl => Unit, depth: Int = 1): Try[Unit] = Try {
-    FSIterator(this, depth).map(_.fold(throw _)(f)).toList
-  }
+  def foreachR[A](tf: TraverseFunction[A], depth: Int = Integer.MAX_VALUE): tf.Result = tf(self, depth)
+  def foreach[A](tf: TraverseFunction[A]): tf.Result                                  = tf(self, 1)
 
   /**
     * apply the given function recursive to every `FSEntry` start from this directory
     *
-    * to control the depth, use [[FSDir.foreach(f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>Unit*]]
+    * @return a `Iterator` where for each entry the given function was applied
     */
-  def foreachR(f: FSEntryImpl => Unit): Try[Unit] = foreach(f, Integer.MAX_VALUE)
-
-  /**
-    * ''save'' function of [[FSDir.foreach(f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>Unit*]] - wraps every file operation in a `Try`.
-    *
-    * @see [[FSDir.foreach(f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>Unit*]]
-    */
-  def foreachS(f: Try[FSEntryImpl] => Unit, depth: Int = 1): Unit = {
-    FSIterator(this, depth).foreach(f)
-  }
-
-  /**
-    * ''save'' function of [[FSDir.foreachR]] - wraps every file operation in a `Try`.
-    *
-    * @see [[FSDir.foreachR]]
-    */
-  def foreachSR(f: Try[FSEntry[_]] => Unit): Unit = foreachS(f, Integer.MAX_VALUE)
-
-  /**
-    * apply the given function to every `FSEntry` in this directory
-    *
-    * @param depth maximum depth level - default: 1 for no recursive behavior
-    * @return a per `FSEntry` iterator where for each entry the given function was applied
-    */
-  def map[A](f: FSEntryImpl => A, depth: Int = 1): Try[Iterator[A]] = Try {
-    FSIterator(this, depth).map(_.fold(throw _)(f))
-  }
+  def mapR[A](tf: TraverseFunction[A], depth: Int = Integer.MAX_VALUE): tf.Result = tf(self, depth)
+  def map[A](tf: TraverseFunction[A]): tf.Result                                  = tf(self, 1)
 
   /**
     * apply the given function recursive to every `FSEntry` start from this directory
     *
-    * to control the depth, use [[FSDir.map[A](f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>A*]]
+    * @return a `Iterator` where for each entry the given function was applied
     */
-  def mapR[A](f: FSEntryImpl => A): Try[Iterator[A]] = map(f, Integer.MAX_VALUE)
-
-  /**
-    * ''save'' function of [[FSDir.map[A](f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>A*]] - wraps every file operation in a `Try`.
-    *
-    * @see [[FSDir.map[A](f:sclib\.io\.fs\.FSEntry\.FSEntryImpl=>A*]]
-    */
-  def mapS[A](f: Try[FSEntryImpl] => A, depth: Int = 1): Iterator[A] = {
-    FSIterator(this, depth).map(f)
-  }
-
-  /**
-    * ''save'' function of [[FSDir.mapR]] - wraps every file operation in a `Try`.
-    *
-    * @see [[FSDir.mapR]]
-    */
-  def mapSR[A](f: Try[FSEntryImpl] => A): Iterator[A] = mapS(f, Integer.MAX_VALUE)
+  def flatMapR[A](tf: TraverseFunction[A], depth: Int = Integer.MAX_VALUE): tf.Result = tf(self, depth)
+  def flatMap[A](tf: TraverseFunction[A]): tf.Result                                  = tf(self, 1)
 
   /**
     *
     * @example
     * {{{
+    * scala>  import sclib.io.fs._
     * scala> import scala.util.Success
     * scala> import scala.collection.SortedSet
     * scala> dir("wd").flatMap(_.createTemp).map{ wd =>
@@ -198,7 +166,7 @@ case class FSDir protected[fs](path: Path) extends FSEntry[FSDir] { self =>
     *      |   List("fd1", "hd2", "fd3", "hd4", "fd5").map(dir(wd, _).flatMap(_.create))
     *      |   //
     *      |   // collect only files, which doesn't have a 'h' prefix
-    *      |   val fileNames = wd.collectSR{
+    *      |   val fileNames = wd.collectR{
     *      |     case Success(f: FSFile) if ! f.name.startsWith("h") => f.name
     *      |   }.toList
     *      |   //
@@ -210,32 +178,65 @@ case class FSDir protected[fs](path: Path) extends FSEntry[FSDir] { self =>
     * res0: scala.util.Try[SortedSet[String]] = Success(TreeSet(f1, f3, f5))
     * }}}
     */
-  def collectS[A](pf: PartialFunction[Try[FSEntryImpl], A], depth: Int = 1): Iterator[A] = new Iterator[A] {
-    private val fsIter = new FSIterator(self, depth)
+  def collectR[A](pf: PartialFunction[Try[FSEntryImpl], A], depth: Int = Integer.MAX_VALUE): Iterator[A] =
+    new Iterator[A] {
+      private val fsIter = new FSIterator(self, depth)
 
-    private var nextElement: Option[A] = None
+      private var nextElement: Option[A] = None
 
-    override def hasNext: Boolean = {
-      fsIter.hasNext && {
-        val n = fsIter.next()
-        if (pf.isDefinedAt(n)) {
-          nextElement = Some(pf(n))
-          true
-        } else {
-          hasNext
+      override def hasNext: Boolean = {
+        fsIter.hasNext && {
+          val n = fsIter.next()
+          if (pf.isDefinedAt(n)) {
+            nextElement = Some(pf(n))
+            true
+          } else {
+            hasNext
+          }
         }
       }
-    }
 
-    override def next(): A =
-      nextElement.map { n =>
-        nextElement = None
-        n
-      }.getOrElse(throw new java.util.NoSuchElementException("next on empty iterator"))
+      override def next(): A =
+        nextElement.map { n =>
+          nextElement = None
+          n
+        }.getOrElse(throw new java.util.NoSuchElementException("next on empty iterator"))
+    }
+  def collect[A](pf: PartialFunction[Try[FSEntryImpl], A]): Iterator[A] = collectR(pf, 1)
+}
+object FSDir {
+  import scala.language.implicitConversions
+
+  trait TraverseFunction[A] {
+    type Result
+    def apply(dir: FSDir, depth: Int): Result
   }
 
-  /**
-    * @see [[FSDir.collectS[A](pf*]]
-    */
-  def collectSR[A](pf: PartialFunction[Try[FSEntryImpl], A]): Iterator[A] = collectS(pf, Integer.MAX_VALUE)
+  object TraverseFunction {
+    implicit def foreach(f: FSEntryImpl => Unit) = new TraverseFunction[Unit] {
+      override type Result = Try[Unit]
+      override def apply(dir: FSDir, depth: Int): Result = Try(FSIterator(dir, depth).foreach(_.fold(throw _)(f)))
+    }
+    implicit def foreachWithTry(f: Try[FSEntryImpl] => Unit) = new TraverseFunction[Unit] {
+      override type Result = Unit
+      override def apply(dir: FSDir, depth: Int): Result = FSIterator(dir, depth).foreach(f)
+    }
+    implicit def map[A](f: FSEntryImpl => A) = new TraverseFunction[A] {
+      override type Result = Iterator[Try[A]]
+      override def apply(dir: FSDir, depth: Int): Result =
+        FSIterator(dir, depth).map(_.fold(_.failure[A])(x => Try(f(x))))
+    }
+    implicit def mapWithTry[A](f: Try[FSEntryImpl] => A) = new TraverseFunction[A] {
+      override type Result = Iterator[Try[A]]
+      override def apply(dir: FSDir, depth: Int): Result = FSIterator(dir, depth).map(x => Try(f(x)))
+    }
+    implicit def flatMap[A](f: FSEntryImpl => Try[A]) = new TraverseFunction[A] {
+      override type Result = Iterator[Try[A]]
+      override def apply(dir: FSDir, depth: Int): Result = FSIterator(dir, depth).map(_.flatMap(f))
+    }
+    implicit def flatMapWithTry[A](f: Try[FSEntryImpl] => Try[A]) = new TraverseFunction[A] {
+      override type Result = Iterator[Try[A]]
+      override def apply(dir: FSDir, depth: Int): Result = FSIterator(dir, depth).map(f)
+    }
+  }
 }
