@@ -45,27 +45,14 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">FSIterator</span><span class="params">(<span name="start">start: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="maxDepth">maxDepth: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Integer.MAX_VALUE</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">FSIterator</span><span class="params">(<span name="start">start: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="maxDepth">maxDepth: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Integer.MAX_VALUE</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>a <i>save</i> file-system iterator.</p><p>it wraps every file operation in a <code>Try</code>.
-</p></div><dl class="paramcmts block"><dt class="param">start</dt><dd class="cmt"><p>directory to start</p></dd><dt class="param">maxDepth</dt><dd class="cmt"><p>the maximum number of directory levels to visit</p></dd></dl><dl class="attributes block"> <div class="block">Example:
-               <ol><li class="cmt"><p></p><pre>scala&gt;  <span class="kw">import</span> sclib.io._
-scala&gt; <span class="kw">val</span> xs = <span class="kw">for</span> {
-     |   wd <span class="kw">&lt;-</span> dir(<span class="lit">"sclib.io"</span>)
-     |   wd <span class="kw">&lt;-</span> wd.createTemp
-     |   pub <span class="kw">&lt;-</span> dir(wd, <span class="lit">"pub"</span>).flatMap(_.create)
-     |   _ <span class="kw">&lt;-</span> file(pub, <span class="lit">"a-file"</span>).flatMap(_.create)
-     |   sec <span class="kw">&lt;-</span> dir(wd, <span class="lit">"sec"</span>).flatMap(_.create(<span class="num">0</span>))
-     |   res = FSIterator(wd).toList
-     |   _ <span class="kw">&lt;-</span> sec.chmod(<span class="num">700</span>)
-     |   _ <span class="kw">&lt;-</span> wd.deleteR
-     | } <span class="kw">yield</span> res
-xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry.FSEntryImpl]]] = Success(<span class="std">List</span>(Success(FSDir(/tmp/sclib.io7738690949969632606/sec)), Failure(java.nio.file.AccessDeniedException: /tmp/sclib.io7738690949969632606/sec), Success(FSDir(/tmp/sclib.io7738690949969632606/pub)), Success(FSFile(/tmp/sclib.io7738690949969632606/pub/a-file))))</pre></li></ol>
-            </div></dl><div class="toggleContainer block">
+</p></div><dl class="paramcmts block"><dt class="param">start</dt><dd class="cmt"><p>directory to start</p></dd><dt class="param">maxDepth</dt><dd class="cmt"><p>the maximum number of directory levels to visit</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.TraversableOnce">TraversableOnce</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.TraversableOnce">TraversableOnce</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -191,7 +178,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $plus$plus" class="name">++</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="that">that: ⇒ <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.collection.Iterator.++.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.++.B">B</span>]</span>
+        <span title="gt4s: $plus$plus" class="name">++</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="that">that: ⇒ <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.collection.Iterator.++.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.++.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@++[B&gt;:A](that:=&gt;scala.collection.GenTraversableOnce[B]):Iterator[B]" title="Permalink" target="_top">
@@ -208,7 +195,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $div$colon" class="name">/:</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.TraversableOnce./:.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce./:.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce./:.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce./:.B">B</span></span>
+        <span title="gt4s: $div$colon" class="name">/:</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.TraversableOnce./:.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce./:.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce./:.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce./:.B">B</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@/:[B](z:B)(op:(B,A)=&gt;B):B" title="Permalink" target="_top">
@@ -225,7 +212,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $colon$bslash" class="name">:\</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.TraversableOnce.:\.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.:\.B">B</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.:\.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.:\.B">B</span></span>
+        <span title="gt4s: $colon$bslash" class="name">:\</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.TraversableOnce.:\.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.:\.B">B</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.:\.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.:\.B">B</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@:\[B](z:B)(op:(A,B)=&gt;B):B" title="Permalink" target="_top">
@@ -310,7 +297,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">aggregate</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: ⇒ <span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span></span>)</span><span class="params">(<span name="seqop">seqop: (<span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span></span>, <span name="combop">combop: (<span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span>, <span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span></span>
+        <span class="name">aggregate</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: ⇒ <span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span></span>)</span><span class="params">(<span name="seqop">seqop: (<span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span></span>, <span name="combop">combop: (<span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span>, <span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.aggregate.B">B</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@aggregate[B](z:=&gt;B)(seqop:(B,A)=&gt;B,combop:(B,B)=&gt;B):B" title="Permalink" target="_top">
@@ -344,7 +331,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">buffered</span><span class="result">: <span class="extype" name="scala.collection.BufferedIterator">BufferedIterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">buffered</span><span class="result">: <span class="extype" name="scala.collection.BufferedIterator">BufferedIterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@buffered:scala.collection.BufferedIterator[A]" title="Permalink" target="_top">
@@ -384,7 +371,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">collect</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="pf">pf: <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.Iterator.collect.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.collect.B">B</span>]</span>
+        <span class="name">collect</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="pf">pf: <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.Iterator.collect.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.collect.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@collect[B](pf:PartialFunction[A,B]):Iterator[B]" title="Permalink" target="_top">
@@ -404,7 +391,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">collectFirst</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="pf">pf: <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.collectFirst.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.collection.TraversableOnce.collectFirst.B">B</span>]</span>
+        <span class="name">collectFirst</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="pf">pf: <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.collectFirst.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.collection.TraversableOnce.collectFirst.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@collectFirst[B](pf:PartialFunction[A,B]):Option[B]" title="Permalink" target="_top">
@@ -438,7 +425,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">copyToArray</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.collection.Iterator.copyToArray.B">B</span>]</span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>, <span name="len">len: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">copyToArray</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.collection.Iterator.copyToArray.B">B</span>]</span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>, <span name="len">len: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@copyToArray[B&gt;:A](xs:Array[B],start:Int,len:Int):Unit" title="Permalink" target="_top">
@@ -455,7 +442,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">copyToArray</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.collection.TraversableOnce.copyToArray.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">copyToArray</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.collection.TraversableOnce.copyToArray.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@copyToArray[B&gt;:A](xs:Array[B]):Unit" title="Permalink" target="_top">
@@ -472,7 +459,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">copyToArray</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.collection.TraversableOnce.copyToArray.B">B</span>]</span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">copyToArray</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.collection.TraversableOnce.copyToArray.B">B</span>]</span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@copyToArray[B&gt;:A](xs:Array[B],start:Int):Unit" title="Permalink" target="_top">
@@ -489,7 +476,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">copyToBuffer</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="dest">dest: <span class="extype" name="scala.collection.mutable.Buffer">Buffer</span>[<span class="extype" name="scala.collection.TraversableOnce.copyToBuffer.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">copyToBuffer</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="dest">dest: <span class="extype" name="scala.collection.mutable.Buffer">Buffer</span>[<span class="extype" name="scala.collection.TraversableOnce.copyToBuffer.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@copyToBuffer[B&gt;:A](dest:scala.collection.mutable.Buffer[B]):Unit" title="Permalink" target="_top">
@@ -506,7 +493,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">corresponds</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="that">that: <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.collection.Iterator.corresponds.B">B</span>]</span>)</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.Iterator.corresponds.B">B</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">corresponds</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="that">that: <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.collection.Iterator.corresponds.B">B</span>]</span>)</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.Iterator.corresponds.B">B</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@corresponds[B](that:scala.collection.GenTraversableOnce[B])(p:(A,B)=&gt;Boolean):Boolean" title="Permalink" target="_top">
@@ -523,7 +510,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">count</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">count</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@count(p:A=&gt;Boolean):Int" title="Permalink" target="_top">
@@ -540,7 +527,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">drop</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">drop</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@drop(n:Int):Iterator[A]" title="Permalink" target="_top">
@@ -557,7 +544,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">dropWhile</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">dropWhile</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@dropWhile(p:A=&gt;Boolean):Iterator[A]" title="Permalink" target="_top">
@@ -574,7 +561,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">duplicate</span><span class="result">: (<span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]])</span>
+        <span class="name">duplicate</span><span class="result">: (<span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]])</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@duplicate:(Iterator[A],Iterator[A])" title="Permalink" target="_top">
@@ -608,7 +595,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">exists</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">exists</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@exists(p:A=&gt;Boolean):Boolean" title="Permalink" target="_top">
@@ -625,7 +612,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">filter</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">filter</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@filter(p:A=&gt;Boolean):Iterator[A]" title="Permalink" target="_top">
@@ -642,7 +629,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">filterNot</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">filterNot</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@filterNot(p:A=&gt;Boolean):Iterator[A]" title="Permalink" target="_top">
@@ -682,7 +669,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">find</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">find</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@find(p:A=&gt;Boolean):Option[A]" title="Permalink" target="_top">
@@ -699,7 +686,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">flatMap</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.collection.Iterator.flatMap.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.flatMap.B">B</span>]</span>
+        <span class="name">flatMap</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.collection.Iterator.flatMap.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.flatMap.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@flatMap[B](f:A=&gt;scala.collection.GenTraversableOnce[B]):Iterator[B]" title="Permalink" target="_top">
@@ -716,7 +703,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">fold</span><span class="tparams">[<span name="A1">A1 &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.TraversableOnce.fold.A1">A1</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.fold.A1">A1</span>, <span class="extype" name="scala.collection.TraversableOnce.fold.A1">A1</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.fold.A1">A1</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.fold.A1">A1</span></span>
+        <span class="name">fold</span><span class="tparams">[<span name="A1">A1 &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.TraversableOnce.fold.A1">A1</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.fold.A1">A1</span>, <span class="extype" name="scala.collection.TraversableOnce.fold.A1">A1</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.fold.A1">A1</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.fold.A1">A1</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@fold[A1&gt;:A](z:A1)(op:(A1,A1)=&gt;A1):A1" title="Permalink" target="_top">
@@ -733,7 +720,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">foldLeft</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.TraversableOnce.foldLeft.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.foldLeft.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.foldLeft.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.foldLeft.B">B</span></span>
+        <span class="name">foldLeft</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.TraversableOnce.foldLeft.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.foldLeft.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.foldLeft.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.foldLeft.B">B</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@foldLeft[B](z:B)(op:(B,A)=&gt;B):B" title="Permalink" target="_top">
@@ -750,7 +737,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">foldRight</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.TraversableOnce.foldRight.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.foldRight.B">B</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.foldRight.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.foldRight.B">B</span></span>
+        <span class="name">foldRight</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.TraversableOnce.foldRight.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.foldRight.B">B</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.foldRight.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.foldRight.B">B</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@foldRight[B](z:B)(op:(A,B)=&gt;B):B" title="Permalink" target="_top">
@@ -767,7 +754,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">forall</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">forall</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@forall(p:A=&gt;Boolean):Boolean" title="Permalink" target="_top">
@@ -784,7 +771,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">foreach</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.Iterator.foreach.U">U</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">foreach</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.Iterator.foreach.U">U</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@foreach[U](f:A=&gt;U):Unit" title="Permalink" target="_top">
@@ -818,7 +805,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">grouped</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="size">size: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#GroupedIterator[B&gt;:A]extendsAbstractIterator[Seq[B]]withIterator[Seq[B]]" class="extmbr" name="sclib.io.fs.FSIterator.GroupedIterator">GroupedIterator</a>[<span class="extype" name="scala.collection.Iterator.grouped.B">B</span>]</span>
+        <span class="name">grouped</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="size">size: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#GroupedIterator[B&gt;:A]extendsAbstractIterator[Seq[B]]withIterator[Seq[B]]" class="extmbr" name="sclib.io.fs.FSIterator.GroupedIterator">GroupedIterator</a>[<span class="extype" name="scala.collection.Iterator.grouped.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@grouped[B&gt;:A](size:Int):Iterator.this.GroupedIterator[B]" title="Permalink" target="_top">
@@ -869,7 +856,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">indexOf</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="elem">elem: <span class="extype" name="scala.collection.Iterator.indexOf.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">indexOf</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="elem">elem: <span class="extype" name="scala.collection.Iterator.indexOf.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@indexOf[B&gt;:A](elem:B):Int" title="Permalink" target="_top">
@@ -886,7 +873,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">indexWhere</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">indexWhere</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@indexWhere(p:A=&gt;Boolean):Int" title="Permalink" target="_top">
@@ -971,7 +958,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">map</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.Iterator.map.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.map.B">B</span>]</span>
+        <span class="name">map</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.Iterator.map.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.map.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@map[B](f:A=&gt;B):Iterator[B]" title="Permalink" target="_top">
@@ -988,7 +975,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">max</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="scala.collection.TraversableOnce.max.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>
+        <span class="name">max</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="scala.collection.TraversableOnce.max.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@max[B&gt;:A](implicitcmp:Ordering[B]):A" title="Permalink" target="_top">
@@ -1005,7 +992,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">maxBy</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.maxBy.B">B</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="scala.collection.TraversableOnce.maxBy.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>
+        <span class="name">maxBy</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.maxBy.B">B</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="scala.collection.TraversableOnce.maxBy.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@maxBy[B](f:A=&gt;B)(implicitcmp:Ordering[B]):A" title="Permalink" target="_top">
@@ -1039,7 +1026,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">min</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="scala.collection.TraversableOnce.min.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>
+        <span class="name">min</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="scala.collection.TraversableOnce.min.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@min[B&gt;:A](implicitcmp:Ordering[B]):A" title="Permalink" target="_top">
@@ -1056,7 +1043,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">minBy</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.minBy.B">B</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="scala.collection.TraversableOnce.minBy.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>
+        <span class="name">minBy</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.minBy.B">B</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="scala.collection.TraversableOnce.minBy.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@minBy[B](f:A=&gt;B)(implicitcmp:Ordering[B]):A" title="Permalink" target="_top">
@@ -1133,7 +1120,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="sclib.io.fs.FSIterator#next" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="next():scala.util.Try[sclib.io.fs.FSEntry.FSEntryImpl]"></a>
+      <a id="next():scala.util.Try[sclib.io.fs.FSEntryImpl]"></a>
       <a id="next():Try[FSEntryImpl]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1141,10 +1128,10 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">next</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>
+        <span class="name">next</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.FSIterator@next():scala.util.Try[sclib.io.fs.FSEntry.FSEntryImpl]" title="Permalink" target="_top">
+      <a href="../../../index.html#sclib.io.fs.FSIterator@next():scala.util.Try[sclib.io.fs.FSEntryImpl]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -1209,7 +1196,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">padTo</span><span class="tparams">[<span name="A1">A1 &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="len">len: <span class="extype" name="scala.Int">Int</span></span>, <span name="elem">elem: <span class="extype" name="scala.collection.Iterator.padTo.A1">A1</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.padTo.A1">A1</span>]</span>
+        <span class="name">padTo</span><span class="tparams">[<span name="A1">A1 &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="len">len: <span class="extype" name="scala.Int">Int</span></span>, <span name="elem">elem: <span class="extype" name="scala.collection.Iterator.padTo.A1">A1</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.padTo.A1">A1</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@padTo[A1&gt;:A](len:Int,elem:A1):Iterator[A1]" title="Permalink" target="_top">
@@ -1226,7 +1213,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">partition</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: (<span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]])</span>
+        <span class="name">partition</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: (<span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]])</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@partition(p:A=&gt;Boolean):(Iterator[A],Iterator[A])" title="Permalink" target="_top">
@@ -1243,7 +1230,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">patch</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="from">from: <span class="extype" name="scala.Int">Int</span></span>, <span name="patchElems">patchElems: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.patch.B">B</span>]</span>, <span name="replaced">replaced: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.patch.B">B</span>]</span>
+        <span class="name">patch</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="from">from: <span class="extype" name="scala.Int">Int</span></span>, <span name="patchElems">patchElems: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.patch.B">B</span>]</span>, <span name="replaced">replaced: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.patch.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@patch[B&gt;:A](from:Int,patchElems:Iterator[B],replaced:Int):Iterator[B]" title="Permalink" target="_top">
@@ -1260,7 +1247,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">product</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="num">num: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="scala.collection.TraversableOnce.product.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.product.B">B</span></span>
+        <span class="name">product</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="num">num: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="scala.collection.TraversableOnce.product.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.product.B">B</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@product[B&gt;:A](implicitnum:Numeric[B]):B" title="Permalink" target="_top">
@@ -1277,7 +1264,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">reduce</span><span class="tparams">[<span name="A1">A1 &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.reduce.A1">A1</span>, <span class="extype" name="scala.collection.TraversableOnce.reduce.A1">A1</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduce.A1">A1</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.reduce.A1">A1</span></span>
+        <span class="name">reduce</span><span class="tparams">[<span name="A1">A1 &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.reduce.A1">A1</span>, <span class="extype" name="scala.collection.TraversableOnce.reduce.A1">A1</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduce.A1">A1</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.reduce.A1">A1</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@reduce[A1&gt;:A](op:(A1,A1)=&gt;A1):A1" title="Permalink" target="_top">
@@ -1294,7 +1281,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">reduceLeft</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.reduceLeft.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduceLeft.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.reduceLeft.B">B</span></span>
+        <span class="name">reduceLeft</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.reduceLeft.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduceLeft.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.reduceLeft.B">B</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@reduceLeft[B&gt;:A](op:(B,A)=&gt;B):B" title="Permalink" target="_top">
@@ -1311,7 +1298,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">reduceLeftOption</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.reduceLeftOption.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduceLeftOption.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.collection.TraversableOnce.reduceLeftOption.B">B</span>]</span>
+        <span class="name">reduceLeftOption</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.reduceLeftOption.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduceLeftOption.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.collection.TraversableOnce.reduceLeftOption.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@reduceLeftOption[B&gt;:A](op:(B,A)=&gt;B):Option[B]" title="Permalink" target="_top">
@@ -1328,7 +1315,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">reduceOption</span><span class="tparams">[<span name="A1">A1 &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.reduceOption.A1">A1</span>, <span class="extype" name="scala.collection.TraversableOnce.reduceOption.A1">A1</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduceOption.A1">A1</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.collection.TraversableOnce.reduceOption.A1">A1</span>]</span>
+        <span class="name">reduceOption</span><span class="tparams">[<span name="A1">A1 &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.TraversableOnce.reduceOption.A1">A1</span>, <span class="extype" name="scala.collection.TraversableOnce.reduceOption.A1">A1</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduceOption.A1">A1</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.collection.TraversableOnce.reduceOption.A1">A1</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@reduceOption[A1&gt;:A](op:(A1,A1)=&gt;A1):Option[A1]" title="Permalink" target="_top">
@@ -1345,7 +1332,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">reduceRight</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.reduceRight.B">B</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduceRight.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.reduceRight.B">B</span></span>
+        <span class="name">reduceRight</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.reduceRight.B">B</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduceRight.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.reduceRight.B">B</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@reduceRight[B&gt;:A](op:(A,B)=&gt;B):B" title="Permalink" target="_top">
@@ -1362,7 +1349,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">reduceRightOption</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.reduceRightOption.B">B</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduceRightOption.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.collection.TraversableOnce.reduceRightOption.B">B</span>]</span>
+        <span class="name">reduceRightOption</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.reduceRightOption.B">B</span>) ⇒ <span class="extype" name="scala.collection.TraversableOnce.reduceRightOption.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.collection.TraversableOnce.reduceRightOption.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@reduceRightOption[B&gt;:A](op:(A,B)=&gt;B):Option[B]" title="Permalink" target="_top">
@@ -1379,7 +1366,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">reversed</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">reversed</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@reversed:List[A]" title="Permalink" target="_top">
@@ -1413,7 +1400,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">scanLeft</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.Iterator.scanLeft.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.Iterator.scanLeft.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.Iterator.scanLeft.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.scanLeft.B">B</span>]</span>
+        <span class="name">scanLeft</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.Iterator.scanLeft.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.collection.Iterator.scanLeft.B">B</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.collection.Iterator.scanLeft.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.scanLeft.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@scanLeft[B](z:B)(op:(B,A)=&gt;B):Iterator[B]" title="Permalink" target="_top">
@@ -1430,7 +1417,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">scanRight</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.Iterator.scanRight.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.Iterator.scanRight.B">B</span>) ⇒ <span class="extype" name="scala.collection.Iterator.scanRight.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.scanRight.B">B</span>]</span>
+        <span class="name">scanRight</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: <span class="extype" name="scala.collection.Iterator.scanRight.B">B</span></span>)</span><span class="params">(<span name="op">op: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.Iterator.scanRight.B">B</span>) ⇒ <span class="extype" name="scala.collection.Iterator.scanRight.B">B</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.scanRight.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@scanRight[B](z:B)(op:(A,B)=&gt;B):Iterator[B]" title="Permalink" target="_top">
@@ -1447,7 +1434,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">seq</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">seq</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@seq:Iterator[A]" title="Permalink" target="_top">
@@ -1481,7 +1468,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">slice</span><span class="params">(<span name="from">from: <span class="extype" name="scala.Int">Int</span></span>, <span name="until">until: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">slice</span><span class="params">(<span name="from">from: <span class="extype" name="scala.Int">Int</span></span>, <span name="until">until: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@slice(from:Int,until:Int):Iterator[A]" title="Permalink" target="_top">
@@ -1498,7 +1485,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sliding</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="size">size: <span class="extype" name="scala.Int">Int</span></span>, <span name="step">step: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#GroupedIterator[B&gt;:A]extendsAbstractIterator[Seq[B]]withIterator[Seq[B]]" class="extmbr" name="sclib.io.fs.FSIterator.GroupedIterator">GroupedIterator</a>[<span class="extype" name="scala.collection.Iterator.sliding.B">B</span>]</span>
+        <span class="name">sliding</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span name="size">size: <span class="extype" name="scala.Int">Int</span></span>, <span name="step">step: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#GroupedIterator[B&gt;:A]extendsAbstractIterator[Seq[B]]withIterator[Seq[B]]" class="extmbr" name="sclib.io.fs.FSIterator.GroupedIterator">GroupedIterator</a>[<span class="extype" name="scala.collection.Iterator.sliding.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@sliding[B&gt;:A](size:Int,step:Int):Iterator.this.GroupedIterator[B]" title="Permalink" target="_top">
@@ -1515,7 +1502,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">span</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: (<span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]])</span>
+        <span class="name">span</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: (<span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]])</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@span(p:A=&gt;Boolean):(Iterator[A],Iterator[A])" title="Permalink" target="_top">
@@ -1549,7 +1536,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sum</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="num">num: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="scala.collection.TraversableOnce.sum.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.sum.B">B</span></span>
+        <span class="name">sum</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="num">num: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="scala.collection.TraversableOnce.sum.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.sum.B">B</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@sum[B&gt;:A](implicitnum:Numeric[B]):B" title="Permalink" target="_top">
@@ -1583,7 +1570,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">take</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">take</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@take(n:Int):Iterator[A]" title="Permalink" target="_top">
@@ -1600,7 +1587,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">takeWhile</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">takeWhile</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@takeWhile(p:A=&gt;Boolean):Iterator[A]" title="Permalink" target="_top">
@@ -1617,7 +1604,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">to</span><span class="tparams">[<span name="Col">Col<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="params">(<span class="implicit">implicit </span><span name="cbf">cbf: <span class="extype" name="scala.collection.generic.CanBuildFrom">CanBuildFrom</span>[<span class="extype" name="scala.Nothing">Nothing</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.to.Col">Col</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]]</span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.to.Col">Col</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">to</span><span class="tparams">[<span name="Col">Col<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="params">(<span class="implicit">implicit </span><span name="cbf">cbf: <span class="extype" name="scala.collection.generic.CanBuildFrom">CanBuildFrom</span>[<span class="extype" name="scala.Nothing">Nothing</span>, <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.TraversableOnce.to.Col">Col</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]]</span>)</span><span class="result">: <span class="extype" name="scala.collection.TraversableOnce.to.Col">Col</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@to[Col[_]](implicitcbf:scala.collection.generic.CanBuildFrom[Nothing,A,Col[A@scala.annotation.unchecked.uncheckedVariance]]):Col[A@scala.annotation.unchecked.uncheckedVariance]" title="Permalink" target="_top">
@@ -1634,7 +1621,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toArray</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassTag">ClassTag</span>[<span class="extype" name="scala.collection.TraversableOnce.toArray.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.collection.TraversableOnce.toArray.B">B</span>]</span>
+        <span class="name">toArray</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassTag">ClassTag</span>[<span class="extype" name="scala.collection.TraversableOnce.toArray.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.collection.TraversableOnce.toArray.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toArray[B&gt;:A](implicitevidence$1:scala.reflect.ClassTag[B]):Array[B]" title="Permalink" target="_top">
@@ -1651,7 +1638,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toBuffer</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="result">: <span class="extype" name="scala.collection.mutable.Buffer">Buffer</span>[<span class="extype" name="scala.collection.TraversableOnce.toBuffer.B">B</span>]</span>
+        <span class="name">toBuffer</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="result">: <span class="extype" name="scala.collection.mutable.Buffer">Buffer</span>[<span class="extype" name="scala.collection.TraversableOnce.toBuffer.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toBuffer[B&gt;:A]:scala.collection.mutable.Buffer[B]" title="Permalink" target="_top">
@@ -1668,7 +1655,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toIndexedSeq</span><span class="result">: <span class="extype" name="scala.collection.immutable.IndexedSeq">IndexedSeq</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">toIndexedSeq</span><span class="result">: <span class="extype" name="scala.collection.immutable.IndexedSeq">IndexedSeq</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toIndexedSeq:scala.collection.immutable.IndexedSeq[A]" title="Permalink" target="_top">
@@ -1685,7 +1672,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toIterable</span><span class="result">: <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">toIterable</span><span class="result">: <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toIterable:Iterable[A]" title="Permalink" target="_top">
@@ -1702,7 +1689,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toIterator</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">toIterator</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toIterator:Iterator[A]" title="Permalink" target="_top">
@@ -1719,7 +1706,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toList</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">toList</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toList:List[A]" title="Permalink" target="_top">
@@ -1736,7 +1723,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toMap</span><span class="tparams">[<span name="T">T</span>, <span name="U">U</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="ev">ev: <span class="extype" name="scala.Predef.&lt;:&lt;">&lt;:&lt;</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], (<span class="extype" name="scala.collection.TraversableOnce.toMap.T">T</span>, <span class="extype" name="scala.collection.TraversableOnce.toMap.U">U</span>)]</span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="scala.collection.TraversableOnce.toMap.T">T</span>, <span class="extype" name="scala.collection.TraversableOnce.toMap.U">U</span>]</span>
+        <span class="name">toMap</span><span class="tparams">[<span name="T">T</span>, <span name="U">U</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="ev">ev: <span class="extype" name="scala.Predef.&lt;:&lt;">&lt;:&lt;</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], (<span class="extype" name="scala.collection.TraversableOnce.toMap.T">T</span>, <span class="extype" name="scala.collection.TraversableOnce.toMap.U">U</span>)]</span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="scala.collection.TraversableOnce.toMap.T">T</span>, <span class="extype" name="scala.collection.TraversableOnce.toMap.U">U</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toMap[T,U](implicitev:&lt;:&lt;[A,(T,U)]):scala.collection.immutable.Map[T,U]" title="Permalink" target="_top">
@@ -1753,7 +1740,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toSeq</span><span class="result">: <span class="extype" name="scala.collection.Seq">Seq</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">toSeq</span><span class="result">: <span class="extype" name="scala.collection.Seq">Seq</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toSeq:Seq[A]" title="Permalink" target="_top">
@@ -1770,7 +1757,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toSet</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="result">: <span class="extype" name="scala.collection.immutable.Set">Set</span>[<span class="extype" name="scala.collection.TraversableOnce.toSet.B">B</span>]</span>
+        <span class="name">toSet</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>]</span><span class="result">: <span class="extype" name="scala.collection.immutable.Set">Set</span>[<span class="extype" name="scala.collection.TraversableOnce.toSet.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toSet[B&gt;:A]:scala.collection.immutable.Set[B]" title="Permalink" target="_top">
@@ -1787,7 +1774,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toStream</span><span class="result">: <span class="extype" name="scala.collection.immutable.Stream">Stream</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">toStream</span><span class="result">: <span class="extype" name="scala.collection.immutable.Stream">Stream</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toStream:scala.collection.immutable.Stream[A]" title="Permalink" target="_top">
@@ -1821,7 +1808,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toTraversable</span><span class="result">: <span class="extype" name="scala.collection.Traversable">Traversable</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">toTraversable</span><span class="result">: <span class="extype" name="scala.collection.Traversable">Traversable</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toTraversable:Traversable[A]" title="Permalink" target="_top">
@@ -1838,7 +1825,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toVector</span><span class="result">: <span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">toVector</span><span class="result">: <span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@toVector:Vector[A]" title="Permalink" target="_top">
@@ -1924,7 +1911,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withFilter</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</span>
+        <span class="name">withFilter</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@withFilter(p:A=&gt;Boolean):Iterator[A]" title="Permalink" target="_top">
@@ -1941,7 +1928,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">zip</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="that">that: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.zip.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[(<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.Iterator.zip.B">B</span>)]</span>
+        <span class="name">zip</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="that">that: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.zip.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[(<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.collection.Iterator.zip.B">B</span>)]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@zip[B](that:Iterator[B]):Iterator[(A,B)]" title="Permalink" target="_top">
@@ -1958,7 +1945,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">zipAll</span><span class="tparams">[<span name="B">B</span>, <span name="A1">A1 &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]</span>, <span name="B1">B1 &gt;: <span class="extype" name="scala.collection.Iterator.zipAll.B">B</span></span>]</span><span class="params">(<span name="that">that: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.zipAll.B">B</span>]</span>, <span name="thisElem">thisElem: <span class="extype" name="scala.collection.Iterator.zipAll.A1">A1</span></span>, <span name="thatElem">thatElem: <span class="extype" name="scala.collection.Iterator.zipAll.B1">B1</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[(<span class="extype" name="scala.collection.Iterator.zipAll.A1">A1</span>, <span class="extype" name="scala.collection.Iterator.zipAll.B1">B1</span>)]</span>
+        <span class="name">zipAll</span><span class="tparams">[<span name="B">B</span>, <span name="A1">A1 &gt;: <span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]</span>, <span name="B1">B1 &gt;: <span class="extype" name="scala.collection.Iterator.zipAll.B">B</span></span>]</span><span class="params">(<span name="that">that: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.collection.Iterator.zipAll.B">B</span>]</span>, <span name="thisElem">thisElem: <span class="extype" name="scala.collection.Iterator.zipAll.A1">A1</span></span>, <span name="thatElem">thatElem: <span class="extype" name="scala.collection.Iterator.zipAll.B1">B1</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[(<span class="extype" name="scala.collection.Iterator.zipAll.A1">A1</span>, <span class="extype" name="scala.collection.Iterator.zipAll.B1">B1</span>)]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@zipAll[B,A1&gt;:A,B1&gt;:B](that:Iterator[B],thisElem:A1,thatElem:B1):Iterator[(A1,B1)]" title="Permalink" target="_top">
@@ -1975,7 +1962,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">zipWithIndex</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[(<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.Int">Int</span>)]</span>
+        <span class="name">zipWithIndex</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[(<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>], <span class="extype" name="scala.Int">Int</span>)]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSIterator@zipWithIndex:Iterator[(A,Int)]" title="Permalink" target="_top">
@@ -2001,11 +1988,11 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
             </div><div class="parent" name="scala.Equals">
               <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
             </div><div class="parent" name="scala.collection.Iterator">
-              <h3>Inherited from <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</h3>
+              <h3>Inherited from <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</h3>
             </div><div class="parent" name="scala.collection.TraversableOnce">
-              <h3>Inherited from <span class="extype" name="scala.collection.TraversableOnce">TraversableOnce</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</h3>
+              <h3>Inherited from <span class="extype" name="scala.collection.TraversableOnce">TraversableOnce</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</h3>
             </div><div class="parent" name="scala.collection.GenTraversableOnce">
-              <h3>Inherited from <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]]</h3>
+              <h3>Inherited from <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]]</h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">

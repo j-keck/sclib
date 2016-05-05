@@ -28,12 +28,10 @@
         </head>
         <body class="type">
       <div id="definition">
-        <a href="try$TryOps$.html" title="See companion object"><img alt="Class/Object" src="../../lib/class_to_object_big.png" /></a>
+        <img alt="Class" src="../../lib/class_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="sclib">sclib</a>.<a href="package.html" class="extype" name="sclib.ops">ops</a>.<a href="try.html" class="extype" name="sclib.ops.try">try</a></p>
-        <h1><a href="try$TryOps$.html" title="See companion object">TryOps</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="try$TryOps$.html" title="See companion object">object TryOps</a>
-            | <a href="try.html" class="extype" name="sclib.ops.try">package try</a>
+        <h1>TryOps</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="try.html" class="extype" name="sclib.ops.try">package try</a>
           </div></span></h3><span class="permalink">
       <a href="../../index.html#sclib.ops.try$TryOps" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
@@ -265,6 +263,33 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="sclib.ops.try.TryOps#flatMapO" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="flatMapO(f:Throwable=&gt;scala.util.Try[A]):scala.util.Try[A]"></a>
+      <a id="flatMapO((Throwable)⇒Try[A]):Try[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">flatMapO</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.ops.try.TryOps.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.ops.try.TryOps.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ops.try$TryOps@flatMapO(f:Throwable=&gt;scala.util.Try[A]):scala.util.Try[A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">apply the given function if it's a failure</p><div class="fullcomment"><div class="comment cmt"><p>apply the given function if it's a failure</p><p>(read as <b>flatMap o</b>ther)
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; <span class="kw">import</span> scala.util.Try
+scala&gt; Try(<span class="num">1</span>/<span class="num">0</span>)
+res0: Try[<span class="std">Int</span>] = Failure(java.lang.ArithmeticException: / by zero)
+scala&gt; Try(<span class="num">1</span>/<span class="num">0</span>).flatMapO(_ <span class="kw">=&gt;</span> <span class="lit">"unable to calculate: 1/0"</span>.failure)
+res1: Try[<span class="std">Int</span>] = Failure(java.lang.Exception: unable to calculate: <span class="num">1</span>/<span class="num">0</span>)
+scala&gt; Try(<span class="num">1</span>/<span class="num">0</span>).flatMapO(_ <span class="kw">=&gt;</span> <span class="num">0.</span>success)
+res2: Try[<span class="std">Int</span>] = Success(<span class="num">0</span>)</pre></li></ol>
+            </div></dl></div>
     </li><li name="sclib.ops.try.TryOps#fold" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fold[B](ff:Throwable=&gt;B)(sf:A=&gt;B):B"></a>
       <a id="fold[B]((Throwable)⇒B)((A)⇒B):B"></a>
@@ -338,6 +363,31 @@ res0: <span class="std">String</span> = &lt;ERROR&gt;</pre></li></ol>
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="sclib.ops.try.TryOps#mapO" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mapO(f:Throwable=&gt;String):scala.util.Try[A]"></a>
+      <a id="mapO((Throwable)⇒String):Try[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mapO</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Throwable">Throwable</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.ops.try.TryOps.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ops.try$TryOps@mapO(f:Throwable=&gt;String):scala.util.Try[A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">apply the given function if it's a failure</p><div class="fullcomment"><div class="comment cmt"><p>apply the given function if it's a failure</p><p>(read as <b>map o</b>ther)
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; <span class="kw">import</span> scala.util.Try
+scala&gt; Try(<span class="num">1</span>/<span class="num">0</span>)
+res0: Try[<span class="std">Int</span>] = Failure(java.lang.ArithmeticException: / by zero)
+scala&gt; Try(<span class="num">1</span>/<span class="num">0</span>).mapO(_ <span class="kw">=&gt;</span> <span class="lit">"unable to calculate: 1/0"</span>)
+res1: Try[<span class="std">Int</span>] = Failure(java.lang.Exception: unable to calculate: <span class="num">1</span>/<span class="num">0</span>)</pre></li></ol>
+            </div></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -510,7 +560,7 @@ res0: <span class="std">String</span> = &lt;ERROR&gt;</pre></li></ol>
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="sclib.ops.try.TryOps#zip" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="sclib.ops.try.TryOps#zip" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="zip[B](other:scala.util.Try[B]):scala.util.Try[(A,B)]"></a>
       <a id="zip[B](Try[B]):Try[(A,B)]"></a>
       <h4 class="signature">
@@ -526,7 +576,15 @@ res0: <span class="std">String</span> = &lt;ERROR&gt;</pre></li></ol>
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">zip two Try's</p><div class="fullcomment"><div class="comment cmt"><p>zip two Try's</p><p>returns a <code>Failure</code> if any of the given <code>Try</code>s are a <code>Failure</code>
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; <span class="kw">import</span> scala.util.Try
+scala&gt; <span class="kw">val</span> z = <span class="num">5.</span>success.zip(<span class="num">11.</span>success)
+res0: Try[(<span class="std">Int</span>, <span class="std">Int</span>)] = Success(<span class="num">5</span>, <span class="num">11</span>)
+scala&gt; z.map(<span class="std">Function</span>.tupled(_ + _))
+res1: Try[<span class="std">Int</span>] = Success(<span class="num">16</span>)</pre></li></ol>
+            </div></dl></div>
     </li></ol>
             </div>
 

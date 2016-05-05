@@ -70,7 +70,7 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="sclib.io.fs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="sclib.io.fs" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fs"></a>
       <a id="fs:fs"></a>
       <h4 class="signature">
@@ -86,7 +86,24 @@
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">working with files and directories</p><div class="fullcomment"><div class="comment cmt"><p>working with files and directories</p><h5>get a file / directory handle</h5><p>to get a file handle, use any of the following functions:</p><ul><li><a href="fs/package.html#file(name:String):scala.util.Try[sclib.io.fs.FSFile]" class="extmbr" name="sclib.io.fs#file">file(name: String): Try[FSFile</a>]</li><li><a href="fs/package.html#file(parent:sclib.io.fs.FSDir,name:String):scala.util.Try[sclib.io.fs.FSFile]" class="extmbr" name="sclib.io.fs#file">file(parent: FSDir, name: String): Try[FSFile</a>]</li><li><a href="fs/package.html#file(path:java.nio.file.Path):scala.util.Try[sclib.io.fs.FSFile]" class="extmbr" name="sclib.io.fs#file">file(path: Path): Try[FSFile</a>]</li></ul><p>for a directory handle:</p><ul><li><a href="fs/package.html#dir(name:String):scala.util.Try[sclib.io.fs.FSDir]" class="extmbr" name="sclib.io.fs#dir">dir(name: String): Try[FSDir</a>]</li><li><a href="fs/package.html#dir(parent:sclib.io.fs.FSDir,name:String):scala.util.Try[sclib.io.fs.FSDir]" class="extmbr" name="sclib.io.fs#dir">dir(parent: FSDir, name: String): Try[FSDir</a>]</li><li><a href="fs/package.html#dir(path:java.nio.file.Path):scala.util.Try[sclib.io.fs.FSDir]" class="extmbr" name="sclib.io.fs#dir">dir(path: Path): Try[FSDir</a>]</li></ul><h6>example:</h6><pre>scala&gt; <span class="kw">import</span> sclib.io.fs._
+scala&gt; file(<span class="lit">"/path/file-name"</span>)
+res0: scala.util.Try[FSFile] = Success(FSFile(/path/file-name))
+scala&gt; dir(<span class="lit">"/path/dir-name"</span>)
+res1: scala.util.Try[FSDir] = Success(FSDir(/path/dir-name))</pre><p>this functions returns a <code>Failure</code> if the requested entry exists, but has a wrong type.</p><pre>scala&gt; <span class="kw">import</span> sclib.io.fs._
+scala&gt; file(<span class="lit">"a-file"</span>).flatMap(_.create)
+res0: scala.util.Try[FSFile] = Success(FSFile(a-file))
+scala&gt; dir(<span class="lit">"a-file"</span>)
+res1: scala.util.Try[FSDir] = Failure(java.lang.Exception: <span class="lit">'a-file'</span> is a file)
+scala&gt; file(<span class="lit">"a-file"</span>).flatMap(_.delete)
+res2: scala.util.Try[<span class="std">Unit</span>] = Success(())</pre><h5>work with a handle</h5><p>all functions which can throw a exception are wrapped in a <code>Try</code>, so it's easy to compose.</p><pre>scala&gt; <span class="kw">import</span> sclib.io.fs._
+scala&gt; <span class="kw">for</span> {
+     |   fh <span class="kw">&lt;-</span> file(<span class="lit">"file-name"</span>)
+     |   _ <span class="kw">&lt;-</span> fh.write(<span class="lit">"file content"</span>)
+     |   c <span class="kw">&lt;-</span> fh.slurp
+     |   _ <span class="kw">&lt;-</span> fh.delete
+     | } <span class="kw">yield</span> c
+res0: scala.util.Try[<span class="std">String</span>] = Success(file content)</pre></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="fs/FSDir.html" class="extype" name="sclib.io.fs.FSDir">sclib.io.fs.FSDir</a></p></span><span class="cmt"><p><a href="fs/FSFile.html" class="extype" name="sclib.io.fs.FSFile">sclib.io.fs.FSFile</a></p></span></dd></dl></div>
     </li></ol>
             </div>
 

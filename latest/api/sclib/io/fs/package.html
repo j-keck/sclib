@@ -47,7 +47,24 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>working with files and directories</p><h5>get a file / directory handle</h5><p>to get a file handle, use any of the following functions:</p><ul><li><a href="#file(name:String):scala.util.Try[sclib.io.fs.FSFile]" class="extmbr" name="sclib.io.fs#file">file(name: String): Try[FSFile</a>]</li><li><a href="#file(parent:sclib.io.fs.FSDir,name:String):scala.util.Try[sclib.io.fs.FSFile]" class="extmbr" name="sclib.io.fs#file">file(parent: FSDir, name: String): Try[FSFile</a>]</li><li><a href="#file(path:java.nio.file.Path):scala.util.Try[sclib.io.fs.FSFile]" class="extmbr" name="sclib.io.fs#file">file(path: Path): Try[FSFile</a>]</li></ul><p>for a directory handle:</p><ul><li><a href="#dir(name:String):scala.util.Try[sclib.io.fs.FSDir]" class="extmbr" name="sclib.io.fs#dir">dir(name: String): Try[FSDir</a>]</li><li><a href="#dir(parent:sclib.io.fs.FSDir,name:String):scala.util.Try[sclib.io.fs.FSDir]" class="extmbr" name="sclib.io.fs#dir">dir(parent: FSDir, name: String): Try[FSDir</a>]</li><li><a href="#dir(path:java.nio.file.Path):scala.util.Try[sclib.io.fs.FSDir]" class="extmbr" name="sclib.io.fs#dir">dir(path: Path): Try[FSDir</a>]</li></ul><h6>example:</h6><pre>scala&gt; <span class="kw">import</span> sclib.io.fs._
+scala&gt; file(<span class="lit">"/path/file-name"</span>)
+res0: scala.util.Try[FSFile] = Success(FSFile(/path/file-name))
+scala&gt; dir(<span class="lit">"/path/dir-name"</span>)
+res1: scala.util.Try[FSDir] = Success(FSDir(/path/dir-name))</pre><p>this functions returns a <code>Failure</code> if the requested entry exists, but has a wrong type.</p><pre>scala&gt; <span class="kw">import</span> sclib.io.fs._
+scala&gt; file(<span class="lit">"a-file"</span>).flatMap(_.create)
+res0: scala.util.Try[FSFile] = Success(FSFile(a-file))
+scala&gt; dir(<span class="lit">"a-file"</span>)
+res1: scala.util.Try[FSDir] = Failure(java.lang.Exception: <span class="lit">'a-file'</span> is a file)
+scala&gt; file(<span class="lit">"a-file"</span>).flatMap(_.delete)
+res2: scala.util.Try[<span class="std">Unit</span>] = Success(())</pre><h5>work with a handle</h5><p>all functions which can throw a exception are wrapped in a <code>Try</code>, so it's easy to compose.</p><pre>scala&gt; <span class="kw">import</span> sclib.io.fs._
+scala&gt; <span class="kw">for</span> {
+     |   fh <span class="kw">&lt;-</span> file(<span class="lit">"file-name"</span>)
+     |   _ <span class="kw">&lt;-</span> fh.write(<span class="lit">"file content"</span>)
+     |   c <span class="kw">&lt;-</span> fh.slurp
+     |   _ <span class="kw">&lt;-</span> fh.delete
+     | } <span class="kw">yield</span> c
+res0: scala.util.Try[<span class="std">String</span>] = Success(file content)</pre></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">sclib.io.fs.FSDir</a></p></span><span class="cmt"><p><a href="FSFile.html" class="extype" name="sclib.io.fs.FSFile">sclib.io.fs.FSFile</a></p></span></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -104,9 +121,39 @@
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Represents a 'Directory'</p><div class="fullcomment"><div class="comment cmt"><p>Represents a 'Directory'</p><h6> to walk over a directory tree, there are four functions available: </h6><ul><li>iterate over each entry</li></ul><pre>ls: Try[Iterator[FSEntryImpl]]</pre><ul><li>execute a side effect on each entry</li></ul><pre>foreach(f: FSEntryImpl <span class="kw">=&gt;</span> <span class="std">Unit</span>): Try[<span class="std">Unit</span>]</pre><ul><li>apply a function on each entry</li></ul><pre>map[A](f: FSEntryImpl <span class="kw">=&gt;</span> A): Try[Iterator[A]]</pre><ul><li>apply a partial function on each entry on which the function is defined</li></ul><pre>collectS[A](pf: PartialFunction[Try[FSEntryImpl], A]): Iterator[A]</pre><p>this functions doesn't work recursive by default. to use the recursive behaviour,
-use their counterpart with the 'R' suffix: <code>lsR</code>, <code>foreachR</code>, <code>mapR</code>, <code>collectSR</code>.</p><p>to control the recursive level, you can give the <code>ls</code>, <code>foreach</code>, <code>map</code> or <code>collectS</code> function a 'depth' argument.</p><hr /><p>for this functions there exists also a error tolerant counterpart with a 'S' suffix (for <b>save</b>):
-<code>lsS</code>, <code>foreachS</code> and <code>mapS</code>. this <i>saver</i> functions wraps every file operation in a <code>Try</code>.</p><hr /><p><i>check the member documentation for examples</i>
+      <p class="shortcomment cmt">Represents a 'Directory'</p><div class="fullcomment"><div class="comment cmt"><p>Represents a 'Directory'</p><h6> to iterate over a directory tree, there are the following functions available: </h6><p><i>the method signature from <code>foreach</code>, <code>map</code> and <code>flatMap</code> shown here are simplified</i></p><ul><li><a href="FSDir.html#ls:Iterator[scala.util.Try[sclib.io.fs.FSEntryImpl]]" class="extmbr" name="sclib.io.fs.FSDir#ls">ls: Iterator[Try[FSEntryImpl]&#93; </a></li><li><a href="FSDir.html#foreach[A](tf:sclib.io.fs.FSDir.TraverseFunction[A]):tf.Result" class="extmbr" name="sclib.io.fs.FSDir#foreach">foreach(f: Try[FSEntryImpl] =&gt; Unit): Unit </a></li><li><a href="FSDir.html#foreach[A](tf:sclib.io.fs.FSDir.TraverseFunction[A]):tf.Result" class="extmbr" name="sclib.io.fs.FSDir#foreach">foreach(f: FSEntryImpl =&gt; Unit): Try[Unit] </a></li><li><a href="FSDir.html#map[A](tf:sclib.io.fs.FSDir.TraverseFunction[A]):tf.Result" class="extmbr" name="sclib.io.fs.FSDir#map">map[A](f: Try[FSEntryImpl] =&gt; A): Iterator[Try[A]&#93; </a></li><li><a href="FSDir.html#map[A](tf:sclib.io.fs.FSDir.TraverseFunction[A]):tf.Result" class="extmbr" name="sclib.io.fs.FSDir#map">map[A](f: FSEntryImpl =&gt; A): Iterator[Try[A]&#93; </a></li><li><a href="FSDir.html#flatMap[A](tf:sclib.io.fs.FSDir.TraverseFunction[A]):tf.Result" class="extmbr" name="sclib.io.fs.FSDir#flatMap">flatMap[A](f: Try[FSEntryImpl] =&gt; Try[A]): Iterator[Try[A]&#93; </a></li><li><a href="FSDir.html#flatMap[A](tf:sclib.io.fs.FSDir.TraverseFunction[A]):tf.Result" class="extmbr" name="sclib.io.fs.FSDir#flatMap">flatMap[A](f: FSEntryImpl =&gt; Try[A]): Iterator[Try[A]&#93; </a></li><li><a href="FSDir.html#collect[A](pf:PartialFunction[scala.util.Try[sclib.io.fs.FSEntryImpl],A]):Iterator[A]" class="extmbr" name="sclib.io.fs.FSDir#collect">collect[A](pf: PartialFunction[Try[FSEntryImpl]&#93;, A): Iterator[A] </a></li></ul><p>this functions doesn't work recursive by default. for a recursive behaviour, use their counterpart functions
+with the 'R' suffix: <code>lsR</code>, <code>foreachR</code>, <code>mapR</code> or <code>collectR</code>.</p><p>to control the recursive level, you can give the <code>lsR</code>, <code>foreachR</code>, <code>mapR</code> or <code>collectR</code> function a 'depth' argument.</p><h6>iterate over a directory tree</h6><p>you can give <code>foreach</code>, <code>map</code> and <code>flatMap</code> a traverse function which receives a <code>FSEntryImpl</code> or a <code>Try[FSEntryImpl]</code>.</p><p>assume the following directory tree:
+<pre>
+root@main:/tmp/sclib-example # ls -lR /tmp/sclib-example/
+total 1
+drwx------  2 j  wheel  5 May  4 10:51 pub
+d---------  2 j  wheel  5 May  4 10:51 sec
+
+/tmp/sclib-example/pub:
+total 2
+-rw-r--r--  1 j  wheel  0 May  4 10:51 a
+-rw-r--r--  1 j  wheel  0 May  4 10:51 b
+-rw-r--r--  1 j  wheel  0 May  4 10:51 c
+
+/tmp/sclib-example/sec:
+total 1
+----------  1 j  wheel  0 May  4 10:51 a
+</pre></p><p><b>fail on first error:</b>
+if you get it a function which receives a <code>FSEntryImpl</code> and an exception occurs, the function execution
+stops and a <code>Failure</code> are returned.</p><pre>scala&gt; <span class="kw">import</span> sclib.io.fs._
+scala&gt; dir(<span class="lit">"/tmp/sclib-example"</span>).get.foreachR(println(_: FSEntryImpl))
+FSDir(/tmp/sclib-example/sec)
+res0: scala.util.Try[<span class="std">Unit</span>] = Failure(java.nio.file.AccessDeniedException: /tmp/sclib-example/sec)</pre><p><b>exceptions intercepted:</b>
+if you get it a function which receives a <code>Try[FSEntryImpl]</code> and an exception occurs, the function execution
+continues.</p><pre>scala&gt; <span class="kw">import</span> sclib.io.fs._
+scala&gt; <span class="kw">import</span> scala.util.Try
+scala&gt; dir(<span class="lit">"/tmp/sclib-example"</span>).get.foreachR(println(_: Try[FSEntryImpl]))
+Success(FSDir(/tmp/sclib-example/sec))
+Failure(java.nio.file.AccessDeniedException: /tmp/sclib-example/sec)
+Success(FSDir(/tmp/sclib-example/pub))
+Success(FSFile(/tmp/sclib-example/pub/c))
+Success(FSFile(/tmp/sclib-example/pub/b))
+Success(FSFile(/tmp/sclib-example/pub/a))</pre><hr /><p><i>check the member documentation for examples</i>
 </p></div></div>
     </li><li name="sclib.io.fs.FSEntry" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="FSEntry[Self&lt;:sclib.io.fs.FSEntry[Self]]extendsAnyRef"></a>
@@ -126,6 +173,24 @@ use their counterpart with the 'R' suffix: <code>lsR</code>, <code>foreachR</cod
     </span>
       <p class="shortcomment cmt">File System Entry
 </p>
+    </li><li name="sclib.io.fs.FSEntryImpl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}"></a>
+      <a id="FSEntryImpl:FSEntryImpl"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">FSEntryImpl</span><span class="result"> = <a href="FSEntry.html" class="extype" name="sclib.io.fs.FSEntry">FSEntry</a>[<span class="extype" name="sclib.io.fs.FSEntryImpl.A">A</span>] forSome {type A &lt;: <a href="FSEntry.html" class="extype" name="sclib.io.fs.FSEntry">FSEntry</a>[<span class="extype" name="sclib.io.fs.FSEntryImpl.A">A</span>]}</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.package@FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Any FSEntry Implementation
+</p>
     </li><li name="sclib.io.fs.FSFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="FSFileextendsFSEntry[sclib.io.fs.FSFile]withProductwithSerializable"></a>
       <a id="FSFile:FSFile"></a>
@@ -144,7 +209,8 @@ use their counterpart with the 'R' suffix: <code>lsR</code>, <code>foreachR</cod
     </span>
       <p class="shortcomment cmt">Represents a 'File'</p><div class="fullcomment"><div class="comment cmt"><p>Represents a 'File'</p><p>the functions <code>write</code>, <code>writeLines</code>, <code>append</code> and <code>appendLines</code> expects a type-class instance (from <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>)
 for their to be written payload in scope. instances for <code>string</code>, <code>char</code>, <code>short</code>, <code>int</code>, <code>long</code>, <code>float</code>,
-<code>double</code> and some collection types are already defined.
+<code>double</code> and some collection types are already defined (see <a href="package$$Writable$.html" class="extype" name="sclib.io.fs.Writable">Writable$</a>).</p><p>the <code>write</code> and <code>append</code> functions don't add a newline at the end / between the sequences.
+for functions which add newlines use <code>writeLines</code> and <code>appendLines</code>.
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.io._
 scala&gt; <span class="kw">for</span> {
@@ -164,7 +230,7 @@ Success(<span class="num">1.</span> apple
 <span class="num">4.</span> dog)</pre><p><i>check the member documentation for examples</i></p></li></ol>
             </div></dl></div>
     </li><li name="sclib.io.fs.FSIterator" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="FSIteratorextendsIterator[scala.util.Try[sclib.io.fs.FSEntry.FSEntryImpl]]withProductwithSerializable"></a>
+      <a id="FSIteratorextendsIterator[scala.util.Try[sclib.io.fs.FSEntryImpl]]withProductwithSerializable"></a>
       <a id="FSIterator:FSIterator"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -172,28 +238,15 @@ Success(<span class="num">1.</span> apple
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="FSIterator.html"><span class="name">FSIterator</span></a><span class="params">(<span name="start">start: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="maxDepth">maxDepth: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Integer.MAX_VALUE</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a>]] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="FSIterator.html"><span class="name">FSIterator</span></a><span class="params">(<span name="start">start: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="maxDepth">maxDepth: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Integer.MAX_VALUE</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@FSIteratorextendsIterator[scala.util.Try[sclib.io.fs.FSEntry.FSEntryImpl]]withProductwithSerializable" title="Permalink" target="_top">
+      <a href="../../../index.html#sclib.io.fs.package@FSIteratorextendsIterator[scala.util.Try[sclib.io.fs.FSEntryImpl]]withProductwithSerializable" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">a <i>save</i> file-system iterator.</p><div class="fullcomment"><div class="comment cmt"><p>a <i>save</i> file-system iterator.</p><p>it wraps every file operation in a <code>Try</code>.
-</p></div><dl class="paramcmts block"><dt class="param">start</dt><dd class="cmt"><p>directory to start</p></dd><dt class="param">maxDepth</dt><dd class="cmt"><p>the maximum number of directory levels to visit</p></dd></dl><dl class="attributes block"> <div class="block">Example:
-               <ol><li class="cmt"><p></p><pre>scala&gt;  <span class="kw">import</span> sclib.io._
-scala&gt; <span class="kw">val</span> xs = <span class="kw">for</span> {
-     |   wd <span class="kw">&lt;-</span> dir(<span class="lit">"sclib.io"</span>)
-     |   wd <span class="kw">&lt;-</span> wd.createTemp
-     |   pub <span class="kw">&lt;-</span> dir(wd, <span class="lit">"pub"</span>).flatMap(_.create)
-     |   _ <span class="kw">&lt;-</span> file(pub, <span class="lit">"a-file"</span>).flatMap(_.create)
-     |   sec <span class="kw">&lt;-</span> dir(wd, <span class="lit">"sec"</span>).flatMap(_.create(<span class="num">0</span>))
-     |   res = FSIterator(wd).toList
-     |   _ <span class="kw">&lt;-</span> sec.chmod(<span class="num">700</span>)
-     |   _ <span class="kw">&lt;-</span> wd.deleteR
-     | } <span class="kw">yield</span> res
-xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry.FSEntryImpl]]] = Success(<span class="std">List</span>(Success(FSDir(/tmp/sclib.io7738690949969632606/sec)), Failure(java.nio.file.AccessDeniedException: /tmp/sclib.io7738690949969632606/sec), Success(FSDir(/tmp/sclib.io7738690949969632606/pub)), Success(FSFile(/tmp/sclib.io7738690949969632606/pub/a-file))))</pre></li></ol>
-            </div></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">start</dt><dd class="cmt"><p>directory to start</p></dd><dt class="param">maxDepth</dt><dd class="cmt"><p>the maximum number of directory levels to visit</p></dd></dl></div>
     </li><li name="sclib.io.fs.Writable" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="Writable[A]extendsAnyRef"></a>
       <a id="Writable[A]:Writable[A]"></a>
@@ -219,19 +272,19 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="sclib.io.fs.FSEntry" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="FSEntry"></a>
-      <a id="FSEntry:FSEntry"></a>
+              <ol><li name="sclib.io.fs.FSDir" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="FSDir"></a>
+      <a id="FSDir:FSDir"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="FSEntry$.html"><span class="name">FSEntry</span></a>
+        <a href="FSDir$.html"><span class="name">FSDir</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@FSEntry" title="Permalink" target="_top">
+      <a href="../../../index.html#sclib.io.fs.package@FSDir" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -271,23 +324,6 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
       </a>
     </span>
       
-    </li><li name="sclib.io.fs#charWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="charWritable:sclib.io.fs.package.Writable[Char]"></a>
-      <a id="charWritable:Writable[Char]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">charWritable</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.Char">Char</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@charWritable:sclib.io.fs.package.Writable[Char]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="sclib.io.fs#dir" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="dir(parent:sclib.io.fs.FSDir,name:String):scala.util.Try[sclib.io.fs.FSDir]"></a>
       <a id="dir(FSDir,String):Try[FSDir]"></a>
@@ -304,7 +340,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">initialize a directory-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a directory-handle from a given path</p><p>if the given path exists, and is a file, a failure are returned</p><p><i>this doesn't create the directory - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSDir.html#createTemp:scala.util.Try[sclib.io.fs.FSDir]" class="extmbr" name="sclib.io.fs.FSDir#createTemp">FSDir.createTemp</a> to create it</i>
+      <p class="shortcomment cmt">initialize a directory-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a directory-handle from a given path</p><p>if the given path exists, and is a file, a failure are returned.</p><p><i>this doesn't create the directory - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSDir.html#createTemp:scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSDir#createTemp">FSDir.createTemp</a> to create it</i>
 </p></div></div>
     </li><li name="sclib.io.fs#dir" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="dir(name:String):scala.util.Try[sclib.io.fs.FSDir]"></a>
@@ -322,7 +358,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">initialize a directory-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a directory-handle from a given path</p><p>if the given path exists, and is a file, a failure are returned</p><p><i>this doesn't create the directory - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSDir.html#createTemp:scala.util.Try[sclib.io.fs.FSDir]" class="extmbr" name="sclib.io.fs.FSDir#createTemp">FSDir.createTemp</a> to create it</i>
+      <p class="shortcomment cmt">initialize a directory-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a directory-handle from a given path</p><p>if the given path exists, and is a file, a failure are returned.</p><p><i>this doesn't create the directory - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSDir.html#createTemp:scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSDir#createTemp">FSDir.createTemp</a> to create it</i>
 </p></div></div>
     </li><li name="sclib.io.fs#dir" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="dir(path:java.nio.file.Path):scala.util.Try[sclib.io.fs.FSDir]"></a>
@@ -340,25 +376,8 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">initialize a directory-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a directory-handle from a given path</p><p>if the given path exists, and is a file, a failure are returned</p><p><i>this doesn't create the directory - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSDir.html#createTemp:scala.util.Try[sclib.io.fs.FSDir]" class="extmbr" name="sclib.io.fs.FSDir#createTemp">FSDir.createTemp</a> to create it</i>
+      <p class="shortcomment cmt">initialize a directory-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a directory-handle from a given path</p><p>if the given path exists, and is a file, a failure are returned.</p><p><i>this doesn't create the directory - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSDir.html#createTemp:scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSDir#createTemp">FSDir.createTemp</a> to create it</i>
 </p></div></div>
-    </li><li name="sclib.io.fs#doubleWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="doubleWritable:sclib.io.fs.package.Writable[Double]"></a>
-      <a id="doubleWritable:Writable[Double]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">doubleWritable</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.Double">Double</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@doubleWritable:sclib.io.fs.package.Writable[Double]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="sclib.io.fs#file" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="file(parent:sclib.io.fs.FSDir,name:String):scala.util.Try[sclib.io.fs.FSFile]"></a>
       <a id="file(FSDir,String):Try[FSFile]"></a>
@@ -375,7 +394,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">initialize a file-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a file-handle from a given path</p><p>if the given path exists, and is a directory, a failure are returned</p><p><i>this doesn't create the file - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSFile.html#createTemp:scala.util.Try[sclib.io.fs.FSFile]" class="extmbr" name="sclib.io.fs.FSFile#createTemp">FSFile.createTemp</a> / any write method to create it</i>
+      <p class="shortcomment cmt">initialize a file-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a file-handle from a given path</p><p>if the given path exists, and is a directory, a failure are returned.</p><p><i>this doesn't create the file - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSFile.html#createTemp:scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSFile#createTemp">FSFile.createTemp</a> / any write method to create it</i>
 </p></div></div>
     </li><li name="sclib.io.fs#file" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="file(name:String):scala.util.Try[sclib.io.fs.FSFile]"></a>
@@ -393,7 +412,7 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">initialize a file-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a file-handle from a given path</p><p>if the given path exists, and is a directory, a failure are returned</p><p><i>this doesn't create the file - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSFile.html#createTemp:scala.util.Try[sclib.io.fs.FSFile]" class="extmbr" name="sclib.io.fs.FSFile#createTemp">FSFile.createTemp</a> / any write method to create it</i>
+      <p class="shortcomment cmt">initialize a file-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a file-handle from a given path</p><p>if the given path exists, and is a directory, a failure are returned.</p><p><i>this doesn't create the file - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSFile.html#createTemp:scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSFile#createTemp">FSFile.createTemp</a> / any write method to create it</i>
 </p></div></div>
     </li><li name="sclib.io.fs#file" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="file(path:java.nio.file.Path):scala.util.Try[sclib.io.fs.FSFile]"></a>
@@ -411,161 +430,8 @@ xs: scala.util.Try[<span class="std">List</span>[scala.util.Try[sclib.io.FSEntry
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">initialize a file-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a file-handle from a given path</p><p>if the given path exists, and is a directory, a failure are returned</p><p><i>this doesn't create the file - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSFile.html#createTemp:scala.util.Try[sclib.io.fs.FSFile]" class="extmbr" name="sclib.io.fs.FSFile#createTemp">FSFile.createTemp</a> / any write method to create it</i>
+      <p class="shortcomment cmt">initialize a file-handle from a given path</p><div class="fullcomment"><div class="comment cmt"><p>initialize a file-handle from a given path</p><p>if the given path exists, and is a directory, a failure are returned.</p><p><i>this doesn't create the file - use <a href="FSEntry.html#create(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#create">FSEntry.create(n:*</a> / <a href="FSFile.html#createTemp:scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSFile#createTemp">FSFile.createTemp</a> / any write method to create it</i>
 </p></div></div>
-    </li><li name="sclib.io.fs#floatWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="floatWritable:sclib.io.fs.package.Writable[Float]"></a>
-      <a id="floatWritable:Writable[Float]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">floatWritable</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.Float">Float</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@floatWritable:sclib.io.fs.package.Writable[Float]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="sclib.io.fs#intWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="intWritable:sclib.io.fs.package.Writable[Int]"></a>
-      <a id="intWritable:Writable[Int]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">intWritable</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.Int">Int</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@intWritable:sclib.io.fs.package.Writable[Int]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="sclib.io.fs#iteratorWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="iteratorWritable[A](implicitevidence$2:sclib.io.fs.package.Writable[A]):sclib.io.fs.package.Writable[Iterator[A]]"></a>
-      <a id="iteratorWritable[A](Writable[A]):Writable[Iterator[A]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">iteratorWritable</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.iteratorWritable.A">A</span>]</span>)</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="sclib.io.fs.iteratorWritable.A">A</span>]]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@iteratorWritable[A](implicitevidence$2:sclib.io.fs.package.Writable[A]):sclib.io.fs.package.Writable[Iterator[A]]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="sclib.io.fs#listWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="listWritable[A](implicitevidence$4:sclib.io.fs.package.Writable[A]):sclib.io.fs.package.Writable[List[A]]"></a>
-      <a id="listWritable[A](Writable[A]):Writable[List[A]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">listWritable</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.listWritable.A">A</span>]</span>)</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="sclib.io.fs.listWritable.A">A</span>]]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@listWritable[A](implicitevidence$4:sclib.io.fs.package.Writable[A]):sclib.io.fs.package.Writable[List[A]]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="sclib.io.fs#longWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="longWritable:sclib.io.fs.package.Writable[Long]"></a>
-      <a id="longWritable:Writable[Long]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">longWritable</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.Long">Long</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@longWritable:sclib.io.fs.package.Writable[Long]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="sclib.io.fs#seqWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="seqWritable[A](implicitevidence$3:sclib.io.fs.package.Writable[A]):sclib.io.fs.package.Writable[Seq[A]]"></a>
-      <a id="seqWritable[A](Writable[A]):Writable[Seq[A]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">seqWritable</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.seqWritable.A">A</span>]</span>)</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="sclib.io.fs.seqWritable.A">A</span>]]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@seqWritable[A](implicitevidence$3:sclib.io.fs.package.Writable[A]):sclib.io.fs.package.Writable[Seq[A]]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="sclib.io.fs#shortWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="shortWritable:sclib.io.fs.package.Writable[Short]"></a>
-      <a id="shortWritable:Writable[Short]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">shortWritable</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.Short">Short</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@shortWritable:sclib.io.fs.package.Writable[Short]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="sclib.io.fs#stringWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="stringWritable:sclib.io.fs.package.Writable[String]"></a>
-      <a id="stringWritable:Writable[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">stringWritable</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@stringWritable:sclib.io.fs.package.Writable[String]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="sclib.io.fs#vectorWritable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="vectorWritable[A](implicitevidence$5:sclib.io.fs.package.Writable[A]):sclib.io.fs.package.Writable[Vector[A]]"></a>
-      <a id="vectorWritable[A](Writable[A]):Writable[Vector[A]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">vectorWritable</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.vectorWritable.A">A</span>]</span>)</span><span class="result">: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="sclib.io.fs.vectorWritable.A">A</span>]]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.package@vectorWritable[A](implicitevidence$5:sclib.io.fs.package.Writable[A]):sclib.io.fs.package.Writable[Vector[A]]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li></ol>
             </div>
 

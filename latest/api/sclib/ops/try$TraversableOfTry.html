@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>either - sclib.ops.either</title>
-          <meta name="description" content="either - sclib.ops.either" />
-          <meta name="keywords" content="either sclib.ops.either" />
+          <title>TraversableOfTry - sclib.ops.try.TraversableOfTry</title>
+          <meta name="description" content="TraversableOfTry - sclib.ops.try.TraversableOfTry" />
+          <meta name="keywords" content="TraversableOfTry sclib.ops.try.TraversableOfTry" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'sclib.ops.either$';
+            var hash = 'sclib.ops.try$TraversableOfTry';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -26,16 +26,14 @@
    	  </script>
     
         </head>
-        <body class="value">
+        <body class="type">
       <div id="definition">
-        <a href="either.html" title="See companion trait"><img alt="Object/Trait" src="../../lib/object_to_trait_big.png" /></a>
-        <p id="owner"><a href="../package.html" class="extype" name="sclib">sclib</a>.<a href="package.html" class="extype" name="sclib.ops">ops</a></p>
-        <h1><a href="either.html" title="See companion trait">either</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="either.html" title="See companion trait">trait either</a>
-            | <a href="package.html" class="extype" name="sclib.ops">package ops</a>
+        <img alt="Class" src="../../lib/class_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="sclib">sclib</a>.<a href="package.html" class="extype" name="sclib.ops">ops</a>.<a href="try.html" class="extype" name="sclib.ops.try">try</a></p>
+        <h1>TraversableOfTry</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="try.html" class="extype" name="sclib.ops.try">package try</a>
           </div></span></h3><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -43,17 +41,18 @@
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">either</span><span class="result"> extends <a href="either.html" class="extype" name="sclib.ops.either">either</a></span>
+        <span class="name">TraversableOfTry</span><span class="tparams">[<span name="A">A</span>, <span name="CC">CC<span class="tparams">[<span name="X">X</span>]</span> &lt;: <span class="extype" name="scala.Traversable">Traversable</span>[<span class="extype" name="sclib.ops.try.TraversableOfTry.CC.X">X</span>]</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>reducing many <code>Try</code>s into a single <code>Try</code>
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="either.html" class="extype" name="sclib.ops.either">either</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -71,7 +70,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="sclib.ops.either"><span>either</span></li><li class="in" name="sclib.ops.either"><span>either</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="sclib.ops.try.TraversableOfTry"><span>TraversableOfTry</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -88,96 +87,29 @@
 
       <div id="template">
         <div id="allMembers">
-        
-
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="sclib.ops.either.Any2Left" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="Any2Left[A]extendsAnyRef"></a>
-      <a id="Any2Left[A]:Any2Left[A]"></a>
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="sclib.ops.try.TraversableOfTry#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(ts:CC[scala.util.Try[A]]):try.this.TraversableOfTry[A,CC]"></a>
+      <a id="&lt;init&gt;:TraversableOfTry[A,CC]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
+        <span class="modifier"></span>
+        <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <a href="either$Any2Left.html"><span class="name">Any2Left</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">TraversableOfTry</span><span class="params">(<span name="ts">ts: <span class="extype" name="sclib.ops.try.TraversableOfTry.CC">CC</span>[<span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.ops.try.TraversableOfTry.A">A</span>]]</span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either@Any2Left[A]extendsAnyRef" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@&lt;init&gt;(ts:CC[scala.util.Try[A]]):try.this.TraversableOfTry[A,CC]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">shorthand constructor for <code>Left</code>
-</p><div class="fullcomment"><div class="comment cmt"><p>shorthand constructor for <code>Left</code>
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="either.html" class="extype" name="sclib.ops.either">either</a></dd><div class="block">Example:
-               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.either._
-scala&gt; <span class="lit">"BOOM"</span>.left
-res0: Either[<span class="std">String</span>,<span class="std">Nothing</span>] = Left(BOOM)</pre></li></ol>
-            </div></dl></div>
-    </li><li name="sclib.ops.either.Any2Right" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="Any2Right[B]extendsAnyRef"></a>
-      <a id="Any2Right[B]:Any2Right[B]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="either$Any2Right.html"><span class="name">Any2Right</span></a><span class="tparams">[<span name="B">B</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either@Any2Right[B]extendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">shorthand constructor for <code>Right</code>
-</p><div class="fullcomment"><div class="comment cmt"><p>shorthand constructor for <code>Right</code>
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="either.html" class="extype" name="sclib.ops.either">either</a></dd><div class="block">Example:
-               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.either._
-scala&gt; <span class="num">1.</span>right
-res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Right(<span class="num">1</span>)</pre></li></ol>
-            </div></dl></div>
-    </li><li name="sclib.ops.either.EitherOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="EitherOps[A,B]extendsAnyRef"></a>
-      <a id="EitherOps[A,B]:EitherOps[A,B]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="either$EitherOps.html"><span class="name">EitherOps</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either@EitherOps[A,B]extendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">extensions on <code>Either</code> instances
-</p><div class="fullcomment"><div class="comment cmt"><p>extensions on <code>Either</code> instances
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="either.html" class="extype" name="sclib.ops.either">either</a></dd></dl></div>
-    </li><li name="sclib.ops.either.TraversableOfEither" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="TraversableOfEither[A,B,CC[X]&lt;:Traversable[X]]extendsAnyRef"></a>
-      <a id="TraversableOfEither[A,B,CC[X]&lt;:Traversable[X]]:TraversableOfEither[A,B,CC]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="either$TraversableOfEither.html"><span class="name">TraversableOfEither</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="CC">CC<span class="tparams">[<span name="X">X</span>]</span> &lt;: <span class="extype" name="scala.Traversable">Traversable</span>[<span class="extype" name="sclib.ops.either.TraversableOfEither.CC.X">X</span>]</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either@TraversableOfEither[A,B,CC[X]&lt;:Traversable[X]]extendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">reducing many <code>Either</code>s into a single <code>Either</code>
-</p><div class="fullcomment"><div class="comment cmt"><p>reducing many <code>Either</code>s into a single <code>Either</code>
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="either.html" class="extype" name="sclib.ops.either">either</a></dd></dl></div>
+      
     </li></ol>
             </div>
+
+        
 
         
 
@@ -195,7 +127,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@!=(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -212,7 +144,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@##():Int" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@##():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -229,7 +161,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@==(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@==(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -246,7 +178,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@asInstanceOf[T0]:T0" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -263,7 +195,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@clone():Object" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@clone():Object" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -286,7 +218,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -303,7 +235,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@equals(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -320,7 +252,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@finalize():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@finalize():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -343,7 +275,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@getClass():Class[_]" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@getClass():Class[_]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -360,7 +292,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@hashCode():Int" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@hashCode():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -377,7 +309,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -394,7 +326,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -411,7 +343,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@notify():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@notify():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -428,11 +360,38 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@notifyAll():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@notifyAll():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="sclib.ops.try.TraversableOfTry#sequence" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sequence(implicitcbf:scala.collection.generic.CanBuildFrom[Nothing,A,CC[A]]):scala.util.Try[CC[A]]"></a>
+      <a id="sequence(CanBuildFrom[Nothing,A,CC[A]]):Try[CC[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">sequence</span><span class="params">(<span class="implicit">implicit </span><span name="cbf">cbf: <span class="extype" name="scala.collection.generic.CanBuildFrom">CanBuildFrom</span>[<span class="extype" name="scala.Nothing">Nothing</span>, <span class="extype" name="sclib.ops.try.TraversableOfTry.A">A</span>, <span class="extype" name="sclib.ops.try.TraversableOfTry.CC">CC</span>[<span class="extype" name="sclib.ops.try.TraversableOfTry.A">A</span>]]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.ops.try.TraversableOfTry.CC">CC</span>[<span class="extype" name="sclib.ops.try.TraversableOfTry.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@sequence(implicitcbf:scala.collection.generic.CanBuildFrom[Nothing,A,CC[A]]):scala.util.Try[CC[A]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">reducing many <code>Try</code>s into a single <code>Try</code>
+</p><div class="fullcomment"><div class="comment cmt"><p>reducing many <code>Try</code>s into a single <code>Try</code>
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
+scala&gt; <span class="std">List</span>(<span class="num">3.</span>success, <span class="num">44.</span>success).sequence
+res0: scala.util.Try[<span class="std">List</span>[<span class="std">Int</span>]] = Success(<span class="std">List</span>(<span class="num">3</span>, <span class="num">44</span>))
+scala&gt; <span class="std">List</span>(<span class="num">3.</span>success, <span class="lit">"BOOM"</span>.failure, <span class="num">44.</span>success).sequence
+res1: scala.util.Try[<span class="std">List</span>[<span class="std">Int</span>]] = Failure(java.lang.Exception: BOOM)
+scala&gt; Vector(<span class="num">1.</span>success, <span class="num">2.</span>success).sequence
+res2: scala.util.Try[scala.collection.immutable.Vector[<span class="std">Int</span>]] = Success(Vector(<span class="num">1</span>, <span class="num">2</span>))</pre></li></ol>
+            </div></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -445,7 +404,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -462,7 +421,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@toString():String" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@toString():String" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -479,7 +438,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@wait():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@wait():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -502,7 +461,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -525,7 +484,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$@wait(x$1:Long):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.try$TraversableOfTry@wait(x$1:Long):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -545,9 +504,7 @@ res0: Either[<span class="std">Nothing</span>,<span class="std">Int</span>] = Ri
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="sclib.ops.either">
-              <h3>Inherited from <a href="either.html" class="extype" name="sclib.ops.either">either</a></h3>
-            </div><div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

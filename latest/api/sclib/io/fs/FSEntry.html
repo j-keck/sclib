@@ -28,12 +28,10 @@
         </head>
         <body class="type">
       <div id="definition">
-        <a href="FSEntry$.html" title="See companion object"><img alt="Trait/Object" src="../../../lib/trait_to_object_big.png" /></a>
+        <img alt="Trait" src="../../../lib/trait_big.png" />
         <p id="owner"><a href="../../package.html" class="extype" name="sclib">sclib</a>.<a href="../package.html" class="extype" name="sclib.io">io</a>.<a href="package.html" class="extype" name="sclib.io.fs">fs</a></p>
-        <h1><a href="FSEntry$.html" title="See companion object">FSEntry</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="FSEntry$.html" title="See companion object">object FSEntry</a>
-            | <a href="package.html" class="extype" name="sclib.io.fs">package fs</a>
+        <h1>FSEntry</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="sclib.io.fs">package fs</a>
           </div></span></h3><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSEntry" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
@@ -98,51 +96,7 @@
 
         <div id="values" class="values members">
               <h3>Abstract Value Members</h3>
-              <ol><li name="sclib.io.fs.FSEntry#createTemp" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="createTemp:scala.util.Try[Self]"></a>
-      <a id="createTemp:Try[Self]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">createTemp</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.FSEntry@createTemp:scala.util.Try[Self]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">create a new temporary filesystem entry.</p><div class="fullcomment"><div class="comment cmt"><p>create a new temporary filesystem entry.
-the actual name is used for the prefix
-</p></div><dl class="attributes block"> <div class="block">Example:
-               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">for</span> {
-     |   fh <span class="kw">&lt;-</span> dir(<span class="lit">"/tmp/a-temp-dir"</span>)
-     |   <span class="cmt">// override the original fh</span>
-     |   fh <span class="kw">&lt;-</span> fh.createTemp
-     |   _ <span class="kw">&lt;-</span> fh.delete
-     |   <span class="cmt">// fh.name is something like 'a-temp-dir7526811586167481701'</span>
-     | } <span class="kw">yield</span> fh.name.matches(<span class="lit">"a-temp-dir\\d+"</span>)
-res0: scala.util.Try[<span class="std">Boolean</span>] = Success(<span class="kw">true</span>)
-scala&gt; <span class="kw">for</span> {
-     |   fh <span class="kw">&lt;-</span> file(<span class="lit">"/tmp/a-temp-file"</span>)
-     |   <span class="cmt">// override the original fh</span>
-     |   fh <span class="kw">&lt;-</span> fh.createTemp
-     |   _ <span class="kw">&lt;-</span> fh.delete
-     |   <span class="cmt">// fh.name is something like 'a-temp-file9014711075515420555'*</span>
-     | } <span class="kw">yield</span> fh.name.matches(<span class="lit">"a-temp-file\\d+"</span>)
-res0: scala.util.Try[<span class="std">Boolean</span>] = Success(<span class="kw">true</span>)
-scala&gt; <span class="kw">for</span> {
-     |   fh <span class="kw">&lt;-</span> file(<span class="lit">"/tmp/a-temp-file.txt"</span>)
-     |   <span class="cmt">// override the original fh</span>
-     |   fh <span class="kw">&lt;-</span> fh.createTemp
-     |   _ <span class="kw">&lt;-</span> fh.delete
-     |   <span class="cmt">// fh.name is something like 'a-temp-file2068553337840465580.txt'</span>
-     | } <span class="kw">yield</span> fh.name.matches(<span class="lit">"a-temp-file\\d+\\.txt"</span>)
-res1: scala.util.Try[<span class="std">Boolean</span>] = Success(<span class="kw">true</span>)</pre></li></ol>
-            </div></dl></div>
-    </li><li name="sclib.io.fs.FSEntry#path" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+              <ol><li name="sclib.io.fs.FSEntry#path" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="path:java.nio.file.Path"></a>
       <a id="path:Path"></a>
       <h4 class="signature">
@@ -160,6 +114,23 @@ res1: scala.util.Try[<span class="std">Boolean</span>] = Success(<span class="kw
     </span>
       <p class="shortcomment cmt">underlying path
 </p>
+    </li><li name="sclib.io.fs.FSEntry#withPath" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="withPath(p:java.nio.file.Path):Self"></a>
+      <a id="withPath(Path):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withPath</span><span class="params">(<span name="p">p: <span class="extype" name="java.nio.file.Path">Path</span></span>)</span><span class="result">: <span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@withPath(p:java.nio.file.Path):Self" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="package.html" class="extype" name="sclib.io.fs">sclib.io.fs</a>] </dd></dl></div>
     </li></ol>
             </div>
 
@@ -267,9 +238,9 @@ res1: scala.util.Try[<span class="std">Boolean</span>] = Success(<span class="kw
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">set file permission mode
-</p><div class="fullcomment"><div class="comment cmt"><p>set file permission mode
-</p></div><dl class="attributes block"> <div class="block">Example:
+      <p class="shortcomment cmt">set entry permission mode
+</p><div class="fullcomment"><div class="comment cmt"><p>set entry permission mode
+</p></div><dl class="paramcmts block"><dt class="param">mode</dt><dd class="cmt"><p>: list of unix like symbolic permissions notation</p></dd></dl><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>chmod(<span class="lit">"a=r,u+w"</span>) -&gt; chmod(<span class="std">Seq</span>(OWNER_READ, OWNER_WRITE, GROUP_READ, OTHERS_READ))
 chmod(<span class="lit">"a+x"</span>)     -&gt; current permissions + <span class="std">Seq</span>(OWNER_EXECUTE, GROUP_EXECUTE, OTHERS_EXECUTE)</pre></li></ol>
             </div></dl></div>
@@ -289,30 +260,96 @@ chmod(<span class="lit">"a+x"</span>)     -&gt; current permissions + <span clas
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">set file permission mode
-</p><div class="fullcomment"><div class="comment cmt"><p>set file permission mode
-</p></div><dl class="attributes block"> <div class="block">Example:
+      <p class="shortcomment cmt">set entry permission mode
+</p><div class="fullcomment"><div class="comment cmt"><p>set entry permission mode
+</p></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>: unix like file permission notation</p></dd></dl><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>chmod(<span class="num">700</span>) -&gt; chmod(<span class="std">Seq</span>(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE))
 chmod(<span class="num">644</span>) -&gt; chmod(<span class="std">Seq</span>(OWNER_READ, OWNER_WRITE, GROUP_READ, OTHERS_READ))</pre></li></ol>
             </div></dl></div>
-    </li><li name="sclib.io.fs.FSEntry#chmod" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="chmod(perms:Seq[java.nio.file.attribute.PosixFilePermission]):scala.util.Try[Self]"></a>
-      <a id="chmod(Seq[PosixFilePermission]):Try[Self]"></a>
+    </li><li name="sclib.io.fs.FSEntry#chmod" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="chmod(perms:java.nio.file.attribute.PosixFilePermission*):scala.util.Try[Self]"></a>
+      <a id="chmod(PosixFilePermission*):Try[Self]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">chmod</span><span class="params">(<span name="perms">perms: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.attribute.PosixFilePermission">PosixFilePermission</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+        <span class="name">chmod</span><span class="params">(<span name="perms">perms: <span class="extype" name="java.nio.file.attribute.PosixFilePermission">PosixFilePermission</span>*</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.FSEntry@chmod(perms:Seq[java.nio.file.attribute.PosixFilePermission]):scala.util.Try[Self]" title="Permalink" target="_top">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@chmod(perms:java.nio.file.attribute.PosixFilePermission*):scala.util.Try[Self]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">set file permission mode
-</p>
+      <p class="shortcomment cmt">set entry permission mode
+</p><div class="fullcomment"><div class="comment cmt"><p>set entry permission mode
+</p></div><dl class="paramcmts block"><dt class="param">perms</dt><dd class="cmt"><p>: sequence of <a href="http://http://docs.oracle.com/javase/8/docs/api/java/nio/file/attribute/PosixFilePermission.html" target="_blank">http://http://docs.oracle.com/javase/8/docs/api/java/nio/file/attribute/PosixFilePermission.html</a></p></dd></dl><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> java.nio.file.attribute.PosixFilePermission._
+scala&gt; <span class="kw">for</span> {
+     |   wd <span class="kw">&lt;-</span> dir(<span class="lit">"sclib-example"</span>)
+     |   wd <span class="kw">&lt;-</span> wd.createTemp
+     |   fh <span class="kw">&lt;-</span> file(wd, <span class="lit">"a-file"</span>).flatMap(_.create)
+     |   _ <span class="kw">&lt;-</span> fh.chmod(OWNER_READ)
+     |   mod <span class="kw">&lt;-</span> fh.lsmod
+     |   _ <span class="kw">&lt;-</span> wd.deleteR()
+     | } <span class="kw">yield</span> mod
+res0: scala.util.Try[<span class="std">Seq</span>[java.nio.file.attribute.PosixFilePermission]] = Success(<span class="std">List</span>(OWNER_READ))</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.io.fs.FSEntry#chmodR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="chmodR(mode:String):scala.util.Try[Self]"></a>
+      <a id="chmodR(String):Try[Self]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">chmodR</span><span class="params">(<span name="mode">mode: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@chmodR(mode:String):scala.util.Try[Self]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">set entry permission mode recursive</p><div class="fullcomment"><div class="comment cmt"><p>set entry permission mode recursive</p><p><i>fail on any error</i>
+</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="#chmodR(mode:String):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#chmodR">FSEntry.chmodR(mode:String)*</a></p></span></dd></dl></div>
+    </li><li name="sclib.io.fs.FSEntry#chmodR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="chmodR(n:Int):scala.util.Try[Self]"></a>
+      <a id="chmodR(Int):Try[Self]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">chmodR</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@chmodR(n:Int):scala.util.Try[Self]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">set entry permission mode recursive</p><div class="fullcomment"><div class="comment cmt"><p>set entry permission mode recursive</p><p><i>fail on any error</i>
+</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="#chmod(n:Int):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#chmod">FSEntry.chmod(n:Int)*</a></p></span></dd></dl></div>
+    </li><li name="sclib.io.fs.FSEntry#chmodR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="chmodR(perms:java.nio.file.attribute.PosixFilePermission*):scala.util.Try[Self]"></a>
+      <a id="chmodR(PosixFilePermission*):Try[Self]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">chmodR</span><span class="params">(<span name="perms">perms: <span class="extype" name="java.nio.file.attribute.PosixFilePermission">PosixFilePermission</span>*</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@chmodR(perms:java.nio.file.attribute.PosixFilePermission*):scala.util.Try[Self]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">set entry permission mode recursive</p><div class="fullcomment"><div class="comment cmt"><p>set entry permission mode recursive</p><p><i>fail on any error</i>
+</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="#chmod(perms:java.nio.file.attribute.PosixFilePermission*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#chmod">FSEntry.chmod(perms:java\.nio\.file\.attribute\.PosixFilePermission*)*</a></p></span></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -337,24 +374,72 @@ chmod(<span class="num">644</span>) -&gt; chmod(<span class="std">Seq</span>(OWN
               
         </dd></dl></div>
     </li><li name="sclib.io.fs.FSEntry#copy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="copy(target:Self,options:Seq[java.nio.file.CopyOption]):scala.util.Try[Self]"></a>
-      <a id="copy(Self,Seq[CopyOption]):Try[Self]"></a>
+      <a id="copy(target:Self,options:java.nio.file.CopyOption*):scala.util.Try[Self]"></a>
+      <a id="copy(Self,CopyOption*):Try[Self]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">copy</span><span class="params">(<span name="target">target: <span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span></span>, <span name="options">options: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.CopyOption">CopyOption</span>] = <span class="symbol">Seq()</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+        <span class="name">copy</span><span class="params">(<span name="target">target: <span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span></span>, <span name="options">options: <span class="extype" name="java.nio.file.CopyOption">CopyOption</span>*</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.FSEntry@copy(target:Self,options:Seq[java.nio.file.CopyOption]):scala.util.Try[Self]" title="Permalink" target="_top">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@copy(target:Self,options:java.nio.file.CopyOption*):scala.util.Try[Self]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">copy the file
-</p><div class="fullcomment"><div class="comment cmt"><p>copy the file
-</p></div><dl class="paramcmts block"><dt class="param">options</dt><dd class="cmt"><p><a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html" target="_blank">http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html</a></p></dd></dl></div>
+      <p class="shortcomment cmt">copy the entry (file -&gt; file, dir -&gt; dir)
+</p><div class="fullcomment"><div class="comment cmt"><p>copy the entry (file -&gt; file, dir -&gt; dir)
+</p></div><dl class="paramcmts block"><dt class="param">options</dt><dd class="cmt"><p><a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html" target="_blank">http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html</a></p></dd></dl><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">for</span> {
+     |   wd <span class="kw">&lt;-</span> dir(<span class="lit">"sclib-example"</span>)
+     |   wd <span class="kw">&lt;-</span> wd.createTemp
+     |   src <span class="kw">&lt;-</span> file(wd, <span class="lit">"a-file"</span>)
+     |   _ <span class="kw">&lt;-</span> src.write(<span class="lit">"content"</span>)
+     |   dst <span class="kw">&lt;-</span> file(wd, <span class="lit">"b-file"</span>)
+     |   _ <span class="kw">&lt;-</span> src.copy(dst)
+     |   c <span class="kw">&lt;-</span> dst.slurp
+     |   _ <span class="kw">&lt;-</span> wd.deleteR
+     | } <span class="kw">yield</span> c
+res0: scala.util.Try[<span class="std">String</span>] = Success(content)</pre></li></ol>
+            </div></dl></div>
+    </li><li name="sclib.io.fs.FSEntry#copyTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyTo(target:sclib.io.fs.FSDir,options:java.nio.file.CopyOption*):scala.util.Try[Self]"></a>
+      <a id="copyTo(FSDir,CopyOption*):Try[Self]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">copyTo</span><span class="params">(<span name="target">target: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="options">options: <span class="extype" name="java.nio.file.CopyOption">CopyOption</span>*</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@copyTo(target:sclib.io.fs.FSDir,options:java.nio.file.CopyOption*):scala.util.Try[Self]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">copy the entry to the given dir</p><div class="fullcomment"><div class="comment cmt"><p>copy the entry to the given dir</p><p>if the target dir doesn't exists, it's being created</p><p>use <a href="#copyToR(target:sclib.io.fs.FSDir,options:java.nio.file.CopyOption*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#copyToR">FSEntry.copyToR(target*</a> for a recursive copy operation
+</p></div></div>
+    </li><li name="sclib.io.fs.FSEntry#copyToR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyToR(target:sclib.io.fs.FSDir,options:java.nio.file.CopyOption*):scala.util.Try[Self]"></a>
+      <a id="copyToR(FSDir,CopyOption*):Try[Self]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">copyToR</span><span class="params">(<span name="target">target: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="options">options: <span class="extype" name="java.nio.file.CopyOption">CopyOption</span>*</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@copyToR(target:sclib.io.fs.FSDir,options:java.nio.file.CopyOption*):scala.util.Try[Self]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">recursively copy the entry to the given dir</p><div class="fullcomment"><div class="comment cmt"><p>recursively copy the entry to the given dir</p><p>if the target dir doesn't exists, it's being created
+</p></div></div>
     </li><li name="sclib.io.fs.FSEntry#create" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="create(mode:String):scala.util.Try[Self]"></a>
       <a id="create(String):Try[Self]"></a>
@@ -371,8 +456,7 @@ chmod(<span class="num">644</span>) -&gt; chmod(<span class="std">Seq</span>(OWN
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">create the filesystem entry with the given permissions
-</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions
+      <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*</a> to create the hierarchy at first.</i>
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>create(<span class="lit">"a=r,u+w"</span>) -&gt; create the entry <span class="kw">with</span> the PosixFilePermissions: OWNER_READ, OWNER_WRITE, GROUP_READ and OTHERS_READ
 scala&gt; <span class="kw">import</span> scala.collection.SortedSet
@@ -402,8 +486,7 @@ res0: scala.util.Try[scala.collection.SortedSet[java.nio.file.attribute.PosixFil
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">create the filesystem entry with the given permissions
-</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions
+      <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*</a> to create the hierarchy at first.</i>
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> scala.collection.SortedSet
 scala&gt; <span class="kw">for</span> {
@@ -416,7 +499,7 @@ scala&gt; <span class="kw">for</span> {
      | } <span class="kw">yield</span> perm.to[SortedSet]
 res0: scala.util.Try[SortedSet[java.nio.file.attribute.PosixFilePermission]] = Success(TreeSet(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ))</pre></li></ol>
             </div></dl></div>
-    </li><li name="sclib.io.fs.FSEntry#create" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="sclib.io.fs.FSEntry#create" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="create(perms:java.nio.file.attribute.PosixFilePermission*):scala.util.Try[Self]"></a>
       <a id="create(PosixFilePermission*):Try[Self]"></a>
       <h4 class="signature">
@@ -432,9 +515,9 @@ res0: scala.util.Try[SortedSet[java.nio.file.attribute.PosixFilePermission]] = S
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">create the filesystem entry with the given permissions
-</p>
-    </li><li name="sclib.io.fs.FSEntry#create" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*</a> to create the hierarchy at first.</i>
+</p></div></div>
+    </li><li name="sclib.io.fs.FSEntry#create" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="create:scala.util.Try[Self]"></a>
       <a id="create:Try[Self]"></a>
       <h4 class="signature">
@@ -450,8 +533,53 @@ res0: scala.util.Try[SortedSet[java.nio.file.attribute.PosixFilePermission]] = S
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">create the filesystem entry with default permissions
-</p>
+      <p class="shortcomment cmt">create the filesystem entry with default permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with default permissions</p><p><i>the path hierarchy must exist - use <a href="#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*</a> to create the hierarchy at first.</i>
+</p></div></div>
+    </li><li name="sclib.io.fs.FSEntry#createTemp" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="createTemp:scala.util.Try[Self]"></a>
+      <a id="createTemp:Try[Self]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">createTemp</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@createTemp:scala.util.Try[Self]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">create a new temporary filesystem entry.</p><div class="fullcomment"><div class="comment cmt"><p>create a new temporary filesystem entry.
+the actual name is used for the prefix.</p><p>if no absolute path is given, the entry is created in the
+temp directory (determined by: System.getProperty(&quot;java.io.tmpdir&quot;)).
+</p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">for</span> {
+     |   fh <span class="kw">&lt;-</span> dir(<span class="lit">"a-temp-dir"</span>)
+     |   <span class="cmt">// override the original fh</span>
+     |   fh <span class="kw">&lt;-</span> fh.createTemp
+     |   _ <span class="kw">&lt;-</span> fh.delete
+     |   <span class="cmt">// fh.name is something like 'a-temp-dir7526811586167481701'</span>
+     | } <span class="kw">yield</span> fh.name.matches(<span class="lit">"a-temp-dir\\d+"</span>)
+res0: scala.util.Try[<span class="std">Boolean</span>] = Success(<span class="kw">true</span>)
+scala&gt; <span class="kw">for</span> {
+     |   fh <span class="kw">&lt;-</span> file(<span class="lit">"a-temp-file"</span>)
+     |   <span class="cmt">// override the original fh</span>
+     |   fh <span class="kw">&lt;-</span> fh.createTemp
+     |   _ <span class="kw">&lt;-</span> fh.delete
+     |   <span class="cmt">// fh.name is something like 'a-temp-file9014711075515420555'</span>
+     | } <span class="kw">yield</span> fh.name.matches(<span class="lit">"a-temp-file\\d+"</span>)
+res0: scala.util.Try[<span class="std">Boolean</span>] = Success(<span class="kw">true</span>)
+scala&gt; <span class="kw">for</span> {
+     |   fh <span class="kw">&lt;-</span> file(<span class="lit">"a-temp-file.txt"</span>)
+     |   <span class="cmt">// override the original fh</span>
+     |   fh <span class="kw">&lt;-</span> fh.createTemp
+     |   _ <span class="kw">&lt;-</span> fh.delete
+     |   <span class="cmt">// fh.name is something like 'a-temp-file2068553337840465580.txt'</span>
+     | } <span class="kw">yield</span> fh.name.matches(<span class="lit">"a-temp-file\\d+\\.txt"</span>)
+res1: scala.util.Try[<span class="std">Boolean</span>] = Success(<span class="kw">true</span>)</pre></li></ol>
+            </div></dl></div>
     </li><li name="sclib.io.fs.FSEntry#delete" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="delete():scala.util.Try[Unit]"></a>
       <a id="delete():Try[Unit]"></a>
@@ -490,7 +618,7 @@ res0: scala.util.Try[SortedSet[java.nio.file.attribute.PosixFilePermission]] = S
 </p><div class="fullcomment"><div class="comment cmt"><p>delete the file if it exists
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>true</code> if the file was deleted, <code>false</code> if it doesn't exist.</p></dd></dl></div>
     </li><li name="sclib.io.fs.FSEntry#depth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="depth(other:sclib.io.fs.FSEntry.FSEntryImpl):Int"></a>
+      <a id="depth(other:sclib.io.fs.FSEntryImpl):Int"></a>
       <a id="depth(FSEntryImpl):Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -498,20 +626,19 @@ res0: scala.util.Try[SortedSet[java.nio.file.attribute.PosixFilePermission]] = S
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">depth</span><span class="params">(<span name="other">other: <a href="FSEntry$.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntry.FSEntryImpl">FSEntryImpl</a></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">depth</span><span class="params">(<span name="other">other: <a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.FSEntry@depth(other:sclib.io.fs.FSEntry.FSEntryImpl):Int" title="Permalink" target="_top">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@depth(other:sclib.io.fs.FSEntryImpl):Int" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">relative depth to a given <code>FSEntry</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>relative depth to a given <code>FSEntry</code>
 </p></div><dl class="attributes block"> <div class="block">Example:
-               <ol><li class="cmt"><p></p><pre><span class="kw">import</span> sclib.io._
-scala&gt; <span class="kw">for</span> {
-     |  a <span class="kw">&lt;-</span> dir(<span class="lit">"/tmp"</span>)
-     |  b <span class="kw">&lt;-</span> dir(<span class="lit">"/tmp/a/b"</span>)
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">for</span> {
+     |  a <span class="kw">&lt;-</span> dir(<span class="lit">"sclib-example"</span>)
+     |  b <span class="kw">&lt;-</span> dir(a, <span class="lit">"x/y/z/.."</span>)
      | } <span class="kw">yield</span> a.depth(b)
 res0: scala.util.Try[<span class="std">Int</span>] = Success(<span class="num">2</span>)</pre></li></ol>
             </div></dl></div>
@@ -692,7 +819,7 @@ res0: scala.util.Try[<span class="std">Int</span>] = Success(<span class="num">2
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">get file permission mode
+      <p class="shortcomment cmt">get entry permission mode
 </p>
     </li><li name="sclib.io.fs.FSEntry#mkDirs" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="mkDirs:scala.util.Try[Self]"></a>
@@ -710,20 +837,20 @@ res0: scala.util.Try[<span class="std">Int</span>] = Success(<span class="num">2
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="#mkDirs(attrs:Seq[java.nio.file.attribute.FileAttribute[_]]):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs*</a></p></span></dd></dl></div>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*</a></p></span></dd></dl></div>
     </li><li name="sclib.io.fs.FSEntry#mkDirs" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mkDirs(attrs:Seq[java.nio.file.attribute.FileAttribute[_]]):scala.util.Try[Self]"></a>
-      <a id="mkDirs(Seq[FileAttribute[_]]):Try[Self]"></a>
+      <a id="mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]"></a>
+      <a id="mkDirs(FileAttribute[_]*):Try[Self]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">mkDirs</span><span class="params">(<span name="attrs">attrs: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.attribute.FileAttribute">FileAttribute</span>[_]] = <span class="symbol">Seq()</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+        <span class="name">mkDirs</span><span class="params">(<span name="attrs">attrs: <span class="extype" name="java.nio.file.attribute.FileAttribute">FileAttribute</span>[_]*</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.FSEntry@mkDirs(attrs:Seq[java.nio.file.attribute.FileAttribute[_]]):scala.util.Try[Self]" title="Permalink" target="_top">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -731,23 +858,42 @@ res0: scala.util.Try[<span class="std">Int</span>] = Success(<span class="num">2
 - when called on a <code>FSFile</code> the parent hierarchy are created
 </p></div><dl class="paramcmts block"><dt class="param">attrs</dt><dd class="cmt"><p><a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/attribute/PosixFileAttributes.html" target="_blank">http://docs.oracle.com/javase/8/docs/api/java/nio/file/attribute/PosixFileAttributes.html</a></p></dd></dl></div>
     </li><li name="sclib.io.fs.FSEntry#move" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="move(target:Self,options:Seq[java.nio.file.CopyOption]):scala.util.Try[Self]"></a>
-      <a id="move(Self,Seq[CopyOption]):Try[Self]"></a>
+      <a id="move(target:Self,options:java.nio.file.CopyOption*):scala.util.Try[Self]"></a>
+      <a id="move(Self,CopyOption*):Try[Self]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">move</span><span class="params">(<span name="target">target: <span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span></span>, <span name="options">options: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.CopyOption">CopyOption</span>] = <span class="symbol">Seq()</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+        <span class="name">move</span><span class="params">(<span name="target">target: <span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span></span>, <span name="options">options: <span class="extype" name="java.nio.file.CopyOption">CopyOption</span>*</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.FSEntry@move(target:Self,options:Seq[java.nio.file.CopyOption]):scala.util.Try[Self]" title="Permalink" target="_top">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@move(target:Self,options:java.nio.file.CopyOption*):scala.util.Try[Self]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">move the file
-</p><div class="fullcomment"><div class="comment cmt"><p>move the file
+      <p class="shortcomment cmt">move the entry
+</p><div class="fullcomment"><div class="comment cmt"><p>move the entry
+</p></div><dl class="paramcmts block"><dt class="param">options</dt><dd class="cmt"><p><a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html" target="_blank">http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html</a></p></dd></dl></div>
+    </li><li name="sclib.io.fs.FSEntry#moveTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="moveTo(dir:sclib.io.fs.FSDir,options:java.nio.file.CopyOption*):scala.util.Try[Self]"></a>
+      <a id="moveTo(FSDir,CopyOption*):Try[Self]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">moveTo</span><span class="params">(<span name="dir">dir: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="options">options: <span class="extype" name="java.nio.file.CopyOption">CopyOption</span>*</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@moveTo(dir:sclib.io.fs.FSDir,options:java.nio.file.CopyOption*):scala.util.Try[Self]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">move the entry to the given directory, and keep the name
+</p><div class="fullcomment"><div class="comment cmt"><p>move the entry to the given directory, and keep the name
 </p></div><dl class="paramcmts block"><dt class="param">options</dt><dd class="cmt"><p><a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html" target="_blank">http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html</a></p></dd></dl></div>
     </li><li name="sclib.io.fs.FSEntry#mtime" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="mtime(millis:Long):scala.util.Try[Unit]"></a>
@@ -855,6 +1001,36 @@ res0: scala.util.Try[<span class="std">Int</span>] = Success(<span class="num">2
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="sclib.io.fs.FSEntry#renameTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="renameTo(newName:String,options:java.nio.file.CopyOption*):scala.util.Try[Self]"></a>
+      <a id="renameTo(String,CopyOption*):Try[Self]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">renameTo</span><span class="params">(<span name="newName">newName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="java.nio.file.CopyOption">CopyOption</span>*</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="sclib.io.fs.FSEntry.Self">Self</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSEntry@renameTo(newName:String,options:java.nio.file.CopyOption*):scala.util.Try[Self]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">rename the entry
+</p><div class="fullcomment"><div class="comment cmt"><p>rename the entry
+</p></div><dl class="paramcmts block"><dt class="param">options</dt><dd class="cmt"><p><a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html" target="_blank">http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html</a></p></dd></dl><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">for</span> {
+     |   wd <span class="kw">&lt;-</span> dir(<span class="lit">"sclib-example"</span>)
+     |   wd <span class="kw">&lt;-</span> wd.createTemp
+     |   src <span class="kw">&lt;-</span> file(wd, <span class="lit">"a-file"</span>)
+     |   _ <span class="kw">&lt;-</span> src.create
+     |   dst <span class="kw">&lt;-</span> src.renameTo(<span class="lit">"b-file"</span>)
+     |   res = (src.exists, dst.exists)
+     |   _ <span class="kw">&lt;-</span> wd.deleteR
+     | } <span class="kw">yield</span> res
+res0: scala.util.Try[(<span class="std">Boolean</span>, <span class="std">Boolean</span>)] = Success((<span class="kw">false</span>,<span class="kw">true</span>))</pre></li></ol>
+            </div></dl></div>
     </li><li name="sclib.io.fs.FSEntry#size" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="size:scala.util.Try[Long]"></a>
       <a id="size:Try[Long]"></a>
