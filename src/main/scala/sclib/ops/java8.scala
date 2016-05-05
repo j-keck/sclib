@@ -13,8 +13,6 @@ object java8 extends java8
   */
 trait java8 {
 
-  import scala.language.implicitConversions
-
   /**
     * extend `Stream`
     */

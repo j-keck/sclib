@@ -27,17 +27,19 @@ add the following snippet to your `build.sbt` file:
 
    - [stdlib extensions](#stdlib-extensions)
      - [Either](#either)
-     - [Java8 interoperability](#java8-interoperability)
-     - [List](#list)
-     - [Option](#option)
-     - [String](#string)
      - [Try](#try)
+     - [Option](#option)
+     - [List](#list)
+     - [String](#string)
+     - [Java8 interoperability](#java8-interoperability)
    - [io](#io)
    - [patterns](#patterns)
    - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
 
 
 ### stdlib extensions
+
+utilities for the scala stdlib.
 
 to import all in one use `import sclib.ops.all._`
 
@@ -70,37 +72,59 @@ for {
 } yield a + b
 ```
 
-
-#### java8 interoperability
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.java8)
+#### Try
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.try)
 
 ```tut:silent:reset
-import sclib.ops.java8._
+import sclib.ops.`try`._
 ```
 
-  - convert a `java.util.stream.Stream` to 'scala.collection.Iterator'
+  - shorthand constructor for `Success`
 ```tut
-java.util.stream.Stream.of(1, 2, 3, 4).toIterator
+3.success
 ```
-  - convert a `java.util.stream.Stream` to 'scala.collection.immutable.List'
+  
+  - shorthand constructor for `Failure` from a `Throwable`
 ```tut
-java.util.stream.Stream.of(1, 2, 3, 4).toList
+new IllegalArgumentException("BOOM").failure[Int]
 ```
-  - convert a `scala.Function1` to a `java.util.function.Function`
+
+  - shorthand constructor for `Failure` from a `String`
 ```tut
-java.util.stream.Stream.of(1, 2, 3,4).map((_: Int) * 10).toArray
+"BOOM".failure
 ```
-  - convert a `scala.Function1` to a `java.util.function.Predicate`
+
+  - sequence on `Traversable[Try[A]]` to reducing many `Try`s into a single `Try`
 ```tut
-java.util.stream.Stream.of(1, 2, 3, 4).filter((_: Int) < 3).toArray
+List(3.success, 44.success).sequence
+List(3.success, "BOOM".failure, 44.success).sequence
+Vector(1.success, 2.success).sequence
 ```
-  - convert a `scala.Function1` to a `java.util.function.Consumer`
-```tut
-java.util.stream.Stream.of(1, 2, 3, 4).forEach(println(_: Int))
+
+#### Option
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.option)
+
+```tut:silent:reset
+import sclib.ops.option._
 ```
-  - convert a `scala.Function2` to a `java.util.function.BinaryOperator`
+
+  - shorthand constructor for `Some` (with type `Option[A]`)
 ```tut
-java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
+123.some
+```
+
+  - shorthand constructor for `None` (with type `Option[A]`)
+  
+```tut
+none
+none[String]
+```
+
+  - sequence on `Traversable[Option[A]]` to reducing many `Option`s into a single `Option`
+```tut
+List(3.some, 44.some).sequence
+List(3.some, none, 44.some).sequence
+Vector(1.some, 2.some).sequence
 ```
 
 #### List
@@ -121,25 +145,6 @@ ListOps.unfoldRight(0){ i =>
 ```tut
 val l = List("-- heading1", "a", "b", "-- heading2", "c", "d")
 l.partitionsBy(_.startsWith("--"))
-```
-
-#### Option
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.option)
-
-```tut:silent:reset
-import sclib.ops.option._
-```
-
-  - shorthand constructor for `Some` (with type `Option[A]`)
-```tut
-123.some
-```
-
-  - shorthand constructor for `None` (with type `Option[A]`)
-  
-```tut
-none
-none[String]
 ```
 
 #### String
@@ -180,36 +185,38 @@ implicit val sdf = new java.text.SimpleDateFormat("DD.MM.yyyy HH:mm:ss")
 "Feb 01 16:30:10 2020".toDateE("MMM DD HH:mm:ss yyyy")
 ```
 
-#### Try
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.try)
+
+#### java8 interoperability
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.java8)
 
 ```tut:silent:reset
-import sclib.ops.`try`._
+import sclib.ops.java8._
 ```
 
-  - shorthand constructor for `Success`
+  - convert a `java.util.stream.Stream` to 'scala.collection.Iterator'
 ```tut
-3.success
+java.util.stream.Stream.of(1, 2, 3, 4).toIterator
 ```
-  
-  - shorthand constructor for `Failure` from a `Throwable`
+  - convert a `java.util.stream.Stream` to 'scala.collection.immutable.List'
 ```tut
-new IllegalArgumentException("BOOM").failure[Int]
+java.util.stream.Stream.of(1, 2, 3, 4).toList
 ```
-
-  - shorthand constructor for `Failure` from a `String`
+  - convert a `scala.Function1` to a `java.util.function.Function`
 ```tut
-"BOOM".failure
+java.util.stream.Stream.of(1, 2, 3,4).map((_: Int) * 10).toArray
 ```
-
-  - sequence on `Traversable[Try[A]]` to reducing many `Try`s into a single `Try`
+  - convert a `scala.Function1` to a `java.util.function.Predicate`
 ```tut
-List(3.success, 44.success).sequence
-List(3.success, "BOOM".failure, 44.success).sequence
-Vector(1.success, 2.success).sequence
+java.util.stream.Stream.of(1, 2, 3, 4).filter((_: Int) < 3).toArray
 ```
-
-
+  - convert a `scala.Function1` to a `java.util.function.Consumer`
+```tut
+java.util.stream.Stream.of(1, 2, 3, 4).forEach(println(_: Int))
+```
+  - convert a `scala.Function2` to a `java.util.function.BinaryOperator`
+```tut
+java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
+```
 
 
 ### io
@@ -217,23 +224,24 @@ Vector(1.success, 2.success).sequence
 ```tut:silent:reset
 import sclib.io.fs._
 ```
+functions to work with files and directories.
 
 - all functions which can throw a exception are wrapped in a `Try`.
 ```tut
 for {
   wd <- dir("sclib-example")
-  wd <- wd.createTemp                          // create a temp work-dir (path is something like: '/tmp/sclib-example6964564891871111476')
-  fh <- file(wd, "a-file")                     // create a file under the work-dir
-  _ <- fh.append("first line in the file\n")   // write a line
+  wd <- wd.createTemp              // create a temp work-dir (path is something like: '/tmp/sclib-example6964564891871111476')
+  fh <- file(wd, "a-file")         // create a file under the work-dir
+  _ <- fh.append("first line\n")   // write a line
   _ <- fh.append("second line")
-  fs <- fh.size                                // file-size  (fh.size returns Try[Long])
-  lc <- fh.lines.map(_.length)                 // line-count (fh.lines returns Try[Iterator[String]])
-  wc <- fh.slurp.map(_.size)                   // word-count (fh.slurp returns Try[String])
-  _ <- wd.deleteR                              // delete the work-dir recursive
+  fs <- fh.size                    // file-size  (fh.size returns Try[Long])
+  lc <- fh.lines.map(_.length)     // line-count (fh.lines returns Try[Iterator[String]])
+  wc <- fh.slurp.map(_.size)       // word-count (fh.slurp returns Try[String])
+  _ <- wd.deleteR                  // delete the work-dir recursive
 } yield s"file size: ${fs}, line count: ${lc}, word count: ${wc}"
 ```
 
-- type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for basic types. 
+- type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for [basic types](http://j-keck.github.io/sclib/latest/api/#sclib.io.fs.package$$Writable$)
 ```tut
 for {
   wd <- dir("sclib-example")

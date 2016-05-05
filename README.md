@@ -11,6 +11,7 @@
 the library are published to bintray for scala 2.10 and 2.11.
 add the following snippet to your `build.sbt` file:
 
+<sbt-snippet>
 - for the jvm:
 
         resolvers += Resolver.bintrayRepo("j-keck", "maven")
@@ -20,23 +21,25 @@ add the following snippet to your `build.sbt` file:
 
         resolvers += Resolver.bintrayRepo("j-keck", "maven")
         libraryDependencies += "net.jkeck" %%% "sclib" % "0.5-SNAPSHOT"
-
+</sbt-snippet>
 
 ## content
 
    - [stdlib extensions](#stdlib-extensions)
      - [Either](#either)
-     - [Java8 interoperability](#java8-interoperability)
-     - [List](#list)
-     - [Option](#option)
-     - [String](#string)
      - [Try](#try)
+     - [Option](#option)
+     - [List](#list)
+     - [String](#string)
+     - [Java8 interoperability](#java8-interoperability)
    - [io](#io)
    - [patterns](#patterns)
    - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
 
 
 ### stdlib extensions
+
+utilities for the scala stdlib.
 
 to import all in one use `import sclib.ops.all._`
 
@@ -80,46 +83,76 @@ scala> for {
 res6: scala.util.Either[Nothing,Int] = Right(5)
 ```
 
+#### Try
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.try)
 
-#### java8 interoperability
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.java8)
-
 ```scala
-import sclib.ops.java8._
+import sclib.ops.`try`._
 ```
 
-  - convert a `java.util.stream.Stream` to 'scala.collection.Iterator'
+  - shorthand constructor for `Success`
 ```scala
-scala> java.util.stream.Stream.of(1, 2, 3, 4).toIterator
-res0: Iterator[Int] = non-empty iterator
+scala> 3.success
+res0: scala.util.Try[Int] = Success(3)
 ```
-  - convert a `java.util.stream.Stream` to 'scala.collection.immutable.List'
+  
+  - shorthand constructor for `Failure` from a `Throwable`
 ```scala
-scala> java.util.stream.Stream.of(1, 2, 3, 4).toList
-res1: List[Int] = List(1, 2, 3, 4)
+scala> new IllegalArgumentException("BOOM").failure[Int]
+res1: scala.util.Try[Int] = Failure(java.lang.IllegalArgumentException: BOOM)
 ```
-  - convert a `scala.Function1` to a `java.util.function.Function`
+
+  - shorthand constructor for `Failure` from a `String`
 ```scala
-scala> java.util.stream.Stream.of(1, 2, 3,4).map((_: Int) * 10).toArray
-res2: Array[Object] = Array(10, 20, 30, 40)
+scala> "BOOM".failure
+res2: scala.util.Try[Nothing] = Failure(java.lang.Exception: BOOM)
 ```
-  - convert a `scala.Function1` to a `java.util.function.Predicate`
+
+  - sequence on `Traversable[Try[A]]` to reducing many `Try`s into a single `Try`
 ```scala
-scala> java.util.stream.Stream.of(1, 2, 3, 4).filter((_: Int) < 3).toArray
-res3: Array[Object] = Array(1, 2)
+scala> List(3.success, 44.success).sequence
+res3: scala.util.Try[List[Int]] = Success(List(3, 44))
+
+scala> List(3.success, "BOOM".failure, 44.success).sequence
+res4: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
+
+scala> Vector(1.success, 2.success).sequence
+res5: scala.util.Try[scala.collection.immutable.Vector[Int]] = Success(Vector(1, 2))
 ```
-  - convert a `scala.Function1` to a `java.util.function.Consumer`
+
+#### Option
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.option)
+
 ```scala
-scala> java.util.stream.Stream.of(1, 2, 3, 4).forEach(println(_: Int))
-1
-2
-3
-4
+import sclib.ops.option._
 ```
-  - convert a `scala.Function2` to a `java.util.function.BinaryOperator`
+
+  - shorthand constructor for `Some` (with type `Option[A]`)
 ```scala
-scala> java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
-res5: Int = 6
+scala> 123.some
+res0: Option[Int] = Some(123)
+```
+
+  - shorthand constructor for `None` (with type `Option[A]`)
+  
+```scala
+scala> none
+res1: Option[Nothing] = None
+
+scala> none[String]
+res2: Option[String] = None
+```
+
+  - sequence on `Traversable[Option[A]]` to reducing many `Option`s into a single `Option`
+```scala
+scala> List(3.some, 44.some).sequence
+res3: Option[List[Int]] = Some(List(3, 44))
+
+scala> List(3.some, none, 44.some).sequence
+res4: Option[List[Int]] = None
+
+scala> Vector(1.some, 2.some).sequence
+res5: Option[scala.collection.immutable.Vector[Int]] = Some(Vector(1, 2))
 ```
 
 #### List
@@ -144,29 +177,6 @@ l: List[String] = List(-- heading1, a, b, -- heading2, c, d)
 
 scala> l.partitionsBy(_.startsWith("--"))
 res1: List[List[String]] = List(List(-- heading1, a, b), List(-- heading2, c, d))
-```
-
-#### Option
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.option)
-
-```scala
-import sclib.ops.option._
-```
-
-  - shorthand constructor for `Some` (with type `Option[A]`)
-```scala
-scala> 123.some
-res0: Option[Int] = Some(123)
-```
-
-  - shorthand constructor for `None` (with type `Option[A]`)
-  
-```scala
-scala> none
-res1: Option[Nothing] = None
-
-scala> none[String]
-res2: Option[String] = None
 ```
 
 #### String
@@ -219,44 +229,47 @@ scala> "Feb 01 16:30:10 2020".toDateE("MMM DD HH:mm:ss yyyy")
 res7: Either[String,java.util.Date] = Right(Wed Jan 01 16:30:10 CET 2020)
 ```
 
-#### Try
-[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.try)
+
+#### java8 interoperability
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.ops.java8)
 
 ```scala
-import sclib.ops.`try`._
+import sclib.ops.java8._
 ```
 
-  - shorthand constructor for `Success`
+  - convert a `java.util.stream.Stream` to 'scala.collection.Iterator'
 ```scala
-scala> 3.success
-res0: scala.util.Try[Int] = Success(3)
+scala> java.util.stream.Stream.of(1, 2, 3, 4).toIterator
+res0: Iterator[Int] = non-empty iterator
 ```
-  
-  - shorthand constructor for `Failure` from a `Throwable`
+  - convert a `java.util.stream.Stream` to 'scala.collection.immutable.List'
 ```scala
-scala> new IllegalArgumentException("BOOM").failure[Int]
-res1: scala.util.Try[Int] = Failure(java.lang.IllegalArgumentException: BOOM)
+scala> java.util.stream.Stream.of(1, 2, 3, 4).toList
+res1: List[Int] = List(1, 2, 3, 4)
 ```
-
-  - shorthand constructor for `Failure` from a `String`
+  - convert a `scala.Function1` to a `java.util.function.Function`
 ```scala
-scala> "BOOM".failure
-res2: scala.util.Try[Nothing] = Failure(java.lang.Exception: BOOM)
+scala> java.util.stream.Stream.of(1, 2, 3,4).map((_: Int) * 10).toArray
+res2: Array[Object] = Array(10, 20, 30, 40)
 ```
-
-  - sequence on `Traversable[Try[A]]` to reducing many `Try`s into a single `Try`
+  - convert a `scala.Function1` to a `java.util.function.Predicate`
 ```scala
-scala> List(3.success, 44.success).sequence
-res3: scala.util.Try[List[Int]] = Success(List(3, 44))
-
-scala> List(3.success, "BOOM".failure, 44.success).sequence
-res4: scala.util.Try[List[Int]] = Failure(java.lang.Exception: BOOM)
-
-scala> Vector(1.success, 2.success).sequence
-res5: scala.util.Try[scala.collection.immutable.Vector[Int]] = Success(Vector(1, 2))
+scala> java.util.stream.Stream.of(1, 2, 3, 4).filter((_: Int) < 3).toArray
+res3: Array[Object] = Array(1, 2)
 ```
-
-
+  - convert a `scala.Function1` to a `java.util.function.Consumer`
+```scala
+scala> java.util.stream.Stream.of(1, 2, 3, 4).forEach(println(_: Int))
+1
+2
+3
+4
+```
+  - convert a `scala.Function2` to a `java.util.function.BinaryOperator`
+```scala
+scala> java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
+res5: Int = 6
+```
 
 
 ### io
@@ -264,24 +277,25 @@ res5: scala.util.Try[scala.collection.immutable.Vector[Int]] = Success(Vector(1,
 ```scala
 import sclib.io.fs._
 ```
+functions to work with files and directories.
 
 - all functions which can throw a exception are wrapped in a `Try`.
 ```scala
 scala> for {
      |   wd <- dir("sclib-example")
-     |   wd <- wd.createTemp                          // create a temp work-dir (path is something like: '/tmp/sclib-example6964564891871111476')
-     |   fh <- file(wd, "a-file")                     // create a file under the work-dir
-     |   _ <- fh.append("first line in the file\n")   // write a line
+     |   wd <- wd.createTemp              // create a temp work-dir (path is something like: '/tmp/sclib-example6964564891871111476')
+     |   fh <- file(wd, "a-file")         // create a file under the work-dir
+     |   _ <- fh.append("first line\n")   // write a line
      |   _ <- fh.append("second line")
-     |   fs <- fh.size                                // file-size  (fh.size returns Try[Long])
-     |   lc <- fh.lines.map(_.length)                 // line-count (fh.lines returns Try[Iterator[String]])
-     |   wc <- fh.slurp.map(_.size)                   // word-count (fh.slurp returns Try[String])
-     |   _ <- wd.deleteR                              // delete the work-dir recursive
+     |   fs <- fh.size                    // file-size  (fh.size returns Try[Long])
+     |   lc <- fh.lines.map(_.length)     // line-count (fh.lines returns Try[Iterator[String]])
+     |   wc <- fh.slurp.map(_.size)       // word-count (fh.slurp returns Try[String])
+     |   _ <- wd.deleteR                  // delete the work-dir recursive
      | } yield s"file size: ${fs}, line count: ${lc}, word count: ${wc}"
-res0: scala.util.Try[String] = Success(file size: 34, line count: 2, word count: 34)
+res0: scala.util.Try[String] = Success(file size: 22, line count: 2, word count: 22)
 ```
 
-- type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for basic types. 
+- type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for [basic types](http://j-keck.github.io/sclib/latest/api/#sclib.io.fs.package$$Writable$)
 ```scala
 scala> for {
      |   wd <- dir("sclib-example")

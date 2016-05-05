@@ -63,7 +63,7 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
   /**
     * create the filesystem entry with the given permissions
     *
-    * ''the path hierarchy must exist - use [[FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*]] to create the hierarchy at first.''
+    * ''the path hierarchy must exist - use [[FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)* FSEntry.mkDirs(attrs: FileAttribute*)]] to create the hierarchy at first.''
     *
     * @example
     * {{{
@@ -85,7 +85,7 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
   /**
     * create the filesystem entry with the given permissions
     *
-    * ''the path hierarchy must exist - use [[FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*]] to create the hierarchy at first.''
+    * ''the path hierarchy must exist - use [[FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)* FSEntry.mkDirs(attrs: FileAttribute*)]] to create the hierarchy at first.''
     *
     * @example
     * {{{

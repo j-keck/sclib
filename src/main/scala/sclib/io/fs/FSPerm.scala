@@ -9,7 +9,12 @@ import scala.collection.SortedMap
 import scala.util.{Either, Try}
 
 /**
-  * utility to calculate `PosixFilePermission`s
+  * utility to calculate `PosixFilePermission`s from unix-style notation:
+  *
+  * <pre>
+  *   - FSPerm.calc(644)      -> Seq(OWNER_READ, OWNER_WRITE, GROUP_READ, OTHERS_READ)
+  *   - FSPerm.mod("a=r,u+w") -> Seq(OWNER_READ, OWNER_WRITE, GROUP_READ, OTHERS_READ)
+  * </pre>
   */
 object FSPerm {
   private val posixFilePermissions = SortedMap(

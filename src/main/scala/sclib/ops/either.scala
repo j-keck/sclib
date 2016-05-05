@@ -108,14 +108,14 @@ trait either {
       *
       * @example {{{
       * scala> import sclib.ops.either._
-      * scala> List(3.right, 4.right).sequence
-      * res0: Either[Nothing,List[Int]] = Right(List(3, 4))
+      * scala> List(3.right[String], 4.right).sequence
+      * res0: Either[String,List[Int]] = Right(List(3, 4))
       *
       * scala> List(3.right, 4.right, "BOOM".left).sequence
       * res1: Either[String,List[Int]] = Left(BOOM)
       *
-      * scala> Vector(2.right, 5.right).sequence
-      * res2: scala.util.Either[Nothing,scala.collection.immutable.Vector[Int]] = Right(Vector(2, 5))
+      * scala> Vector(2.right[String], 5.right).sequence
+      * res2: scala.util.Either[String,scala.collection.immutable.Vector[Int]] = Right(Vector(2, 5))
       * }}}
       */
     def sequence(implicit cbf: CanBuildFrom[Nothing, B, CC[B]]): Either[A, CC[B]] = {

@@ -6,8 +6,8 @@ class EitherOpsSuite extends FunSuite with Matchers {
   import sclib.ops.either._
 
   test("sequence with Right values"){
-    val l: List[Either[Nothing, Int]] = List.range(1, 10).map(Right.apply)
-    val e: Either[Nothing, Seq[Int]] = l.sequence
+    val l: List[Either[String, Int]] = List.range(1, 10).map(_.right[String])
+    val e: Either[String, List[Int]] = l.sequence
     e should be(Right(List.range(1, 10)))
   }
 

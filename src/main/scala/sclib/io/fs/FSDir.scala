@@ -205,7 +205,6 @@ case class FSDir protected[fs](path: Path) extends FSEntry[FSDir] { self =>
   def collect[A](pf: PartialFunction[Try[FSEntryImpl], A]): Iterator[A] = collectR(pf, 1)
 }
 object FSDir {
-  import scala.language.implicitConversions
 
   trait TraverseFunction[A] {
     type Result
