@@ -1,0 +1,18 @@
+#
+# sbt snippet will be included in the 'README.md' file at release time
+# (from project/ReplaceSbtSnippet.scala)
+#
+#  - this whole file (without lines starting with '#') will be included
+#  - the '$VERSION$' marker will be replaced with the actual version.
+#
+<sbt-snippet>
+- for the jvm:
+
+        resolvers += Resolver.bintrayRepo("j-keck", "maven")
+        libraryDependencies += "net.jkeck" %% "sclib" % "$VERSION$"
+
+- for scala.js
+
+        resolvers += Resolver.bintrayRepo("j-keck", "maven")
+        libraryDependencies += "net.jkeck" %%% "sclib" % "$VERSION$"
+</sbt-snippet>

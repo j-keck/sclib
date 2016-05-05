@@ -1,9 +1,10 @@
+import ReleaseTransformations._
+import ReplaceSbtSnippet._
 
 lazy val buildSettings = Seq(
   name := "sclib",
   organization := "net.jkeck",
-
-  version := "0.5-SNAPSHOT",
+ 
   scalaVersion := "2.11.8",
   crossScalaVersions := Seq("2.10.6", scalaVersion.value)
 )
@@ -29,6 +30,22 @@ lazy val commonSettings = Seq(
 
   libraryDependencies ++= Seq(
     "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+  ),
+
+  releaseCrossBuild := true,
+  releaseProcess := Seq[ReleaseStep](
+    checkSnapshotDependencies,
+    inquireVersions,
+    runTest,
+    releaseStepCommand("ghpagesPushSite"),
+    setReleaseVersion,
+    replaceSbtSnippet,
+    commitReleaseVersion,
+    tagRelease,
+    publishArtifacts,
+    setNextVersion,
+    commitNextVersion,
+    pushChanges
   )
 )
 
