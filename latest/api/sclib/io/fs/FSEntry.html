@@ -456,7 +456,7 @@ res0: scala.util.Try[<span class="std">String</span>] = Success(content)</pre></
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*</a> to create the hierarchy at first.</i>
+      <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs: FileAttribute*)</a> to create the hierarchy at first.</i>
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>create(<span class="lit">"a=r,u+w"</span>) -&gt; create the entry <span class="kw">with</span> the PosixFilePermissions: OWNER_READ, OWNER_WRITE, GROUP_READ and OTHERS_READ
 scala&gt; <span class="kw">import</span> scala.collection.SortedSet
@@ -486,7 +486,7 @@ res0: scala.util.Try[scala.collection.SortedSet[java.nio.file.attribute.PosixFil
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*</a> to create the hierarchy at first.</i>
+      <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs: FileAttribute*)</a> to create the hierarchy at first.</i>
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> scala.collection.SortedSet
 scala&gt; <span class="kw">for</span> {
