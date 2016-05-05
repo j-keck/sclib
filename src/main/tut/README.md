@@ -11,17 +11,7 @@
 the library are published to bintray for scala 2.10 and 2.11.
 add the following snippet to your `build.sbt` file:
 
-<sbt-snippet>
-- for the jvm:
-
-        resolvers += Resolver.bintrayRepo("j-keck", "maven")
-        libraryDependencies += "net.jkeck" %% "sclib" % "0.5-SNAPSHOT"
-
-- for scala.js
-
-        resolvers += Resolver.bintrayRepo("j-keck", "maven")
-        libraryDependencies += "net.jkeck" %%% "sclib" % "0.5-SNAPSHOT"
-</sbt-snippet>
+<sbt-snippet>/- for the jvm://        resolvers += Resolver.bintrayRepo("j-keck", "maven")/        libraryDependencies += "net.jkeck" %% "sclib" % "0.5"//- for scala.js//        resolvers += Resolver.bintrayRepo("j-keck", "maven")/        libraryDependencies += "net.jkeck" %%% "sclib" % "0.5"/</sbt-snippet>
 
 ## content
 
