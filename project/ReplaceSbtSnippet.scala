@@ -38,7 +38,7 @@ object ReplaceSbtSnippet extends AutoPlugin {
       // snippet with updated version
       val snippet = {
         val path    = baseDir.toString + "/sbt-snippet.txt"
-        val nl = System.getProperty("file.separator")
+        val nl = System.getProperty("line.separator")
         val snippet = IO.readLines(file(path)).filterNot(_.startsWith("#")).mkString(nl)
         snippet.replaceAll("""\$VERSION\$""", version)
       }
