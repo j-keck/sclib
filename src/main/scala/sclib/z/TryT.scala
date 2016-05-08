@@ -10,7 +10,7 @@ import sclib.ops.`try`._
   * {{{
   * scala> import sclib.z._
   * scala> import sclib.ops.`try`._
-  * scala> val tt = TryT[({type L[A] = Function1[Int, A]})#L, Int]{i => if(i < 10) i.success else "BOOM".failure}
+  * scala> val tt = TryT[Function1[Int, ?], Int]{i => if(i < 10) i.success else "BOOM".failure}
   *
   * scala> tt.map(_ * 10).runTryT(5)
   * res0: scala.util.Try[Int] = Success(50)

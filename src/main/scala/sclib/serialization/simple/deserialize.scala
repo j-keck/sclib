@@ -5,14 +5,14 @@ import sclib.ops.all._
 
 trait deserialize {
 
-  type DeserializeState[A] = StateT[({ type L [X] = Either[String, X] })#L, String, A]
+  type DeserializeState[A] = StateT[Either[String, ?], String, A]
 
 
   trait Deserialize[A] {
     def apply: DeserializeState[A]
 
     protected def next: DeserializeState[String] =
-      StateT[({ type L [A] = Either[String, A] })#L, String, String](
+      StateT[Either[String, ?], String, String](
           (_: String).split(":", 2) match {
         case Array(l, str) => l.toIntE.map(str.splitAt)
         case Array("") =>

@@ -71,7 +71,7 @@ package object z {
 
 
   /** `Function1`s `Functor` and `Monad` instances */
-  implicit def function1Instances[A] = new Functor[({type L[B] = Function1[A, B]})#L] with Monad[({type L[B] = Function1[A, B]})#L] {
+  implicit def function1Instances[A] = new Functor[Function1[A, ?]] with Monad[Function1[A, ?]] {
     override def map[B, C](fa: (A) => B)(f: (B) => C): (A) => C = a => f(fa(a))
 
     override def flatMap[B, C](fa: (A) => B)(f: (B) => (A) => C): (A) => C = a => f(fa(a))(a)
@@ -81,7 +81,7 @@ package object z {
 
 
   /** `Either`s `Functor` and `Monad` instances */
-  implicit def eitherInstance[A] = new Functor[({type L[B] = Either[A, B]})#L] with Monad[({type L[B] = Either[A, B]})#L] {
+  implicit def eitherInstance[A] = new Functor[Either[A, ?]] with Monad[Either[A, ?]] {
     override def map[B, C](fa: Either[A, B])(f: (B) => C): Either[A, C] = fa.right.map(f)
 
     override def flatMap[B, C](fa: Either[A, B])(f: (B) => Either[A, C]): Either[A, C] = fa.right.flatMap(f)
@@ -102,7 +102,7 @@ package object z {
 
 
   /** `Reader`s `Functor` and `Monad` instances */
-  implicit def readerInstances[C] = new Functor[({type L[A] = Reader[C, A]})#L] with Monad[({type L[A] = Reader[C, A]})#L] {
+  implicit def readerInstances[C] = new Functor[Reader[C, ?]] with Monad[Reader[C, ?]] {
     override def pure[A](a: A): Reader[C, A] = Reader(_ => a)
 
     override def flatMap[A, B](fa: Reader[C, A])(f: (A) => Reader[C, B]): Reader[C, B] = fa.flatMap(f)
@@ -112,7 +112,7 @@ package object z {
 
 
   /** `State`s `Functor` and `Monad` instances */
-  implicit def stateInstances[S] = new Functor[({type L[A] = State[S, A]})#L] with Monad[({type L[A] = State[S, A]})#L] {
+  implicit def stateInstances[S] = new Functor[State[S, ?]] with Monad[State[S, ?]] {
     override def pure[A](a: A): State[S, A] = State(s => (a, s))
 
     override def flatMap[A, B](fa: State[S, A])(f: (A) => State[S, B]): State[S, B] = fa.flatMap(f)

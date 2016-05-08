@@ -32,7 +32,7 @@ package object patterns {
     */
   object AppF {
     def apply[C, A, B](f: C => Either[A, B]) =
-      EitherT[({type L[B] = Reader[C, B]})#L, A, B](Reader(f))
+      EitherT[Reader[C, ?], A, B](Reader(f))
 
     /** lift a Either into AppF */
     def lift[C, A, B](f: => Either[A, B]) = apply[C, A, B](_ => f)

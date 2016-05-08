@@ -10,7 +10,7 @@ import sclib.ops.either._
   * scala> import sclib.z._
   * scala> import sclib.ops.either._
   *
-  * scala> val et = EitherT[({type L[A] = Function1[Int, A]})#L, String, Int]{i => if(i < 10) i.right else "BOOM".left}
+  * scala> val et = EitherT[Function1[Int, ?], String, Int]{i => if(i < 10) i.right else "BOOM".left}
   * et: sclib.z.EitherT[[A]Int => A,String,Int] = EitherT(<function1>)
   *
   * scala> et.runEitherT(5)
