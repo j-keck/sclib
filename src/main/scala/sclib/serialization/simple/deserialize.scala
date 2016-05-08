@@ -5,8 +5,8 @@ import sclib.ops.all._
 
 trait deserialize {
 
-  type DeserializeState [A] = StateT[
-      ({ type L [A] = Either[String, A] })#L, String, A]
+  type DeserializeState[A] = StateT[({ type L [X] = Either[String, X] })#L, String, A]
+
 
   trait Deserialize[A] {
     def apply: DeserializeState[A]

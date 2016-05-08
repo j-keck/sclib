@@ -1,9 +1,8 @@
 package sclib.ops
 
-import scala.util.{Either, Try}
+import scala.util.Try
 import sclib.ops.`try`._
 
-import scala.collection.{SeqLike, TraversableLike}
 import scala.collection.generic.CanBuildFrom
 
 object either extends either
@@ -38,7 +37,7 @@ trait either {
     def toTry: Try[B] = e.fold(_.toString.failure, _.success)
 
     /** map both */
-    def bimap[AA, BB](fl: A => AA, fr: B => BB) = e.fold(fl, fr)
+    def bimap[AA, BB](fl: A => AA, fr: B => BB): Either[AA, BB] = e.fold(fl(_).left, fr(_).right)
 
     /**
       * apply the given function if it's a `Left`

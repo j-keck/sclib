@@ -54,7 +54,7 @@ trait `try` {
       * }}}
       */
     def zip[B](other: Try[B]): Try[(A, B)] = (t, other) match {
-      case (Success(a), Success(b)) => Success(a, b)
+      case (Success(a), Success(b)) => Success(a -> b)
       case (Failure(t), _)          => t.failure
       case (_, Failure(t))          => t.failure
     }

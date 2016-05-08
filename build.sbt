@@ -21,6 +21,7 @@ lazy val commonSettings = Seq(
     "-language:existentials",
     "-language:implicitConversions",
     "-Xfatal-warnings",
+    "-Xlint",
     "-deprecation",
     "-unchecked"
   ),

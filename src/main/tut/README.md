@@ -241,7 +241,7 @@ for {
 } yield s"file size: ${fs}, line count: ${lc}, word count: ${wc}"
 ```
 
-- type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for [basic types](http://j-keck.github.io/sclib/latest/api/#sclib.io.fs.package$$Writable$)
+- type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for [basic types](http://j-keck.github.io/sclib/latest/api/#sclib.io.fs.Writable$)
 ```tut
 for {
   wd <- dir("sclib-example")

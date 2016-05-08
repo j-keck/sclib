@@ -295,7 +295,7 @@ scala> for {
 res0: scala.util.Try[String] = Success(file size: 22, line count: 2, word count: 22)
 ```
 
-- type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for [basic types](http://j-keck.github.io/sclib/latest/api/#sclib.io.fs.package$$Writable$)
+- type-class based `write`, `writeLines`, `append` and `appendLines` functions with instances for [basic types](http://j-keck.github.io/sclib/latest/api/#sclib.io.fs.Writable$)
 ```scala
 scala> for {
      |   wd <- dir("sclib-example")
