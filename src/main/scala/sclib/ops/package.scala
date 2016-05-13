@@ -10,5 +10,5 @@ package object ops {
   /**
     * use `import sclib.ops.all._` to import all
     */
-  object all extends either with java8 with list with option with string with `try`
+  object all extends either with int with java8 with list with option with string with `try`
 }
