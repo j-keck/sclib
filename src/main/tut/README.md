@@ -221,6 +221,22 @@ java.util.stream.Stream.of(1, 2, 3).reduce(0, (_: Int) + (_: Int))
 
 
 ### io
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.package)
+
+- simple version of java's 'try-with-resource'
+```scala
+import sclib.io.autoClose
+import java.nio.file.Paths
+import java.nio.file.StandardOpenOption.{CREATE, WRITE}
+import java.nio.channels.FileChannel
+for {
+  in <- autoClose(FileChannel.open(Paths.get("/tmp/input")))
+  out <- autoClose(FileChannel.open(Paths.get("/tmp/output"), CREATE, WRITE))
+} in.transferTo(0, Long.MaxValue, out)
+// `in` and `out` are closed here
+```
+
+#### filesystem
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.fs.package)
 ```tut:silent:reset
 import sclib.io.fs._
