@@ -1,6 +1,7 @@
 # sclib - simple scala utility library
 
   - stdlib extensions
+  - toolbox to work with files and directories
   - utilities
   - zero runtime dependencies
   - jvm and scala.js bits
@@ -273,7 +274,24 @@ for {
   _ <- wd.deleteR                                       // delete the work-dir recursive
 } yield content
 ```
-  
+
+ #### networking 
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.net.package)
+```tut:silent:reset
+import sclib.io.net._
+```
+ 
+ - download a file
+ ```scala
+scala> import sclib.io.fs._
+scala> url("http://example.com").flatMap(_.fetch(file("example.com")))
+res0: scala.util.Try[sclib.io.fs.FSFile] = Success(FSFile(example.com))
+ ```
+### util
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.util.package)
+```tut:silent:reset
+```
+
 - simple Union type
 ```tut
 import sclib.util.union._
