@@ -33,6 +33,7 @@ add the following snippet to your `build.sbt` file:
      - [String](#string)
      - [Java8 interoperability](#java8-interoperability)
    - [io](#io)
+   - [util](#util)
    - [patterns](#patterns)
    - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
 
@@ -257,6 +258,21 @@ for {
 } yield content
 ```
   
+- simple Union type
+```tut
+import sclib.util.union._
+def f[A: (Int Or String)#Check](a: A): Int = a match {
+  case i: Int => i
+  case s: String => s.length
+}
+f(5)
+f("hey")
+
+// this throws a compiler error:
+// f(5L) 
+```
+
+
 
 ### "pattern's"
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.patterns.package)
