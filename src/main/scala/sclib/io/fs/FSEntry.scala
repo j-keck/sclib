@@ -395,11 +395,10 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
       case d: FSDir =>
         Try {
           // try to apply the given permissions recursive to each entry - fail on any error.
-          // the result is ignored.
-          FSIterator(d).map(_.fold(throw _)(_.chmod(perms:_*).get)).toList
+          FSIterator(d, includeStartDir = true).foreach(_.fold(throw _)(_.chmod(perms: _*).get))
           this
         }
-      case _: FSFile => chmod(perms:_*)
+      case _: FSFile => chmod(perms: _*)
     }
   }
 
@@ -446,14 +445,13 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     *
     * ''fail on any error''
     *
-    * @see [[FSEntry.chmodR(mode:String)*]]
+    * @see [[FSEntry.chmod(mode:String)*]]
     */
   def chmodR(mode: String): Try[Self] = this match {
     case d: FSDir =>
       Try {
         // try to apply the given permissions recursive to each entry - fail on any error.
-        // the result is ignored.
-        FSIterator(d).map(_.fold(throw _)(_.chmod(mode).get))
+        FSIterator(d, includeStartDir = true).foreach(_.fold(throw _)(_.chmod(mode).get))
         this
       }
     case _: FSFile => chmod(mode)

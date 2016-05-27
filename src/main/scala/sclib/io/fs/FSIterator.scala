@@ -11,12 +11,51 @@ import sclib.ops.all._
   *
   * it wraps every file operation in a `Try`.
   *
+  *
+  * by default, the iterator start ''in'' the given directory, and walk recursively (deep first) over all entries.
+  * you can control the recursive level with the 'depth' argument, where 1 means only the content from the given directory.
+  * to start ''with'' the given directory, use 'includeStartDir = true'.
+  *
+  *
+  * assume the following directory tree:
+  * <pre>
+  * /tmp/sclib-example/a1/b1/a1b1file
+  * /tmp/sclib-example/a1/b1/c1/a1b1c1file
+  * /tmp/sclib-example/a2/b2/a2b2file
+  * </pre>
+  *
+  *
+  * ===default behaviour===
+  * <pre>
+  * scala> FSIterator(dir("/tmp/sclib-example").get).foreach(println)
+  * Success(FSDir(/tmp/sclib-example/a1))
+  * Success(FSDir(/tmp/sclib-example/a1/b1))
+  * Success(FSFile(/tmp/sclib-example/a1/b1/a1b1file))
+  * Success(FSDir(/tmp/sclib-example/a1/b1/c1))
+  * Success(FSFile(/tmp/sclib-example/a1/b1/c1/a1b1c1file))
+  * Success(FSDir(/tmp/sclib-example/a2))
+  * Success(FSDir(/tmp/sclib-example/a2/b2))
+  * Success(FSFile(/tmp/sclib-example/a2/b2/a2b2file))
+  * </pre>
+  *
+  * ===with max-depth: 2 and the start directory included===
+  * <pre>
+  * scala> FSIterator(dir("/tmp/sclib-example").get, depth = 2, includeStartDir = true).foreach(println)
+  * Success(FSDir(/tmp/sclib-example))
+  * Success(FSDir(/tmp/sclib-example/a1))
+  * Success(FSDir(/tmp/sclib-example/a1/b1))
+  * Success(FSDir(/tmp/sclib-example/a2))
+  * Success(FSDir(/tmp/sclib-example/a2/b2))
+  * </pre>
+  *
+  *
   * @param start directory to start
-  * @param maxDepth the maximum number of directory levels to visit
+  * @param depth the maximum number of directory levels to visit
   */
-case class FSIterator(start: FSDir, maxDepth: Int = Integer.MAX_VALUE) extends Iterator[Try[FSEntryImpl]] {
+case class FSIterator(start: FSDir, depth: Int = Integer.MAX_VALUE, includeStartDir: Boolean = false)
+    extends Iterator[Try[FSEntryImpl]] {
 
-  private var todo: List[Try[FSEntryImpl]]   = ls(start.path)
+  private var todo: List[Try[FSEntryImpl]]   = if (includeStartDir) List(start.success) else ls(start.path)
   private var maybePendingDir: Option[FSDir] = None
 
   override def hasNext: Boolean = {
@@ -37,8 +76,8 @@ case class FSIterator(start: FSDir, maxDepth: Int = Integer.MAX_VALUE) extends I
       // if the current entry is a directory, and we didn't reach 'maxDepth',
       // save it to process the contents later.
       // "don't look ahead" - necessary for example if we need to fix the permissions before we can look in the dir.
-      case d: FSDir if d.depth(start) < maxDepth => maybePendingDir = Some(d)
-      case _                                     => // nothing to do
+      case d: FSDir if d.depth(start) < depth => maybePendingDir = Some(d)
+      case _                                  => // nothing to do
     }
 
     curOrErr
