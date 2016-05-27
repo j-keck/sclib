@@ -70,11 +70,11 @@ trait `try` {
       * scala> import scala.util.Try
       * scala> Try(1/0)
       * res0: Try[Int] = Failure(java.lang.ArithmeticException: / by zero)
-      * scala> Try(1/0).mapO(_ => "unable to calculate: 1/0")
+      * scala> Try(1/0).mapO(_ => new java.lang.Exception("unable to calculate: 1/0"))
       * res1: Try[Int] = Failure(java.lang.Exception: unable to calculate: 1/0)
       * }}}
       */
-    def mapO(f: Throwable => String): Try[A] = t.transform(_.success, f(_).failure)
+    def mapO(f: Throwable => Throwable): Try[A] = t.transform(_.success, f(_).failure)
 
     /**
       * apply the given function if it's a failure
@@ -135,11 +135,11 @@ trait `try` {
     def failure[A]: Try[A] = Failure(new Exception(s))
   }
 
-
   /**
     * reducing many `Try`s into a single `Try`
     */
   implicit class TraversableOfTry[A, CC[X] <: Traversable[X]](ts: CC[Try[A]]) {
+
     /**
       * reducing many `Try`s into a single `Try`
       *

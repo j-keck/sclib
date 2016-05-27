@@ -39,7 +39,13 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     case _: FSFile =>
       create(OWNER_READ, OWNER_WRITE, GROUP_READ, OTHERS_READ)
     case _: FSDir =>
-      create(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ, GROUP_EXECUTE, OTHERS_READ, OTHERS_EXECUTE)
+      create(OWNER_READ,
+             OWNER_WRITE,
+             OWNER_EXECUTE,
+             GROUP_READ,
+             GROUP_EXECUTE,
+             OTHERS_READ,
+             OTHERS_EXECUTE)
   }
 
   /**
@@ -47,8 +53,6 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     *
     * ''the path hierarchy must exist - use [[FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*]] to create the hierarchy at first.''
     *
-    * @param perms
-    * @return
     */
   def create(perms: PosixFilePermission*): Try[Self] = Try {
     this match {
@@ -78,9 +82,9 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     *      | } yield perm.to[SortedSet]
     * res0: scala.util.Try[SortedSet[java.nio.file.attribute.PosixFilePermission]] = Success(TreeSet(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ))
     * }}}
-    * @param n
+    * @param n unix like numeric mode
     */
-  def create(n: Int): Try[Self] = FSPerm.calc(n).flatMap(create(_:_*))
+  def create(n: Int): Try[Self] = FSPerm.calc(n).flatMap(create(_: _*))
 
   /**
     * create the filesystem entry with the given permissions
@@ -102,11 +106,13 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     *      | } yield perm.to[SortedSet]
     * res0: scala.util.Try[scala.collection.SortedSet[java.nio.file.attribute.PosixFilePermission]] = Success(TreeSet(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ, OTHERS_READ))
     * }}}
+    *
+    * @param mode unix like symbolic mode
     */
   def create(mode: String): Try[Self] =
     for {
-      newPerms <- FSPerm.mod(Seq(), mode)
-      res      <- create(newPerms:_*)
+      perms <- FSPerm.mod(Seq(), mode)
+      res   <- create(perms: _*)
     } yield res
 
   /**
@@ -176,7 +182,7 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
         // 'getParent' can return 'null'. but because it's a file, there it has always a parent.
         absNormalizedPath.getParent
     }
-    Files.createDirectories(p, attrs:_*)
+    Files.createDirectories(p, attrs: _*)
     this
   }
 
@@ -274,7 +280,7 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     *
     */
   def copy(target: Self, options: CopyOption*): Try[Self] = Try {
-    withPath(Files.copy(path, target.absNormalizedPath, options:_*))
+    withPath(Files.copy(path, target.absNormalizedPath, options: _*))
   }
 
   /**
@@ -289,7 +295,7 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
       // create the target directory if it doesn't exist
       _ <- target.mkDirs
       t = Paths.get(target.absNormalizedPath.toString + System.getProperty("file.separator") + this.name)
-      s <- Try(withPath(Files.copy(path, t, options:_*)))
+      s <- Try(withPath(Files.copy(path, t, options: _*)))
     } yield s
 
   /**
@@ -302,16 +308,16 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
       case d: FSDir =>
         for {
           // copy the directory
-          t <- d.copyTo(target, options:_*)
+          t <- d.copyTo(target, options: _*)
           // copy recursive
           _ <- d.flatMap { e: FSEntryImpl =>
-            dir(t.path.toString + System.getProperty("file.separator") + e.name).flatMap[FSEntryImpl] {
-              e.copyToR(_, options:_*)
-            }
-          }.toList.sequence
+                dir(t.path.toString + System.getProperty("file.separator") + e.name).flatMap[FSEntryImpl] {
+                  e.copyToR(_, options: _*)
+                }
+              }.toList.sequence
         } yield withPath(target.path)
       case _: FSFile =>
-        copyTo(target, options:_*)
+        copyTo(target, options: _*)
     }
   }
 
@@ -321,7 +327,7 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     * @param options [[http://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html]]
     */
   def move(target: Self, options: CopyOption*): Try[Self] = Try {
-    withPath(Files.move(path, target.path, options:_*))
+    withPath(Files.move(path, target.path, options: _*))
   }
 
   /**
@@ -333,7 +339,7 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     for {
       // create the target directory if it doesn't exist
       _ <- dir.mkDirs
-      s <- Try(withPath(Files.move(path, Paths.get(dir.path.toString, name), options:_*)))
+      s <- Try(withPath(Files.move(path, Paths.get(dir.path.toString, name), options: _*)))
     } yield s
 
   /**
@@ -412,7 +418,7 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     * }}}
     * @param n : unix like file permission notation
     */
-  def chmod(n: Int): Try[Self] = FSPerm.calc(n).flatMap(chmod(_:_*))
+  def chmod(n: Int): Try[Self] = FSPerm.calc(n).flatMap(chmod(_: _*))
 
   /**
     * set entry permission mode recursive
@@ -421,7 +427,11 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     *
     * @see [[FSEntry.chmod(n:Int)*]]
     */
-  def chmodR(n: Int): Try[Self] = FSPerm.calc(n).flatMap(chmodR(_:_*))
+  def chmodR(n: Int): Try[Self] =
+    for {
+      perm <- FSPerm.calc(n)
+      _    <- chmodR(perm: _*)
+    } yield this
 
   /**
     * set entry permission mode
@@ -437,7 +447,7 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     for {
       actualPerms <- lsmod
       newPerms    <- FSPerm.mod(actualPerms, mode)
-      res         <- chmod(newPerms:_*)
+      res         <- chmod(newPerms: _*)
     } yield res
 
   /**
@@ -466,4 +476,3 @@ trait FSEntry[Self <: FSEntry[Self]] { self: Self =>
     Files.getPosixFilePermissions(path).asScala.toList
   }
 }
-

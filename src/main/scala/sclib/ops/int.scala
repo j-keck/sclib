@@ -15,5 +15,4 @@ trait int {
     def MB: Long = KB * 1024
     def GB: Long = MB * 1024
   }
-
 }

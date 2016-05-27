@@ -9,6 +9,7 @@ import java.nio.file.{Files, OpenOption, Path}
 import scala.util.Try
 import scala.collection.JavaConverters._
 
+import sclib.io.autoClose
 import sclib.ops.all._
 
 /**
@@ -113,17 +114,20 @@ case class FSFile protected[io](path: Path) extends FSEntry[FSFile] {
     * @param cs      [[http://docs.oracle.com/javase/8/docs/api/java/nio/charset/Charset.html]]
     * @return
     */
-  def write[A : Writable](a: A, options: Seq[OpenOption] = Seq(), cs: Charset = UTF_8): Try[FSFile] = Try {
+  def write[A: Writable](a: A, options: Seq[OpenOption] = Seq(), cs: Charset = UTF_8): Try[FSFile] = Try {
 
     // truncate the file before writing if append mode is not given
-    val _options = options ++ Seq(CREATE, WRITE) ++ (if (options.contains(APPEND)) Seq() else Seq(TRUNCATE_EXISTING))
+    val _options =
+      options ++ Seq(CREATE, WRITE) ++ (if (options.contains(APPEND)) Seq()
+                                        else Seq(TRUNCATE_EXISTING))
 
-    val out                    = Files.newOutputStream(path, _options:_*)
-    val writer: BufferedWriter = new BufferedWriter(new OutputStreamWriter(out, cs.newEncoder()))
-    Writable(a).foreach { line =>
+    for {
+      out    <- autoClose(Files.newOutputStream(path, _options: _*))
+      writer <- autoClose(new BufferedWriter(new OutputStreamWriter(out, cs.newEncoder)))
+    } Writable(a).foreach { line =>
       writer.append(line)
     }
-    writer.close()
+
     this
   }
 
@@ -132,7 +136,7 @@ case class FSFile protected[io](path: Path) extends FSEntry[FSFile] {
     *
     * @see [[FSFile.write]]
     */
-  def writeLines[A : Writable](a: A, options: Seq[OpenOption] = Seq(), cs: Charset = UTF_8): Try[FSFile] = {
+  def writeLines[A: Writable](a: A, options: Seq[OpenOption] = Seq(), cs: Charset = UTF_8): Try[FSFile] = {
     val nl           = System.getProperty("line.separator")
     val originalIter = Writable(a)
     // wrap the original iterator in a iterator which add newlines
@@ -140,7 +144,9 @@ case class FSFile protected[io](path: Path) extends FSEntry[FSFile] {
 
       override def hasNext: Boolean = originalIter.hasNext
 
-      override def next(): String = if (originalIter.hasNext) originalIter.next() + nl else originalIter.next()
+      override def next(): String =
+        if (originalIter.hasNext) originalIter.next() + nl
+        else originalIter.next()
     }, options, cs)
   }
 
@@ -151,7 +157,7 @@ case class FSFile protected[io](path: Path) extends FSEntry[FSFile] {
     *
     * @see [[FSFile.write]]
     */
-  def append[A : Writable](a: A, options: Seq[OpenOption] = Seq(), cs: Charset = UTF_8): Try[FSFile] =
+  def append[A: Writable](a: A, options: Seq[OpenOption] = Seq(), cs: Charset = UTF_8): Try[FSFile] =
     write(a, options :+ APPEND, cs)
 
   /**
@@ -161,7 +167,7 @@ case class FSFile protected[io](path: Path) extends FSEntry[FSFile] {
     *
     * @see [[FSFile.append]]
     */
-  def appendLines[A : Writable](a: A, options: Seq[OpenOption] = Seq(), cs: Charset = UTF_8): Try[FSFile] =
+  def appendLines[A: Writable](a: A, options: Seq[OpenOption] = Seq(), cs: Charset = UTF_8): Try[FSFile] =
     writeLines(a, options :+ APPEND, cs)
 
   /**
@@ -174,8 +180,10 @@ case class FSFile protected[io](path: Path) extends FSEntry[FSFile] {
     */
   def writeBytes(b: Array[Byte], options: Seq[OpenOption] = Seq()): Try[FSFile] = Try {
     // truncate the file before writing if append mode is not given
-    val _options = options ++ Seq(CREATE, WRITE) ++ (if (options.contains(APPEND)) Seq() else Seq(TRUNCATE_EXISTING))
-    Files.write(path, b, _options:_*)
+    val _options =
+      options ++ Seq(CREATE, WRITE) ++ (if (options.contains(APPEND)) Seq()
+                                        else Seq(TRUNCATE_EXISTING))
+    Files.write(path, b, _options: _*)
     this
   }
 
@@ -186,5 +194,6 @@ case class FSFile protected[io](path: Path) extends FSEntry[FSFile] {
     *
     * @see [[FSFile.writeBytes]]
     */
-  def appendBytes(b: Array[Byte], options: Seq[OpenOption] = Seq()): Try[FSFile] = writeBytes(b, options :+ APPEND)
+  def appendBytes(b: Array[Byte], options: Seq[OpenOption] = Seq()): Try[FSFile] =
+    writeBytes(b, options :+ APPEND)
 }

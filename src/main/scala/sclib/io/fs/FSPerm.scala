@@ -134,9 +134,10 @@ object FSPerm {
     def lookup(
         act: Seq[PosixFilePermission], who: Who, op: Char, perm: Perm): Either[String, Seq[PosixFilePermission]] = {
       val xs = (who, perm) match {
-        case (All, Read)     => Seq(OWNER_READ, GROUP_READ, OTHERS_READ).right
-        case (All, Write)    => Seq(OWNER_WRITE, GROUP_WRITE, OTHERS_WRITE).right
-        case (All, Exec)     => Seq(OWNER_EXECUTE, GROUP_EXECUTE, OTHERS_EXECUTE).right
+        case (All, Read)  => Seq(OWNER_READ, GROUP_READ, OTHERS_READ).right
+        case (All, Write) => Seq(OWNER_WRITE, GROUP_WRITE, OTHERS_WRITE).right
+        case (All, Exec) =>
+          Seq(OWNER_EXECUTE, GROUP_EXECUTE, OTHERS_EXECUTE).right
         case (User, Read)    => Seq(OWNER_READ).right
         case (User, Write)   => Seq(OWNER_WRITE).right
         case (User, Exec)    => Seq(OWNER_EXECUTE).right
@@ -155,10 +156,13 @@ object FSPerm {
           case '+' => (act ++ ys).right
           case '=' =>
             val keep: Seq[PosixFilePermission] = who match {
-              case All    => Seq()
-              case User   => act.filterNot(Seq(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE).contains)
-              case Group  => act.filterNot(Seq(GROUP_READ, GROUP_WRITE, GROUP_EXECUTE).contains)
-              case Others => act.filterNot(Seq(OTHERS_READ, OTHERS_WRITE, OTHERS_EXECUTE).contains)
+              case All => Seq()
+              case User =>
+                act.filterNot(Seq(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE).contains)
+              case Group =>
+                act.filterNot(Seq(GROUP_READ, GROUP_WRITE, GROUP_EXECUTE).contains)
+              case Others =>
+                act.filterNot(Seq(OTHERS_READ, OTHERS_WRITE, OTHERS_EXECUTE).contains)
             }
             (keep ++ ys).right
           case _ => s"unexpected op: ${op}".left
@@ -169,10 +173,11 @@ object FSPerm {
     def lookupAll(act: Seq[PosixFilePermission],
                   whos: Seq[Who],
                   op: Char,
-                  perms: Seq[Perm]): Either[String, Seq[PosixFilePermission]] = (for {
-          w <- whos
-          p <- perms
-        } yield lookup(act, w, op, p)).sequence.map(_.flatten)
+                  perms: Seq[Perm]): Either[String, Seq[PosixFilePermission]] =
+      (for {
+        w <- whos
+        p <- perms
+      } yield lookup(act, w, op, p)).sequence.map(_.flatten)
 
     def parse(act: Seq[PosixFilePermission], mode: String): Try[Seq[PosixFilePermission]] = {
       val idx = mode.indexWhere("+-=".contains(_))

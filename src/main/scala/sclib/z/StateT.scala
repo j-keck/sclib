@@ -28,20 +28,22 @@ case class StateT[F[_], S, A](runStateT: F[S => F[(A, S)]]) {
     F.map(run(s)) { case (a, s) => (f(a), s) }
   }
 
-  def flatMap[B](f: A => StateT[F, S, B])(implicit F: Monad[F]): StateT[F, S, B] = StateT { s =>
+  def flatMap[B](f: A => StateT[F, S, B])(
+      implicit F: Monad[F]): StateT[F, S, B] = StateT { s =>
     F.flatMap(run(s)) {
       case (a, s) =>
         f(a).run(s)
     }
   }
 
-  def flatMapF[B](f: A => F[B])(implicit F: Monad[F]): StateT[F, S, B] = StateT { s =>
-    F.flatMap(runStateT) { fa =>
-      F.flatMap(fa(s)) {
-        case (a, s) => F.map(f(a))((_, s))
+  def flatMapF[B](f: A => F[B])(implicit F: Monad[F]): StateT[F, S, B] =
+    StateT { s =>
+      F.flatMap(runStateT) { fa =>
+        F.flatMap(fa(s)) {
+          case (a, s) => F.map(f(a))((_, s))
+        }
       }
     }
-  }
 
   def run(s: S)(implicit F: Monad[F]): F[(A, S)] = {
     F.flatMap(runStateT)(f => f(s))
@@ -53,5 +55,6 @@ case class StateT[F[_], S, A](runStateT: F[S => F[(A, S)]]) {
 }
 
 object StateT {
-  def apply[F[_], S, A](f: S => F[(A, S)])(implicit F: Monad[F]): StateT[F, S, A] = new StateT(F.pure(f))
+  def apply[F[_], S, A](f: S => F[(A, S)])(
+      implicit F: Monad[F]): StateT[F, S, A] = new StateT(F.pure(f))
 }

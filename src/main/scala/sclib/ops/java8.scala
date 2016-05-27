@@ -6,6 +6,7 @@ import java.util.stream.{Stream => JStream}
 import scala.collection.JavaConverters
 
 object java8 extends java8
+
 /**
   * java8 interoperability
   *
@@ -30,7 +31,6 @@ trait java8 {
       */
     def toIterator: Iterator[A] =
       JavaConverters.asScalaIteratorConverter(js.iterator()).asScala
-
 
     /**
       * create a `scala.collection.immutable.List` from a `java.util.stream.Stream`
@@ -69,7 +69,6 @@ trait java8 {
   implicit def SFunction2JFunction[A, B](f: A => B) = new JFunction[A, B] {
     override def apply(t: A): B = f(t)
   }
-
 
   /**
     * convert a `scala.Function1` to a `java.util.function.Predicate`

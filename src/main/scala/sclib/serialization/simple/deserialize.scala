@@ -7,7 +7,6 @@ trait deserialize {
 
   type DeserializeState[A] = StateT[Either[String, ?], String, A]
 
-
   trait Deserialize[A] {
     def apply: DeserializeState[A]
 
@@ -23,10 +22,10 @@ trait deserialize {
   }
 
   object Deserialize {
-    def apply[A : Deserialize](s: String): Either[String, A] =
+    def apply[A: Deserialize](s: String): Either[String, A] =
       Deserialize.apply[A].eval(s)
 
-    def apply[A : Deserialize]: DeserializeState[A] =
+    def apply[A: Deserialize]: DeserializeState[A] =
       implicitly[Deserialize[A]].apply
   }
 
@@ -63,17 +62,18 @@ trait deserialize {
   // container
   //
 
-  implicit def optionDes[A : Deserialize] = new Deserialize[Option[A]] {
+  implicit def optionDes[A: Deserialize] = new Deserialize[Option[A]] {
     override def apply: DeserializeState[Option[A]] = next.flatMapF {
       case "N" => none.right
-      case s => Deserialize[A](s).map(_.some)
+      case s   => Deserialize[A](s).map(_.some)
     }
   }
 
-  implicit def eitherDes[A : Deserialize, B : Deserialize] =
+  implicit def eitherDes[A: Deserialize, B: Deserialize] =
     new Deserialize[Either[A, B]] {
       override def apply: DeserializeState[Either[A, B]] =
-        next.flatMapF(_.splitAt(1) match {
+        next.flatMapF(
+            _.splitAt(1) match {
           case ("L", s) => Deserialize[A](s).map(_.left)
           case ("R", s) => Deserialize[B](s).map(_.right)
           case (x, r) =>
@@ -81,7 +81,7 @@ trait deserialize {
         })
     }
 
-  implicit def tupleDes[A : Deserialize, B : Deserialize] =
+  implicit def tupleDes[A: Deserialize, B: Deserialize] =
     new Deserialize[(A, B)] {
       override def apply: DeserializeState[(A, B)] =
         for {
@@ -90,7 +90,7 @@ trait deserialize {
         } yield (a, b)
     }
 
-  implicit def listDes[A : Deserialize] = new Deserialize[List[A]] {
+  implicit def listDes[A: Deserialize] = new Deserialize[List[A]] {
 
     override def apply: DeserializeState[List[A]] = next.flatMapF(unspool)
 
@@ -102,7 +102,7 @@ trait deserialize {
       }
   }
 
-  implicit def vectorDes[A : Deserialize] = new Deserialize[Vector[A]] {
+  implicit def vectorDes[A: Deserialize] = new Deserialize[Vector[A]] {
 
     override def apply: DeserializeState[Vector[A]] = next.flatMapF(unspool)
 
@@ -113,7 +113,7 @@ trait deserialize {
       }
   }
 
-  implicit def setDes[A : Deserialize] = new Deserialize[Set[A]] {
+  implicit def setDes[A: Deserialize] = new Deserialize[Set[A]] {
 
     override def apply: DeserializeState[Set[A]] = next.flatMapF(unspool)
 
@@ -124,13 +124,13 @@ trait deserialize {
       }
   }
 
-  implicit def mapDes[A : Deserialize, B : Deserialize] =
+  implicit def mapDes[A: Deserialize, B: Deserialize] =
     new Deserialize[Map[A, B]] {
       override def apply: DeserializeState[Map[A, B]] = next.flatMapF(unspool)
 
       private def unspool(s: String): Either[String, Map[A, B]] =
         Deserialize[Tuple2[A, B]].run(s).flatMap {
-          case ((a, b), "") => Map(a -> b).right
+          case ((a, b), "") => Map(a                  -> b).right
           case ((a, b), xs) => unspool(xs).map(_ + (a -> b))
         }
     }

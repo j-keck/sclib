@@ -12,14 +12,14 @@ import scala.util.Try
   * ===get a file / directory handle===
   *
   * to get a file handle, use any of the following functions:
-  *   - [[fs.file(name:String)* file(name: String): Try[FSFile]]]
-  *   - [[fs.file(parent:sclib\.io\.fs\.FSDir,name:String)* file(parent: FSDir, name: String): Try[FSFile]]]
-  *   - [[fs.file(path:java\.nio\.file\.Path)* file(path: Path): Try[FSFile]]]
+  *   - [[fs.file(name:String)* file(name: String): Try[FSFile&#93;]]
+  *   - [[fs.file(parent:sclib\.io\.fs\.FSDir,name:String)* file(parent: FSDir, name: String): Try[FSFile&#93;]]
+  *   - [[fs.file(path:java\.nio\.file\.Path)* file(path: Path): Try[FSFile&#93;]]
   *
   * for a directory handle:
-  *   - [[fs.dir(name:String)* dir(name: String): Try[FSDir]]]
-  *   - [[fs.dir(parent:sclib\.io\.fs\.FSDir,name:String)* dir(parent: FSDir, name: String): Try[FSDir]]]
-  *   - [[fs.dir(path:java\.nio\.file\.Path)* dir(path: Path): Try[FSDir]]]
+  *   - [[fs.dir(name:String)* dir(name: String): Try[FSDir&#93;]]
+  *   - [[fs.dir(parent:sclib\.io\.fs\.FSDir,name:String)* dir(parent: FSDir, name: String): Try[FSDir&#93;]]
+  *   - [[fs.dir(path:java\.nio\.file\.Path)* dir(path: Path): Try[FSDir&#93;]]
   *
   *
   * ======example:======

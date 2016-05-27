@@ -75,7 +75,7 @@ object net {
       * </pre>
       *
       */
-    def fetch[A : (FSFile Or Try[FSFile])#Check](
+    def fetch[A: (FSFile Or Try[FSFile])#Check](
         target: A, connectTimeoutMS: Int = 0, readTimeoutMS: Int = 0): Try[FSFile] =
       target match {
         case f: FSFile =>
@@ -86,7 +86,10 @@ object net {
             con.setReadTimeout(readTimeoutMS)
 
             @tailrec
-            def go(src: ReadableByteChannel, dst: FileChannel, pos: Long, bufSize: Long): Long = {
+            def go(src: ReadableByteChannel,
+                   dst: FileChannel,
+                   pos: Long,
+                   bufSize: Long): Long = {
               val count = dst.transferFrom(src, pos, bufSize)
               if (count > 0) go(src, dst, pos + count, bufSize)
               else pos

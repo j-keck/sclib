@@ -16,7 +16,7 @@ package sclib.z
   * res1: ((Int, Int), Int) = ((0,1),2)
   * }}}
   */
-case class State[S, A](run: S => (A, S)){
+case class State[S, A](run: S => (A, S)) {
   def map[B](f: A => B): State[S, B] = State { s =>
     val (a, s2) = run(s)
     (f(a), s2)

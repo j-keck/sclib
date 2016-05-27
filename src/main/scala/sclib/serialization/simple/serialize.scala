@@ -44,11 +44,11 @@ trait serialize {
   // container
   //
 
-  implicit def optionSer[A: Serialize] = new Serialize[Option[A]]{
+  implicit def optionSer[A: Serialize] = new Serialize[Option[A]] {
     override def apply(a: Option[A]): String = pack(a.fold("N")(s => Serialize(s)))
   }
 
-  implicit def eitherSer[A: Serialize, B: Serialize] = new Serialize[Either[A, B]]{
+  implicit def eitherSer[A: Serialize, B: Serialize] = new Serialize[Either[A, B]] {
     override def apply(a: Either[A, B]): String = pack(a.fold("L" + Serialize(_), "R" + Serialize(_)))
   }
 
@@ -60,15 +60,15 @@ trait serialize {
     override def apply(a: List[A]): String = pack(a.map(Serialize[A]).mkString)
   }
 
-  implicit def vectorSer[A: Serialize] = new Serialize[Vector[A]]{
+  implicit def vectorSer[A: Serialize] = new Serialize[Vector[A]] {
     override def apply(a: Vector[A]): String = pack(a.map(Serialize[A]).mkString)
   }
 
-  implicit def setSer[A: Serialize] = new Serialize[Set[A]]{
+  implicit def setSer[A: Serialize] = new Serialize[Set[A]] {
     override def apply(a: Set[A]): String = pack(a.map(Serialize[A]).mkString)
   }
 
-  implicit def mapSer[A: Serialize, B: Serialize] = new Serialize[Map[A, B]]{
+  implicit def mapSer[A: Serialize, B: Serialize] = new Serialize[Map[A, B]] {
     override def apply(m: Map[A, B]): String = pack(m.foldRight("")(Serialize[Tuple2[A, B]](_) + _))
   }
 }

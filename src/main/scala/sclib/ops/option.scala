@@ -16,14 +16,12 @@ trait option {
     **/
   def none[A]: Option[A] = None
 
-
   /**
     * shorthand constructor for `Some`
     */
   implicit class Any2Some[A](a: A) {
     def some: Option[A] = Some(a)
   }
-
 
   /**
     * reducing many `Option`s into a single `Option`

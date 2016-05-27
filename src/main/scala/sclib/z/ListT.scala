@@ -26,19 +26,21 @@ case class ListT[F[_], A](runListT: F[List[A]]) {
     F.map(runListT)(_.map(f))
   }
 
-  def flatMap[B](f: A => ListT[F, B])(implicit F: Monad[F]): ListT[F, B] = ListT {
-    F.flatMap(runListT)(_.map(f(_).runListT).fold(F.pure(List.empty[B])) {
-      case (fbs1, fbs2) =>
-        F.flatMap(fbs1)((bs1: List[B]) => F.map(fbs2)((bs2: List[B]) => bs1 ++ bs2))
-    })
-  }
+  def flatMap[B](f: A => ListT[F, B])(implicit F: Monad[F]): ListT[F, B] =
+    ListT {
+      F.flatMap(runListT)(_.map(f(_).runListT).fold(F.pure(List.empty[B])) {
+        case (fbs1, fbs2) =>
+          F.flatMap(fbs1)((bs1: List[B]) => F.map(fbs2)((bs2: List[B]) => bs1 ++ bs2))
+      })
+    }
 
-  def flatMapF[B](f: A => F[List[B]])(implicit F: Monad[F]): ListT[F, B] = ListT {
-    F.flatMap(runListT)(_.map(f).fold(F.pure(List.empty[B])) {
-      case (fbs1, fbs2) =>
-        F.flatMap(fbs1)((bs1: List[B]) => F.map(fbs2)((bs2: List[B]) => bs1 ++ bs2))
-    })
-  }
+  def flatMapF[B](f: A => F[List[B]])(implicit F: Monad[F]): ListT[F, B] =
+    ListT {
+      F.flatMap(runListT)(_.map(f).fold(F.pure(List.empty[B])) {
+        case (fbs1, fbs2) =>
+          F.flatMap(fbs1)((bs1: List[B]) => F.map(fbs2)((bs2: List[B]) => bs1 ++ bs2))
+      })
+    }
 
   /**
     * head of the list
@@ -72,7 +74,8 @@ case class ListT[F[_], A](runListT: F[List[A]]) {
     * res2: sclib.z.ListT[scala.util.Try,Nothing] = ListT(Failure(java.lang.UnsupportedOperationException: tail of empty list))
     * }}}
     */
-  def tail(implicit F: Functor[F]): ListT[F, A] = ListT(F.map(runListT)(_.tail))
+  def tail(implicit F: Functor[F]): ListT[F, A] =
+    ListT(F.map(runListT)(_.tail))
 
   /**
     * prepend the given element to the list
@@ -131,5 +134,6 @@ case class ListT[F[_], A](runListT: F[List[A]]) {
 }
 
 object ListT {
-  def apply[F[_], A](xs: List[A])(implicit F: Monad[F]): ListT[F, A] = ListT(F.pure(xs))
+  def apply[F[_], A](xs: List[A])(implicit F: Monad[F]): ListT[F, A] =
+    ListT(F.pure(xs))
 }
