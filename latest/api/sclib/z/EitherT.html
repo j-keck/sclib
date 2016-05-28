@@ -53,7 +53,7 @@
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
 scala&gt; <span class="kw">import</span> sclib.ops.either._
-scala&gt; <span class="kw">val</span> et = EitherT[({<span class="kw">type</span> L[A] = Function1[<span class="std">Int</span>, A]})#L, <span class="std">String</span>, <span class="std">Int</span>]{i <span class="kw">=&gt;</span> <span class="kw">if</span>(i &lt; <span class="num">10</span>) i.right <span class="kw">else</span> <span class="lit">"BOOM"</span>.left}
+scala&gt; <span class="kw">val</span> et = EitherT[Function1[<span class="std">Int</span>, ?], <span class="std">String</span>, <span class="std">Int</span>]{i <span class="kw">=&gt;</span> <span class="kw">if</span>(i &lt; <span class="num">10</span>) i.right <span class="kw">else</span> <span class="lit">"BOOM"</span>.left}
 et: sclib.z.EitherT[[A]<span class="std">Int</span> <span class="kw">=&gt;</span> A,<span class="std">String</span>,<span class="std">Int</span>] = EitherT(&lt;function1&gt;)
 scala&gt; et.runEitherT(<span class="num">5</span>)
 res0: Either[<span class="std">String</span>,<span class="std">Int</span>] = Right(<span class="num">5</span>)

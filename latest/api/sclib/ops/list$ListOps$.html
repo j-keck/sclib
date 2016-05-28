@@ -400,7 +400,7 @@
       <p class="shortcomment cmt"><code>unfoldLeft</code> is a <code>dual</code> for <code>foldLeft</code>.</p><div class="fullcomment"><div class="comment cmt"><p><code>unfoldLeft</code> is a <code>dual</code> for <code>foldLeft</code>.
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.list._
-scala&gt; ListOps.unfoldLeft(<span class="num">0</span>){ i <span class="kw">=&gt;</span> <span class="kw">if</span>(i &gt; <span class="num">10</span>) <span class="std">None</span> <span class="kw">else</span> <span class="std">Some</span>(i + <span class="num">1</span>, i)}
+scala&gt; ListOps.unfoldLeft(<span class="num">0</span>){ i <span class="kw">=&gt;</span> <span class="kw">if</span>(i &gt; <span class="num">10</span>) <span class="std">None</span> <span class="kw">else</span> <span class="std">Some</span>(i + <span class="num">1</span> -&gt; i)}
 res0: <span class="std">List</span>[<span class="std">Int</span>] = <span class="std">List</span>(<span class="num">10</span>, <span class="num">9</span>, <span class="num">8</span>, <span class="num">7</span>, <span class="num">6</span>, <span class="num">5</span>, <span class="num">4</span>, <span class="num">3</span>, <span class="num">2</span>, <span class="num">1</span>, <span class="num">0</span>)</pre></li></ol>
             </div></dl></div>
     </li><li name="sclib.ops.list.ListOps#unfoldRight" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -422,7 +422,7 @@ res0: <span class="std">List</span>[<span class="std">Int</span>] = <span class=
       <p class="shortcomment cmt"><code>unfoldRight</code> is a <code>dual</code> for <code>foldRight</code>.</p><div class="fullcomment"><div class="comment cmt"><p><code>unfoldRight</code> is a <code>dual</code> for <code>foldRight</code>.
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.ops.list._
-scala&gt; ListOps.unfoldRight(<span class="num">0</span>){ i <span class="kw">=&gt;</span> <span class="kw">if</span>(i &gt; <span class="num">10</span>) <span class="std">None</span> <span class="kw">else</span> <span class="std">Some</span>(i, i + <span class="num">1</span>)}
+scala&gt; ListOps.unfoldRight(<span class="num">0</span>){ i <span class="kw">=&gt;</span> <span class="kw">if</span>(i &gt; <span class="num">10</span>) <span class="std">None</span> <span class="kw">else</span> <span class="std">Some</span>(i -&gt; (i + <span class="num">1</span>))}
 res0: <span class="std">List</span>[<span class="std">Int</span>] = <span class="std">List</span>(<span class="num">0</span>, <span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>, <span class="num">7</span>, <span class="num">8</span>, <span class="num">9</span>, <span class="num">10</span>)</pre></li></ol>
             </div></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">

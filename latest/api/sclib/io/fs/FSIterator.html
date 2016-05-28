@@ -45,12 +45,35 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">FSIterator</span><span class="params">(<span name="start">start: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="maxDepth">maxDepth: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Integer.MAX_VALUE</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">FSIterator</span><span class="params">(<span name="start">start: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="depth">depth: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Integer.MAX_VALUE</span></span>, <span name="includeStartDir">includeStartDir: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>a <i>save</i> file-system iterator.</p><p>it wraps every file operation in a <code>Try</code>.
-</p></div><dl class="paramcmts block"><dt class="param">start</dt><dd class="cmt"><p>directory to start</p></dd><dt class="param">maxDepth</dt><dd class="cmt"><p>the maximum number of directory levels to visit</p></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>a <i>save</i> file-system iterator.</p><p>it wraps every file operation in a <code>Try</code>.</p><p>by default, the iterator start <i>in</i> the given directory, and walk recursively (deep first) over all entries.
+you can control the recursive level with the 'depth' argument, where 1 means only the content from the given directory.
+to start <i>with</i> the given directory, use 'includeStartDir = true'.</p><p>assume the following directory tree:
+<pre>
+/tmp/sclib-example/a1/b1/a1b1file
+/tmp/sclib-example/a1/b1/c1/a1b1c1file
+/tmp/sclib-example/a2/b2/a2b2file
+</pre></p><h5>default behaviour</h5><p><pre>
+scala> FSIterator(dir("/tmp/sclib-example").get).foreach(println)
+Success(FSDir(/tmp/sclib-example/a1))
+Success(FSDir(/tmp/sclib-example/a1/b1))
+Success(FSFile(/tmp/sclib-example/a1/b1/a1b1file))
+Success(FSDir(/tmp/sclib-example/a1/b1/c1))
+Success(FSFile(/tmp/sclib-example/a1/b1/c1/a1b1c1file))
+Success(FSDir(/tmp/sclib-example/a2))
+Success(FSDir(/tmp/sclib-example/a2/b2))
+Success(FSFile(/tmp/sclib-example/a2/b2/a2b2file))
+</pre></p><h5>with max-depth: 2 and the start directory included</h5><p><pre>
+scala> FSIterator(dir("/tmp/sclib-example").get, depth = 2, includeStartDir = true).foreach(println)
+Success(FSDir(/tmp/sclib-example))
+Success(FSDir(/tmp/sclib-example/a1))
+Success(FSDir(/tmp/sclib-example/a1/b1))
+Success(FSDir(/tmp/sclib-example/a2))
+Success(FSDir(/tmp/sclib-example/a2/b2))
+</pre></p></div><dl class="paramcmts block"><dt class="param">start</dt><dd class="cmt"><p>directory to start</p></dd><dt class="param">depth</dt><dd class="cmt"><p>the maximum number of directory levels to visit</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.TraversableOnce">TraversableOnce</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="scala.util.Try">Try</span>[<a href="package.html#FSEntryImpl=sclib.io.fs.FSEntry[A]forSome{typeA&lt;:sclib.io.fs.FSEntry[A]}" class="extmbr" name="sclib.io.fs.FSEntryImpl">FSEntryImpl</a>]], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -90,7 +113,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="sclib.io.fs.FSIterator#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(start:sclib.io.fs.FSDir,maxDepth:Int):sclib.io.fs.FSIterator"></a>
+      <a id="&lt;init&gt;(start:sclib.io.fs.FSDir,depth:Int,includeStartDir:Boolean):sclib.io.fs.FSIterator"></a>
       <a id="&lt;init&gt;:FSIterator"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -98,14 +121,14 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">FSIterator</span><span class="params">(<span name="start">start: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="maxDepth">maxDepth: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Integer.MAX_VALUE</span></span>)</span>
+        <span class="name">FSIterator</span><span class="params">(<span name="start">start: <a href="FSDir.html" class="extype" name="sclib.io.fs.FSDir">FSDir</a></span>, <span name="depth">depth: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Integer.MAX_VALUE</span></span>, <span name="includeStartDir">includeStartDir: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.FSIterator@&lt;init&gt;(start:sclib.io.fs.FSDir,maxDepth:Int):sclib.io.fs.FSIterator" title="Permalink" target="_top">
+      <a href="../../../index.html#sclib.io.fs.FSIterator@&lt;init&gt;(start:sclib.io.fs.FSDir,depth:Int,includeStartDir:Boolean):sclib.io.fs.FSIterator" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">start</dt><dd class="cmt"><p>directory to start</p></dd><dt class="param">maxDepth</dt><dd class="cmt"><p>the maximum number of directory levels to visit</p></dd></dl></div>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">start</dt><dd class="cmt"><p>directory to start</p></dd><dt class="param">depth</dt><dd class="cmt"><p>the maximum number of directory levels to visit</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -518,6 +541,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
+    </li><li name="sclib.io.fs.FSIterator#depth" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="depth:Int"></a>
+      <a id="depth:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">depth</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSIterator@depth:Int" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">the maximum number of directory levels to visit</p>
     </li><li name="scala.collection.Iterator#drop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="drop(n:&lt;?&gt;):Iterator[A]"></a>
       <a id="drop(Int):Iterator[Try[FSEntryImpl]]"></a>
@@ -847,6 +887,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="sclib.io.fs.FSIterator">FSIterator</a> → Iterator</dd></dl></div>
+    </li><li name="sclib.io.fs.FSIterator#includeStartDir" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="includeStartDir:Boolean"></a>
+      <a id="includeStartDir:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">includeStartDir</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#sclib.io.fs.FSIterator@includeStartDir:Boolean" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="scala.collection.Iterator#indexOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="indexOf[B&lt;:&lt;?&gt;](elem:&lt;?&gt;):Int"></a>
       <a id="indexOf[B&gt;:Try[FSEntryImpl]](B):Int"></a>
@@ -1000,23 +1057,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="sclib.io.fs.FSIterator#maxDepth" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="maxDepth:Int"></a>
-      <a id="maxDepth:Int"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">maxDepth</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#sclib.io.fs.FSIterator@maxDepth:Int" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">the maximum number of directory levels to visit</p>
     </li><li name="scala.collection.TraversableOnce#min" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="min[B&gt;:A](implicitcmp:Ordering[B]):A"></a>
       <a id="min[B&gt;:Try[FSEntryImpl]](Ordering[B]):Try[FSEntryImpl]"></a>

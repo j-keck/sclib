@@ -49,9 +49,9 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Represents a 'File'</p><p>the functions <code>write</code>, <code>writeLines</code>, <code>append</code> and <code>appendLines</code> expects a type-class instance (from <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>)
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Represents a 'File'</p><p>the functions <code>write</code>, <code>writeLines</code>, <code>append</code> and <code>appendLines</code> expects a type-class instance (from <a href="Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>)
 for their to be written payload in scope. instances for <code>string</code>, <code>char</code>, <code>short</code>, <code>int</code>, <code>long</code>, <code>float</code>,
-<code>double</code> and some collection types are already defined (see <a href="package$$Writable$.html" class="extype" name="sclib.io.fs.Writable">Writable$</a>).</p><p>the <code>write</code> and <code>append</code> functions don't add a newline at the end / between the sequences.
+<code>double</code> and some collection types are already defined (see <a href="Writable$.html" class="extype" name="sclib.io.fs.Writable">Writable$</a>).</p><p>the <code>write</code> and <code>append</code> functions don't add a newline at the end / between the sequences.
 for functions which add newlines use <code>writeLines</code> and <code>appendLines</code>.
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.io._
@@ -214,7 +214,7 @@ Success(<span class="num">1.</span> apple
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">append</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="a">a: <span class="extype" name="sclib.io.fs.FSFile.append.A">A</span></span>, <span name="options">options: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.OpenOption">OpenOption</span>] = <span class="symbol">Seq()</span></span>, <span name="cs">cs: <span class="extype" name="java.nio.charset.Charset">Charset</span> = <span class="symbol">UTF_8</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.FSFile.append.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="sclib.io.fs.FSFile">FSFile</a>]</span>
+        <span class="name">append</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="a">a: <span class="extype" name="sclib.io.fs.FSFile.append.A">A</span></span>, <span name="options">options: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.OpenOption">OpenOption</span>] = <span class="symbol">Seq()</span></span>, <span name="cs">cs: <span class="extype" name="java.nio.charset.Charset">Charset</span> = <span class="symbol">UTF_8</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.FSFile.append.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="sclib.io.fs.FSFile">FSFile</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSFile@append[A](a:A,options:Seq[java.nio.file.OpenOption],cs:java.nio.charset.Charset)(implicitevidence$3:sclib.io.fs.Writable[A]):scala.util.Try[sclib.io.fs.FSFile]" title="Permalink" target="_top">
@@ -250,7 +250,7 @@ Success(<span class="num">1.</span> apple
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">appendLines</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="a">a: <span class="extype" name="sclib.io.fs.FSFile.appendLines.A">A</span></span>, <span name="options">options: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.OpenOption">OpenOption</span>] = <span class="symbol">Seq()</span></span>, <span name="cs">cs: <span class="extype" name="java.nio.charset.Charset">Charset</span> = <span class="symbol">UTF_8</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.FSFile.appendLines.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="sclib.io.fs.FSFile">FSFile</a>]</span>
+        <span class="name">appendLines</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="a">a: <span class="extype" name="sclib.io.fs.FSFile.appendLines.A">A</span></span>, <span name="options">options: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.OpenOption">OpenOption</span>] = <span class="symbol">Seq()</span></span>, <span name="cs">cs: <span class="extype" name="java.nio.charset.Charset">Charset</span> = <span class="symbol">UTF_8</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.FSFile.appendLines.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="sclib.io.fs.FSFile">FSFile</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSFile@appendLines[A](a:A,options:Seq[java.nio.file.OpenOption],cs:java.nio.charset.Charset)(implicitevidence$4:sclib.io.fs.Writable[A]):scala.util.Try[sclib.io.fs.FSFile]" title="Permalink" target="_top">
@@ -367,7 +367,7 @@ res0: scala.util.Try[<span class="std">Seq</span>[java.nio.file.attribute.PosixF
       </a>
     </span>
       <p class="shortcomment cmt">set entry permission mode recursive</p><div class="fullcomment"><div class="comment cmt"><p>set entry permission mode recursive</p><p><i>fail on any error</i>
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FSEntry.html" class="extype" name="sclib.io.fs.FSEntry">FSEntry</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="FSEntry.html#chmodR(mode:String):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#chmodR">FSEntry.chmodR(mode:String)*</a></p></span></dd></dl></div>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FSEntry.html" class="extype" name="sclib.io.fs.FSEntry">FSEntry</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="FSEntry.html#chmod(mode:String):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#chmod">FSEntry.chmod(mode:String)*</a></p></span></dd></dl></div>
     </li><li name="sclib.io.fs.FSEntry#chmodR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="chmodR(n:Int):scala.util.Try[Self]"></a>
       <a id="chmodR(Int):Try[FSFile]"></a>
@@ -511,7 +511,7 @@ res0: scala.util.Try[<span class="std">String</span>] = Success(content)</pre></
       </a>
     </span>
       <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="FSEntry.html#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs: FileAttribute*)</a> to create the hierarchy at first.</i>
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FSEntry.html" class="extype" name="sclib.io.fs.FSEntry">FSEntry</a></dd><div class="block">Example:
+</p></div><dl class="paramcmts block"><dt class="param">mode</dt><dd class="cmt"><p>unix like symbolic mode</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FSEntry.html" class="extype" name="sclib.io.fs.FSEntry">FSEntry</a></dd><div class="block">Example:
                <ol><li class="cmt"><p></p><pre>create(<span class="lit">"a=r,u+w"</span>) -&gt; create the entry <span class="kw">with</span> the PosixFilePermissions: OWNER_READ, OWNER_WRITE, GROUP_READ and OTHERS_READ
 scala&gt; <span class="kw">import</span> scala.collection.SortedSet
 scala&gt; <span class="kw">for</span> {
@@ -541,7 +541,7 @@ res0: scala.util.Try[scala.collection.SortedSet[java.nio.file.attribute.PosixFil
       </a>
     </span>
       <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="FSEntry.html#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs: FileAttribute*)</a> to create the hierarchy at first.</i>
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FSEntry.html" class="extype" name="sclib.io.fs.FSEntry">FSEntry</a></dd><div class="block">Example:
+</p></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>unix like numeric mode</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FSEntry.html" class="extype" name="sclib.io.fs.FSEntry">FSEntry</a></dd><div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> scala.collection.SortedSet
 scala&gt; <span class="kw">for</span> {
      |   wd <span class="kw">&lt;-</span> dir(<span class="lit">"/tmp/sclib"</span>)
@@ -569,8 +569,7 @@ res0: scala.util.Try[SortedSet[java.nio.file.attribute.PosixFilePermission]] = S
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="FSEntry.html#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*</a> to create the hierarchy at first.</i>
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FSEntry.html" class="extype" name="sclib.io.fs.FSEntry">FSEntry</a></dd></dl></div>
+      <p class="shortcomment cmt">create the filesystem entry with the given permissions</p><div class="fullcomment"><div class="comment cmt"><p>create the filesystem entry with the given permissions</p><p><i>the path hierarchy must exist - use <a href="FSEntry.html#mkDirs(attrs:java.nio.file.attribute.FileAttribute[_]*):scala.util.Try[Self]" class="extmbr" name="sclib.io.fs.FSEntry#mkDirs">FSEntry.mkDirs(attrs:java\.nio\.file\.attribute\.FileAttribute[_]*)*</a> to create the hierarchy at first.</i></p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FSEntry.html" class="extype" name="sclib.io.fs.FSEntry">FSEntry</a></dd></dl></div>
     </li><li name="sclib.io.fs.FSEntry#create" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="create:scala.util.Try[Self]"></a>
       <a id="create:Try[FSFile]"></a>
@@ -1334,7 +1333,7 @@ res0: scala.util.Try[(<span class="std">Boolean</span>, <span class="std">Boolea
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">write</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="a">a: <span class="extype" name="sclib.io.fs.FSFile.write.A">A</span></span>, <span name="options">options: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.OpenOption">OpenOption</span>] = <span class="symbol">Seq()</span></span>, <span name="cs">cs: <span class="extype" name="java.nio.charset.Charset">Charset</span> = <span class="symbol">UTF_8</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.FSFile.write.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="sclib.io.fs.FSFile">FSFile</a>]</span>
+        <span class="name">write</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="a">a: <span class="extype" name="sclib.io.fs.FSFile.write.A">A</span></span>, <span name="options">options: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.OpenOption">OpenOption</span>] = <span class="symbol">Seq()</span></span>, <span name="cs">cs: <span class="extype" name="java.nio.charset.Charset">Charset</span> = <span class="symbol">UTF_8</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.FSFile.write.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="sclib.io.fs.FSFile">FSFile</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSFile@write[A](a:A,options:Seq[java.nio.file.OpenOption],cs:java.nio.charset.Charset)(implicitevidence$1:sclib.io.fs.Writable[A]):scala.util.Try[sclib.io.fs.FSFile]" title="Permalink" target="_top">
@@ -1372,7 +1371,7 @@ with the <code>TRUNCATE_EXISTING</code> option which truncate's the file before 
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">writeLines</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="a">a: <span class="extype" name="sclib.io.fs.FSFile.writeLines.A">A</span></span>, <span name="options">options: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.OpenOption">OpenOption</span>] = <span class="symbol">Seq()</span></span>, <span name="cs">cs: <span class="extype" name="java.nio.charset.Charset">Charset</span> = <span class="symbol">UTF_8</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="package$$Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.FSFile.writeLines.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="sclib.io.fs.FSFile">FSFile</a>]</span>
+        <span class="name">writeLines</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="a">a: <span class="extype" name="sclib.io.fs.FSFile.writeLines.A">A</span></span>, <span name="options">options: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="java.nio.file.OpenOption">OpenOption</span>] = <span class="symbol">Seq()</span></span>, <span name="cs">cs: <span class="extype" name="java.nio.charset.Charset">Charset</span> = <span class="symbol">UTF_8</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="Writable.html" class="extype" name="sclib.io.fs.Writable">Writable</a>[<span class="extype" name="sclib.io.fs.FSFile.writeLines.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="sclib.io.fs.FSFile">FSFile</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#sclib.io.fs.FSFile@writeLines[A](a:A,options:Seq[java.nio.file.OpenOption],cs:java.nio.charset.Charset)(implicitevidence$2:sclib.io.fs.Writable[A]):scala.util.Try[sclib.io.fs.FSFile]" title="Permalink" target="_top">

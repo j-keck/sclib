@@ -90,7 +90,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="sclib.ops.either.EitherOps#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(e:scala.util.Either[A,B]):either.this.EitherOps[A,B]"></a>
+      <a id="&lt;init&gt;(e:Either[A,B]):either.this.EitherOps[A,B]"></a>
       <a id="&lt;init&gt;:EitherOps[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -98,10 +98,10 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">EitherOps</span><span class="params">(<span name="e">e: <span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>, <span class="extype" name="sclib.ops.either.EitherOps.B">B</span>]</span>)</span>
+        <span class="name">EitherOps</span><span class="params">(<span name="e">e: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>, <span class="extype" name="sclib.ops.either.EitherOps.B">B</span>]</span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$EitherOps@&lt;init&gt;(e:scala.util.Either[A,B]):either.this.EitherOps[A,B]" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.either$EitherOps@&lt;init&gt;(e:Either[A,B]):either.this.EitherOps[A,B]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -184,18 +184,18 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="sclib.ops.either.EitherOps#bimap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="bimap[AA,BB](fl:A=&gt;AA,fr:B=&gt;BB):Any"></a>
-      <a id="bimap[AA,BB]((A)⇒AA,(B)⇒BB):Any"></a>
+      <a id="bimap[AA,BB](fl:A=&gt;AA,fr:B=&gt;BB):Either[AA,BB]"></a>
+      <a id="bimap[AA,BB]((A)⇒AA,(B)⇒BB):Either[AA,BB]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">bimap</span><span class="tparams">[<span name="AA">AA</span>, <span name="BB">BB</span>]</span><span class="params">(<span name="fl">fl: (<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>) ⇒ <span class="extype" name="sclib.ops.either.EitherOps.bimap.AA">AA</span></span>, <span name="fr">fr: (<span class="extype" name="sclib.ops.either.EitherOps.B">B</span>) ⇒ <span class="extype" name="sclib.ops.either.EitherOps.bimap.BB">BB</span></span>)</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
+        <span class="name">bimap</span><span class="tparams">[<span name="AA">AA</span>, <span name="BB">BB</span>]</span><span class="params">(<span name="fl">fl: (<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>) ⇒ <span class="extype" name="sclib.ops.either.EitherOps.bimap.AA">AA</span></span>, <span name="fr">fr: (<span class="extype" name="sclib.ops.either.EitherOps.B">B</span>) ⇒ <span class="extype" name="sclib.ops.either.EitherOps.bimap.BB">BB</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.bimap.AA">AA</span>, <span class="extype" name="sclib.ops.either.EitherOps.bimap.BB">BB</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$EitherOps@bimap[AA,BB](fl:A=&gt;AA,fr:B=&gt;BB):Any" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.either$EitherOps@bimap[AA,BB](fl:A=&gt;AA,fr:B=&gt;BB):Either[AA,BB]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -281,7 +281,7 @@
               
         </dd></dl></div>
     </li><li name="sclib.ops.either.EitherOps#flatMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="flatMap[BB](f:B=&gt;scala.util.Either[A,BB]):scala.util.Either[A,BB]"></a>
+      <a id="flatMap[BB](f:B=&gt;Either[A,BB]):Either[A,BB]"></a>
       <a id="flatMap[BB]((B)⇒Either[A,BB]):Either[A,BB]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -289,16 +289,16 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">flatMap</span><span class="tparams">[<span name="BB">BB</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.ops.either.EitherOps.B">B</span>) ⇒ <span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>, <span class="extype" name="sclib.ops.either.EitherOps.flatMap.BB">BB</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>, <span class="extype" name="sclib.ops.either.EitherOps.flatMap.BB">BB</span>]</span>
+        <span class="name">flatMap</span><span class="tparams">[<span name="BB">BB</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.ops.either.EitherOps.B">B</span>) ⇒ <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>, <span class="extype" name="sclib.ops.either.EitherOps.flatMap.BB">BB</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>, <span class="extype" name="sclib.ops.either.EitherOps.flatMap.BB">BB</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$EitherOps@flatMap[BB](f:B=&gt;scala.util.Either[A,BB]):scala.util.Either[A,BB]" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.either$EitherOps@flatMap[BB](f:B=&gt;Either[A,BB]):Either[A,BB]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">apply the given function if it's a <code>Right</code></p>
     </li><li name="sclib.ops.either.EitherOps#flatMapO" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="flatMapO[AA](f:A=&gt;scala.util.Either[AA,B]):scala.util.Either[AA,B]"></a>
+      <a id="flatMapO[AA](f:A=&gt;Either[AA,B]):Either[AA,B]"></a>
       <a id="flatMapO[AA]((A)⇒Either[AA,B]):Either[AA,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -306,10 +306,10 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">flatMapO</span><span class="tparams">[<span name="AA">AA</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>) ⇒ <span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.flatMapO.AA">AA</span>, <span class="extype" name="sclib.ops.either.EitherOps.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.flatMapO.AA">AA</span>, <span class="extype" name="sclib.ops.either.EitherOps.B">B</span>]</span>
+        <span class="name">flatMapO</span><span class="tparams">[<span name="AA">AA</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>) ⇒ <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.flatMapO.AA">AA</span>, <span class="extype" name="sclib.ops.either.EitherOps.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.flatMapO.AA">AA</span>, <span class="extype" name="sclib.ops.either.EitherOps.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$EitherOps@flatMapO[AA](f:A=&gt;scala.util.Either[AA,B]):scala.util.Either[AA,B]" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.either$EitherOps@flatMapO[AA](f:A=&gt;Either[AA,B]):Either[AA,B]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -388,7 +388,7 @@ res0: scala.util.Either[<span class="std">Nothing</span>,<span class="std">Int</
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="sclib.ops.either.EitherOps#map" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="map[BB](f:B=&gt;BB):scala.util.Either[A,BB]"></a>
+      <a id="map[BB](f:B=&gt;BB):Either[A,BB]"></a>
       <a id="map[BB]((B)⇒BB):Either[A,BB]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -396,16 +396,16 @@ res0: scala.util.Either[<span class="std">Nothing</span>,<span class="std">Int</
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">map</span><span class="tparams">[<span name="BB">BB</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.ops.either.EitherOps.B">B</span>) ⇒ <span class="extype" name="sclib.ops.either.EitherOps.map.BB">BB</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>, <span class="extype" name="sclib.ops.either.EitherOps.map.BB">BB</span>]</span>
+        <span class="name">map</span><span class="tparams">[<span name="BB">BB</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.ops.either.EitherOps.B">B</span>) ⇒ <span class="extype" name="sclib.ops.either.EitherOps.map.BB">BB</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>, <span class="extype" name="sclib.ops.either.EitherOps.map.BB">BB</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$EitherOps@map[BB](f:B=&gt;BB):scala.util.Either[A,BB]" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.either$EitherOps@map[BB](f:B=&gt;BB):Either[A,BB]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">apply the given function if it's a <code>Right</code></p>
     </li><li name="sclib.ops.either.EitherOps#mapO" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mapO[AA](f:A=&gt;AA):scala.util.Either[AA,B]"></a>
+      <a id="mapO[AA](f:A=&gt;AA):Either[AA,B]"></a>
       <a id="mapO[AA]((A)⇒AA):Either[AA,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -413,10 +413,10 @@ res0: scala.util.Either[<span class="std">Nothing</span>,<span class="std">Int</
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">mapO</span><span class="tparams">[<span name="AA">AA</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>) ⇒ <span class="extype" name="sclib.ops.either.EitherOps.mapO.AA">AA</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.mapO.AA">AA</span>, <span class="extype" name="sclib.ops.either.EitherOps.B">B</span>]</span>
+        <span class="name">mapO</span><span class="tparams">[<span name="AA">AA</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="sclib.ops.either.EitherOps.A">A</span>) ⇒ <span class="extype" name="sclib.ops.either.EitherOps.mapO.AA">AA</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="sclib.ops.either.EitherOps.mapO.AA">AA</span>, <span class="extype" name="sclib.ops.either.EitherOps.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#sclib.ops.either$EitherOps@mapO[AA](f:A=&gt;AA):scala.util.Either[AA,B]" title="Permalink" target="_top">
+      <a href="../../index.html#sclib.ops.either$EitherOps@mapO[AA](f:A=&gt;AA):Either[AA,B]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

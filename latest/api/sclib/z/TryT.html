@@ -53,7 +53,7 @@
 </p></div><dl class="attributes block"> <div class="block">Example:
                <ol><li class="cmt"><p></p><pre>scala&gt; <span class="kw">import</span> sclib.z._
 scala&gt; <span class="kw">import</span> sclib.ops.`<span class="kw">try</span>`._
-scala&gt; <span class="kw">val</span> tt = TryT[({<span class="kw">type</span> L[A] = Function1[<span class="std">Int</span>, A]})#L, <span class="std">Int</span>]{i <span class="kw">=&gt;</span> <span class="kw">if</span>(i &lt; <span class="num">10</span>) i.success <span class="kw">else</span> <span class="lit">"BOOM"</span>.failure}
+scala&gt; <span class="kw">val</span> tt = TryT[Function1[<span class="std">Int</span>, ?], <span class="std">Int</span>]{i <span class="kw">=&gt;</span> <span class="kw">if</span>(i &lt; <span class="num">10</span>) i.success <span class="kw">else</span> <span class="lit">"BOOM"</span>.failure}
 scala&gt; tt.map(_ * <span class="num">10</span>).runTryT(<span class="num">5</span>)
 res0: scala.util.Try[<span class="std">Int</span>] = Success(<span class="num">50</span>)
 scala&gt; tt.map(_ * <span class="num">10</span>).runTryT(<span class="num">10</span>)
