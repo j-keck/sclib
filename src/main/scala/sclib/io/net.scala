@@ -32,8 +32,14 @@ import scala.util.Try
   * {{{
   * scala: import sclib.io.net._
   * scala: import sclib.io.fs._
-  * scala: url("http://example.com").flatMap(_.fetch(file("example.com")))
-  * scala.util.Try[sclib.io.fs.FSFile] = Success(FSFile(example.com))
+  * scala: for {
+  *      |    url <- url("http://example.com")         // save way to get a 'java.net.URL'
+  *      |    local <- url.fetch(file("example.com"))  // download the url-content
+  *      |    content <- local.slurp                   // read the local copy
+  *      |    _ <- local.delete()                      // delete the local copy
+  *      |  } yield content.take(20)
+  * res0: scala.util.Try[String] = Success(<!doctype html>
+  *       <htm)
   * }}}
   */
 object net {

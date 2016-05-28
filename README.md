@@ -1,6 +1,7 @@
 # sclib - simple scala utility library
 
   - stdlib extensions
+  - toolbox to work with files and directories
   - utilities
   - zero runtime dependencies
   - jvm and scala.js bits
@@ -33,6 +34,7 @@ add the following snippet to your `build.sbt` file:
      - [String](#string)
      - [Java8 interoperability](#java8-interoperability)
    - [io](#io)
+   - [util](#util)
    - [patterns](#patterns)
    - [(very) simple serialize / deserialize](#very-simple-serialize--deserialize)   
 
@@ -53,25 +55,25 @@ import sclib.ops.either._
   - shorthand Left / Right constructor:
 ```scala
 scala> "a string".left
-res0: scala.util.Either[String,Nothing] = Left(a string)
+res0: Either[String,Nothing] = Left(a string)
 
 scala> "a string".left[Int] 
-res1: scala.util.Either[String,Int] = Left(a string)
+res1: Either[String,Int] = Left(a string)
 
 scala> 4.right[String]
-res2: scala.util.Either[String,Int] = Right(4)
+res2: Either[String,Int] = Right(4)
 ```
 
   - sequence on `Traversable[Either[A, B]]` to reducing many `Either`s into a single `Either`
 ```scala
 scala> List(3.right, 4.right).sequence
-res3: scala.util.Either[Nothing,List[Int]] = Right(List(3, 4))
+res3: Either[Nothing,List[Int]] = Right(List(3, 4))
 
 scala> List(3.right, 4.right, "BOOM".left).sequence
-res4: scala.util.Either[String,List[Int]] = Left(BOOM)
+res4: Either[String,List[Int]] = Left(BOOM)
 
 scala> Vector(2.right, 5.right).sequence
-res5: scala.util.Either[Nothing,scala.collection.immutable.Vector[Int]] = Right(Vector(2, 5))
+res5: Either[Nothing,scala.collection.immutable.Vector[Int]] = Right(Vector(2, 5))
 ```
    
   - right biased either
@@ -80,7 +82,7 @@ scala> for {
      |   a <- Right(1)
      |   b <- Right(4)
      | } yield a + b
-res6: scala.util.Either[Nothing,Int] = Right(5)
+res6: Either[Nothing,Int] = Right(5)
 ```
 
 #### Try
@@ -186,47 +188,60 @@ res1: List[List[String]] = List(List(-- heading1, a, b), List(-- heading2, c, d)
 import sclib.ops.string._
 ```
 
-  - save / easy to compose toInt[T|E], toLong[T|E], toDouble[T|E], toChar[T|E] and toBoolean[T|E]
+  - save / easy to compose parser for `Int`, `Long`, `Double`, `Char`, `Boolean` and `Date`.
+    the result can be wrapped in a `Try`, `Option`, `Either[String, ?]` or `Either[Throwable, ?]`.
 ```scala
-scala> "123".toIntT
+scala> import scala.util.Try
+import scala.util.Try
+
+scala> "123".parseInt[Try]
 res0: scala.util.Try[Int] = Success(123)
 
-scala> "one".toIntT
+scala> "one".parseInt[Try]
 res1: scala.util.Try[Int] = Failure(java.lang.NumberFormatException: For input string: "one")
 
-scala> "123".toIntE
-res2: Either[String,Int] = Right(123)
+scala> "123".parseInt[Option]
+res2: Option[Int] = Some(123)
 
-scala> "one".toIntE
-res3: Either[String,Int] = Left('one' is not a Int)
+scala> "one".parseInt[Option]
+res3: Option[Int] = None
+
+scala> "123".parseInt[Either[String, ?]]
+res4: scala.util.Either[String,Int] = Right(123)
+
+scala> "one".parseInt[Either[String, ?]]
+res5: scala.util.Either[String,Int] = Left(java.lang.NumberFormatException: For input string: "one")
 
 scala> import sclib.ops.either._
 import sclib.ops.either._
 
 scala> for{
-     |  a <- "123".toIntE
-     |  b <- "44".toIntE
+     |  a <- "123".parseInt[Try]
+     |  b <- "44".parseInt[Try]
      | } yield a + b
-res4: scala.util.Either[String,Int] = Right(167)
+res6: scala.util.Try[Int] = Success(167)
 
 scala> for{
-     |  a <- "one".toIntE
-     |  b <- "44".toIntE
+     |  a <- "one".parseInt[Try]
+     |  b <- "44".parseInt[Try]
      | } yield a + b
-res5: scala.util.Either[String,Int] = Left('one' is not a Int)
+res7: scala.util.Try[Int] = Failure(java.lang.NumberFormatException: For input string: "one")
 ```
 
-  - toDate[T|E]
+  - parseDate[F[_]](pattern: String)
+```scala
+scala> "Feb 01 16:30:10 2020".parseDate[Try]("MMM DD HH:mm:ss yyyy")
+res8: scala.util.Try[java.util.Date] = Success(Wed Jan 01 16:30:10 CET 2020)
+```
+
+  - parseDate[F[_]]
+which expects a implicit `SimpleDateFormat` in scope
 ```scala
 implicit val sdf = new java.text.SimpleDateFormat("DD.MM.yyyy HH:mm:ss")
 ```
-
 ```scala
-scala> "01.02.2020 16:30:10".toDateE
-res6: Either[String,java.util.Date] = Right(Wed Jan 01 16:30:10 CET 2020)
-
-scala> "Feb 01 16:30:10 2020".toDateE("MMM DD HH:mm:ss yyyy")
-res7: Either[String,java.util.Date] = Right(Wed Jan 01 16:30:10 CET 2020)
+scala> "01.02.2020 16:30:10".parseDate[Try]
+res9: scala.util.Try[java.util.Date] = Success(Wed Jan 01 16:30:10 CET 2020)
 ```
 
 
@@ -273,6 +288,22 @@ res5: Int = 6
 
 
 ### io
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.package)
+
+- simple version of java's 'try-with-resource'
+```scala
+import sclib.io.autoClose
+import java.nio.file.Paths
+import java.nio.file.StandardOpenOption.{CREATE, WRITE}
+import java.nio.channels.FileChannel
+for {
+  in <- autoClose(FileChannel.open(Paths.get("/tmp/input")))
+  out <- autoClose(FileChannel.open(Paths.get("/tmp/output"), CREATE, WRITE))
+} in.transferTo(0, Long.MaxValue, out)
+// `in` and `out` are closed here
+```
+
+#### filesystem
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.fs.package)
 ```scala
 import sclib.io.fs._
@@ -315,7 +346,53 @@ Success(1. apple
 3. cherry
 4. dog)
 ```
-  
+
+#### net 
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.net.package)
+```scala
+import sclib.io.net._
+```
+ 
+ - download a file
+```scala
+scala> import sclib.io.fs._
+scala> for {
+     |    url <- url("http://example.com")         // save way to get a 'java.net.URL'
+     |    local <- url.fetch(file("example.com"))  // download the url-content
+     |    content <- local.slurp                   // read the local copy
+     |    _ <- local.delete()                      // delete the local copy
+     |  } yield content.take(20)
+res0: scala.util.Try[String] = Success(<!doctype html>
+      <htm)
+```
+
+### util
+[scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.util.package)
+```scala
+```
+
+- simple Union type
+```scala
+scala> import sclib.util.union._
+import sclib.util.union._
+
+scala> def f[A: (Int Or String)#Check](a: A): Int = a match {
+     |   case i: Int => i
+     |   case s: String => s.length
+     | }
+f: [A](a: A)(implicit evidence$1: <:<[sclib.util.union.Contra[sclib.util.union.Contra[A]],sclib.util.union.Contra[sclib.util.union.Contra[Int] with sclib.util.union.Contra[String]]])Int
+
+scala> f(5)
+res0: Int = 5
+
+scala> f("hey")
+res1: Int = 3
+
+scala> // this throws a compiler error:
+     | // f(5L) 
+```
+
+
 
 ### "pattern's"
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.patterns.package)
@@ -337,7 +414,7 @@ scala> val action = for {
      |   b <- AppF{i: Int => if(i < 5) (i * 10).right else "BOOM".left}
      |   c <- AppF.lift(33.right[String])
      | } yield (a, b, c)
-action: sclib.z.EitherT[[B]sclib.z.Reader[Int,B],String,(Int, Int, Int)] = EitherT(Reader(<function1>))
+action: sclib.z.EitherT[[β]sclib.z.Reader[Int,β],String,(Int, Int, Int)] = EitherT(Reader(<function1>))
 
 scala> action.runEitherT.runReader(2)
 res0: Either[String,(Int, Int, Int)] = Right((2,20,33))

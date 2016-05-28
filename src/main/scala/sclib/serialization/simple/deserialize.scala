@@ -13,7 +13,7 @@ trait deserialize {
     protected def next: DeserializeState[String] =
       StateT[Either[String, ?], String, String](
           (_: String).split(":", 2) match {
-        case Array(l, str) => l.toIntE.map(str.splitAt)
+        case Array(l, str) => l.parseInt[Either[String, ?]].map(str.splitAt)
         case Array("") =>
           "unable to deserialize empty string - expected: '<LENGTH>:<CONTENT>...'".left
         case Array(x) =>
@@ -39,23 +39,23 @@ trait deserialize {
 
   // FIXME: if i use 'implicit val xxxDes ..', the compiler throws: 'not found: type $anon'
   implicit def charDes = new Deserialize[Char] {
-    override def apply: DeserializeState[Char] = next.flatMapF(_.toCharE)
+    override def apply: DeserializeState[Char] = next.flatMapF(_.parseChar[Either[String, ?]])
   }
 
   implicit def intDes = new Deserialize[Int] {
-    override def apply: DeserializeState[Int] = next.flatMapF(_.toIntE)
+    override def apply: DeserializeState[Int] = next.flatMapF(_.parseInt[Either[String, ?]])
   }
 
   implicit def longDes = new Deserialize[Long] {
-    override def apply: DeserializeState[Long] = next.flatMapF(_.toLongE)
+    override def apply: DeserializeState[Long] = next.flatMapF(_.parseLong[Either[String, ?]])
   }
 
   implicit def doubleDes = new Deserialize[Double] {
-    override def apply: DeserializeState[Double] = next.flatMapF(_.toDoubleE)
+    override def apply: DeserializeState[Double] = next.flatMapF(_.parseDouble[Either[String, ?]])
   }
 
   implicit def booleanDes = new Deserialize[Boolean] {
-    override def apply: DeserializeState[Boolean] = next.flatMapF(_.toBooleanE)
+    override def apply: DeserializeState[Boolean] = next.flatMapF(_.parseBoolean[Either[String, ?]])
   }
 
   //

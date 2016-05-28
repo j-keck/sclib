@@ -17,45 +17,56 @@ object string extends string
 trait string {
 
   implicit class StringOps(s: String) {
-    def toIntT: Try[Int] = Try(s.toInt)
 
-    def toIntE: Either[String, Int] = toIntT.fold(_ => s"'${s}' is not a Int".left[Int])(_.right)
+    def parseInt[F[_]](implicit pfs: ParsedFromString[F, Int]): F[Int] = pfs.fromTry(Try(s.toInt))
 
-    def toLongT: Try[Long] = Try(s.toLong)
+    def parseLong[F[_]](implicit pfs: ParsedFromString[F, Long]): F[Long] = pfs.fromTry(Try(s.toLong))
 
-    def toLongE: Either[String, Long] = toLongT.fold(_ => s"'${s}' is not a Long".left[Long])(_.right)
+    def parseDouble[F[_]](implicit pfs: ParsedFromString[F, Double]): F[Double] = pfs.fromTry(Try(s.toDouble))
 
-    def toDoubleT: Try[Double] = Try(s.toDouble)
+    def parseChar[F[_]](implicit pfs: ParsedFromString[F, Char]): F[Char] =
+      pfs.fromTry(
+          s.toList match {
+        case List(c) => c.success
+        case Nil     => "empty string doesn't contain any char".failure
+        case _       => s"'${s}' contains more than a char".failure
+      })
 
-    def toDoubleE: Either[String, Double] = toDoubleT.fold(_ => s"'${s}' is not a Double".left[Double])(_.right)
+    def parseBoolean[F[_]](implicit pfs: ParsedFromString[F, Boolean]): F[Boolean] = pfs.fromTry(Try(s.toBoolean))
 
-    def toCharT: Try[Char] = toCharE.fold(_.failure, _.success)
+    def parseDate[F[_]](implicit pfs: ParsedFromString[F, Date], sdf: SimpleDateFormat): F[Date] =
+      pfs.fromTry(Try(sdf.parse(s)))
 
-    def toCharE: Either[String, Char] = s.toList match {
-      case List(c) => c.right
-      case Nil     => "empty string doesn't contain any char".left
-      case _       => s"'${s}' contains more than a char".left
+    def parseDate[F[_]](pattern: String)(implicit pfs: ParsedFromString[F, Date]): F[Date] =
+      pfs.fromTry(
+          Try {
+        val sdf = new SimpleDateFormat(pattern)
+        sdf.parse(s)
+      })
+  }
+
+  /**
+    * Type-Class for the result of `StringOps.parseXX`
+    */
+  trait ParsedFromString[F[_], A] {
+    def fromTry(t: Try[A]): F[A]
+  }
+
+  object ParsedFromString {
+    implicit def tryFromTry[A] = new ParsedFromString[Try, A] {
+      override def fromTry(t: Try[A]): Try[A] = t
     }
 
-    def toBooleanT: Try[Boolean] = Try(s.toBoolean)
-
-    def toBooleanE: Either[String, Boolean] = toBooleanT.fold(_ => s"'${s}' is not a Boolean".left[Boolean])(_.right)
-
-    def toDateT(implicit sdf: SimpleDateFormat): Try[Date] = Try {
-      sdf.parse(s)
+    implicit def optionFromTry[A] = new ParsedFromString[Option, A] {
+      override def fromTry(t: Try[A]): Option[A] = t.toOption
+    }
+    implicit def eitherFromTry[A] = new ParsedFromString[Either[Throwable, ?], A] {
+      override def fromTry(t: Try[A]): Either[Throwable, A] = t.toEither
     }
 
-    def toDateE(implicit sdf: SimpleDateFormat): Either[String, Date] =
-      toDateT(sdf)
-        .fold(_ => s"'${s}' is not a Date with the given format-pattern: '${sdf.toPattern}'".left[Date])(_.right)
-
-    def toDateT(pattern: String): Try[Date] = Try {
-      val sdf = new SimpleDateFormat(pattern)
-      sdf.parse(s)
+    implicit def eitherFromTryWithLepfsString[A] = new ParsedFromString[Either[String, ?], A] {
+      override def fromTry(t: Try[A]): Either[String, A] =
+        t.toEither.mapO(e => e.getClass.getName + ": " + e.getMessage)
     }
-
-    def toDateE(pattern: String): Either[String, Date] =
-      toDateT(pattern)
-        .fold(_ => s"'${s}' is not a Date with the given format-pattern: '${pattern}'".left[Date])(_.right)
   }
 }

@@ -156,35 +156,43 @@ l.partitionsBy(_.startsWith("--"))
 import sclib.ops.string._
 ```
 
-  - save / easy to compose toInt[T|E], toLong[T|E], toDouble[T|E], toChar[T|E] and toBoolean[T|E]
+  - save / easy to compose parser for `Int`, `Long`, `Double`, `Char`, `Boolean` and `Date`.
+    the result can be wrapped in a `Try`, `Option`, `Either[String, ?]` or `Either[Throwable, ?]`.
 ```tut
-"123".toIntT
-"one".toIntT
+import scala.util.Try
+"123".parseInt[Try]
+"one".parseInt[Try]
 
-"123".toIntE
-"one".toIntE
+"123".parseInt[Option]
+"one".parseInt[Option]
+
+"123".parseInt[Either[String, ?]]
+"one".parseInt[Either[String, ?]]
 
 import sclib.ops.either._
 for{
- a <- "123".toIntE
- b <- "44".toIntE
+ a <- "123".parseInt[Try]
+ b <- "44".parseInt[Try]
 } yield a + b
 
 for{
- a <- "one".toIntE
- b <- "44".toIntE
+ a <- "one".parseInt[Try]
+ b <- "44".parseInt[Try]
 } yield a + b
 ```
 
-  - toDate[T|E]
+  - parseDate[F[_]](pattern: String)
+```tut  
+"Feb 01 16:30:10 2020".parseDate[Try]("MMM DD HH:mm:ss yyyy")
+```
+
+  - parseDate[F[_]]
+which expects a implicit `SimpleDateFormat` in scope
 ```tut:silent
 implicit val sdf = new java.text.SimpleDateFormat("DD.MM.yyyy HH:mm:ss")
 ```
-
 ```tut
-"01.02.2020 16:30:10".toDateE
-
-"Feb 01 16:30:10 2020".toDateE("MMM DD HH:mm:ss yyyy")
+"01.02.2020 16:30:10".parseDate[Try]
 ```
 
 
@@ -275,18 +283,25 @@ for {
 } yield content
 ```
 
- #### networking 
+#### net 
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.net.package)
 ```tut:silent:reset
 import sclib.io.net._
 ```
  
  - download a file
- ```scala
+```scala
 scala> import sclib.io.fs._
-scala> url("http://example.com").flatMap(_.fetch(file("example.com")))
-res0: scala.util.Try[sclib.io.fs.FSFile] = Success(FSFile(example.com))
- ```
+scala> for {
+     |    url <- url("http://example.com")         // save way to get a 'java.net.URL'
+     |    local <- url.fetch(file("example.com"))  // download the url-content
+     |    content <- local.slurp                   // read the local copy
+     |    _ <- local.delete()                      // delete the local copy
+     |  } yield content.take(20)
+res0: scala.util.Try[String] = Success(<!doctype html>
+      <htm)
+```
+
 ### util
 [scaladoc](http://j-keck.github.io/sclib/latest/api/#sclib.io.util.package)
 ```tut:silent:reset

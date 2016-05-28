@@ -61,9 +61,9 @@ class SerializationSuite extends FunSuite with Matchers {
 
   test("deserialize char") {
     Deserialize[Char]("1:x") should be('x'.right)
-    Deserialize[Char]("2:xx") should be("'xx' contains more than a char".left)
+    Deserialize[Char]("2:xx") should be("java.lang.Exception: 'xx' contains more than a char".left)
     Deserialize[Char]("0:") should be(
-      "empty string doesn't contain any char".left)
+      "java.lang.Exception: empty string doesn't contain any char".left)
   }
 
   test("deserialize int") {
