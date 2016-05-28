@@ -16,12 +16,12 @@ add the following snippet to your `build.sbt` file:
 - for the jvm:
 
         resolvers += Resolver.bintrayRepo("j-keck", "maven")
-        libraryDependencies += "net.jkeck" %% "sclib" % "0.5"
+        libraryDependencies += "net.jkeck" %% "sclib" % "0.6"
 
 - for scala.js
 
         resolvers += Resolver.bintrayRepo("j-keck", "maven")
-        libraryDependencies += "net.jkeck" %%% "sclib" % "0.5"
+        libraryDependencies += "net.jkeck" %%% "sclib" % "0.6"
 </sbt-snippet>
 
 ## content
